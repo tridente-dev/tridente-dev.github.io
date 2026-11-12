@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Rooms & Suites - Aura Suites</title>
+    <meta name="description" content="Discover the 7 exclusive accommodations of Aura Suites: from the Classic Queen to the Signature Terrace Suite with private Jacuzzi.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23232120'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='60' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: { extend: {
+            colors: { cream: '#F8F6F2', sand: '#EFECE6', 'stone-dark': '#232120', 'neutral-soft': '#E2DDD5' },
+            fontFamily: { 'serif-title': ['"Cormorant Garamond"', 'serif'] }
+        }}
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-cream text-neutral-800 antialiased min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-md border-b border-neutral-soft">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="font-serif-title text-2xl tracking-widest uppercase font-semibold text-neutral-900">AURA</a>
+
+            <nav class="hidden lg:flex items-center space-x-6 text-sm tracking-wide font-medium text-neutral-600">
+                <a href="index.html#about" class="hover:text-neutral-900 transition">About Us</a>
+                <a href="camere.html" class="text-neutral-900 font-semibold transition">Rooms</a>
+                <a href="wellness.html" class="hover:text-neutral-900 transition">Wellness & Spa</a>
+                <a href="ristorazione.html" class="hover:text-neutral-900 transition">Restaurants, Bar & Nightlife</a>
+                <a href="escursioni.html" class="hover:text-neutral-900 transition">Excursions</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center space-x-4">
+                <span class="text-[10px] uppercase tracking-wider bg-sand px-3 py-1 rounded-full border border-neutral-soft font-semibold text-neutral-600">Adults Only 16+</span>
+                <a href="prenotazione.html" class="bg-stone-dark text-white px-5 py-2.5 rounded-full text-xs uppercase tracking-widest font-medium hover:bg-neutral-800 transition">Book Now</a>
+            </div>
+
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden text-neutral-900 p-2 focus:outline-none" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+                <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden bg-cream border-t border-neutral-200 px-6 py-4 space-y-3">
+            <a href="index.html#about" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-neutral-800 py-1 border-b border-neutral-200">About Us</a>
+            <a href="camere.html" class="block text-sm font-semibold text-neutral-800 py-1 border-b border-neutral-200">Rooms</a>
+            <a href="wellness.html" class="block text-sm font-semibold text-neutral-800 py-1 border-b border-neutral-200">Wellness & Spa</a>
+            <a href="ristorazione.html" class="block text-sm font-semibold text-neutral-800 py-1 border-b border-neutral-200">Restaurants, Bar & Nightlife</a>
+            <a href="escursioni.html" class="block text-sm font-semibold text-neutral-800 py-1 border-b border-neutral-200">Excursions</a>
+            <div class="pt-2 flex flex-col space-y-2">
+                <span class="text-[10px] uppercase tracking-wider bg-sand px-3 py-1 rounded-full border border-neutral-soft font-semibold text-neutral-600 text-center">Adults Only 16+</span>
+                <a href="prenotazione.html" class="bg-stone-dark text-white text-center py-3 rounded-xl text-xs uppercase tracking-widest font-semibold">Book Now</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-6 py-8 w-full space-y-8">
+        <div class="border-b border-neutral-soft pb-4">
+            <h1 class="font-serif-title text-4xl font-light text-neutral-900">Our 7 Accommodations</h1>
+            <p class="text-neutral-500 text-sm mt-1">Click on the image or details to discover photos and full amenities of each room.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover flex flex-col">
+                <a href="camera-dettaglio.html?id=classic-queen" class="block relative h-56 overflow-hidden group">
+                    <img src="img/Classic-Queen-Room.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Classic Queen Room">
+                    <span class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition">🔍 Click for Photos & Info</span>
+                </a>
+                <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs uppercase tracking-wider text-neutral-400 font-semibold">Max 2 Guests</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-semibold border border-emerald-200">✓ 12/12 rooms available</span>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-medium text-neutral-900 mb-1">Classic Queen Room</h3>
+                        <div class="text-lg font-semibold text-neutral-900 mb-2">€140 <span class="text-xs font-normal text-neutral-400">/ night</span></div>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Queen Size bed, marble bathroom, local minibar, Wi-Fi and garden view.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-neutral-soft pt-4 space-x-2">
+                        <a href="camera-dettaglio.html?id=classic-queen" class="text-xs font-semibold underline text-neutral-600 hover:text-neutral-900">Details & Photos</a>
+                        <a href="prenotazione.html?room=classic-queen" class="bg-stone-dark text-white px-4 py-2 rounded-xl text-xs uppercase font-semibold hover:bg-neutral-800 transition">Select</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover flex flex-col">
+                <a href="camera-dettaglio.html?id=superior-twin" class="block relative h-56 overflow-hidden group">
+                    <img src="img/Superior-Twin-Room.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Superior Twin Room">
+                    <span class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition">🔍 Click for Photos & Info</span>
+                </a>
+                <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs uppercase tracking-wider text-neutral-400 font-semibold">Max 2 Guests</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-semibold border border-emerald-200">✓ 8/8 rooms available</span>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-medium text-neutral-900 mb-1">Superior Twin Room</h3>
+                        <div class="text-lg font-semibold text-neutral-900 mb-2">€170 <span class="text-xs font-normal text-neutral-400">/ night</span></div>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Private furnished balcony, two customizable single beds and organic amenity kit.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-neutral-soft pt-4 space-x-2">
+                        <a href="camera-dettaglio.html?id=superior-twin" class="text-xs font-semibold underline text-neutral-600 hover:text-neutral-900">Details & Photos</a>
+                        <a href="prenotazione.html?room=superior-twin" class="bg-stone-dark text-white px-4 py-2 rounded-xl text-xs uppercase font-semibold hover:bg-neutral-800 transition">Select</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover flex flex-col">
+                <a href="camera-dettaglio.html?id=executive-sea" class="block relative h-56 overflow-hidden group">
+                    <img src="img/Executive-Sea-View.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Executive Sea View">
+                    <span class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition">🔍 Click for Photos & Info</span>
+                </a>
+                <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs uppercase tracking-wider text-neutral-400 font-semibold">Max 2 Guests</span>
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full font-semibold border border-amber-200">⚡ 3/5 rooms available</span>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-medium text-neutral-900 mb-1">Executive Sea View</h3>
+                        <div class="text-lg font-semibold text-neutral-900 mb-2">€210 <span class="text-xs font-normal text-neutral-400">/ night</span></div>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Frontal sea view, espresso coffee machine, home automation and advanced climate control.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-neutral-soft pt-4 space-x-2">
+                        <a href="camera-dettaglio.html?id=executive-sea" class="text-xs font-semibold underline text-neutral-600 hover:text-neutral-900">Details & Photos</a>
+                        <a href="prenotazione.html?room=executive-sea" class="bg-stone-dark text-white px-4 py-2 rounded-xl text-xs uppercase font-semibold hover:bg-neutral-800 transition">Select</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover flex flex-col">
+                <a href="camera-dettaglio.html?id=deluxe-panorama" class="block relative h-56 overflow-hidden group">
+                    <img src="img/Deluxe-Panorama-Suite.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Deluxe Panorama Suite">
+                    <span class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition">🔍 Click for Photos & Info</span>
+                </a>
+                <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs uppercase tracking-wider text-neutral-400 font-semibold">Max 2 Guests</span>
+                            <span class="text-xs bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full font-semibold border border-amber-200">⚡ 4/7 rooms available</span>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-medium text-neutral-900 mb-1">Deluxe Panorama Suite</h3>
+                        <div class="text-lg font-semibold text-neutral-900 mb-2">€310 <span class="text-xs font-normal text-neutral-400">/ night</span></div>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Freestanding bathtub with sea view, elegant living room and private terrace for exclusive use.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-neutral-soft pt-4 space-x-2">
+                        <a href="camera-dettaglio.html?id=deluxe-panorama" class="text-xs font-semibold underline text-neutral-600 hover:text-neutral-900">Details & Photos</a>
+                        <a href="prenotazione.html?room=deluxe-panorama" class="bg-stone-dark text-white px-4 py-2 rounded-xl text-xs uppercase font-semibold hover:bg-neutral-800 transition">Select</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover flex flex-col">
+                <a href="camera-dettaglio.html?id=comfort-quad" class="block relative h-56 overflow-hidden group">
+                    <img src="img/Comfort-Quad-Room.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Comfort Quad Room">
+                    <span class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition">🔍 Click for Photos & Info</span>
+                </a>
+                <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs uppercase tracking-wider text-neutral-400 font-semibold">Max 4 Guests</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-semibold border border-emerald-200">✓ 10/10 rooms available</span>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-medium text-neutral-900 mb-1">Comfort Quad Room</h3>
+                        <div class="text-lg font-semibold text-neutral-900 mb-2">€220 <span class="text-xs font-normal text-neutral-400">/ night</span></div>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Accommodation for up to 4 adults with distinct areas, smart TV and double sink.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-neutral-soft pt-4 space-x-2">
+                        <a href="camera-dettaglio.html?id=comfort-quad" class="text-xs font-semibold underline text-neutral-600 hover:text-neutral-900">Details & Photos</a>
+                        <a href="prenotazione.html?room=comfort-quad" class="bg-stone-dark text-white px-4 py-2 rounded-xl text-xs uppercase font-semibold hover:bg-neutral-800 transition">Select</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover flex flex-col">
+                <a href="camera-dettaglio.html?id=grand-residence" class="block relative h-56 overflow-hidden group">
+                    <img src="img/Grand-Family-Residence.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Grand Family Residence">
+                    <span class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition">🔍 Click for Photos & Info</span>
+                </a>
+                <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs uppercase tracking-wider text-neutral-400 font-semibold">Max 4 Guests</span>
+                            <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-semibold border border-emerald-200">✓ 15/15 rooms available</span>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-medium text-neutral-900 mb-1">Grand Family Residence</h3>
+                        <div class="text-lg font-semibold text-neutral-900 mb-2">€320 <span class="text-xs font-normal text-neutral-400">/ night</span></div>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Connecting double bedroom, two full bathrooms and extended private balcony.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-neutral-soft pt-4 space-x-2">
+                        <a href="camera-dettaglio.html?id=grand-residence" class="text-xs font-semibold underline text-neutral-600 hover:text-neutral-900">Details & Photos</a>
+                        <a href="prenotazione.html?room=grand-residence" class="bg-stone-dark text-white px-4 py-2 rounded-xl text-xs uppercase font-semibold hover:bg-neutral-800 transition">Select</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover flex flex-col">
+                <a href="camera-dettaglio.html?id=signature-terrace" class="block relative h-56 overflow-hidden group">
+                    <img src="img/Signature-Terrace-Suite.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Signature Terrace Suite">
+                    <span class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition">🔍 Click for Photos & Info</span>
+                </a>
+                <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs uppercase tracking-wider text-neutral-400 font-semibold">Max 4 Guests</span>
+                            <span class="text-xs bg-red-100 text-red-800 px-2.5 py-0.5 rounded-full font-semibold border border-red-200">⚠ Only 2/6 rooms left!</span>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-medium text-neutral-900 mb-1">Signature Terrace Suite</h3>
+                        <div class="text-lg font-semibold text-neutral-900 mb-2">€450 <span class="text-xs font-normal text-neutral-400">/ night</span></div>
+                        <p class="text-neutral-500 text-xs leading-relaxed">Luxury penthouse for 4 guests with private heated Jacuzzi on the terrace and butler service.</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t border-neutral-soft pt-4 space-x-2">
+                        <a href="camera-dettaglio.html?id=signature-terrace" class="text-xs font-semibold underline text-neutral-600 hover:text-neutral-900">Details & Photos</a>
+                        <a href="prenotazione.html?room=signature-terrace" class="bg-stone-dark text-white px-4 py-2 rounded-xl text-xs uppercase font-semibold hover:bg-neutral-800 transition">Select</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-sand border-t border-neutral-soft py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-6 text-center text-xs text-neutral-500">
+            © 2026 Aura Suites. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+    <script>
+    if (typeof window.toggleMobileMenu !== 'function') {
+        window.toggleMobileMenu = function () {
+            const menu = document.getElementById('mobile-menu');
+            const btn  = document.getElementById('mobile-menu-btn');
+            const icon = document.getElementById('menu-icon');
+            if (!menu) return;
+            const isOpening = menu.classList.contains('hidden');
+            menu.classList.toggle('hidden');
+            if (btn) btn.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
+            if (icon) {
+                icon.innerHTML = isOpening
+                    ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>'
+                    : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            }
+        };
+    }
+    </script>
+</body>
+</html>
