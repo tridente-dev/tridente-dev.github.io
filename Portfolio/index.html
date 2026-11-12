@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light" style="background-color: #FAFAF9;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giancarlo Tridente — Web Developer & Digital Designer</title>
+    <meta name="description" content="Portfolio di Giancarlo Tridente, Web Developer & Digital Designer. Progetto esperienze digitali ad alto impatto visivo.">
+    <meta name="theme-color" content="#FAFAF9">
+
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme = saved || 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.style.colorScheme = (theme === 'dark') ? 'dark' : 'light';
+
+          var savedLang = localStorage.getItem('siteLang');
+          if (savedLang) {
+            document.documentElement.setAttribute('lang', savedLang);
+            if (savedLang === 'ar') {
+              document.documentElement.setAttribute('dir', 'rtl');
+            }
+          }
+
+          var style = document.createElement('style');
+          style.id = 'anti-fouc';
+          style.textContent = 'html, body, .header, .theme-ball, .brand-logo, .accent-dot, .status-dot, .section-tag, .skill-group h4, .theme-toggle, .theme-toggle .toggle-thumb, .theme-toggle svg { transition: none !important; }';
+          document.head.appendChild(style);
+
+          window.addEventListener('load', function() {
+            setTimeout(function() {
+              var s = document.getElementById('anti-fouc');
+              if (s) s.remove();
+            }, 100);
+          });
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="logo-favicon.png?v=3">
+    <link rel="icon" type="image/png" sizes="192x192" href="logo-favicon.png?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo-favicon.png?v=3">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =============================================
+           OVERLAY SELEZIONE LINGUA - EDITORIAL STYLE
+           ============================================= */
+        .lang-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-main);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 1;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(0px);
+        }
+        .lang-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .lang-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 60%);
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
+        .lang-modal {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            box-shadow:
+                0 1px 2px rgba(0,0,0,0.02),
+                0 30px 80px -20px rgba(20,24,31,0.18),
+                0 0 0 1px rgba(255,255,255,0.03) inset;
+            overflow: hidden;
+            animation: langModalIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes langModalIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .lang-modal-head {
+            padding: 32px 32px 20px;
+            position: relative;
+        }
+
+        .lang-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+        .lang-eyebrow::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        .lang-title {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .lang-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        /* --- SEARCH --- */
+        .lang-search-wrap {
+            padding: 0 32px 20px;
+            position: relative;
+        }
+
+        .lang-search {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .lang-search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: color 0.2s ease;
+        }
+
+        .lang-search input {
+            width: 100%;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            background: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 12px 14px 12px 40px;
+            outline: none;
+            transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .lang-search input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .lang-search input:focus {
+            border-color: var(--accent);
+            background: var(--bg-surface);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .lang-search:has(input:focus) .lang-search-icon {
+            color: var(--accent);
+        }
+
+        /* --- LISTA SCROLLABILE --- */
+        .lang-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 20px;
+            margin: 0 12px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-strong) transparent;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            max-height: 44vh;
+        }
+
+        .lang-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        .lang-list::-webkit-scrollbar-thumb {
+            background: var(--border-strong);
+            border-radius: 3px;
+        }
+        .lang-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* --- ITEM LINGUA --- */
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            padding: 12px 16px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            text-align: left;
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            animation: langItemIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+        }
+
+        @keyframes langItemIn {
+            from {
+                opacity: 0;
+                transform: translateX(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .lang-item:hover,
+        .lang-item.is-focused {
+            background: var(--bg-surface-hover);
+            border-color: var(--border-subtle);
+            transform: translateX(2px);
+        }
+
+        .lang-item:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .lang-item.is-current {
+            background: var(--accent-glow);
+            border-color: var(--accent-soft);
+        }
+
+        .lang-flag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            font-size: 1.15rem;
+            line-height: 1;
+            flex-shrink: 0;
+            transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.5, 1), border-color 0.2s ease;
+        }
+
+        /* Nuova classe per gli acronimi */
+        .lang-flag.lang-acronym {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            background: var(--bg-main);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.2s ease;
+        }
+
+        .lang-item:hover .lang-flag.lang-acronym,
+        .lang-item.is-focused .lang-flag.lang-acronym {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: var(--accent-glow);
+            transform: scale(1.05);
+        }
+
+        .lang-item:hover .lang-flag,
+        .lang-item.is-focused .lang-flag {
+            transform: rotate(-6deg) scale(1.06);
+            border-color: var(--accent);
+        }
+
+        .lang-names {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .lang-native {
+            font-weight: 500;
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .lang-code {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .lang-check {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            opacity: 0;
+            color: var(--accent);
+            transition: opacity 0.2s ease;
+        }
+        .lang-item.is-current .lang-check {
+            opacity: 1;
+        }
+
+        /* --- FOOTER --- */
+        .lang-foot {
+            padding: 14px 32px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-count {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+
+        .lang-close {
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .lang-close:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+            background: var(--bg-surface-hover);
+        }
+
+        .lang-empty {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- PULSANTE "A" NELL'HEADER --- */
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            flex-shrink: 0;
+            position: relative;
+        }
+        .lang-btn:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--accent);
+            transform: translateY(-1px) rotate(-4deg);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .lang-btn::after {
+            content: attr(data-current-lang);
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: var(--bg-main);
+            font-size: 0.55rem;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            border: 1.5px solid var(--bg-main);
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+
+        /* --- RTL --- */
+        [dir="rtl"] .lang-item { text-align: right; }
+        [dir="rtl"] .lang-search-icon { left: auto; right: 14px; }
+        [dir="rtl"] .lang-search input { padding: 12px 40px 12px 14px; }
+        [dir="rtl"] .lang-item:hover,
+        [dir="rtl"] .lang-item.is-focused { transform: translateX(-2px); }
+
+        /* --- MOBILE --- */
+        @media (max-width: 520px) {
+            .lang-modal-head { padding: 24px 22px 16px; }
+            .lang-title { font-size: 1.45rem; }
+            .lang-search-wrap { padding: 0 22px 16px; }
+            .lang-list { margin: 0 6px; padding: 10px 12px; }
+            .lang-foot { padding: 12px 22px 16px; }
+            .lang-item { padding: 10px 12px; gap: 12px; }
+            .lang-flag { width: 32px; height: 32px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- OVERLAY SELEZIONE LINGUA -->
+    <div id="lang-overlay" class="lang-overlay">
+        <div class="lang-modal" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title">
+            <div class="lang-modal-head">
+                <span class="lang-eyebrow" id="lang-eyebrow">Language</span>
+                <h2 class="lang-title" id="lang-modal-title">Choose your language</h2>
+                <p class="lang-subtitle" id="lang-modal-subtitle">Select the language you prefer to browse the site.</p>
+            </div>
+
+            <div class="lang-search-wrap">
+                <div class="lang-search">
+                    <svg class="lang-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input
+                        type="text"
+                        id="lang-search-input"
+                        placeholder="Search a language…"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-label="Search language"
+                    >
+                </div>
+            </div>
+
+            <div class="lang-list" id="lang-list" role="listbox" aria-label="Languages">
+                <!-- Generato da JS -->
+            </div>
+
+            <div class="lang-foot">
+                <span class="lang-count" id="lang-count">16 lingue disponibili</span>
+                <button type="button" class="lang-close" id="lang-close">Chiudi</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container nav-container">
+            
+            <div class="brand-logo">
+                <div class="logo-wrapper">
+                    <img src="logo.png" alt="Tridente Dev Logo" class="brand-mark" width="42" height="42">
+                </div>
+                <span class="brand-name">Giancarlo Tridente<span class="accent-dot">.</span></span>
+            </div>
+
+            <div class="nav-right">
+                <nav class="nav-menu">
+                    <a href="#projects" data-i18n="nav_works">Lavori</a>
+                    <a href="#about" data-i18n="nav_about">Chi Sono</a>
+                    <a href="#contact" data-i18n="nav_contact">Contatti</a>
+                </nav>
+
+                <!-- PULSANTE LINGUA -->
+                <button id="lang-toggle" class="lang-btn" aria-label="Change language" title="Change language" data-current-lang="it">A</button>
+
+                <button id="theme-toggle" class="theme-toggle" aria-label="Cambia tema">
+                    <span class="toggle-track">
+                        <span class="toggle-thumb">
+                            <svg class="icon-sun" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <line x1="12" y1="2" x2="12" y2="4"></line>
+                                <line x1="12" y1="20" x2="12" y2="22"></line>
+                                <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line>
+                                <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line>
+                                <line x1="2" y1="12" x2="4" y2="12"></line>
+                                <line x1="20" y1="12" x2="22" y2="12"></line>
+                                <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line>
+                                <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>
+                            </svg>
+                            <svg class="icon-moon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-status">
+                        <span class="status-dot"></span> <span data-i18n="hero_status">Disponibile per nuovi progetti</span>
+                    </span>
+                    <h1 class="hero-name">Giancarlo Tridente</h1>
+                    <p class="hero-role" data-i18n="hero_role">Web Developer & Digital Designer</p>
+                    <p class="hero-pitch" data-i18n="hero_pitch">
+                        Progetto e sviluppo esperienze digitali ad alto impatto visivo e funzionale,
+                        trasformando la complessità tecnica in interfacce pulite, veloci e intuitive.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_projects">Esplora i Lavori</a>
+                        <a href="#contact" class="btn btn-secondary" data-i18n="hero_btn_contact">Avvia un progetto</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-i18n="projects_title">Progetti Personali Selezionati</h2>
+                </div>
+
+                <div class="projects-list">
+
+                    <a href="aura-suites/index.html" class="project-item" target="_blank" rel="noopener noreferrer" aria-label="Apri il progetto Aura Suites &amp; Resort (si apre in una nuova scheda)">
+                        <div class="project-meta">
+                            <span class="project-number">01</span>
+                            <span class="project-category" data-i18n="project1_cat">Luxury Hospitality Platform (Concept)</span>
+                        </div>
+                        <div class="project-body">
+                            <h3 class="project-title">Aura Suites &amp; Resort</h3>
+                            <p class="project-description" data-i18n="project1_desc">
+                                Progetto concept per una piattaforma di prenotazione diretta orientata al segmento Luxury Adults Only. Design minimale e motore di calcolo preventivi in tempo reale.
+                            </p>
+
+                            <div class="project-details">
+                                <div class="detail-block">
+                                    <span class="detail-label" data-i18n="detail_project_nature">Natura del Progetto:</span>
+                                    <span class="detail-value" data-i18n="project1_nature">Sito concept sviluppato per esplorare architetture di booking e UI luxury</span>
+                                </div>
+                                <div class="detail-block">
+                                    <span class="detail-label" data-i18n="detail_tech_focus">Focus Tecnico:</span>
+                                    <span class="detail-value" data-i18n="project1_focus">Calcolo dinamico prezzi, gestione disponibilità camere, verifica età ospiti</span>
+                                </div>
+                            </div>
+
+                            <div class="project-tags">
+                                <span>UI/UX Design</span>
+                                <span>Frontend Dev</span>
+                                <span>JavaScript ES6+</span>
+                                <span>Tailwind CSS</span>
+                            </div>
+                            <span class="project-link"><span data-i18n="detail_view_demo">Vedi Demo Live</span> <span class="arrow">→</span></span>
+                        </div>
+                    </a>
+
+                    <a href="aether/index.html" class="project-item" target="_blank" rel="noopener noreferrer" aria-label="Apri il progetto AETHER Objects (si apre in una nuova scheda)">
+                        <div class="project-meta">
+                            <span class="project-number">02</span>
+                            <span class="project-category" data-i18n="project2_cat">E-commerce Concept (Design Objects)</span>
+                        </div>
+                        <div class="project-body">
+                            <h3 class="project-title">AETHER — Objects for Mindful Workspaces</h3>
+                            <p class="project-description" data-i18n="project2_desc">
+                                Concept e-commerce per un brand di oggetti scultorei da scrivania. Catalogo dinamico con filtri, carrello persistente in localStorage, checkout completo e modal dedicato per le edizioni limitate numerate.
+                            </p>
+
+                            <div class="project-details">
+                                <div class="detail-block">
+                                    <span class="detail-label" data-i18n="detail_project_nature">Natura del Progetto:</span>
+                                    <span class="detail-value" data-i18n="project2_nature">Piattaforma e-commerce concept con gestione carrello, checkout e schede prodotto dinamiche</span>
+                                </div>
+                                <div class="detail-block">
+                                    <span class="detail-label" data-i18n="detail_tech_focus">Focus Tecnico:</span>
+                                    <span class="detail-value" data-i18n="project2_focus">Filtri multi-criterio, persistenza carrello, gestione quantità, UI minimal luxury, tema chiaro/scuro</span>
+                                </div>
+                            </div>
+
+                            <div class="project-tags">
+                                <span>E-commerce UI</span>
+                                <span>JavaScript Vanilla</span>
+                                <span>LocalStorage</span>
+                                <span>Modal &amp; Drawer</span>
+                            </div>
+                            <span class="project-link"><span data-i18n="detail_view_demo">Vedi Demo Live</span> <span class="arrow">→</span></span>
+                        </div>
+                    </a>
+
+                    <a href="chronos/index.html" class="project-item" target="_blank" rel="noopener noreferrer" aria-label="Apri il progetto Chronos Time Perception (si apre in una nuova scheda)">
+                        <div class="project-meta">
+                            <span class="project-number">03</span>
+                            <span class="project-category" data-i18n="project3_cat">3D Web Experience (Concept)</span>
+                        </div>
+                        <div class="project-body">
+                            <h3 class="project-title">Chronos Time Perception</h3>
+                            <p class="project-description" data-i18n="project3_desc">
+                                Studio digitale e sperimentale sulla percezione temporale. Un'esperienza immersiva WebGL con rendering 3D in tempo reale e orbita interattiva a 360°.
+                            </p>
+
+                            <div class="project-details">
+                                <div class="detail-block">
+                                    <span class="detail-label" data-i18n="detail_project_nature">Natura del Progetto:</span>
+                                    <span class="detail-value" data-i18n="project3_nature">Sperimentazione creativa per l'integrazione di grafica 3D e canvas nel browser</span>
+                                </div>
+                                <div class="detail-block">
+                                    <span class="detail-label" data-i18n="detail_tech_focus">Focus Tecnico:</span>
+                                    <span class="detail-value" data-i18n="project3_focus">Shading personalizzato, gestione camera orbitale 3D, ottimizzazione framerate a 60fps</span>
+                                </div>
+                            </div>
+
+                            <div class="project-tags">
+                                <span>Three.js</span>
+                                <span>WebGL</span>
+                                <span>GSAP Animations</span>
+                                <span>Canvas API</span>
+                            </div>
+                            <span class="project-link"><span data-i18n="detail_view_demo">Vedi Demo Live</span> <span class="arrow">→</span></span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-header">
+                        <h2 class="section-title" data-i18n="about_title">Ingegneria e forma visiva.</h2>
+                    </div>
+                    <div class="about-content">
+                        <p class="about-bio" data-i18n="about_bio1">
+                            Sono uno studente di Informatica a Milano con un forte orientamento al design digitale. Credo che il codice sia lo strumento per dare forma a idee complesse, ma è l'attenzione al dettaglio visivo e all'interazione a renderle memorabili.
+                        </p>
+                        <p class="about-bio" data-i18n="about_bio2">
+                            Il mio approccio unisce il rigore analitico dello sviluppo software ad una spiccata sensibilità estetica, creando prodotti digitali essenziali, performanti ed eleganti.
+                        </p>
+
+                        <div class="skills-block">
+                            <h3 class="skills-heading" data-i18n="skills_title">Competenze e Strumenti</h3>
+                            <div class="skills-columns">
+                                <div class="skill-group">
+                                    <h4 data-i18n="skills_dev">Sviluppo</h4>
+                                    <ul>
+                                        <li>HTML5 / CSS3 / SASS</li>
+                                        <li>JavaScript (ES6+) / TypeScript</li>
+                                        <li>React.js / Next.js</li>
+                                        <li>Tailwind CSS</li>
+                                    </ul>
+                                </div>
+                                <div class="skill-group">
+                                    <h4 data-i18n="skills_design">Design &amp; Core</h4>
+                                    <ul>
+                                        <li>UI/UX &amp; Interactive Design</li>
+                                        <li>Design Systems</li>
+                                        <li>Wireframing &amp; Prototyping</li>
+                                        <li>Performance &amp; SEO Basics</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-card">
+                    <h2 class="contact-title" data-i18n="contact_title">Hai un progetto in mente?</h2>
+                    <p class="contact-subtitle" data-i18n="contact_subtitle">Scrivimi una mail. Rispondo di solito entro 24 ore.</p>
+
+                    <a href="mailto:g.tridente.web@gmail.com" class="contact-email" id="contact-email">
+                        g.tridente.web@gmail.com
+                    </a>
+
+                    <div class="contact-footer">
+                        <div class="contact-socials">
+                            <a href="https://www.instagram.com/tridente.dev/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                            <a href="https://wa.me/393314052066" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                        </div>
+                        <p class="copyright" data-i18n="copyright">&copy; 2026 Giancarlo Tridente. Tutti i diritti riservati.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

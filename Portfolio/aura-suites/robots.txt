@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /prenotazione.html
+
+Sitemap: https://aurasuites.example.com/sitemap.xml
