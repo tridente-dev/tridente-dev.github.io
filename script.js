@@ -1,6 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================================================
+       0. FALLBACK TRANSLATIONS (se non definite altrove)
+       ========================================================= */
+    if (typeof window.translations === 'undefined') {
+        window.translations = {
+            en: {
+                form_error_required: 'Please fill in all required fields.',
+                form_error_email: 'Please enter a valid email address.',
+                form_error_send: 'Sending failed. Please try again.',
+                form_sending: 'Sending…'
+            },
+            it: {
+                form_error_required: 'Compila tutti i campi obbligatori.',
+                form_error_email: 'Inserisci un indirizzo email valido.',
+                form_error_send: 'Invio non riuscito. Riprova.',
+                form_sending: 'Invio in corso…'
+            }
+        };
+    }
+    const translations = window.translations;
+
+    /* =========================================================
        1. GESTIONE LINGUA - EDITORIAL SELECTOR
        ========================================================= */
     const langOverlay = document.getElementById('lang-overlay');
@@ -52,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function applyTranslation(langCode) {
         currentLang = langCode;
-        const dict = translations[langCode] || translations['en'];
-        const fallback = translations['en'];
+        const dict = (translations && translations[langCode]) || {};
+        const fallback = (translations && translations['en']) || {};
 
         // Traduzione testi normali
         document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -189,9 +210,13 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { langOverlay.style.display = 'none'; }, 400);
     }
 
+    function hasSavedLang() {
+        try { return !!localStorage.getItem('siteLang'); } catch (_) { return false; }
+    }
+
     renderLangList('');
 
-    const savedLang = (() => { try { return localStorage.getItem('siteLang'); } catch(e) { return null; } })();
+    const savedLang = (() => { try { return localStorage.getItem('siteLang'); } catch (e) { return null; } })();
 
     if (savedLang) {
         if (langOverlay) {
@@ -200,10 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         applyTranslation(savedLang);
     } else {
-        if (langOverlay) {
-            langOverlay.style.display = 'flex';
-        }
+        // Nessuna lingua salvata: applica base EN poi apri overlay completo
         applyTranslation('en');
+        openOverlay();
     }
 
     if (langSearchInput) {
@@ -212,6 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         langSearchInput.addEventListener('keydown', (e) => {
+            if (!langList) return;
             const items = langList.querySelectorAll('.lang-item');
             if (e.key === 'ArrowDown') {
                 e.preventDefault();
@@ -229,16 +254,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     items[0].click();
                 }
             } else if (e.key === 'Escape') {
-                const hasSaved = (() => { try { return !!localStorage.getItem('siteLang'); } catch(_) { return false; } })();
-                if (hasSaved) closeOverlay();
+                if (hasSavedLang()) closeOverlay();
             }
         });
     }
 
     function updateKeyboardFocus(items) {
+        if (!items || !items.length) return;
         items.forEach((el, i) => {
             el.classList.toggle('is-focused', i === focusedIndex);
-            if (i === focusedIndex) {
+            if (i === focusedIndex && el.scrollIntoView) {
                 el.scrollIntoView({ block: 'nearest' });
             }
         });
@@ -250,23 +275,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (langClose) {
         langClose.addEventListener('click', () => {
-            const hasSaved = (() => { try { return !!localStorage.getItem('siteLang'); } catch(_) { return false; } })();
-            if (hasSaved) closeOverlay();
+            if (hasSavedLang()) closeOverlay();
         });
     }
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && langOverlay && !langOverlay.classList.contains('hidden')) {
-            const hasSaved = (() => { try { return !!localStorage.getItem('siteLang'); } catch(_) { return false; } })();
-            if (hasSaved) closeOverlay();
+            if (hasSavedLang()) closeOverlay();
         }
     });
 
     if (langOverlay) {
         langOverlay.addEventListener('click', (e) => {
             if (e.target === langOverlay) {
-                const hasSaved = (() => { try { return !!localStorage.getItem('siteLang'); } catch(_) { return false; } })();
-                if (hasSaved) closeOverlay();
+                if (hasSavedLang()) closeOverlay();
             }
         });
     }
@@ -359,37 +381,38 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================================
        6. AUTO-FIT EMAIL
        ========================================================= */
-    const emailEl = document.getElementById('contact-email');
+    const contactEmailEl = document.getElementById('contact-email');
 
-    if (emailEl) {
+    if (contactEmailEl) {
         const fitEmail = () => {
-            if (!emailEl) return;
+            if (!contactEmailEl) return;
 
-            emailEl.style.fontSize = '';
-            emailEl.style.whiteSpace = 'nowrap';
+            contactEmailEl.style.fontSize = '';
+            contactEmailEl.style.whiteSpace = 'nowrap';
 
-            const parent = emailEl.parentElement;
+            const parent = contactEmailEl.parentElement;
+            if (!parent) return;
             const parentStyles = window.getComputedStyle(parent);
             const paddingLeft = parseFloat(parentStyles.paddingLeft) || 0;
             const paddingRight = parseFloat(parentStyles.paddingRight) || 0;
             const availableWidth = parent.clientWidth - paddingLeft - paddingRight;
 
-            const computed = window.getComputedStyle(emailEl);
+            const computed = window.getComputedStyle(contactEmailEl);
             let fontSize = parseFloat(computed.fontSize);
 
             const MIN_FONT = 10;
             let safety = 0;
 
-            while (emailEl.scrollWidth > availableWidth && fontSize > MIN_FONT && safety < 80) {
+            while (contactEmailEl.scrollWidth > availableWidth && fontSize > MIN_FONT && safety < 80) {
                 fontSize -= 0.5;
-                emailEl.style.fontSize = fontSize + 'px';
+                contactEmailEl.style.fontSize = fontSize + 'px';
                 safety++;
             }
 
-            if (emailEl.scrollWidth > availableWidth) {
-                emailEl.style.letterSpacing = '-0.04em';
+            if (contactEmailEl.scrollWidth > availableWidth) {
+                contactEmailEl.style.letterSpacing = '-0.04em';
             } else {
-                emailEl.style.letterSpacing = '';
+                contactEmailEl.style.letterSpacing = '';
             }
         };
 
@@ -413,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================================================
-       7. CONTACT FORM (FormSubmit + AJAX)
+       7. CONTACT FORM (FormSubmit + AJAX + Verifica Email Reale)
        ========================================================= */
     const contactForm = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
@@ -422,9 +445,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const formSubmitText = formSubmitBtn ? formSubmitBtn.querySelector('.form-submit-text') : null;
 
     function t(key) {
-        const dict = translations[currentLang] || translations['en'];
-        const fallback = translations['en'];
+        const dict = (translations && translations[currentLang]) || {};
+        const fallback = (translations && translations['en']) || {};
         return (dict && dict[key]) || (fallback && fallback[key]) || '';
+    }
+
+    // Lista di domini fittizi o usa e getta comuni da bloccare subito
+    const blockedDomains = new Set([
+        'example.com', 'example.org', 'example.net', 'esempio.com', 'test.com',
+        'fake.com', 'mailinator.com', 'tempmail.com', '10minutemail.com',
+        'guerrillamail.com', 'throwawaymail.com', 'yopmail.com', 'trashmail.com',
+        'asd.com', 'qwerty.com', 'xyz.com', 'abc.com', 'cjves'
+    ]);
+
+    // Verifica se il dominio dell'email esiste realmente ed è abilitato a ricevere posta (record MX)
+    async function isRealEmailDomain(email) {
+        // 1. Regex rigorosa (RFC standard + TLD tra 2 e 24 caratteri alfabetici)
+        const strictEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,24}$/;
+        if (!strictEmailRegex.test(email)) return false;
+
+        const parts = email.split('@');
+        const localPart = parts[0].toLowerCase();
+        const domain = parts[1].toLowerCase();
+
+        // Evita punti consecutivi o all'inizio/fine della parte locale
+        if (localPart.startsWith('.') || localPart.endsWith('.') || localPart.includes('..')) {
+            return false;
+        }
+
+        // 2. Controllo blacklist domini fittizi/temporanei
+        if (blockedDomains.has(domain)) return false;
+
+        // 3. Controllo record DNS MX reali tramite Google DNS-over-HTTPS
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+            const dnsResponse = await fetch(
+                `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,
+                { signal: controller.signal }
+            );
+            clearTimeout(timeoutId);
+
+            if (!dnsResponse.ok) return true; // Fallback in caso di errore temporaneo del servizio DNS
+
+            const dnsData = await dnsResponse.json();
+            // Status 0 = NOERROR e presenza di almeno un record MX (Answer)
+            return dnsData.Status === 0 && Array.isArray(dnsData.Answer) && dnsData.Answer.length > 0;
+        } catch (err) {
+            // Se il browser o la rete bloccano la richiesta DNS, non blocchiamo utenti legittimi
+            return true;
+        }
     }
 
     if (contactForm) {
@@ -442,25 +513,25 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const nameEl = contactForm.querySelector('#form-name');
-            const emailEl = contactForm.querySelector('#form-email');
+            const nameEl    = contactForm.querySelector('#form-name');
+            const emailFEl  = contactForm.querySelector('#form-email');
             const messageEl = contactForm.querySelector('#form-message');
 
-            const name = nameEl.value.trim();
-            const email = emailEl.value.trim();
+            const name    = nameEl.value.trim();
+            const email   = emailFEl.value.trim();
             const message = messageEl.value.trim();
 
             // Reset
-            [nameEl, emailEl, messageEl].forEach(el => el.classList.remove('is-invalid'));
+            [nameEl, emailFEl, messageEl].forEach(el => el.classList.remove('is-invalid'));
             if (formStatus) {
                 formStatus.textContent = '';
                 formStatus.classList.remove('is-error');
             }
 
-            // Validazione
+            // Validazione campi obbligatori
             let hasError = false;
-            if (!name) { nameEl.classList.add('is-invalid'); hasError = true; }
-            if (!email) { emailEl.classList.add('is-invalid'); hasError = true; }
+            if (!name)    { nameEl.classList.add('is-invalid');    hasError = true; }
+            if (!email)   { emailFEl.classList.add('is-invalid');  hasError = true; }
             if (!message) { messageEl.classList.add('is-invalid'); hasError = true; }
 
             if (hasError) {
@@ -471,22 +542,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                emailEl.classList.add('is-invalid');
-                if (formStatus) {
-                    formStatus.textContent = t('form_error_email');
-                    formStatus.classList.add('is-error');
-                }
-                return;
-            }
-
-            // Stato "invio in corso"
+            // Stato "verifica / invio in corso"
             const originalText = formSubmitText ? formSubmitText.textContent : '';
             if (formSubmitText) formSubmitText.textContent = t('form_sending');
             if (formSubmitBtn) {
                 formSubmitBtn.disabled = true;
                 formSubmitBtn.classList.add('is-sending');
+            }
+
+            // Controllo esistenza reale del dominio email
+            const emailIsValid = await isRealEmailDomain(email);
+            if (!emailIsValid) {
+                emailFEl.classList.add('is-invalid');
+                emailFEl.focus();
+                if (formStatus) {
+                    formStatus.textContent = t('form_error_email');
+                    formStatus.classList.add('is-error');
+                }
+                if (formSubmitText) formSubmitText.textContent = originalText;
+                if (formSubmitBtn) {
+                    formSubmitBtn.disabled = false;
+                    formSubmitBtn.classList.remove('is-sending');
+                }
+                return;
             }
 
             try {
@@ -522,4 +600,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 });
