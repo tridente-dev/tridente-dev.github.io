@@ -1,6 +1,6 @@
 /* ============================================================
    CHRONOS — style.css
-   Cross-browser & Mobile Touch Optimized
+   Cross-browser & Mobile Touch Optimized (iOS / Android / PC)
    ============================================================ */
 
 :root {
@@ -90,8 +90,8 @@ a, button, [role="button"] {
   height: 100vh;
   height: 100dvh;
   z-index: 1;
-  pointer-events: none;
-  /* Nessuna gesture nativa sul canvas */
+  /* Abilita i pointer events anche su mobile per catturare il tocco sullo sfondo */
+  pointer-events: auto;
   touch-action: none;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);

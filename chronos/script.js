@@ -1,7 +1,7 @@
 /* ============================================================
    CHRONOS — script.js
    Fully in English — slower auto-rotation
-   Mobile touch optimizations (no native gestures)
+   Mobile touch optimizations (Pointer Events for iOS/Android/PC)
    ============================================================ */
 
 /* ---------- SECTIONS DATA ---------- */
@@ -227,7 +227,7 @@ function onResize() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 }
 
-/* ---------- INTERACTIONS ---------- */
+/* ---------- INTERACTIONS (Pointer Events for iOS/Android/PC) ---------- */
 function initInteractions() {
   const cursor = document.getElementById('cursor');
   const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -268,27 +268,7 @@ function initInteractions() {
     previousPointer = { x: clientX, y: clientY };
   }
 
-  /* ---------- MOUSE (desktop) ---------- */
-  window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
-  window.addEventListener('mousedown', (e) => {
-    // Evita di avviare il drag 3D quando si clicca su controlli UI o modale
-    if (e.target.closest('button, a, [role="button"], .index-list, .modal-overlay')) return;
-    isDragging = true;
-    isAutoRotating = false;
-    previousPointer = { x: e.clientX, y: e.clientY };
-    lastPointerPos = { x: e.clientX, y: e.clientY };
-  });
-  window.addEventListener('mouseup', () => {
-    isDragging = false;
-    isAutoRotating = true;
-  });
-
-  /* ---------- TOUCH (mobile) ---------- */
-  // Gestisce il drag della sfera ovunque sullo schermo tranne su pulsanti,
-  // lista scorrevole delle sezioni e finestra modale.
-  let touchStartedOnOrbit = false;
-  let activeTouchId = null;
-
+  /* ---------- POINTER EVENTS (Uniform across iOS, Android, Desktop) ---------- */
   function isRotateOverlayActive() {
     const overlay = document.getElementById('rotate-overlay');
     if (!overlay) return false;
@@ -297,61 +277,53 @@ function initInteractions() {
 
   function isInteractiveUI(target) {
     if (!target || !target.closest) return false;
-    return Boolean(target.closest('button, a, [role="button"], .index-list, .modal-overlay'));
+    return Boolean(target.closest('button, a, [role="button"], .index-list, .modal-overlay, .header-nav'));
   }
 
-  document.addEventListener('touchstart', (e) => {
-    if (isRotateOverlayActive() || isTimeFrozen) return;
+  let activePointerId = null;
 
-    const touch = e.changedTouches[0];
-    if (!touch) return;
+  window.addEventListener('pointerdown', (e) => {
+    if (isRotateOverlayActive() || isTimeFrozen || isInteractiveUI(e.target)) return;
 
-    // Blocca edge-swipe laterale di iOS/Android dai bordi estremi
-    const edge = 20;
-    if (touch.clientX < edge || touch.clientX > window.innerWidth - edge) {
-      if (e.cancelable) e.preventDefault();
-    }
-
-    // Se il tocco è su un elemento UI cliccabile o sulla lista sezioni, lascia il comportamento nativo
-    if (isInteractiveUI(e.target)) return;
-
-    activeTouchId = touch.identifier;
-    touchStartedOnOrbit = true;
+    activePointerId = e.pointerId;
     isDragging = true;
     isAutoRotating = false;
-    previousPointer = { x: touch.clientX, y: touch.clientY };
-    lastPointerPos = { x: touch.clientX, y: touch.clientY };
+    previousPointer = { x: e.clientX, y: e.clientY };
+    lastPointerPos = { x: e.clientX, y: e.clientY };
 
-    // FONDAMENTALE: blocca gesture native (pull-to-refresh / swipe) durante la rotazione
-    if (e.cancelable) e.preventDefault();
-  }, { passive: false });
-
-  document.addEventListener('touchmove', (e) => {
-    if (!touchStartedOnOrbit) return;
-
-    // Traccia esattamente il dito che ha iniziato il drag (supporto multi-touch sicuro)
-    const touch = Array.from(e.touches).find(t => t.identifier === activeTouchId) || e.touches[0];
-    if (!touch) return;
-
-    handlePointerMove(touch.clientX, touch.clientY);
-
-    // FONDAMENTALE: impedisce scroll/edge-swipe/tab-bar di sistema durante il drag
-    if (e.cancelable) e.preventDefault();
-  }, { passive: false });
-
-  function endOrbitTouch(e) {
-    if (!touchStartedOnOrbit) return;
-    if (e && e.changedTouches) {
-      const ended = Array.from(e.changedTouches).some(t => t.identifier === activeTouchId);
-      if (!ended) return;
+    // Cattura il puntatore per iOS/Safari: permette di continuare il drag anche se il dito esce dal canvas
+    if (e.target && e.target.setPointerCapture) {
+      try { e.target.setPointerCapture(e.pointerId); } catch (err) {}
     }
-    touchStartedOnOrbit = false;
-    activeTouchId = null;
+  }, { passive: true });
+
+  window.addEventListener('pointermove', (e) => {
+    if (isDragging && activePointerId !== null && e.pointerId !== activePointerId) return;
+    handlePointerMove(e.clientX, e.clientY);
+  }, { passive: true });
+
+  function endPointerDrag(e) {
+    if (!isDragging) return;
+    if (e && activePointerId !== null && e.pointerId !== activePointerId) return;
+
     isDragging = false;
     isAutoRotating = true;
+    activePointerId = null;
+
+    if (e && e.target && e.target.releasePointerCapture) {
+      try { e.target.releasePointerCapture(e.pointerId); } catch (err) {}
+    }
   }
-  document.addEventListener('touchend', endOrbitTouch, { passive: true });
-  document.addEventListener('touchcancel', endOrbitTouch, { passive: true });
+
+  window.addEventListener('pointerup', endPointerDrag, { passive: true });
+  window.addEventListener('pointercancel', endPointerDrag, { passive: true });
+
+  // Fallback per iOS Safari: previene lo scroll di pagina durante il trascinamento della sfera
+  document.addEventListener('touchmove', (e) => {
+    if (isDragging && e.cancelable) {
+      e.preventDefault();
+    }
+  }, { passive: false });
 
   /* ---------- HOVER (cursor custom) ---------- */
   const hoverables = document.querySelectorAll('a, button, [role="button"], .menu-item, .index-item, .brand, .card-link, .audio-toggle');
