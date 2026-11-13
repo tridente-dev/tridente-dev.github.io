@@ -37,6 +37,9 @@ html, body {
   line-height: 1.4;
   letter-spacing: 0.05em;
   overscroll-behavior: none;
+  /* Blocca gesture native iOS/Android: lo scroll verticale è gestito internamente */
+  touch-action: pan-y;
+  -webkit-touch-callout: none;
 }
 
 body {
@@ -72,6 +75,8 @@ a, button, [role="button"] {
   height: 100dvh;
   z-index: 1;
   pointer-events: none;
+  /* Nessuna gesture nativa sul canvas */
+  touch-action: none;
 }
 
 #grain {
@@ -314,6 +319,7 @@ a, button, [role="button"] {
   gap: 0.4rem;
   padding-right: 4px;
   scroll-behavior: smooth;
+  touch-action: pan-y;
 }
 .index-list::-webkit-scrollbar { width: 3px; }
 .index-list::-webkit-scrollbar-thumb {
@@ -540,6 +546,59 @@ a, button, [role="button"] {
   font-size: 11px;
 }
 
+/* ============================================================
+   OVERLAY ROTAZIONE DISPOSITIVO
+   ============================================================ */
+#rotate-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(8, 8, 8, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  color: var(--accent-yellow);
+}
+#rotate-overlay .rotate-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  max-width: 320px;
+}
+#rotate-overlay .rotate-icon {
+  animation: rotate-hint 2.4s ease-in-out infinite;
+  color: var(--accent-yellow);
+  transform-origin: center;
+}
+#rotate-overlay .rotate-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text-white);
+  margin: 0;
+}
+#rotate-overlay .rotate-sub {
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+@keyframes rotate-hint {
+  0%, 40% { transform: rotate(0deg); }
+  60%, 100% { transform: rotate(90deg); }
+}
+
+/* Mostra overlay solo su mobile in portrait */
+@media (max-width: 900px) and (orientation: portrait) {
+  #rotate-overlay { display: flex; }
+}
+
+/* ============================================================
+   MEDIA QUERIES
+   ============================================================ */
 @media (max-width: 1200px) {
   .app-layout {
     grid-template-columns: 280px 1fr 220px;
@@ -553,6 +612,18 @@ a, button, [role="button"] {
 @media (max-width: 900px) {
   #cursor { display: none; }
   * { cursor: auto !important; }
+
+  /* Su mobile il canvas deve ricevere i touch per il drag della sfera */
+  #webgl-canvas {
+    pointer-events: auto;
+    touch-action: none;
+  }
+
+  /* La zona centrale diventa interattiva per il drag */
+  .col-center {
+    pointer-events: auto;
+    touch-action: none;
+  }
 
   .app-layout {
     grid-template-columns: 1fr 1fr;
@@ -628,7 +699,7 @@ a, button, [role="button"] {
     overflow: auto;
     height: auto;
     min-height: 100dvh;
-    touch-action: manipulation;
+    touch-action: pan-y;
   }
 
   .app-layout {
@@ -768,5 +839,6 @@ a, button, [role="button"] {
   .status-dot { animation: none; }
   .wave-svg path { animation: none; }
   .modal-content { transition: none; }
+  #rotate-overlay .rotate-icon { animation: none; }
   * { transition-duration: 0.01ms !important; }
 }
