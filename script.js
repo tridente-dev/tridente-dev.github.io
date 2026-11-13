@@ -8,32 +8,40 @@ document.addEventListener('DOMContentLoaded', () => {
             en: {
                 form_error_required: 'Please fill in all required fields.',
                 form_error_email: 'Please enter a valid email address.',
+                form_error_email_unverifiable: 'Unable to verify this email. Please check your connection or use a different address.',
+                form_error_email_nodomain: 'This email domain does not exist or cannot receive messages.',
                 form_error_send: 'Sending failed. Please try again.',
-                form_sending: 'Sending…'
+                form_sending: 'Sending…',
+                form_thanks_title: 'Message sent!',
+                form_thanks_text: 'Thanks for reaching out. I will get back to you as soon as possible.'
             },
             it: {
                 form_error_required: 'Compila tutti i campi obbligatori.',
                 form_error_email: 'Inserisci un indirizzo email valido.',
+                form_error_email_unverifiable: 'Impossibile verificare questa email. Controlla la connessione o usa un altro indirizzo.',
+                form_error_email_nodomain: 'Il dominio di questa email non esiste o non può ricevere messaggi.',
                 form_error_send: 'Invio non riuscito. Riprova.',
-                form_sending: 'Invio in corso…'
+                form_sending: 'Invio in corso…',
+                form_thanks_title: 'Messaggio inviato!',
+                form_thanks_text: 'Grazie per avermi contattato. Ti risponderò il prima possibile.'
             }
         };
     }
     const translations = window.translations;
 
     /* =========================================================
-       1. GESTIONE LINGUA - EDITORIAL SELECTOR
+       1. GESTIONE LINGUA
        ========================================================= */
-    const langOverlay = document.getElementById('lang-overlay');
-    const langList = document.getElementById('lang-list');
-    const langSearchInput = document.getElementById('lang-search-input');
-    const langToggle = document.getElementById('lang-toggle');
-    const langCount = document.getElementById('lang-count');
-    const langClose = document.getElementById('lang-close');
-    const langEyebrow = document.getElementById('lang-eyebrow');
-    const langModalTitle = document.getElementById('lang-modal-title');
+    const langOverlay       = document.getElementById('lang-overlay');
+    const langList          = document.getElementById('lang-list');
+    const langSearchInput   = document.getElementById('lang-search-input');
+    const langToggle        = document.getElementById('lang-toggle');
+    const langCount         = document.getElementById('lang-count');
+    const langClose         = document.getElementById('lang-close');
+    const langEyebrow       = document.getElementById('lang-eyebrow');
+    const langModalTitle    = document.getElementById('lang-modal-title');
     const langModalSubtitle = document.getElementById('lang-modal-subtitle');
-    const htmlElement = document.documentElement;
+    const htmlElement       = document.documentElement;
 
     const supportedLanguages = [
         { code: 'en', flag: '🇬🇧', name: 'English',            english: 'English' },
@@ -76,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const dict = (translations && translations[langCode]) || {};
         const fallback = (translations && translations['en']) || {};
 
-        // Traduzione testi normali
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             const value = dict[key] || fallback[key];
@@ -90,13 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Traduzione placeholder (input e textarea)
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
             const key = el.getAttribute('data-i18n-placeholder');
             const value = dict[key] || fallback[key];
-            if (value) {
-                el.setAttribute('placeholder', value);
-            }
+            if (value) el.setAttribute('placeholder', value);
         });
 
         htmlElement.setAttribute('lang', langCode);
@@ -110,12 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.direction = 'ltr';
         }
 
-        if (langSearchInput) {
-            langSearchInput.placeholder = getOverlayText('search', langCode);
-        }
-        if (langClose) {
-            langClose.textContent = getOverlayText('close', langCode);
-        }
+        if (langSearchInput) langSearchInput.placeholder = getOverlayText('search', langCode);
+        if (langClose)       langClose.textContent = getOverlayText('close', langCode);
         updateLangCount();
     }
 
@@ -191,8 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
         void langOverlay.offsetWidth;
         langOverlay.classList.remove('hidden');
 
-        if (langEyebrow) langEyebrow.textContent = getOverlayText('eyebrow', currentLang);
-        if (langModalTitle) langModalTitle.textContent = getOverlayText('title', currentLang);
+        if (langEyebrow)       langEyebrow.textContent = getOverlayText('eyebrow', currentLang);
+        if (langModalTitle)    langModalTitle.textContent = getOverlayText('title', currentLang);
         if (langModalSubtitle) langModalSubtitle.textContent = getOverlayText('subtitle', currentLang);
         if (langSearchInput) {
             langSearchInput.value = '';
@@ -225,15 +225,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         applyTranslation(savedLang);
     } else {
-        // Nessuna lingua salvata: applica base EN poi apri overlay completo
         applyTranslation('en');
         openOverlay();
     }
 
     if (langSearchInput) {
-        langSearchInput.addEventListener('input', (e) => {
-            renderLangList(e.target.value);
-        });
+        langSearchInput.addEventListener('input', (e) => renderLangList(e.target.value));
 
         langSearchInput.addEventListener('keydown', (e) => {
             if (!langList) return;
@@ -248,11 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateKeyboardFocus(items);
             } else if (e.key === 'Enter') {
                 e.preventDefault();
-                if (focusedIndex >= 0 && items[focusedIndex]) {
-                    items[focusedIndex].click();
-                } else if (items.length > 0) {
-                    items[0].click();
-                }
+                if (focusedIndex >= 0 && items[focusedIndex]) items[focusedIndex].click();
+                else if (items.length > 0) items[0].click();
             } else if (e.key === 'Escape') {
                 if (hasSavedLang()) closeOverlay();
             }
@@ -263,20 +257,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!items || !items.length) return;
         items.forEach((el, i) => {
             el.classList.toggle('is-focused', i === focusedIndex);
-            if (i === focusedIndex && el.scrollIntoView) {
-                el.scrollIntoView({ block: 'nearest' });
-            }
+            if (i === focusedIndex && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
         });
     }
 
-    if (langToggle) {
-        langToggle.addEventListener('click', openOverlay);
-    }
+    if (langToggle) langToggle.addEventListener('click', openOverlay);
 
     if (langClose) {
-        langClose.addEventListener('click', () => {
-            if (hasSavedLang()) closeOverlay();
-        });
+        langClose.addEventListener('click', () => { if (hasSavedLang()) closeOverlay(); });
     }
 
     document.addEventListener('keydown', (e) => {
@@ -287,9 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (langOverlay) {
         langOverlay.addEventListener('click', (e) => {
-            if (e.target === langOverlay) {
-                if (hasSavedLang()) closeOverlay();
-            }
+            if (e.target === langOverlay && hasSavedLang()) closeOverlay();
         });
     }
 
@@ -322,9 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('show');
-                }, index * 80);
+                setTimeout(() => entry.target.classList.add('show'), index * 80);
                 observer.unobserve(entry.target);
             }
         });
@@ -344,12 +328,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (header) {
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-
             if (currentScroll <= 0) {
                 header.style.transform = 'translateY(0)';
                 return;
             }
-
             if (currentScroll > lastScroll && currentScroll > 100) {
                 header.style.transform = 'translateY(-100%)';
             } else {
@@ -367,14 +349,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#' || targetId === '') return;
-
             const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+            if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
 
@@ -393,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const parent = contactEmailEl.parentElement;
             if (!parent) return;
             const parentStyles = window.getComputedStyle(parent);
-            const paddingLeft = parseFloat(parentStyles.paddingLeft) || 0;
+            const paddingLeft  = parseFloat(parentStyles.paddingLeft)  || 0;
             const paddingRight = parseFloat(parentStyles.paddingRight) || 0;
             const availableWidth = parent.clientWidth - paddingLeft - paddingRight;
 
@@ -409,11 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 safety++;
             }
 
-            if (contactEmailEl.scrollWidth > availableWidth) {
-                contactEmailEl.style.letterSpacing = '-0.04em';
-            } else {
-                contactEmailEl.style.letterSpacing = '';
-            }
+            contactEmailEl.style.letterSpacing = (contactEmailEl.scrollWidth > availableWidth) ? '-0.04em' : '';
         };
 
         if (document.fonts && document.fonts.ready) {
@@ -430,27 +402,37 @@ document.addEventListener('DOMContentLoaded', () => {
             resizeTimer = setTimeout(fitEmail, 100);
         });
 
-        window.addEventListener('orientationchange', () => {
-            setTimeout(fitEmail, 200);
-        });
+        window.addEventListener('orientationchange', () => setTimeout(fitEmail, 200));
     }
 
     /* =========================================================
-       7. CONTACT FORM (FormSubmit + AJAX + Verifica Email Reale)
+       7. UTILITY: FETCH CON TIMEOUT
        ========================================================= */
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
-    const formSubmitBtn = document.getElementById('form-submit');
-    const formThanks = document.getElementById('form-thanks');
+    async function fetchWithTimeout(url, options = {}, timeoutMs = 15000) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+        try {
+            return await fetch(url, { ...options, signal: controller.signal });
+        } finally {
+            clearTimeout(timer);
+        }
+    }
+
+    /* =========================================================
+       8. CONTACT FORM (Web3Forms + Verifica Email Reale)
+       ========================================================= */
+    const contactForm    = document.getElementById('contact-form');
+    const formStatus     = document.getElementById('form-status');
+    const formSubmitBtn  = document.getElementById('form-submit');
+    const formThanks     = document.getElementById('form-thanks');
     const formSubmitText = formSubmitBtn ? formSubmitBtn.querySelector('.form-submit-text') : null;
 
     function t(key) {
-        const dict = (translations && translations[currentLang]) || {};
+        const dict     = (translations && translations[currentLang]) || {};
         const fallback = (translations && translations['en']) || {};
-        return (dict && dict[key]) || (fallback && fallback[key]) || '';
+        return dict[key] || fallback[key] || '';
     }
 
-    // Lista di domini fittizi o usa e getta comuni da bloccare subito
     const blockedDomains = new Set([
         'example.com', 'example.org', 'example.net', 'esempio.com', 'test.com',
         'fake.com', 'mailinator.com', 'tempmail.com', '10minutemail.com',
@@ -458,28 +440,30 @@ document.addEventListener('DOMContentLoaded', () => {
         'asd.com', 'qwerty.com', 'xyz.com', 'abc.com', 'cjves'
     ]);
 
-    // Verifica se il dominio dell'email esiste realmente ed è abilitato a ricevere posta (record MX)
+    const trustedProviders = [
+        'gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com',
+        'yahoo.com', 'yahoo.it', 'icloud.com', 'me.com', 'proton.me', 'protonmail.com',
+        'aol.com', 'gmx.com', 'gmx.net', 'libero.it', 'virgilio.it', 'tiscali.it',
+        'fastwebnet.it', 'alice.it', 'tin.it'
+    ];
+
     async function isRealEmailDomain(email) {
-        // 1. Regex rigorosa (RFC standard + TLD tra 2 e 24 caratteri alfabetici)
         const strictEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,24}$/;
-        if (!strictEmailRegex.test(email)) return false;
+        if (!strictEmailRegex.test(email)) return { ok: false, reason: 'format' };
 
-        const parts = email.split('@');
+        const parts     = email.split('@');
         const localPart = parts[0].toLowerCase();
-        const domain = parts[1].toLowerCase();
+        const domain    = parts[1].toLowerCase();
 
-        // Evita punti consecutivi o all'inizio/fine della parte locale
         if (localPart.startsWith('.') || localPart.endsWith('.') || localPart.includes('..')) {
-            return false;
+            return { ok: false, reason: 'format' };
         }
 
-        // 2. Controllo blacklist domini fittizi/temporanei
-        if (blockedDomains.has(domain)) return false;
+        if (blockedDomains.has(domain)) return { ok: false, reason: 'blocked' };
 
-        // 3. Controllo record DNS MX reali tramite Google DNS-over-HTTPS
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 4000);
+            const timeoutId  = setTimeout(() => controller.abort(), 5000);
 
             const dnsResponse = await fetch(
                 `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,
@@ -487,19 +471,26 @@ document.addEventListener('DOMContentLoaded', () => {
             );
             clearTimeout(timeoutId);
 
-            if (!dnsResponse.ok) return true; // Fallback in caso di errore temporaneo del servizio DNS
+            if (!dnsResponse.ok) {
+                if (trustedProviders.includes(domain)) return { ok: true };
+                return { ok: false, reason: 'unverifiable' };
+            }
 
             const dnsData = await dnsResponse.json();
-            // Status 0 = NOERROR e presenza di almeno un record MX (Answer)
-            return dnsData.Status === 0 && Array.isArray(dnsData.Answer) && dnsData.Answer.length > 0;
+
+            if (dnsData.Status !== 0) return { ok: false, reason: 'nodomain' };
+
+            const hasMx = Array.isArray(dnsData.Answer) && dnsData.Answer.some(a => a.type === 15);
+            if (!hasMx) return { ok: false, reason: 'nomx' };
+
+            return { ok: true };
         } catch (err) {
-            // Se il browser o la rete bloccano la richiesta DNS, non blocchiamo utenti legittimi
-            return true;
+            if (trustedProviders.includes(domain)) return { ok: true };
+            return { ok: false, reason: 'unverifiable' };
         }
     }
 
     if (contactForm) {
-        // Rimuove lo stato "invalid" quando l'utente scrive
         contactForm.querySelectorAll('input, textarea').forEach(el => {
             el.addEventListener('input', () => {
                 el.classList.remove('is-invalid');
@@ -521,14 +512,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const email   = emailFEl.value.trim();
             const message = messageEl.value.trim();
 
-            // Reset
             [nameEl, emailFEl, messageEl].forEach(el => el.classList.remove('is-invalid'));
             if (formStatus) {
                 formStatus.textContent = '';
                 formStatus.classList.remove('is-error');
             }
 
-            // Validazione campi obbligatori
             let hasError = false;
             if (!name)    { nameEl.classList.add('is-invalid');    hasError = true; }
             if (!email)   { emailFEl.classList.add('is-invalid');  hasError = true; }
@@ -542,7 +531,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Stato "verifica / invio in corso"
             const originalText = formSubmitText ? formSubmitText.textContent : '';
             if (formSubmitText) formSubmitText.textContent = t('form_sending');
             if (formSubmitBtn) {
@@ -550,13 +538,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 formSubmitBtn.classList.add('is-sending');
             }
 
-            // Controllo esistenza reale del dominio email
-            const emailIsValid = await isRealEmailDomain(email);
-            if (!emailIsValid) {
+            const emailCheck = await isRealEmailDomain(email);
+            if (!emailCheck.ok) {
                 emailFEl.classList.add('is-invalid');
                 emailFEl.focus();
+
+                let errorMsg = t('form_error_email');
+                if (emailCheck.reason === 'unverifiable') {
+                    errorMsg = t('form_error_email_unverifiable');
+                } else if (emailCheck.reason === 'nomx' || emailCheck.reason === 'nodomain') {
+                    errorMsg = t('form_error_email_nodomain');
+                }
+
                 if (formStatus) {
-                    formStatus.textContent = t('form_error_email');
+                    formStatus.textContent = errorMsg;
                     formStatus.classList.add('is-error');
                 }
                 if (formSubmitText) formSubmitText.textContent = originalText;
@@ -567,27 +562,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // === INVIO A WEB3FORMS ===
             try {
                 const formData = new FormData(contactForm);
-                const response = await fetch(contactForm.action, {
+
+                const response = await fetchWithTimeout(contactForm.action, {
                     method: 'POST',
                     body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
+                    headers: { 'Accept': 'application/json' },
+                    redirect: 'follow'
+                }, 15000);
 
-                if (response.ok) {
-                    contactForm.reset();
-                    contactForm.hidden = true;
-                    if (formThanks) formThanks.hidden = false;
+                // Consuma SEMPRE il body come testo (evita promise appese)
+                const rawText = await response.text();
 
-                    if (formStatus) {
-                        formStatus.textContent = '';
-                        formStatus.classList.remove('is-error');
-                    }
-                } else {
-                    throw new Error('Network response was not ok');
+                let data = null;
+                try { data = JSON.parse(rawText); } catch (_) { data = null; }
+
+                const successFlag = data && (
+                    data.success === true ||
+                    String(data.success) === 'true'
+                );
+
+                // Successo = status 2xx E (success true O body vuoto/non-JSON)
+                const isSuccess = response.ok && (successFlag || data === null);
+
+                if (!isSuccess) {
+                    const msg = (data && (data.message || data.error)) || 'Invio non riuscito';
+                    console.error('[Web3Forms] Errore:', msg, data, 'status:', response.status);
+                    throw new Error(msg);
+                }
+
+                // ✅ SUCCESSO
+                contactForm.reset();
+                contactForm.hidden = true;
+                if (formThanks) formThanks.hidden = false;
+
+                if (formStatus) {
+                    formStatus.textContent = '';
+                    formStatus.classList.remove('is-error');
+                }
+                if (formSubmitBtn) {
+                    formSubmitBtn.disabled = false;
+                    formSubmitBtn.classList.remove('is-sending');
                 }
             } catch (err) {
+                console.error('[Web3Forms] Exception:', err);
                 if (formStatus) {
                     formStatus.textContent = t('form_error_send');
                     formStatus.classList.add('is-error');
@@ -601,4 +621,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-});
+}); 

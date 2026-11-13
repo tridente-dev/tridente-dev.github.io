@@ -726,24 +726,27 @@
             <div class="container">
                 <div class="contact-card">
                     <h2 class="contact-title" data-i18n="contact_title">Hai un progetto in mente?</h2>
-                    <p class="contact-subtitle" data-i18n="contact_subtitle">Compila il modulo o scrivimi una mail. Rispondo di solito entro 24 ore.</p>
+                    <p class="contact-subtitle" data-i18n="contact_subtitle">Compila il modulo o scrivimi una mail. Rispondo il prima possibile.</p>
 
                     <a href="mailto:g.tridente.web@gmail.com" class="contact-email" id="contact-email">
                         g.tridente.web@gmail.com
                     </a>
 
-                    <!-- FORM DI CONTATTO -->
+                    <!-- ============================================
+                         FORM DI CONTATTO — WEB3FORMS
+                         Access Key già inserita: 345919ac-2b43-4396-95cb-cc19aecb22e8
+                         ============================================ -->
                     <form
                         id="contact-form"
                         class="contact-form"
-                        action="https://formsubmit.co/g.tridente.web@gmail.com"
+                        action="https://api.web3forms.com/submit"
                         method="POST"
                         novalidate
                     >
-                        <input type="hidden" name="_subject" value="Nuovo messaggio dal portfolio — Giancarlo Tridente">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+                        <input type="hidden" name="access_key" value="345919ac-2b43-4396-95cb-cc19aecb22e8">
+                        <input type="hidden" name="subject" value="Nuovo messaggio dal portfolio — Giancarlo Tridente">
+                        <input type="hidden" name="from_name" value="Portfolio Giancarlo Tridente">
+                        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
                         <div class="form-row">
                             <div class="form-group">
@@ -803,7 +806,7 @@
                             </svg>
                         </div>
                         <h3 class="form-thanks-title" data-i18n="form_thanks_title">Messaggio inviato!</h3>
-                        <p class="form-thanks-text" data-i18n="form_thanks_text">Grazie per avermi contattato. Ti risponderò al più presto, di solito entro 24 ore.</p>
+                        <p class="form-thanks-text" data-i18n="form_thanks_text">Grazie per avermi contattato. Ti risponderò il prima possibile.</p>
                     </div>
 
                     <div class="contact-footer">
