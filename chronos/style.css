@@ -842,21 +842,4 @@ a, button, [role="button"] {
   .mid-bar {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-    padding: 4px 0;
-    font-size: 9px;
-  }
-  .mid-bar .mid-cell:nth-child(3) { display: none; }
-  .mid-bar .mid-cell:nth-child(4) { display: none; }
-  .active-section-card { margin-top: 10px; }
-  .card-title { font-size: 1.3rem; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #cursor { transition: none; }
-  .status-dot { animation: none; }
-  .wave-svg path { animation: none; }
-  .modal-content { transition: none; }
-  * { transition-duration: 0.01ms !important; }
-}
+    justify-content:

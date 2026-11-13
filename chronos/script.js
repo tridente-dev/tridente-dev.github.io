@@ -1,7 +1,6 @@
 /* ============================================================
    CHRONOS — script.js
    Mobile Touch & Android Optimization
-   Sfera sempre centrata nel suo stage e libera da sovrapposizioni
    ============================================================ */
 
 const sections = [
@@ -48,32 +47,6 @@ let isAutoRotating = true;
 const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 const IS_ANDROID = /Android/i.test(navigator.userAgent);
 const IS_MOBILE = IS_TOUCH && window.matchMedia('(max-width: 1024px)').matches;
-
-/* ------------------------------------------------------------
-   STAGE HELPERS
-   Lo "stage" è il contenitore che ospita il canvas della sfera.
-   Desktop: fullscreen fixed -> la sfera è al centro della viewport.
-   Mobile: blocco dedicato -> la sfera è al centro di quel blocco.
-   In entrambi i casi usiamo le sue dimensioni reali per:
-   - dimensionare il renderer
-   - calcolare lo "spazio utile" per gli eventi touch
-   ------------------------------------------------------------ */
-function getStageEl() {
-  return document.querySelector('.sphere-stage');
-}
-
-function getStageRect() {
-  const stage = getStageEl();
-  if (!stage) {
-    return { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
-  }
-  const r = stage.getBoundingClientRect();
-  // Se lo stage ha dimensioni zero (es. display:none) fallback alla viewport
-  if (r.width === 0 || r.height === 0) {
-    return { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
-  }
-  return r;
-}
 
 function updateAudioButtonUI() {
   const btn = document.getElementById('audio-toggle');
@@ -151,9 +124,8 @@ function init3D() {
 
   scene = new THREE.Scene();
 
-  camera = new THREE.PerspectiveCamera(40, 1, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(0, 0, 7.5);
-  camera.lookAt(0, 0, 0);
 
   renderer = new THREE.WebGLRenderer({
     canvas,
@@ -162,13 +134,9 @@ function init3D() {
     powerPreference: 'high-performance'
   });
 
-  const stageRect = getStageRect();
-  renderer.setSize(stageRect.width, stageRect.height, false);
+  renderer.setSize(window.innerWidth, window.innerHeight);
   const maxRatio = IS_MOBILE ? 1.5 : 2;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
-
-  camera.aspect = stageRect.width / stageRect.height;
-  camera.updateProjectionMatrix();
 
   networkGroup = new THREE.Group();
   positions = [];
@@ -247,36 +215,23 @@ function init3D() {
   scene.add(networkGroup);
 
   window.addEventListener('resize', onResize, { passive: true });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', onResize, { passive: true });
-  }
-  // Lo stage su mobile cambia dimensioni con il layout: osserviamolo
-  const stage = getStageEl();
-  if (stage && typeof ResizeObserver !== 'undefined') {
-    const ro = new ResizeObserver(() => onResize());
-    ro.observe(stage);
-  }
 }
 
 function onResize() {
   if (!camera || !renderer) return;
-  const rect = getStageRect();
-  renderer.setSize(rect.width, rect.height, false);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
   const maxRatio = IS_MOBILE ? 1.5 : 2;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
-  camera.aspect = rect.width / rect.height;
-  camera.updateProjectionMatrix();
 }
 
-/* ------------------------------------------------------------
-   Zona interattiva per il drag della sfera: usa il rettangolo
-   reale dello stage, quindi funziona identico su desktop
-   (fullscreen) e mobile (blocco dedicato).
-   ------------------------------------------------------------ */
 function isInSphereZone(clientX, clientY) {
-  const r = getStageRect();
-  return clientX >= r.left && clientX <= r.left + r.width &&
-         clientY >= r.top  && clientY <= r.top  + r.height;
+  if (!IS_MOBILE) return true;
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  if (w > h) return clientX < w * 0.75 && clientY > h * 0.15 && clientY < h * 0.85;
+  return clientY > h * 0.25 && clientY < h * 0.75;
 }
 
 function initInteractions() {
@@ -316,17 +271,17 @@ function initInteractions() {
     previousPointer = { x: clientX, y: clientY };
   }
 
-  /* MOUSE DESKTOP: listener globali; il drag parte solo se il click
-     avviene fuori dagli elementi interattivi E dentro lo stage. */
+  /* MOUSE DESKTOP: Listener globali, lasciamo passare i click solo se su elementi interattivi */
   if (!IS_TOUCH) {
     window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
     window.addEventListener('mousedown', (e) => {
+      // Controlla se stiamo cliccando un link, un bottone, o un testo interattivo
       const el = document.elementFromPoint(e.clientX, e.clientY);
       if (el && el.closest('button, a, .index-item, .menu-item, .card-link, .audio-toggle, .brand, .modal-overlay, .index-list')) {
-        return;
+        return; // Lascia il click al bottone, non far girare la sfera
       }
-      if (!isInSphereZone(e.clientX, e.clientY)) return;
 
+      // Se clicchiamo nel vuoto (o sulla sfera), attiviamo il drag
       isDragging = true;
       isAutoRotating = false;
       previousPointer = { x: e.clientX, y: e.clientY };
@@ -341,6 +296,12 @@ function initInteractions() {
   /* TOUCH MOBILE */
   let touchStartedOnOrbit = false;
 
+  function isRotateOverlayActive() {
+    const overlay = document.getElementById('rotate-overlay');
+    if (!overlay) return false;
+    return getComputedStyle(overlay).display !== 'none';
+  }
+
   function isOnInteractiveElement(clientX, clientY) {
     const el = document.elementFromPoint(clientX, clientY);
     if (!el) return false;
@@ -348,6 +309,7 @@ function initInteractions() {
   }
 
   document.addEventListener('touchstart', (e) => {
+    if (isRotateOverlayActive()) return;
     const touch = e.touches[0];
     if (!touch) return;
 
@@ -562,6 +524,4 @@ window.addEventListener('DOMContentLoaded', () => {
   animate(0);
   setInterval(updateClock, 1000);
   updateClock();
-  // Ricalcola dimensioni dopo che il layout è stabilizzato
-  requestAnimationFrame(onResize);
 });
