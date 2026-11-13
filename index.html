@@ -290,7 +290,6 @@
             transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.5, 1), border-color 0.2s ease;
         }
 
-        /* Nuova classe per gli acronimi */
         .lang-flag.lang-acronym {
             font-family: var(--font-heading);
             font-size: 0.85rem;
@@ -510,7 +509,6 @@
                     <a href="#contact" data-i18n="nav_contact">Contatti</a>
                 </nav>
 
-                <!-- PULSANTE LINGUA -->
                 <button id="lang-toggle" class="lang-btn" aria-label="Change language" title="Change language" data-current-lang="it">A</button>
 
                 <button id="theme-toggle" class="theme-toggle" aria-label="Cambia tema">
@@ -662,6 +660,22 @@
                         </div>
                     </a>
 
+                </div><!-- /.projects-list -->
+
+                <div class="repo-cta">
+                    <a href="https://github.com/tridente-dev/tridente-dev.github.io"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="repo-link"
+                       aria-label="Apri la repository GitHub del portfolio (si apre in una nuova scheda)">
+                        <svg class="repo-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                        <span class="repo-text">
+                            <span class="repo-label" data-i18n="repo_label">Codice sorgente disponibile su</span>
+                            <span class="repo-name">GitHub <span class="repo-arrow">→</span></span>
+                        </span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -712,11 +726,85 @@
             <div class="container">
                 <div class="contact-card">
                     <h2 class="contact-title" data-i18n="contact_title">Hai un progetto in mente?</h2>
-                    <p class="contact-subtitle" data-i18n="contact_subtitle">Scrivimi una mail. Rispondo di solito entro 24 ore.</p>
+                    <p class="contact-subtitle" data-i18n="contact_subtitle">Compila il modulo o scrivimi una mail. Rispondo di solito entro 24 ore.</p>
 
                     <a href="mailto:g.tridente.web@gmail.com" class="contact-email" id="contact-email">
                         g.tridente.web@gmail.com
                     </a>
+
+                    <!-- FORM DI CONTATTO -->
+                    <form
+                        id="contact-form"
+                        class="contact-form"
+                        action="https://formsubmit.co/g.tridente.web@gmail.com"
+                        method="POST"
+                        novalidate
+                    >
+                        <input type="hidden" name="_subject" value="Nuovo messaggio dal portfolio — Giancarlo Tridente">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-name" data-i18n="form_name">Nome</label>
+                                <input
+                                    type="text"
+                                    id="form-name"
+                                    name="name"
+                                    placeholder="Il tuo nome"
+                                    data-i18n-placeholder="form_name_ph"
+                                    required
+                                    autocomplete="name"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="form-email" data-i18n="form_email">Email</label>
+                                <input
+                                    type="email"
+                                    id="form-email"
+                                    name="email"
+                                    placeholder="tu@esempio.com"
+                                    data-i18n-placeholder="form_email_ph"
+                                    required
+                                    autocomplete="email"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form-message" data-i18n="form_message">Messaggio</label>
+                            <textarea
+                                id="form-message"
+                                name="message"
+                                rows="5"
+                                placeholder="Raccontami del tuo progetto…"
+                                data-i18n-placeholder="form_message_ph"
+                                required
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-submit" id="form-submit">
+                            <span class="form-submit-text" data-i18n="form_send">Invia messaggio</span>
+                            <svg class="form-submit-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+
+                        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                    </form>
+
+                    <!-- MESSAGGIO DI RINGRAZIAMENTO -->
+                    <div class="form-thanks" id="form-thanks" hidden>
+                        <div class="form-thanks-icon">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="form-thanks-title" data-i18n="form_thanks_title">Messaggio inviato!</h3>
+                        <p class="form-thanks-text" data-i18n="form_thanks_text">Grazie per avermi contattato. Ti risponderò al più presto, di solito entro 24 ore.</p>
+                    </div>
 
                     <div class="contact-footer">
                         <div class="contact-socials">

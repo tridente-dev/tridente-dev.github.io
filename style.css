@@ -21,6 +21,9 @@
     --toggle-thumb: #FFFFFF;
     --toggle-icon: #3B5B7A;
 
+    --error: #B4453A;
+    --success: #3B7A5A;
+
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
 
@@ -50,6 +53,9 @@
     --toggle-track: #2A2F3A;
     --toggle-thumb: #0E1117;
     --toggle-icon: #8AAFC9;
+
+    --error: #E08A7A;
+    --success: #8FCFA8;
 }
 
 * {
@@ -135,9 +141,6 @@ button {
     gap: 24px;
 }
 
-/* =========================================================
-   BRAND CON LOGO OTTIMIZZATO (NON CLICCABILE)
-   ========================================================= */
 .brand-logo {
     display: inline-flex;
     align-items: center;
@@ -147,7 +150,6 @@ button {
     color: var(--text-primary);
     flex-shrink: 0;
     line-height: 1;
-    /* Rimosso cursor: pointer e transizioni hover */
 }
 
 .logo-wrapper {
@@ -167,15 +169,12 @@ button {
     transition: filter 0.4s ease;
 }
 
-/* Light mode: se il PNG ha un leggero alone bianco, lo nascondiamo */
 [data-theme="light"] .brand-mark {
     mix-blend-mode: multiply;
 }
 
-/* Dark mode: il logo diventa bianco puro per risaltare sullo sfondo nero */
 [data-theme="dark"] .brand-mark {
     mix-blend-mode: normal;
-    /* Il filtro converte qualsiasi colore scuro in bianco luminoso */
     filter: brightness(0) invert(1);
     opacity: 0.9;
 }
@@ -600,6 +599,88 @@ button {
 }
 
 /* =========================================================
+   REPO CTA (GitHub link)
+   ========================================================= */
+.repo-cta {
+    margin-top: 56px;
+    display: flex;
+    justify-content: center;
+}
+
+.repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 28px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition), background-color 0.4s ease, border-color 0.4s ease;
+    box-shadow: 0 2px 12px rgba(20, 24, 31, 0.035);
+    max-width: 100%;
+}
+
+.repo-link:hover {
+    border-color: var(--accent);
+    background: var(--bg-surface-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(20, 24, 31, 0.08);
+}
+
+.repo-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.repo-icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.repo-link:hover .repo-icon {
+    color: var(--accent);
+}
+
+.repo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.3;
+}
+
+.repo-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.repo-name {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.repo-arrow {
+    display: inline-block;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.repo-link:hover .repo-arrow {
+    transform: translateX(4px);
+}
+
+/* =========================================================
    ABOUT
    ========================================================= */
 .about {
@@ -706,7 +787,7 @@ button {
     border-bottom: 1px solid var(--accent);
     padding-bottom: 4px;
     transition: color 0.3s ease, border-color 0.3s ease;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     margin-left: auto;
     margin-right: auto;
     letter-spacing: -0.01em;
@@ -719,6 +800,191 @@ button {
 .contact-email:hover {
     color: var(--accent);
     border-color: var(--text-primary);
+}
+
+/* =========================================================
+   CONTACT FORM
+   ========================================================= */
+.contact-form {
+    max-width: 640px;
+    margin: 0 auto 48px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--bg-main);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    width: 100%;
+    resize: vertical;
+    min-height: 48px;
+}
+
+.form-group textarea {
+    min-height: 130px;
+    line-height: 1.5;
+    font-family: inherit;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: var(--border-strong);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent);
+    background: var(--bg-surface);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.form-group input.is-invalid,
+.form-group textarea.is-invalid {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(180, 69, 58, 0.10);
+}
+
+.form-submit {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    background: var(--text-primary);
+    color: var(--bg-main);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.form-submit:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(20, 24, 31, 0.10);
+}
+
+.form-submit:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.form-submit-icon {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-submit:hover:not(:disabled) .form-submit-icon {
+    transform: translateX(3px) translateY(-1px);
+}
+
+.form-submit.is-sending .form-submit-icon {
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.form-status {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    min-height: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.form-status.is-error {
+    color: var(--error);
+    font-weight: 500;
+}
+
+/* --- MESSAGGIO DI RINGRAZIAMENTO --- */
+.form-thanks {
+    max-width: 640px;
+    margin: 0 auto 40px;
+    padding: 40px 24px;
+    background: var(--accent-glow);
+    border: 1px solid var(--accent-soft);
+    border-radius: 14px;
+    text-align: center;
+    animation: thanksIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes thanksIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.form-thanks-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--success);
+    color: white;
+    margin-bottom: 18px;
+}
+
+.form-thanks-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.form-thanks-text {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    max-width: 460px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 .contact-footer {
@@ -813,6 +1079,18 @@ button {
     }
 }
 
+@media (max-width: 640px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .form-submit {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 @media (max-width: 600px) {
     .nav-right {
         gap: 16px;
@@ -877,6 +1155,24 @@ button {
     .hero-actions .btn {
         width: 100%;
         justify-content: center;
+    }
+
+    .repo-cta {
+        margin-top: 40px;
+    }
+
+    .repo-link {
+        padding: 16px 22px;
+        gap: 12px;
+    }
+
+    .repo-icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .repo-name {
+        font-size: 0.95rem;
     }
 }
 
