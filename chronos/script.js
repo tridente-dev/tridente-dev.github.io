@@ -1,6 +1,7 @@
 /* ============================================================
    CHRONOS — script.js
    Fully in English — slower auto-rotation
+   Mobile touch optimizations (no native gestures)
    ============================================================ */
 
 /* ---------- SECTIONS DATA ---------- */
@@ -259,6 +260,7 @@ function initInteractions() {
     previousPointer = { x: clientX, y: clientY };
   }
 
+  /* ---------- MOUSE (desktop) ---------- */
   window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
   window.addEventListener('mousedown', (e) => {
     isDragging = true;
@@ -271,24 +273,83 @@ function initInteractions() {
     isAutoRotating = true;
   });
 
-  window.addEventListener('touchstart', (e) => {
+  /* ---------- TOUCH (mobile) ---------- */
+  // Il drag della sfera è attivo solo se il touch parte nella zona centrale
+  // e blocca tutte le gesture native iOS/Android (edge-swipe, tab bar, ecc.)
+  const orbitZone = document.querySelector('.col-center') || document.getElementById('webgl-canvas') || document.body;
+  let touchStartedOnOrbit = false;
+
+  function isRotateOverlayActive() {
+    const overlay = document.getElementById('rotate-overlay');
+    if (!overlay) return false;
+    return getComputedStyle(overlay).display !== 'none';
+  }
+
+  function isTouchOnOrbitZone(clientX, clientY) {
+    // Su desktop non serve; su mobile il drag è limitato alla zona centrale
+    if (window.innerWidth > 900) return true;
+    const center = document.querySelector('.col-center');
+    if (!center) {
+      // fallback: tutta la fascia centrale della viewport
+      return clientX > window.innerWidth * 0.2 && clientX < window.innerWidth * 0.8;
+    }
+    const r = center.getBoundingClientRect();
+    return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
+  }
+
+  orbitZone.addEventListener('touchstart', (e) => {
+    if (isRotateOverlayActive()) return;
+
+    const touch = e.touches[0];
+    if (!touch) return;
+
+    // Su mobile il drag parte solo nella zona centrale (sfera)
+    if (!isTouchOnOrbitZone(touch.clientX, touch.clientY)) return;
+
+    touchStartedOnOrbit = true;
     isDragging = true;
     isAutoRotating = false;
-    const touch = e.touches[0];
     previousPointer = { x: touch.clientX, y: touch.clientY };
     lastPointerPos = { x: touch.clientX, y: touch.clientY };
-  }, { passive: true });
 
-  window.addEventListener('touchmove', (e) => {
+    // FONDAMENTALE: blocca gesture native
+    if (e.cancelable) e.preventDefault();
+  }, { passive: false });
+
+  orbitZone.addEventListener('touchmove', (e) => {
+    if (!touchStartedOnOrbit) return;
     const touch = e.touches[0];
-    handlePointerMove(touch.clientX, touch.clientY);
-  }, { passive: true });
+    if (!touch) return;
 
-  window.addEventListener('touchend', () => {
+    handlePointerMove(touch.clientX, touch.clientY);
+
+    // FONDAMENTALE: impedisce scroll/edge-swipe/tab-bar di sistema durante il drag
+    if (e.cancelable) e.preventDefault();
+  }, { passive: false });
+
+  function endOrbitTouch(e) {
+    if (!touchStartedOnOrbit) return;
+    touchStartedOnOrbit = false;
     isDragging = false;
     isAutoRotating = true;
-  });
+    if (e && e.cancelable) e.preventDefault();
+  }
+  orbitZone.addEventListener('touchend', endOrbitTouch, { passive: false });
+  orbitZone.addEventListener('touchcancel', endOrbitTouch, { passive: false });
 
+  // Blocca edge-swipe di iOS (gesture laterali che cambiano pagina/app)
+  // sull'intera app, MA solo per i touch che partono dai bordi estremi.
+  document.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    if (!t) return;
+    const x = t.clientX;
+    const edge = 24; // px dal bordo
+    if (x < edge || x > window.innerWidth - edge) {
+      if (e.cancelable) e.preventDefault();
+    }
+  }, { passive: false });
+
+  /* ---------- HOVER (cursor custom) ---------- */
   const hoverables = document.querySelectorAll('a, button, [role="button"], .menu-item, .index-item, .brand, .card-link, .audio-toggle');
   hoverables.forEach(el => {
     el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hovered'));

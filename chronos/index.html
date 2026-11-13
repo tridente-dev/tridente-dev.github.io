@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#080808">
   <meta name="description" content="Chronos — Experimental study on the perception of time. An interactive 3D experience.">
+
+  <!-- iOS / Android web-app meta -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
 
   <title>Chronos — Study on the Perception of Time</title>
 
@@ -118,7 +124,7 @@
     </div>
   </div>
 
-  <!-- ROTATION OVERLAY (English) -->
+  <!-- Overlay rotazione dispositivo (mobile portrait) -->
   <div id="rotate-overlay" aria-hidden="true">
     <div class="rotate-content">
       <svg class="rotate-icon" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2">
@@ -127,8 +133,8 @@
         <path d="M46 14l6 4-4 6"/>
         <rect x="36" y="28" width="24" height="16" rx="3" stroke-dasharray="3 3" opacity="0.5"/>
       </svg>
-      <p class="rotate-title">Rotate your device</p>
-      <p class="rotate-sub">For the full experience, use your phone in landscape mode.</p>
+      <p class="rotate-title">Ruota il dispositivo</p>
+      <p class="rotate-sub">Per un'esperienza completa, usa il telefono in orizzontale.</p>
     </div>
   </div>
 

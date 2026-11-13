@@ -37,6 +37,9 @@ html, body {
   line-height: 1.4;
   letter-spacing: 0.05em;
   overscroll-behavior: none;
+  /* Blocca gesture native iOS/Android: lo scroll verticale è gestito internamente */
+  touch-action: pan-y;
+  -webkit-touch-callout: none;
 }
 
 body {
@@ -72,6 +75,8 @@ a, button, [role="button"] {
   height: 100dvh;
   z-index: 1;
   pointer-events: none;
+  /* Nessuna gesture nativa sul canvas */
+  touch-action: none;
 }
 
 #grain {
@@ -314,6 +319,7 @@ a, button, [role="button"] {
   gap: 0.4rem;
   padding-right: 4px;
   scroll-behavior: smooth;
+  touch-action: pan-y;
 }
 .index-list::-webkit-scrollbar { width: 3px; }
 .index-list::-webkit-scrollbar-thumb {
@@ -541,7 +547,7 @@ a, button, [role="button"] {
 }
 
 /* ============================================================
-   ROTATION OVERLAY (English)
+   OVERLAY ROTAZIONE DISPOSITIVO
    ============================================================ */
 #rotate-overlay {
   display: none;
@@ -591,7 +597,7 @@ a, button, [role="button"] {
 }
 
 /* ============================================================
-   MEDIA QUERIES (Originali)
+   MEDIA QUERIES
    ============================================================ */
 @media (max-width: 1200px) {
   .app-layout {
@@ -606,6 +612,18 @@ a, button, [role="button"] {
 @media (max-width: 900px) {
   #cursor { display: none; }
   * { cursor: auto !important; }
+
+  /* Su mobile il canvas deve ricevere i touch per il drag della sfera */
+  #webgl-canvas {
+    pointer-events: auto;
+    touch-action: none;
+  }
+
+  /* La zona centrale diventa interattiva per il drag */
+  .col-center {
+    pointer-events: auto;
+    touch-action: none;
+  }
 
   .app-layout {
     grid-template-columns: 1fr 1fr;
@@ -681,7 +699,7 @@ a, button, [role="button"] {
     overflow: auto;
     height: auto;
     min-height: 100dvh;
-    touch-action: manipulation;
+    touch-action: pan-y;
   }
 
   .app-layout {
