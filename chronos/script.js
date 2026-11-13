@@ -1,8 +1,9 @@
 /* ============================================================
    CHRONOS — script.js
-   Mobile Touch & Android Optimization
+   Fully in English — slower auto-rotation
    ============================================================ */
 
+/* ---------- SECTIONS DATA ---------- */
 const sections = [
   { num: "00", name: "Threshold", desc: "The transition point between nothingness and the first instant of perception." },
   { num: "01", name: "Echo", desc: "The resonance of past decisions still vibrating in the present." },
@@ -32,11 +33,12 @@ const sections = [
 
 const MODAL_DETAILS = "You are exploring the temporal dimension of this section. Each instant is a coordinate in the space of human perception.";
 
+/* ---------- STATE ---------- */
 let activeIndex = 17;
 let isTimeFrozen = false;
 let scene, camera, renderer, networkGroup, nodesMesh, linesMesh;
 let positions = [], colors = [];
-let nodeCount = 180;
+const nodeCount = 180;
 let isDragging = false;
 let previousPointer = { x: 0, y: 0 };
 let lastPointerPos = { x: 0, y: 0 };
@@ -44,16 +46,14 @@ let pointerSpeed = 0;
 let audioCtx = null, osc = null, gainNode = null;
 let isAutoRotating = true;
 
-const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-const IS_ANDROID = /Android/i.test(navigator.userAgent);
-const IS_MOBILE = IS_TOUCH && window.matchMedia('(max-width: 1024px)').matches;
-
+/* ---------- AUDIO BUTTON UI ---------- */
 function updateAudioButtonUI() {
   const btn = document.getElementById('audio-toggle');
   if (!btn) return;
   btn.textContent = (audioCtx && audioCtx.state === 'running') ? '⊙ ACTIVE' : '⊙ MUTE';
 }
 
+/* ---------- INDEX ---------- */
 function renderIndexList() {
   const listEl = document.getElementById('index-list');
   if (!listEl) return;
@@ -78,6 +78,7 @@ function renderIndexList() {
 
 function updateSectionDataUI(idx) {
   const data = sections[idx];
+
   const kickerEl = document.getElementById('section-kicker');
   const titleEl = document.getElementById('section-title');
   const descEl = document.getElementById('section-desc');
@@ -115,28 +116,19 @@ function selectSection(idx) {
   }
 }
 
+/* ---------- 3D ---------- */
 function init3D() {
   const canvas = document.getElementById('webgl-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
-
-  if (IS_ANDROID) nodeCount = 80;
-  else if (IS_MOBILE) nodeCount = 120;
 
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(0, 0, 7.5);
 
-  renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: !IS_MOBILE,
-    alpha: true,
-    powerPreference: 'high-performance'
-  });
-
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  const maxRatio = IS_MOBILE ? 1.5 : 2;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   networkGroup = new THREE.Group();
   positions = [];
@@ -167,7 +159,7 @@ function init3D() {
   nodesGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
   const nodesMat = new THREE.PointsMaterial({
-    size: IS_MOBILE ? 0.08 : 0.06,
+    size: 0.06,
     vertexColors: true,
     transparent: true,
     opacity: 0.95,
@@ -179,7 +171,7 @@ function init3D() {
 
   const linePositions = [];
   const lineColors = [];
-  const maxDist = IS_MOBILE ? 0.75 : 0.85;
+  const maxDist = 0.85;
   const maxDistSq = maxDist * maxDist;
 
   for (let i = 0; i < nodeCount; i++) {
@@ -192,6 +184,7 @@ function init3D() {
       if (distSq < maxDistSq) {
         linePositions.push(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]);
         linePositions.push(positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]);
+
         lineColors.push(colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]);
         lineColors.push(colors[j * 3], colors[j * 3 + 1], colors[j * 3 + 2]);
       }
@@ -205,7 +198,7 @@ function init3D() {
   const linesMat = new THREE.LineBasicMaterial({
     vertexColors: true,
     transparent: true,
-    opacity: IS_MOBILE ? 0.25 : 0.35
+    opacity: 0.35
   });
 
   linesMesh = new THREE.LineSegments(linesGeo, linesMat);
@@ -222,26 +215,20 @@ function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  const maxRatio = IS_MOBILE ? 1.5 : 2;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 }
 
-function isInSphereZone(clientX, clientY) {
-  if (!IS_MOBILE) return true;
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-  if (w > h) return clientX < w * 0.75 && clientY > h * 0.15 && clientY < h * 0.85;
-  return clientY > h * 0.25 && clientY < h * 0.75;
-}
-
+/* ---------- INTERACTIONS ---------- */
 function initInteractions() {
   const cursor = document.getElementById('cursor');
-  if (cursor && IS_TOUCH) cursor.style.display = 'none';
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (cursor && isTouch) cursor.style.display = 'none';
 
   const speedEl = document.getElementById('speed-val');
 
   function handlePointerMove(clientX, clientY) {
-    if (cursor && !IS_TOUCH) {
+    if (cursor && !isTouch) {
       cursor.style.left = `${clientX}px`;
       cursor.style.top = `${clientY}px`;
     }
@@ -260,6 +247,7 @@ function initInteractions() {
 
       networkGroup.rotation.y += deltaX * 0.008;
       networkGroup.rotation.x += deltaY * 0.008;
+
       networkGroup.rotation.x = Math.max(-Math.PI / 4, Math.min(Math.PI / 4, networkGroup.rotation.x));
 
       let normalizedAngle = (networkGroup.rotation.y % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
@@ -271,81 +259,35 @@ function initInteractions() {
     previousPointer = { x: clientX, y: clientY };
   }
 
-  /* MOUSE DESKTOP: Listener globali, lasciamo passare i click solo se su elementi interattivi */
-  if (!IS_TOUCH) {
-    window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
-    window.addEventListener('mousedown', (e) => {
-      // Controlla se stiamo cliccando un link, un bottone, o un testo interattivo
-      const el = document.elementFromPoint(e.clientX, e.clientY);
-      if (el && el.closest('button, a, .index-item, .menu-item, .card-link, .audio-toggle, .brand, .modal-overlay, .index-list')) {
-        return; // Lascia il click al bottone, non far girare la sfera
-      }
-
-      // Se clicchiamo nel vuoto (o sulla sfera), attiviamo il drag
-      isDragging = true;
-      isAutoRotating = false;
-      previousPointer = { x: e.clientX, y: e.clientY };
-      lastPointerPos = { x: e.clientX, y: e.clientY };
-    });
-    window.addEventListener('mouseup', () => {
-      isDragging = false;
-      isAutoRotating = true;
-    });
-  }
-
-  /* TOUCH MOBILE */
-  let touchStartedOnOrbit = false;
-
-  function isRotateOverlayActive() {
-    const overlay = document.getElementById('rotate-overlay');
-    if (!overlay) return false;
-    return getComputedStyle(overlay).display !== 'none';
-  }
-
-  function isOnInteractiveElement(clientX, clientY) {
-    const el = document.elementFromPoint(clientX, clientY);
-    if (!el) return false;
-    return !!el.closest('button, a, .index-list, .index-item, .menu-item, .card-link, .audio-toggle, .brand, .modal-overlay');
-  }
-
-  document.addEventListener('touchstart', (e) => {
-    if (isRotateOverlayActive()) return;
-    const touch = e.touches[0];
-    if (!touch) return;
-
-    const modal = document.getElementById('modal-hour');
-    if (modal && modal.classList.contains('open')) return;
-
-    if (isOnInteractiveElement(touch.clientX, touch.clientY)) return;
-    if (!isInSphereZone(touch.clientX, touch.clientY)) return;
-
-    touchStartedOnOrbit = true;
+  window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
+  window.addEventListener('mousedown', (e) => {
     isDragging = true;
     isAutoRotating = false;
-    previousPointer = { x: touch.clientX, y: touch.clientY };
-    lastPointerPos = { x: touch.clientX, y: touch.clientY };
-
-    if (e.cancelable) e.preventDefault();
-  }, { passive: false });
-
-  document.addEventListener('touchmove', (e) => {
-    if (!touchStartedOnOrbit) return;
-    const touch = e.touches[0];
-    if (!touch) return;
-
-    handlePointerMove(touch.clientX, touch.clientY);
-    if (e.cancelable) e.preventDefault();
-  }, { passive: false });
-
-  function endTouch(e) {
-    if (!touchStartedOnOrbit) return;
-    touchStartedOnOrbit = false;
+    previousPointer = { x: e.clientX, y: e.clientY };
+    lastPointerPos = { x: e.clientX, y: e.clientY };
+  });
+  window.addEventListener('mouseup', () => {
     isDragging = false;
     isAutoRotating = true;
-    if (e && e.cancelable) e.preventDefault();
-  }
-  document.addEventListener('touchend', endTouch, { passive: false });
-  document.addEventListener('touchcancel', endTouch, { passive: false });
+  });
+
+  window.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    isAutoRotating = false;
+    const touch = e.touches[0];
+    previousPointer = { x: touch.clientX, y: touch.clientY };
+    lastPointerPos = { x: touch.clientX, y: touch.clientY };
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    handlePointerMove(touch.clientX, touch.clientY);
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    isDragging = false;
+    isAutoRotating = true;
+  });
 
   const hoverables = document.querySelectorAll('a, button, [role="button"], .menu-item, .index-item, .brand, .card-link, .audio-toggle');
   hoverables.forEach(el => {
@@ -405,10 +347,15 @@ function goToAtlas() {
 
 function triggerUselessPulse() {
   if (!networkGroup || !window.gsap) return;
+
   gsap.to(networkGroup.scale, {
     x: 1.3, y: 1.3, z: 1.3,
-    duration: 0.2, yoyo: true, repeat: 1, ease: "power2.out"
+    duration: 0.2,
+    yoyo: true,
+    repeat: 1,
+    ease: "power2.out"
   });
+
   if (osc && audioCtx && audioCtx.state === 'running') {
     const baseFreq = 120 + activeIndex * 18;
     osc.frequency.cancelScheduledValues(audioCtx.currentTime);
@@ -419,6 +366,7 @@ function triggerUselessPulse() {
   }
 }
 
+/* ---------- MODAL ---------- */
 function openModal() {
   isTimeFrozen = true;
   const modal = document.getElementById('modal-hour');
@@ -438,6 +386,7 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
+/* ---------- SPARKLINE ---------- */
 const sparklineVals = new Array(12).fill(2);
 function updateSparkline(val) {
   sparklineVals.shift();
@@ -454,6 +403,7 @@ function updateSparkline(val) {
   });
 }
 
+/* ---------- AUDIO ---------- */
 function toggleAudio() {
   if (!audioCtx) {
     try {
@@ -462,12 +412,15 @@ function toggleAudio() {
       audioCtx = new AudioCtx();
       osc = audioCtx.createOscillator();
       gainNode = audioCtx.createGain();
+
       osc.type = 'sine';
       osc.frequency.setValueAtTime(120 + activeIndex * 18, audioCtx.currentTime);
       gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+
       osc.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       osc.start();
+
       gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.3);
     } catch (e) {
       console.warn('Audio not available:', e);
@@ -481,27 +434,23 @@ function toggleAudio() {
   updateAudioButtonUI();
 }
 
+/* ---------- CLOCK ---------- */
 function updateClock() {
   const el = document.getElementById('clock-val');
   if (!el) return;
   el.textContent = new Date().toTimeString().split(' ')[0];
 }
 
+/* ---------- ANIMATE ---------- */
 let lastTime = 0;
-let frameSkipCounter = 0;
 function animate(time) {
   requestAnimationFrame(animate);
 
   const delta = time - lastTime;
   lastTime = time;
 
-  if (IS_ANDROID) {
-    frameSkipCounter++;
-    if (frameSkipCounter % 2 !== 0) return;
-  }
-
   if (isAutoRotating && !isDragging && networkGroup && !isTimeFrozen) {
-    const speed = 0.00015;
+    const speed = 0.00015; // slowed down (was 0.0004)
     networkGroup.rotation.y += speed * Math.min(delta, 50);
 
     let normalizedAngle = (networkGroup.rotation.y % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
@@ -515,6 +464,7 @@ function animate(time) {
   }
 }
 
+/* ---------- INIT ---------- */
 window.addEventListener('DOMContentLoaded', () => {
   init3D();
   renderIndexList();
