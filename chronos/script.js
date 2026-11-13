@@ -274,8 +274,8 @@ function initInteractions() {
   });
 
   /* ---------- TOUCH (mobile) ---------- */
-  // Il drag della sfera è attivo solo se il touch parte nella zona centrale
-  // e blocca tutte le gesture native iOS/Android (edge-swipe, tab bar, ecc.)
+  // Sphere dragging is active only if the touch starts in the central zone
+  // and blocks all native iOS/Android gestures (edge-swipe, tab bar, etc.)
   const orbitZone = document.querySelector('.col-center') || document.getElementById('webgl-canvas') || document.body;
   let touchStartedOnOrbit = false;
 
@@ -286,11 +286,11 @@ function initInteractions() {
   }
 
   function isTouchOnOrbitZone(clientX, clientY) {
-    // Su desktop non serve; su mobile il drag è limitato alla zona centrale
+    // On desktop this is not needed; on mobile drag is limited to the central zone
     if (window.innerWidth > 900) return true;
     const center = document.querySelector('.col-center');
     if (!center) {
-      // fallback: tutta la fascia centrale della viewport
+      // fallback: whole central band of the viewport
       return clientX > window.innerWidth * 0.2 && clientX < window.innerWidth * 0.8;
     }
     const r = center.getBoundingClientRect();
@@ -303,7 +303,7 @@ function initInteractions() {
     const touch = e.touches[0];
     if (!touch) return;
 
-    // Su mobile il drag parte solo nella zona centrale (sfera)
+    // On mobile, drag starts only within the central zone (sphere)
     if (!isTouchOnOrbitZone(touch.clientX, touch.clientY)) return;
 
     touchStartedOnOrbit = true;
@@ -312,7 +312,7 @@ function initInteractions() {
     previousPointer = { x: touch.clientX, y: touch.clientY };
     lastPointerPos = { x: touch.clientX, y: touch.clientY };
 
-    // FONDAMENTALE: blocca gesture native
+    // CRUCIAL: blocks native gestures
     if (e.cancelable) e.preventDefault();
   }, { passive: false });
 
@@ -323,7 +323,7 @@ function initInteractions() {
 
     handlePointerMove(touch.clientX, touch.clientY);
 
-    // FONDAMENTALE: impedisce scroll/edge-swipe/tab-bar di sistema durante il drag
+    // CRUCIAL: prevents scroll/edge-swipe/system tab-bar during drag
     if (e.cancelable) e.preventDefault();
   }, { passive: false });
 
@@ -337,19 +337,19 @@ function initInteractions() {
   orbitZone.addEventListener('touchend', endOrbitTouch, { passive: false });
   orbitZone.addEventListener('touchcancel', endOrbitTouch, { passive: false });
 
-  // Blocca edge-swipe di iOS (gesture laterali che cambiano pagina/app)
-  // sull'intera app, MA solo per i touch che partono dai bordi estremi.
+  // Blocks iOS edge-swipe (the side gestures that switch page/app)
+  // across the whole app, but ONLY for touches that start from the outer edges.
   document.addEventListener('touchstart', (e) => {
     const t = e.touches[0];
     if (!t) return;
     const x = t.clientX;
-    const edge = 24; // px dal bordo
+    const edge = 24; // px from the edge
     if (x < edge || x > window.innerWidth - edge) {
       if (e.cancelable) e.preventDefault();
     }
   }, { passive: false });
 
-  /* ---------- HOVER (cursor custom) ---------- */
+  /* ---------- HOVER (custom cursor) ---------- */
   const hoverables = document.querySelectorAll('a, button, [role="button"], .menu-item, .index-item, .brand, .card-link, .audio-toggle');
   hoverables.forEach(el => {
     el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hovered'));

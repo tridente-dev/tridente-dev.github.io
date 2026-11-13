@@ -37,7 +37,7 @@ html, body {
   line-height: 1.4;
   letter-spacing: 0.05em;
   overscroll-behavior: none;
-  /* Blocca gesture native iOS/Android: lo scroll verticale è gestito internamente */
+  /* Block native iOS/Android gestures: vertical scroll handled internally */
   touch-action: pan-y;
   -webkit-touch-callout: none;
 }
@@ -75,7 +75,7 @@ a, button, [role="button"] {
   height: 100dvh;
   z-index: 1;
   pointer-events: none;
-  /* Nessuna gesture nativa sul canvas */
+  /* No native gestures on the canvas */
   touch-action: none;
 }
 
@@ -547,7 +547,7 @@ a, button, [role="button"] {
 }
 
 /* ============================================================
-   OVERLAY ROTAZIONE DISPOSITIVO
+   DEVICE ROTATION OVERLAY
    ============================================================ */
 #rotate-overlay {
   display: none;
@@ -591,7 +591,7 @@ a, button, [role="button"] {
   60%, 100% { transform: rotate(90deg); }
 }
 
-/* Mostra overlay solo su mobile in portrait */
+/* Show overlay only on mobile in portrait */
 @media (max-width: 900px) and (orientation: portrait) {
   #rotate-overlay { display: flex; }
 }
@@ -613,13 +613,13 @@ a, button, [role="button"] {
   #cursor { display: none; }
   * { cursor: auto !important; }
 
-  /* Su mobile il canvas deve ricevere i touch per il drag della sfera */
+  /* On mobile the canvas must receive touches for sphere dragging */
   #webgl-canvas {
     pointer-events: auto;
     touch-action: none;
   }
 
-  /* La zona centrale diventa interattiva per il drag */
+  /* The central zone becomes interactive for dragging */
   .col-center {
     pointer-events: auto;
     touch-action: none;
