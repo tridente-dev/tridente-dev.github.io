@@ -1,10 +1,8 @@
 /* ============================================================
    CHRONOS — script.js
-   Touch: listeners globali su document con hit-test manuale
-   Android: performance ottimizzate
+   Mobile Touch & Android Optimization
    ============================================================ */
 
-/* ---------- SECTIONS DATA ---------- */
 const sections = [
   { num: "00", name: "Threshold", desc: "The transition point between nothingness and the first instant of perception." },
   { num: "01", name: "Echo", desc: "The resonance of past decisions still vibrating in the present." },
@@ -34,7 +32,6 @@ const sections = [
 
 const MODAL_DETAILS = "You are exploring the temporal dimension of this section. Each instant is a coordinate in the space of human perception.";
 
-/* ---------- STATE ---------- */
 let activeIndex = 17;
 let isTimeFrozen = false;
 let scene, camera, renderer, networkGroup, nodesMesh, linesMesh;
@@ -47,48 +44,16 @@ let pointerSpeed = 0;
 let audioCtx = null, osc = null, gainNode = null;
 let isAutoRotating = true;
 
-/* ---------- DEVICE DETECTION ---------- */
-const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 const IS_ANDROID = /Android/i.test(navigator.userAgent);
-const IS_MOBILE = IS_TOUCH && window.matchMedia('(max-width: 900px)').matches;
+const IS_MOBILE = IS_TOUCH && window.matchMedia('(max-width: 1024px)').matches;
 
-/* ---------- UTILITY: capire se il touch è nella zona sfera ---------- */
-/*
-   Su mobile il layout è complesso: col-center è display:none, quindi NON possiamo
-   usare getBoundingClientRect su di esso. Definiamo invece una "zona sfera"
-   come la fascia centrale dello schermo, escludendo header/footer e il pannello index.
-
-   - Portrait (max-width 640): zona verticale tra 35% e 65% dell'altezza,
-     tutta la larghezza (il pannello index è in basso, non laterale).
-   - Landscape (641-900): zona orizzontale tra il 5% e il 70% della larghezza,
-     verticale tra 15% e 85% dell'altezza.
-*/
-function isInSphereZone(clientX, clientY) {
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-
-  if (!IS_MOBILE) return true; // desktop: tutto è drag
-
-  if (w <= 640) {
-    // portrait stretto: fascia centrale verticale, tutta la larghezza
-    return clientY > h * 0.30 && clientY < h * 0.70;
-  }
-
-  // landscape / tablet: escludi il pannello index a destra (circa 30% destra)
-  const isIndexPanel = clientX > w * 0.70;
-  if (isIndexPanel) return false;
-
-  return clientY > h * 0.12 && clientY < h * 0.88;
-}
-
-/* ---------- AUDIO BUTTON UI ---------- */
 function updateAudioButtonUI() {
   const btn = document.getElementById('audio-toggle');
   if (!btn) return;
   btn.textContent = (audioCtx && audioCtx.state === 'running') ? '⊙ ACTIVE' : '⊙ MUTE';
 }
 
-/* ---------- INDEX ---------- */
 function renderIndexList() {
   const listEl = document.getElementById('index-list');
   if (!listEl) return;
@@ -150,13 +115,11 @@ function selectSection(idx) {
   }
 }
 
-/* ---------- 3D ---------- */
 function init3D() {
   const canvas = document.getElementById('webgl-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
 
-  // Performance: meno nodi su mobile
-  if (IS_ANDROID) nodeCount = 90;
+  if (IS_ANDROID) nodeCount = 80;
   else if (IS_MOBILE) nodeCount = 120;
 
   scene = new THREE.Scene();
@@ -164,7 +127,6 @@ function init3D() {
   camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(0, 0, 7.5);
 
-  // Antialias off su mobile = enorme guadagno
   renderer = new THREE.WebGLRenderer({
     canvas,
     antialias: !IS_MOBILE,
@@ -264,7 +226,23 @@ function onResize() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
 }
 
-/* ---------- INTERACTIONS ---------- */
+// Determina se il dito sta interagendo con la sfera (il canvas è a schermo intero dietro tutto)
+function isInSphereZone(clientX, clientY) {
+  if (!IS_MOBILE) return true;
+
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  // Se in landscape, la sfera sta nella parte centrale/sinistra
+  if (w > h) {
+    // Escludi il pannello index (a destra) e l'header (in alto)
+    return clientX < w * 0.75 && clientY > h * 0.15 && clientY < h * 0.85;
+  }
+
+  // Se in portrait, la sfera è dietro i testi centrali. Escludi header/footer/pannelli
+  return clientY > h * 0.25 && clientY < h * 0.75;
+}
+
 function initInteractions() {
   const cursor = document.getElementById('cursor');
   if (cursor && IS_TOUCH) cursor.style.display = 'none';
@@ -302,7 +280,6 @@ function initInteractions() {
     previousPointer = { x: clientX, y: clientY };
   }
 
-  /* ---------- MOUSE (desktop) ---------- */
   if (!IS_TOUCH) {
     window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
     window.addEventListener('mousedown', (e) => {
@@ -317,9 +294,7 @@ function initInteractions() {
     });
   }
 
-  /* ---------- TOUCH: listener globali con hit-test manuale ---------- */
   let touchStartedOnOrbit = false;
-  let touchStartPoint = { x: 0, y: 0 };
 
   function isRotateOverlayActive() {
     const overlay = document.getElementById('rotate-overlay');
@@ -330,8 +305,8 @@ function initInteractions() {
   function isOnInteractiveElement(clientX, clientY) {
     const el = document.elementFromPoint(clientX, clientY);
     if (!el) return false;
-    // elementi interattivi che devono mantenere il loro comportamento
-    return !!el.closest('button, a, input, textarea, select, label, .index-list, .index-item, .menu-item, .card-link, .audio-toggle, .brand, .modal-overlay, #modal-hour, #rotate-overlay');
+    // Se tocca un bottone, un link o la lista index, non intercettare
+    return !!el.closest('button, a, .index-list, .index-item, .menu-item, .card-link, .audio-toggle, .brand, .modal-overlay');
   }
 
   document.addEventListener('touchstart', (e) => {
@@ -340,24 +315,18 @@ function initInteractions() {
     const touch = e.touches[0];
     if (!touch) return;
 
-    // Se l'overlay modal è aperto, non intercettare
     const modal = document.getElementById('modal-hour');
     if (modal && modal.classList.contains('open')) return;
 
-    // Se il touch cade su un controllo interattivo, lascialo passare
     if (isOnInteractiveElement(touch.clientX, touch.clientY)) return;
-
-    // Se NON siamo nella zona sfera, lascia lo scroll/gesture nativo
     if (!isInSphereZone(touch.clientX, touch.clientY)) return;
 
     touchStartedOnOrbit = true;
-    touchStartPoint = { x: touch.clientX, y: touch.clientY };
     isDragging = true;
     isAutoRotating = false;
     previousPointer = { x: touch.clientX, y: touch.clientY };
     lastPointerPos = { x: touch.clientX, y: touch.clientY };
 
-    // Blocca gesture native solo se il touch è nella zona sfera
     if (e.cancelable) e.preventDefault();
   }, { passive: false });
 
@@ -380,17 +349,6 @@ function initInteractions() {
   document.addEventListener('touchend', endTouch, { passive: false });
   document.addEventListener('touchcancel', endTouch, { passive: false });
 
-  // Edge-swipe iOS: blocca solo tocchi che partono dai bordi estremi
-  document.addEventListener('touchstart', (e) => {
-    const t = e.touches[0];
-    if (!t) return;
-    const edge = 24;
-    if (t.clientX < edge || t.clientX > window.innerWidth - edge) {
-      if (e.cancelable) e.preventDefault();
-    }
-  }, { passive: false });
-
-  /* ---------- HOVER / BUTTONS ---------- */
   const hoverables = document.querySelectorAll('a, button, [role="button"], .menu-item, .index-item, .brand, .card-link, .audio-toggle');
   hoverables.forEach(el => {
     el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hovered'));
@@ -449,12 +407,10 @@ function goToAtlas() {
 
 function triggerUselessPulse() {
   if (!networkGroup || !window.gsap) return;
-
   gsap.to(networkGroup.scale, {
     x: 1.3, y: 1.3, z: 1.3,
     duration: 0.2, yoyo: true, repeat: 1, ease: "power2.out"
   });
-
   if (osc && audioCtx && audioCtx.state === 'running') {
     const baseFreq = 120 + activeIndex * 18;
     osc.frequency.cancelScheduledValues(audioCtx.currentTime);
@@ -465,7 +421,6 @@ function triggerUselessPulse() {
   }
 }
 
-/* ---------- MODAL ---------- */
 function openModal() {
   isTimeFrozen = true;
   const modal = document.getElementById('modal-hour');
@@ -485,7 +440,6 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-/* ---------- SPARKLINE ---------- */
 const sparklineVals = new Array(12).fill(2);
 function updateSparkline(val) {
   sparklineVals.shift();
@@ -502,7 +456,6 @@ function updateSparkline(val) {
   });
 }
 
-/* ---------- AUDIO ---------- */
 function toggleAudio() {
   if (!audioCtx) {
     try {
@@ -511,15 +464,12 @@ function toggleAudio() {
       audioCtx = new AudioCtx();
       osc = audioCtx.createOscillator();
       gainNode = audioCtx.createGain();
-
       osc.type = 'sine';
       osc.frequency.setValueAtTime(120 + activeIndex * 18, audioCtx.currentTime);
       gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-
       osc.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       osc.start();
-
       gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.3);
     } catch (e) {
       console.warn('Audio not available:', e);
@@ -533,14 +483,12 @@ function toggleAudio() {
   updateAudioButtonUI();
 }
 
-/* ---------- CLOCK ---------- */
 function updateClock() {
   const el = document.getElementById('clock-val');
   if (!el) return;
   el.textContent = new Date().toTimeString().split(' ')[0];
 }
 
-/* ---------- ANIMATE ---------- */
 let lastTime = 0;
 let frameSkipCounter = 0;
 function animate(time) {
@@ -549,7 +497,6 @@ function animate(time) {
   const delta = time - lastTime;
   lastTime = time;
 
-  // Android: ~30fps per risparmiare GPU
   if (IS_ANDROID) {
     frameSkipCounter++;
     if (frameSkipCounter % 2 !== 0) return;
@@ -570,7 +517,6 @@ function animate(time) {
   }
 }
 
-/* ---------- INIT ---------- */
 window.addEventListener('DOMContentLoaded', () => {
   init3D();
   renderIndexList();

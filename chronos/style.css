@@ -545,9 +545,6 @@ a, button, [role="button"] {
   font-size: 11px;
 }
 
-/* ============================================================
-   DEVICE ROTATION OVERLAY
-   ============================================================ */
 #rotate-overlay {
   display: none;
   position: fixed;
@@ -607,10 +604,23 @@ a, button, [role="button"] {
   .bottom-telemetry { gap: 12px; }
 }
 
+@media (max-width: 1024px) {
+  .app-layout {
+    grid-template-columns: 240px 1fr 200px;
+    grid-template-rows: 50px 1fr 28px minmax(60px, auto);
+  }
+  .main-headline { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+  .card-title { font-size: 1.4rem; }
+  .mid-bar { grid-template-columns: 240px 1fr 1fr 200px; }
+  .bottom-telemetry { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .telemetry-col:nth-child(4), .telemetry-col:nth-child(5) { display: none; }
+}
+
 @media (max-width: 900px) {
   #cursor { display: none; }
   * { cursor: auto !important; }
 
+  /* FIX ANDROID: layout pulito a due colonne per non schiacciare */
   .app-layout {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr auto auto;
@@ -624,15 +634,15 @@ a, button, [role="button"] {
   .header-nav {
     grid-column: 1 / -1;
     grid-row: 1;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     padding-bottom: 10px;
     gap: 10px;
   }
   .top-menu {
-    width: 100%;
-    justify-content: space-between;
-    gap: 8px;
+    width: auto;
+    justify-content: flex-end;
+    gap: 12px;
     font-size: 10px;
   }
   .menu-item { font-size: 10px; }
@@ -649,7 +659,7 @@ a, button, [role="button"] {
     border-left: 1px solid var(--border-dark);
     border-top: none;
     padding: 0 0 0 14px;
-    max-height: none;
+    max-height: 500px;
   }
   .col-center { display: none; }
 
@@ -676,6 +686,7 @@ a, button, [role="button"] {
     padding-top: 12px;
     border-top: 1px solid var(--border-dark);
   }
+  .telemetry-col { display: flex !important; }
 
   #webgl-canvas { opacity: 0.5; }
 }
@@ -787,23 +798,37 @@ a, button, [role="button"] {
   .telemetry-val { font-size: 1rem; }
 }
 
-@media (max-width: 900px) and (orientation: landscape) {
+/* FIX ANDROID LANDSCAPE */
+@media (max-width: 1024px) and (orientation: landscape) {
   .app-layout {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr auto;
     gap: 10px;
     padding: 10px 14px;
     min-height: 100dvh;
+    height: auto;
   }
-  .header-nav { padding-bottom: 6px; gap: 6px; }
-  .main-headline { font-size: 1.5rem; }
-  .col-right { max-height: 140px; }
-  .index-list { max-height: 100px; }
+  .header-nav { padding-bottom: 6px; gap: 6px; flex-direction: row; align-items: center; }
+  .main-headline { font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 8px; }
+  .kicker { margin-bottom: 8px; }
+  .headline-sub { font-size: 10px; }
+  .col-right { max-height: 240px; }
+  .index-list { max-height: 160px; }
   .bottom-telemetry {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     padding-top: 6px;
   }
+  .mid-bar {
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 4px 0;
+    font-size: 9px;
+  }
+  .mid-bar .mid-cell:nth-child(3) { display: none; }
+  .mid-bar .mid-cell:nth-child(4) { display: none; }
+  .active-section-card { margin-top: 10px; }
+  .card-title { font-size: 1.3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
