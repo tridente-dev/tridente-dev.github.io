@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const translations = window.translations;
 
     /* =========================================================
-       1. GESTIONE LINGUA
+       1. GESTIONE LINGUA (Rilevamento browser + Modale su richiesta)
        ========================================================= */
     const langOverlay       = document.getElementById('lang-overlay');
     const langList          = document.getElementById('lang-list');
@@ -210,24 +210,27 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { langOverlay.style.display = 'none'; }, 400);
     }
 
-    function hasSavedLang() {
-        try { return !!localStorage.getItem('siteLang'); } catch (_) { return false; }
-    }
-
     renderLangList('');
 
-    const savedLang = (() => { try { return localStorage.getItem('siteLang'); } catch (e) { return null; } })();
-
-    if (savedLang) {
-        if (langOverlay) {
-            langOverlay.style.display = 'none';
-            langOverlay.classList.add('hidden');
+    // Inizializzazione automatica lingua (Browser o LocalStorage)
+    let initialLang = 'en';
+    try {
+        const savedLang = localStorage.getItem('siteLang');
+        if (savedLang && translations[savedLang]) {
+            initialLang = savedLang;
+        } else {
+            const browserLang = (navigator.language || navigator.userLanguage || 'en').slice(0, 2).toLowerCase();
+            if (translations[browserLang]) {
+                initialLang = browserLang;
+            }
         }
-        applyTranslation(savedLang);
-    } else {
-        applyTranslation('en');
-        openOverlay();
+    } catch (e) {}
+
+    if (langOverlay) {
+        langOverlay.style.display = 'none';
+        langOverlay.classList.add('hidden');
     }
+    applyTranslation(initialLang);
 
     if (langSearchInput) {
         langSearchInput.addEventListener('input', (e) => renderLangList(e.target.value));
@@ -248,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (focusedIndex >= 0 && items[focusedIndex]) items[focusedIndex].click();
                 else if (items.length > 0) items[0].click();
             } else if (e.key === 'Escape') {
-                if (hasSavedLang()) closeOverlay();
+                closeOverlay();
             }
         });
     }
@@ -262,20 +265,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (langToggle) langToggle.addEventListener('click', openOverlay);
-
-    if (langClose) {
-        langClose.addEventListener('click', () => { if (hasSavedLang()) closeOverlay(); });
-    }
+    if (langClose)  langClose.addEventListener('click', closeOverlay);
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && langOverlay && !langOverlay.classList.contains('hidden')) {
-            if (hasSavedLang()) closeOverlay();
+            closeOverlay();
         }
     });
 
     if (langOverlay) {
         langOverlay.addEventListener('click', (e) => {
-            if (e.target === langOverlay && hasSavedLang()) closeOverlay();
+            if (e.target === langOverlay) closeOverlay();
         });
     }
 
@@ -573,7 +573,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     redirect: 'follow'
                 }, 15000);
 
-                // Consuma SEMPRE il body come testo (evita promise appese)
                 const rawText = await response.text();
 
                 let data = null;
@@ -584,16 +583,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     String(data.success) === 'true'
                 );
 
-                // Successo = status 2xx E (success true O body vuoto/non-JSON)
                 const isSuccess = response.ok && (successFlag || data === null);
 
                 if (!isSuccess) {
                     const msg = (data && (data.message || data.error)) || 'Invio non riuscito';
-                    console.error('[Web3Forms] Errore:', msg, data, 'status:', response.status);
                     throw new Error(msg);
                 }
 
-                // ✅ SUCCESSO
                 contactForm.reset();
                 contactForm.hidden = true;
                 if (formThanks) formThanks.hidden = false;
@@ -607,7 +603,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     formSubmitBtn.classList.remove('is-sending');
                 }
             } catch (err) {
-                console.error('[Web3Forms] Exception:', err);
                 if (formStatus) {
                     formStatus.textContent = t('form_error_send');
                     formStatus.classList.add('is-error');
@@ -621,4 +616,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); 
+});
