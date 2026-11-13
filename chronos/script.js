@@ -1,7 +1,7 @@
 /* ============================================================
    CHRONOS — script.js
-   Fully in English — slower auto-rotation
-   Mobile touch + Android performance optimizations
+   Touch: listeners globali su document con hit-test manuale
+   Android: performance ottimizzate
    ============================================================ */
 
 /* ---------- SECTIONS DATA ---------- */
@@ -47,10 +47,39 @@ let pointerSpeed = 0;
 let audioCtx = null, osc = null, gainNode = null;
 let isAutoRotating = true;
 
-/* ---------- MOBILE / ANDROID DETECTION ---------- */
-const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth <= 900;
+/* ---------- DEVICE DETECTION ---------- */
+const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
 const IS_ANDROID = /Android/i.test(navigator.userAgent);
-const IS_TOUCH = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+const IS_MOBILE = IS_TOUCH && window.matchMedia('(max-width: 900px)').matches;
+
+/* ---------- UTILITY: capire se il touch è nella zona sfera ---------- */
+/*
+   Su mobile il layout è complesso: col-center è display:none, quindi NON possiamo
+   usare getBoundingClientRect su di esso. Definiamo invece una "zona sfera"
+   come la fascia centrale dello schermo, escludendo header/footer e il pannello index.
+
+   - Portrait (max-width 640): zona verticale tra 35% e 65% dell'altezza,
+     tutta la larghezza (il pannello index è in basso, non laterale).
+   - Landscape (641-900): zona orizzontale tra il 5% e il 70% della larghezza,
+     verticale tra 15% e 85% dell'altezza.
+*/
+function isInSphereZone(clientX, clientY) {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  if (!IS_MOBILE) return true; // desktop: tutto è drag
+
+  if (w <= 640) {
+    // portrait stretto: fascia centrale verticale, tutta la larghezza
+    return clientY > h * 0.30 && clientY < h * 0.70;
+  }
+
+  // landscape / tablet: escludi il pannello index a destra (circa 30% destra)
+  const isIndexPanel = clientX > w * 0.70;
+  if (isIndexPanel) return false;
+
+  return clientY > h * 0.12 && clientY < h * 0.88;
+}
 
 /* ---------- AUDIO BUTTON UI ---------- */
 function updateAudioButtonUI() {
@@ -126,26 +155,24 @@ function init3D() {
   const canvas = document.getElementById('webgl-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
 
-  // Riduci il carico su mobile / Android
-  if (IS_MOBILE) nodeCount = 110;
+  // Performance: meno nodi su mobile
   if (IS_ANDROID) nodeCount = 90;
+  else if (IS_MOBILE) nodeCount = 120;
 
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(0, 0, 7.5);
 
-  // Antialias off su mobile = enorme guadagno su Android
-  const useAntialias = !IS_MOBILE;
+  // Antialias off su mobile = enorme guadagno
   renderer = new THREE.WebGLRenderer({
     canvas,
-    antialias: useAntialias,
+    antialias: !IS_MOBILE,
     alpha: true,
     powerPreference: 'high-performance'
   });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
-  // pixelRatio massimo 1.5 su mobile, 2 su desktop
   const maxRatio = IS_MOBILE ? 1.5 : 2;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
 
@@ -203,7 +230,6 @@ function init3D() {
       if (distSq < maxDistSq) {
         linePositions.push(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]);
         linePositions.push(positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]);
-
         lineColors.push(colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]);
         lineColors.push(colors[j * 3], colors[j * 3 + 1], colors[j * 3 + 2]);
       }
@@ -277,23 +303,23 @@ function initInteractions() {
   }
 
   /* ---------- MOUSE (desktop) ---------- */
-  window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
-  window.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    isAutoRotating = false;
-    previousPointer = { x: e.clientX, y: e.clientY };
-    lastPointerPos = { x: e.clientX, y: e.clientY };
-  });
-  window.addEventListener('mouseup', () => {
-    isDragging = false;
-    isAutoRotating = true;
-  });
+  if (!IS_TOUCH) {
+    window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
+    window.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      isAutoRotating = false;
+      previousPointer = { x: e.clientX, y: e.clientY };
+      lastPointerPos = { x: e.clientX, y: e.clientY };
+    });
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      isAutoRotating = true;
+    });
+  }
 
-  /* ---------- TOUCH (mobile) ---------- */
-  // #touch-surface è un layer trasparente sopra il canvas che cattura i drag
-  const touchSurface = document.getElementById('touch-surface');
-  const orbitZone = touchSurface || document.body;
+  /* ---------- TOUCH: listener globali con hit-test manuale ---------- */
   let touchStartedOnOrbit = false;
+  let touchStartPoint = { x: 0, y: 0 };
 
   function isRotateOverlayActive() {
     const overlay = document.getElementById('rotate-overlay');
@@ -301,28 +327,41 @@ function initInteractions() {
     return getComputedStyle(overlay).display !== 'none';
   }
 
-  orbitZone.addEventListener('touchstart', (e) => {
+  function isOnInteractiveElement(clientX, clientY) {
+    const el = document.elementFromPoint(clientX, clientY);
+    if (!el) return false;
+    // elementi interattivi che devono mantenere il loro comportamento
+    return !!el.closest('button, a, input, textarea, select, label, .index-list, .index-item, .menu-item, .card-link, .audio-toggle, .brand, .modal-overlay, #modal-hour, #rotate-overlay');
+  }
+
+  document.addEventListener('touchstart', (e) => {
     if (isRotateOverlayActive()) return;
 
     const touch = e.touches[0];
     if (!touch) return;
 
-    // Se il tocco è sopra un controllo interattivo, lascialo passare
-    const el = document.elementFromPoint(touch.clientX, touch.clientY);
-    if (el && el.closest && el.closest('button, a, .index-item, .menu-item, .card-link, .audio-toggle, .brand')) {
-      return;
-    }
+    // Se l'overlay modal è aperto, non intercettare
+    const modal = document.getElementById('modal-hour');
+    if (modal && modal.classList.contains('open')) return;
+
+    // Se il touch cade su un controllo interattivo, lascialo passare
+    if (isOnInteractiveElement(touch.clientX, touch.clientY)) return;
+
+    // Se NON siamo nella zona sfera, lascia lo scroll/gesture nativo
+    if (!isInSphereZone(touch.clientX, touch.clientY)) return;
 
     touchStartedOnOrbit = true;
+    touchStartPoint = { x: touch.clientX, y: touch.clientY };
     isDragging = true;
     isAutoRotating = false;
     previousPointer = { x: touch.clientX, y: touch.clientY };
     lastPointerPos = { x: touch.clientX, y: touch.clientY };
 
+    // Blocca gesture native solo se il touch è nella zona sfera
     if (e.cancelable) e.preventDefault();
   }, { passive: false });
 
-  orbitZone.addEventListener('touchmove', (e) => {
+  document.addEventListener('touchmove', (e) => {
     if (!touchStartedOnOrbit) return;
     const touch = e.touches[0];
     if (!touch) return;
@@ -331,28 +370,27 @@ function initInteractions() {
     if (e.cancelable) e.preventDefault();
   }, { passive: false });
 
-  function endOrbitTouch(e) {
+  function endTouch(e) {
     if (!touchStartedOnOrbit) return;
     touchStartedOnOrbit = false;
     isDragging = false;
     isAutoRotating = true;
     if (e && e.cancelable) e.preventDefault();
   }
-  orbitZone.addEventListener('touchend', endOrbitTouch, { passive: false });
-  orbitZone.addEventListener('touchcancel', endOrbitTouch, { passive: false });
+  document.addEventListener('touchend', endTouch, { passive: false });
+  document.addEventListener('touchcancel', endTouch, { passive: false });
 
-  // Blocca edge-swipe iOS solo sui bordi estremi
+  // Edge-swipe iOS: blocca solo tocchi che partono dai bordi estremi
   document.addEventListener('touchstart', (e) => {
     const t = e.touches[0];
     if (!t) return;
-    const x = t.clientX;
     const edge = 24;
-    if (x < edge || x > window.innerWidth - edge) {
+    if (t.clientX < edge || t.clientX > window.innerWidth - edge) {
       if (e.cancelable) e.preventDefault();
     }
   }, { passive: false });
 
-  /* ---------- HOVER (custom cursor) ---------- */
+  /* ---------- HOVER / BUTTONS ---------- */
   const hoverables = document.querySelectorAll('a, button, [role="button"], .menu-item, .index-item, .brand, .card-link, .audio-toggle');
   hoverables.forEach(el => {
     el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hovered'));
@@ -511,7 +549,7 @@ function animate(time) {
   const delta = time - lastTime;
   lastTime = time;
 
-  // Su Android rendiamo a ~30fps per risparmiare GPU
+  // Android: ~30fps per risparmiare GPU
   if (IS_ANDROID) {
     frameSkipCounter++;
     if (frameSkipCounter % 2 !== 0) return;
