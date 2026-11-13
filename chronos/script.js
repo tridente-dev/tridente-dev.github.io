@@ -1,6 +1,6 @@
 /* ============================================================
    CHRONOS — script.js
-   Mobile Touch & Android Optimization
+   Pointer Events unificati (Mouse + Touch)
    ============================================================ */
 
 const sections = [
@@ -46,6 +46,7 @@ let isAutoRotating = true;
 
 const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 const IS_ANDROID = /Android/i.test(navigator.userAgent);
+// Soglia portata a 1024 per includere gli Android in landscape
 const IS_MOBILE = IS_TOUCH && window.matchMedia('(max-width: 1024px)').matches;
 
 function updateAudioButtonUI() {
@@ -58,7 +59,6 @@ function renderIndexList() {
   const listEl = document.getElementById('index-list');
   if (!listEl) return;
   listEl.innerHTML = '';
-
   sections.forEach((sec, idx) => {
     const li = document.createElement('li');
     li.className = `index-item ${idx === activeIndex ? 'active' : ''}`;
@@ -66,12 +66,6 @@ function renderIndexList() {
     li.setAttribute('tabindex', '0');
     li.innerHTML = `<span class="item-num">${sec.num}</span><span class="item-name">${sec.name}</span>`;
     li.addEventListener('click', () => { if (!isTimeFrozen) selectSection(idx); });
-    li.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        if (!isTimeFrozen) selectSection(idx);
-      }
-    });
     listEl.appendChild(li);
   });
 }
@@ -119,11 +113,10 @@ function init3D() {
   const canvas = document.getElementById('webgl-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
 
-  if (IS_ANDROID) nodeCount = 80;
+  if (IS_ANDROID) nodeCount = 90;
   else if (IS_MOBILE) nodeCount = 120;
 
   scene = new THREE.Scene();
-
   camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(0, 0, 7.5);
 
@@ -135,29 +128,19 @@ function init3D() {
   });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
-  const maxRatio = IS_MOBILE ? 1.5 : 2;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, IS_MOBILE ? 1.5 : 2));
 
   networkGroup = new THREE.Group();
   positions = [];
   colors = [];
-
   const baseColor = new THREE.Color(0xdddddd);
   const limeColor = new THREE.Color(0xd7ff3f);
 
   for (let i = 0; i < nodeCount; i++) {
-    const u = Math.random();
-    const v = Math.random();
-    const theta = u * 2.0 * Math.PI;
-    const phi = Math.acos(2.0 * v - 1.0);
+    const theta = Math.random() * 2.0 * Math.PI;
+    const phi = Math.acos(2.0 * Math.random() - 1.0);
     const r = 2.0 + (Math.random() - 0.5) * 0.4;
-
-    const x = r * Math.sin(phi) * Math.cos(theta);
-    const y = r * Math.sin(phi) * Math.sin(theta);
-    const z = r * Math.cos(phi);
-
-    positions.push(x, y, z);
-
+    positions.push(r * Math.sin(phi) * Math.cos(theta), r * Math.sin(phi) * Math.sin(theta), r * Math.cos(phi));
     const mixColor = baseColor.clone().lerp(limeColor, Math.random() * 0.45);
     colors.push(mixColor.r, mixColor.g, mixColor.b);
   }
@@ -168,10 +151,7 @@ function init3D() {
 
   const nodesMat = new THREE.PointsMaterial({
     size: IS_MOBILE ? 0.08 : 0.06,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.95,
-    sizeAttenuation: true
+    vertexColors: true, transparent: true, opacity: 0.95, sizeAttenuation: true
   });
 
   nodesMesh = new THREE.Points(nodesGeo, nodesMat);
@@ -187,13 +167,9 @@ function init3D() {
       const dx = positions[i * 3] - positions[j * 3];
       const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
       const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
-      const distSq = dx * dx + dy * dy + dz * dz;
-
-      if (distSq < maxDistSq) {
-        linePositions.push(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]);
-        linePositions.push(positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]);
-        lineColors.push(colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]);
-        lineColors.push(colors[j * 3], colors[j * 3 + 1], colors[j * 3 + 2]);
+      if (dx*dx + dy*dy + dz*dz < maxDistSq) {
+        linePositions.push(positions[i*3], positions[i*3+1], positions[i*3+2], positions[j*3], positions[j*3+1], positions[j*3+2]);
+        lineColors.push(colors[i*3], colors[i*3+1], colors[i*3+2], colors[j*3], colors[j*3+1], colors[j*3+2]);
       }
     }
   }
@@ -201,19 +177,12 @@ function init3D() {
   const linesGeo = new THREE.BufferGeometry();
   linesGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
   linesGeo.setAttribute('color', new THREE.Float32BufferAttribute(lineColors, 3));
-
-  const linesMat = new THREE.LineBasicMaterial({
-    vertexColors: true,
-    transparent: true,
-    opacity: IS_MOBILE ? 0.25 : 0.35
-  });
-
+  const linesMat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: IS_MOBILE ? 0.25 : 0.35 });
   linesMesh = new THREE.LineSegments(linesGeo, linesMat);
   networkGroup.add(linesMesh);
 
   networkGroup.rotation.y = (activeIndex / 24) * Math.PI * 2;
   scene.add(networkGroup);
-
   window.addEventListener('resize', onResize, { passive: true });
 }
 
@@ -222,25 +191,7 @@ function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  const maxRatio = IS_MOBILE ? 1.5 : 2;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
-}
-
-// Determina se il dito sta interagendo con la sfera (il canvas è a schermo intero dietro tutto)
-function isInSphereZone(clientX, clientY) {
-  if (!IS_MOBILE) return true;
-
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-
-  // Se in landscape, la sfera sta nella parte centrale/sinistra
-  if (w > h) {
-    // Escludi il pannello index (a destra) e l'header (in alto)
-    return clientX < w * 0.75 && clientY > h * 0.15 && clientY < h * 0.85;
-  }
-
-  // Se in portrait, la sfera è dietro i testi centrali. Escludi header/footer/pannelli
-  return clientY > h * 0.25 && clientY < h * 0.75;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, IS_MOBILE ? 1.5 : 2));
 }
 
 function initInteractions() {
@@ -248,6 +199,8 @@ function initInteractions() {
   if (cursor && IS_TOUCH) cursor.style.display = 'none';
 
   const speedEl = document.getElementById('speed-val');
+  // Il target del drag ora è esplicitamente la zona centrale (#sphere-zone)
+  const sphereZone = document.getElementById('sphere-zone');
 
   function handlePointerMove(clientX, clientY) {
     if (cursor && !IS_TOUCH) {
@@ -280,76 +233,62 @@ function initInteractions() {
     previousPointer = { x: clientX, y: clientY };
   }
 
-  if (!IS_TOUCH) {
-    window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
-    window.addEventListener('mousedown', (e) => {
+  /* ------------------------------------------------------------
+     POINTER EVENTS: funzionano per Mouse, Touch e Penna in un colpo solo.
+     Evitano i bug di iOS e Android relativi alle gesture native.
+     ------------------------------------------------------------ */
+  if (sphereZone) {
+    sphereZone.addEventListener('pointerdown', (e) => {
+      // Ignora se overlay o modale sono aperti
+      const overlay = document.getElementById('rotate-overlay');
+      if (overlay && getComputedStyle(overlay).display !== 'none') return;
+      const modal = document.getElementById('modal-hour');
+      if (modal && modal.classList.contains('open')) return;
+
       isDragging = true;
       isAutoRotating = false;
       previousPointer = { x: e.clientX, y: e.clientY };
       lastPointerPos = { x: e.clientX, y: e.clientY };
-    });
-    window.addEventListener('mouseup', () => {
+      
+      // Cattura il puntatore fuori dall'elemento (evita che il drag si interrompa)
+      if (sphereZone.setPointerCapture) {
+        try { sphereZone.setPointerCapture(e.pointerId); } catch(err) {}
+      }
+      
+      // Previene gesture native tipo edge-swipe su iOS
+      if (e.pointerType === 'touch' && e.cancelable) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    sphereZone.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      handlePointerMove(e.clientX, e.clientY);
+      
+      if (e.pointerType === 'touch' && e.cancelable) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    function endDrag(e) {
+      if (!isDragging) return;
       isDragging = false;
       isAutoRotating = true;
+      if (sphereZone.releasePointerCapture && e.pointerId) {
+        try { sphereZone.releasePointerCapture(e.pointerId); } catch(err) {}
+      }
+    }
+
+    sphereZone.addEventListener('pointerup', endDrag);
+    sphereZone.addEventListener('pointercancel', endDrag);
+    sphereZone.addEventListener('pointerleave', (e) => {
+      // Su mouse se esce dal box mentre trascina
+      if (e.pointerType === 'mouse') endDrag(e);
     });
   }
 
-  let touchStartedOnOrbit = false;
-
-  function isRotateOverlayActive() {
-    const overlay = document.getElementById('rotate-overlay');
-    if (!overlay) return false;
-    return getComputedStyle(overlay).display !== 'none';
-  }
-
-  function isOnInteractiveElement(clientX, clientY) {
-    const el = document.elementFromPoint(clientX, clientY);
-    if (!el) return false;
-    // Se tocca un bottone, un link o la lista index, non intercettare
-    return !!el.closest('button, a, .index-list, .index-item, .menu-item, .card-link, .audio-toggle, .brand, .modal-overlay');
-  }
-
-  document.addEventListener('touchstart', (e) => {
-    if (isRotateOverlayActive()) return;
-
-    const touch = e.touches[0];
-    if (!touch) return;
-
-    const modal = document.getElementById('modal-hour');
-    if (modal && modal.classList.contains('open')) return;
-
-    if (isOnInteractiveElement(touch.clientX, touch.clientY)) return;
-    if (!isInSphereZone(touch.clientX, touch.clientY)) return;
-
-    touchStartedOnOrbit = true;
-    isDragging = true;
-    isAutoRotating = false;
-    previousPointer = { x: touch.clientX, y: touch.clientY };
-    lastPointerPos = { x: touch.clientX, y: touch.clientY };
-
-    if (e.cancelable) e.preventDefault();
-  }, { passive: false });
-
-  document.addEventListener('touchmove', (e) => {
-    if (!touchStartedOnOrbit) return;
-    const touch = e.touches[0];
-    if (!touch) return;
-
-    handlePointerMove(touch.clientX, touch.clientY);
-    if (e.cancelable) e.preventDefault();
-  }, { passive: false });
-
-  function endTouch(e) {
-    if (!touchStartedOnOrbit) return;
-    touchStartedOnOrbit = false;
-    isDragging = false;
-    isAutoRotating = true;
-    if (e && e.cancelable) e.preventDefault();
-  }
-  document.addEventListener('touchend', endTouch, { passive: false });
-  document.addEventListener('touchcancel', endTouch, { passive: false });
-
-  const hoverables = document.querySelectorAll('a, button, [role="button"], .menu-item, .index-item, .brand, .card-link, .audio-toggle');
+  // Cursore custom (solo hover, non tocca il drag)
+  const hoverables = document.querySelectorAll('button, .index-item, .brand, .card-link, .audio-toggle');
   hoverables.forEach(el => {
     el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hovered'));
     el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('hovered'));
@@ -407,10 +346,7 @@ function goToAtlas() {
 
 function triggerUselessPulse() {
   if (!networkGroup || !window.gsap) return;
-  gsap.to(networkGroup.scale, {
-    x: 1.3, y: 1.3, z: 1.3,
-    duration: 0.2, yoyo: true, repeat: 1, ease: "power2.out"
-  });
+  gsap.to(networkGroup.scale, { x: 1.3, y: 1.3, z: 1.3, duration: 0.2, yoyo: true, repeat: 1, ease: "power2.out" });
   if (osc && audioCtx && audioCtx.state === 'running') {
     const baseFreq = 120 + activeIndex * 18;
     osc.frequency.cancelScheduledValues(audioCtx.currentTime);
@@ -425,11 +361,9 @@ function openModal() {
   isTimeFrozen = true;
   const modal = document.getElementById('modal-hour');
   const sec = sections[activeIndex];
-
   document.getElementById('modal-kicker').textContent = `NOW / SECTION ${sec.num}`;
   document.getElementById('modal-title').textContent = sec.name;
   document.getElementById('modal-body').textContent = `${sec.desc}\n\n${MODAL_DETAILS}`;
-
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -444,7 +378,6 @@ const sparklineVals = new Array(12).fill(2);
 function updateSparkline(val) {
   sparklineVals.shift();
   sparklineVals.push(Math.min(Math.max(val * 5, 2), 16));
-
   const container = document.getElementById('sparkline');
   if (!container) return;
   container.innerHTML = '';
@@ -493,25 +426,20 @@ let lastTime = 0;
 let frameSkipCounter = 0;
 function animate(time) {
   requestAnimationFrame(animate);
-
   const delta = time - lastTime;
   lastTime = time;
-
   if (IS_ANDROID) {
     frameSkipCounter++;
     if (frameSkipCounter % 2 !== 0) return;
   }
-
   if (isAutoRotating && !isDragging && networkGroup && !isTimeFrozen) {
     const speed = 0.00015;
     networkGroup.rotation.y += speed * Math.min(delta, 50);
-
     let normalizedAngle = (networkGroup.rotation.y % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
     let calculatedIndex = Math.floor((normalizedAngle / (Math.PI * 2)) * 24);
     calculatedIndex = (calculatedIndex + 24) % 24;
     selectSection(calculatedIndex);
   }
-
   if (renderer && scene && camera) {
     renderer.render(scene, camera);
   }
