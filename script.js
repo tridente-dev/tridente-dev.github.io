@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dict = translations[langCode] || translations['en'];
         const fallback = translations['en'];
 
+        // Traduzione testi normali
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             const value = dict[key] || fallback[key];
@@ -65,6 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     const textNode = Array.from(el.childNodes).find(n => n.nodeType === 3);
                     if (textNode) textNode.textContent = value;
                 }
+            }
+        });
+
+        // Traduzione placeholder (input e textarea)
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            const value = dict[key] || fallback[key];
+            if (value) {
+                el.setAttribute('placeholder', value);
             }
         });
 
@@ -118,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.setAttribute('aria-selected', lang.code === currentLang ? 'true' : 'false');
             btn.style.animationDelay = (i * 0.025) + 's';
 
-            // MODIFICA: Rimosso il flag emoji, aggiunto acronimo e rimosso lang-code duplicato
             btn.innerHTML = `
                 <span class="lang-flag lang-acronym">${lang.code.toUpperCase()}</span>
                 <span class="lang-names">
@@ -400,6 +409,117 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.addEventListener('orientationchange', () => {
             setTimeout(fitEmail, 200);
+        });
+    }
+
+    /* =========================================================
+       7. CONTACT FORM (FormSubmit + AJAX)
+       ========================================================= */
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+    const formSubmitBtn = document.getElementById('form-submit');
+    const formThanks = document.getElementById('form-thanks');
+    const formSubmitText = formSubmitBtn ? formSubmitBtn.querySelector('.form-submit-text') : null;
+
+    function t(key) {
+        const dict = translations[currentLang] || translations['en'];
+        const fallback = translations['en'];
+        return (dict && dict[key]) || (fallback && fallback[key]) || '';
+    }
+
+    if (contactForm) {
+        // Rimuove lo stato "invalid" quando l'utente scrive
+        contactForm.querySelectorAll('input, textarea').forEach(el => {
+            el.addEventListener('input', () => {
+                el.classList.remove('is-invalid');
+                if (formStatus) {
+                    formStatus.textContent = '';
+                    formStatus.classList.remove('is-error');
+                }
+            });
+        });
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nameEl = contactForm.querySelector('#form-name');
+            const emailEl = contactForm.querySelector('#form-email');
+            const messageEl = contactForm.querySelector('#form-message');
+
+            const name = nameEl.value.trim();
+            const email = emailEl.value.trim();
+            const message = messageEl.value.trim();
+
+            // Reset
+            [nameEl, emailEl, messageEl].forEach(el => el.classList.remove('is-invalid'));
+            if (formStatus) {
+                formStatus.textContent = '';
+                formStatus.classList.remove('is-error');
+            }
+
+            // Validazione
+            let hasError = false;
+            if (!name) { nameEl.classList.add('is-invalid'); hasError = true; }
+            if (!email) { emailEl.classList.add('is-invalid'); hasError = true; }
+            if (!message) { messageEl.classList.add('is-invalid'); hasError = true; }
+
+            if (hasError) {
+                if (formStatus) {
+                    formStatus.textContent = t('form_error_required');
+                    formStatus.classList.add('is-error');
+                }
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                emailEl.classList.add('is-invalid');
+                if (formStatus) {
+                    formStatus.textContent = t('form_error_email');
+                    formStatus.classList.add('is-error');
+                }
+                return;
+            }
+
+            // Stato "invio in corso"
+            const originalText = formSubmitText ? formSubmitText.textContent : '';
+            if (formSubmitText) formSubmitText.textContent = t('form_sending');
+            if (formSubmitBtn) {
+                formSubmitBtn.disabled = true;
+                formSubmitBtn.classList.add('is-sending');
+            }
+
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    contactForm.reset();
+                    contactForm.hidden = true;
+                    if (formThanks) formThanks.hidden = false;
+
+                    if (formStatus) {
+                        formStatus.textContent = '';
+                        formStatus.classList.remove('is-error');
+                    }
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (err) {
+                if (formStatus) {
+                    formStatus.textContent = t('form_error_send');
+                    formStatus.classList.add('is-error');
+                }
+                if (formSubmitText) formSubmitText.textContent = originalText;
+                if (formSubmitBtn) {
+                    formSubmitBtn.disabled = false;
+                    formSubmitBtn.classList.remove('is-sending');
+                }
+            }
         });
     }
 });
