@@ -65,16 +65,27 @@ a, button, [role="button"] {
   outline-offset: 3px;
 }
 
-#webgl-canvas {
+/* ============================================================
+   SPHERE STAGE — contiene il canvas e garantisce che la sfera
+   sia sempre centrata e libera da sovrapposizioni.
+   Desktop: fullscreen fixed.
+   Mobile (<= 900px): blocco dedicato nella colonna del layout.
+   ============================================================ */
+.sphere-stage {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
+  inset: 0;
   z-index: 1;
   pointer-events: none;
+}
+
+#webgl-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
   touch-action: none;
+  display: block;
 }
 
 #grain {
@@ -116,17 +127,16 @@ a, button, [role="button"] {
   grid-template-columns: 320px 1fr 240px;
   grid-template-rows: 60px 1fr 32px minmax(70px, auto);
   padding: 0 var(--pad-x) var(--pad-y) var(--pad-x);
-  pointer-events: none; /* Fa passare i click al canvas */
+  pointer-events: none;
 }
 
-/* Solo i componenti specifici intercettano i click sul desktop */
 .header-nav, .col-left, .col-right, .mid-bar, .bottom-telemetry {
   pointer-events: auto;
 }
 
-/* La colonna centrale NON intercetta nulla (lascia passare al canvas) */
 .col-center {
   pointer-events: none;
+  position: relative;
 }
 
 .header-nav {
@@ -286,7 +296,9 @@ a, button, [role="button"] {
   min-height: 0;
 }
 
-.object-badge, .orbit-hint {
+/* Badge ancorati ai bordi della colonna centrale: mai sopra la sfera */
+.object-badge,
+.orbit-hint {
   font-size: 0.72rem;
   letter-spacing: 0.15em;
   color: var(--text-muted);
@@ -295,7 +307,14 @@ a, button, [role="button"] {
   border-radius: 100px;
   backdrop-filter: blur(4px);
   background: rgba(8,8,8,0.4);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 11;
+  pointer-events: none;
 }
+.object-badge { top: 1.2rem; }
+.orbit-hint   { bottom: 1.2rem; }
 
 .col-right {
   grid-column: 3;
@@ -555,52 +574,6 @@ a, button, [role="button"] {
   font-size: 11px;
 }
 
-#rotate-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: rgba(8, 8, 8, 0.96);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-  color: var(--accent-yellow);
-}
-#rotate-overlay .rotate-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
-  max-width: 320px;
-}
-#rotate-overlay .rotate-icon {
-  animation: rotate-hint 2.4s ease-in-out infinite;
-  color: var(--accent-yellow);
-  transform-origin: center;
-}
-#rotate-overlay .rotate-title {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  color: var(--text-white);
-  margin: 0;
-}
-#rotate-overlay .rotate-sub {
-  color: var(--text-muted);
-  font-size: 11px;
-  line-height: 1.6;
-}
-@keyframes rotate-hint {
-  0%, 40% { transform: rotate(0deg); }
-  60%, 100% { transform: rotate(90deg); }
-}
-
-@media (max-width: 900px) and (orientation: portrait) {
-  #rotate-overlay { display: flex; }
-}
-
 /* ============================================================
    MEDIA QUERIES
    ============================================================ */
@@ -626,35 +599,65 @@ a, button, [role="button"] {
   .telemetry-col:nth-child(4), .telemetry-col:nth-child(5) { display: none; }
 }
 
+/* ============================================================
+   TABLET / MOBILE (<= 900px)
+   La sfera diventa un blocco dedicato (.sphere-stage) sopra il
+   contenuto: nessun testo può sovrapporsi.
+   ============================================================ */
 @media (max-width: 900px) {
   #cursor { display: none; }
   * { cursor: auto !important; }
 
-  /* Su mobile i testi si scuriscono per far risaltare la sfera */
-  .col-left .editorial-block, .col-left .active-section-card {
-    opacity: 0.85;
-    transition: opacity 0.3s;
+  html, body {
+    overflow: auto;
+    height: auto;
+    min-height: 100dvh;
   }
-  .col-left .editorial-block:hover, .col-left .active-section-card:hover {
+
+  .app-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 100dvh;
+    padding: var(--pad-y) var(--pad-x);
+    gap: 18px;
+    overflow: visible;
+  }
+
+  /* Lo stage della sfera: blocco dedicato, sopra ogni testo */
+  .sphere-stage {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 45vh;
+    min-height: 300px;
+    max-height: 480px;
+    margin: 4px 0 6px;
+    order: 1;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  #webgl-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     opacity: 1;
   }
 
-  /* Elimina i badge che davano fastidio alla sfera */
-  .object-badge, .orbit-hint { display: none !important; }
+  /* Ordine degli altri blocchi: header, stage, testo, indice, barre, footer */
+  .header-nav { order: 0; }
+  .col-left    { order: 2; }
+  .col-right   { order: 3; }
+  .mid-bar     { order: 4; }
+  .bottom-telemetry { order: 5; }
 
-  .app-layout {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr auto auto;
-    padding: var(--pad-y) var(--pad-x);
-    gap: 14px;
-    height: auto;
-    min-height: 100dvh;
-    overflow-y: auto;
-  }
+  /* Badge centrali non servono più: lo stage è dedicato */
+  .col-center { display: none; }
 
   .header-nav {
-    grid-column: 1 / -1;
-    grid-row: 1;
     flex-direction: row;
     align-items: center;
     padding-bottom: 10px;
@@ -668,72 +671,51 @@ a, button, [role="button"] {
   }
   .menu-item { font-size: 10px; }
 
-  .col-left {
-    grid-column: 1;
-    grid-row: 2;
-    padding: 0;
-    gap: 20px;
-  }
+  .col-left { padding: 0; gap: 20px; }
   .col-right {
-    grid-column: 2;
-    grid-row: 2;
-    border-left: 1px solid var(--border-dark);
-    border-top: none;
-    padding: 0 0 0 14px;
-    max-height: 500px;
+    border-left: none;
+    border-top: 1px solid var(--border-dark);
+    padding: 14px 0 0;
+    max-height: 320px;
+    overflow: hidden;
   }
-  .col-center { display: none; }
+  .index-list { max-height: 220px; }
 
   .main-headline { font-size: clamp(1.8rem, 5vw, 2.4rem); }
   .headline-sub { max-width: 100%; }
 
   .mid-bar {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 6px;
-    padding: 8px 0;
+    padding: 10px 0;
     border-top: 1px solid var(--border-dark);
     border-bottom: 1px solid var(--border-dark);
+    text-align: center;
+    font-size: 10px;
   }
-  .mid-bar .mid-cell:nth-child(2) { text-align: right; }
+  .mid-bar .mid-cell { padding: 0; }
   .mid-bar .mid-cell:nth-child(4) { display: none; }
 
   .bottom-telemetry {
-    grid-column: 1 / -1;
-    grid-row: 4;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
     padding-top: 12px;
     border-top: 1px solid var(--border-dark);
   }
   .telemetry-col { display: flex !important; }
-
-  #webgl-canvas { opacity: 0.5; }
 }
 
 @media (max-width: 640px) {
-  html, body {
-    overflow: auto;
-    height: auto;
-    min-height: 100dvh;
-    touch-action: pan-y;
-  }
-
   .app-layout {
-    display: flex;
-    flex-direction: column;
     padding: 14px 16px 20px;
-    gap: 18px;
-    height: auto;
-    min-height: 100dvh;
-    overflow: visible;
+    gap: 16px;
   }
 
   .header-nav {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
     padding-bottom: 12px;
     position: sticky;
     top: 0;
@@ -758,6 +740,14 @@ a, button, [role="button"] {
   .menu-item { font-size: 9.5px; padding: 2px 0; }
   .status-dot { display: none; }
 
+  /* Sfera: più compatta ma sempre al centro del suo stage */
+  .sphere-stage {
+    height: 42vh;
+    min-height: 260px;
+    max-height: 380px;
+    margin: 2px 0 4px;
+  }
+
   .col-left { padding: 0; gap: 24px; flex: none; }
   .kicker { font-size: 0.7rem; margin-bottom: 10px; }
   .main-headline {
@@ -772,9 +762,6 @@ a, button, [role="button"] {
   .card-desc { max-width: 100%; }
 
   .col-right {
-    border-left: none;
-    border-top: 1px solid var(--border-dark);
-    border-bottom: 1px solid var(--border-dark);
     padding: 16px 0;
     max-height: 200px;
   }
@@ -804,8 +791,6 @@ a, button, [role="button"] {
   .telemetry-val { font-size: 1.1rem; }
   .telemetry-label { font-size: 0.62rem; }
 
-  #webgl-canvas { opacity: 0.35; }
-
   .modal-content { padding: 1.5rem; }
 }
 
@@ -817,13 +802,18 @@ a, button, [role="button"] {
   .menu-item { font-size: 8.5px; }
   .bottom-telemetry { grid-template-columns: 1fr; }
   .telemetry-val { font-size: 1rem; }
+  .sphere-stage {
+    height: 40vh;
+    min-height: 240px;
+    max-height: 340px;
+  }
 }
 
-/* FIX ANDROID LANDSCAPE */
+/* ANDROID LANDSCAPE */
 @media (max-width: 1024px) and (orientation: landscape) {
   .app-layout {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr auto;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
     padding: 10px 14px;
     min-height: 100dvh;
@@ -833,6 +823,15 @@ a, button, [role="button"] {
   .main-headline { font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 8px; }
   .kicker { margin-bottom: 8px; }
   .headline-sub { font-size: 10px; }
+
+  /* In landscape la sfera occupa uno spazio dedicato ma ridotto */
+  .sphere-stage {
+    height: 55vh;
+    min-height: 220px;
+    max-height: 340px;
+    margin: 2px 0 4px;
+  }
+
   .col-right { max-height: 240px; }
   .index-list { max-height: 160px; }
   .bottom-telemetry {
@@ -841,8 +840,10 @@ a, button, [role="button"] {
     padding-top: 6px;
   }
   .mid-bar {
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
     padding: 4px 0;
     font-size: 9px;
   }
@@ -857,6 +858,5 @@ a, button, [role="button"] {
   .status-dot { animation: none; }
   .wave-svg path { animation: none; }
   .modal-content { transition: none; }
-  #rotate-overlay .rotate-icon { animation: none; }
   * { transition-duration: 0.01ms !important; }
 }

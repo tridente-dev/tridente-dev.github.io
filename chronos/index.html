@@ -28,7 +28,9 @@
   <div id="cursor" aria-hidden="true"></div>
   <div id="grain" aria-hidden="true"></div>
 
-  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+  <div class="sphere-stage" aria-hidden="true">
+    <canvas id="webgl-canvas"></canvas>
+  </div>
 
   <div class="app-layout">
 
@@ -120,19 +122,6 @@
       <span class="modal-kicker" id="modal-kicker">NOW / SECTION 17</span>
       <h2 class="modal-title" id="modal-title">Dilatation</h2>
       <p class="modal-body" id="modal-body"></p>
-    </div>
-  </div>
-
-  <div id="rotate-overlay" aria-hidden="true">
-    <div class="rotate-content">
-      <svg class="rotate-icon" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="8" y="4" width="20" height="36" rx="3"/>
-        <path d="M40 28c0-6 5-10 10-10"/>
-        <path d="M46 14l6 4-4 6"/>
-        <rect x="36" y="28" width="24" height="16" rx="3" stroke-dasharray="3 3" opacity="0.5"/>
-      </svg>
-      <p class="rotate-title">Rotate your device</p>
-      <p class="rotate-sub">For the full experience, use your phone in landscape mode.</p>
     </div>
   </div>
 
