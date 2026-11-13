@@ -127,9 +127,14 @@ function init3D() {
   camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(0, 0, 7.5);
 
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+    powerPreference: 'high-performance'
+  });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
   networkGroup = new THREE.Group();
   positions = [];
@@ -209,6 +214,9 @@ function init3D() {
   scene.add(networkGroup);
 
   window.addEventListener('resize', onResize, { passive: true });
+  window.addEventListener('orientationchange', () => {
+    setTimeout(onResize, 120);
+  }, { passive: true });
 }
 
 function onResize() {
@@ -216,7 +224,7 @@ function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 }
 
 /* ---------- INTERACTIONS ---------- */
@@ -263,6 +271,8 @@ function initInteractions() {
   /* ---------- MOUSE (desktop) ---------- */
   window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true });
   window.addEventListener('mousedown', (e) => {
+    // Evita di avviare il drag 3D quando si clicca su controlli UI o modale
+    if (e.target.closest('button, a, [role="button"], .index-list, .modal-overlay')) return;
     isDragging = true;
     isAutoRotating = false;
     previousPointer = { x: e.clientX, y: e.clientY };
@@ -274,10 +284,10 @@ function initInteractions() {
   });
 
   /* ---------- TOUCH (mobile) ---------- */
-  // Il drag della sfera è attivo solo se il touch parte nella zona centrale
-  // e blocca tutte le gesture native iOS/Android (edge-swipe, tab bar, ecc.)
-  const orbitZone = document.querySelector('.col-center') || document.getElementById('webgl-canvas') || document.body;
+  // Gestisce il drag della sfera ovunque sullo schermo tranne su pulsanti,
+  // lista scorrevole delle sezioni e finestra modale.
   let touchStartedOnOrbit = false;
+  let activeTouchId = null;
 
   function isRotateOverlayActive() {
     const overlay = document.getElementById('rotate-overlay');
@@ -285,40 +295,42 @@ function initInteractions() {
     return getComputedStyle(overlay).display !== 'none';
   }
 
-  function isTouchOnOrbitZone(clientX, clientY) {
-    // Su desktop non serve; su mobile il drag è limitato alla zona centrale
-    if (window.innerWidth > 900) return true;
-    const center = document.querySelector('.col-center');
-    if (!center) {
-      // fallback: tutta la fascia centrale della viewport
-      return clientX > window.innerWidth * 0.2 && clientX < window.innerWidth * 0.8;
-    }
-    const r = center.getBoundingClientRect();
-    return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
+  function isInteractiveUI(target) {
+    if (!target || !target.closest) return false;
+    return Boolean(target.closest('button, a, [role="button"], .index-list, .modal-overlay'));
   }
 
-  orbitZone.addEventListener('touchstart', (e) => {
-    if (isRotateOverlayActive()) return;
+  document.addEventListener('touchstart', (e) => {
+    if (isRotateOverlayActive() || isTimeFrozen) return;
 
-    const touch = e.touches[0];
+    const touch = e.changedTouches[0];
     if (!touch) return;
 
-    // Su mobile il drag parte solo nella zona centrale (sfera)
-    if (!isTouchOnOrbitZone(touch.clientX, touch.clientY)) return;
+    // Blocca edge-swipe laterale di iOS/Android dai bordi estremi
+    const edge = 20;
+    if (touch.clientX < edge || touch.clientX > window.innerWidth - edge) {
+      if (e.cancelable) e.preventDefault();
+    }
 
+    // Se il tocco è su un elemento UI cliccabile o sulla lista sezioni, lascia il comportamento nativo
+    if (isInteractiveUI(e.target)) return;
+
+    activeTouchId = touch.identifier;
     touchStartedOnOrbit = true;
     isDragging = true;
     isAutoRotating = false;
     previousPointer = { x: touch.clientX, y: touch.clientY };
     lastPointerPos = { x: touch.clientX, y: touch.clientY };
 
-    // FONDAMENTALE: blocca gesture native
+    // FONDAMENTALE: blocca gesture native (pull-to-refresh / swipe) durante la rotazione
     if (e.cancelable) e.preventDefault();
   }, { passive: false });
 
-  orbitZone.addEventListener('touchmove', (e) => {
+  document.addEventListener('touchmove', (e) => {
     if (!touchStartedOnOrbit) return;
-    const touch = e.touches[0];
+
+    // Traccia esattamente il dito che ha iniziato il drag (supporto multi-touch sicuro)
+    const touch = Array.from(e.touches).find(t => t.identifier === activeTouchId) || e.touches[0];
     if (!touch) return;
 
     handlePointerMove(touch.clientX, touch.clientY);
@@ -329,25 +341,17 @@ function initInteractions() {
 
   function endOrbitTouch(e) {
     if (!touchStartedOnOrbit) return;
+    if (e && e.changedTouches) {
+      const ended = Array.from(e.changedTouches).some(t => t.identifier === activeTouchId);
+      if (!ended) return;
+    }
     touchStartedOnOrbit = false;
+    activeTouchId = null;
     isDragging = false;
     isAutoRotating = true;
-    if (e && e.cancelable) e.preventDefault();
   }
-  orbitZone.addEventListener('touchend', endOrbitTouch, { passive: false });
-  orbitZone.addEventListener('touchcancel', endOrbitTouch, { passive: false });
-
-  // Blocca edge-swipe di iOS (gesture laterali che cambiano pagina/app)
-  // sull'intera app, MA solo per i touch che partono dai bordi estremi.
-  document.addEventListener('touchstart', (e) => {
-    const t = e.touches[0];
-    if (!t) return;
-    const x = t.clientX;
-    const edge = 24; // px dal bordo
-    if (x < edge || x > window.innerWidth - edge) {
-      if (e.cancelable) e.preventDefault();
-    }
-  }, { passive: false });
+  document.addEventListener('touchend', endOrbitTouch, { passive: true });
+  document.addEventListener('touchcancel', endOrbitTouch, { passive: true });
 
   /* ---------- HOVER (cursor custom) ---------- */
   const hoverables = document.querySelectorAll('a, button, [role="button"], .menu-item, .index-item, .brand, .card-link, .audio-toggle');
