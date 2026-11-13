@@ -1,7 +1,7 @@
 /* ============================================================
    CHRONOS — script.js
    Fully in English — slower auto-rotation
-   Mobile touch optimizations (no native gestures)
+   Mobile touch + Android performance optimizations
    ============================================================ */
 
 /* ---------- SECTIONS DATA ---------- */
@@ -39,13 +39,18 @@ let activeIndex = 17;
 let isTimeFrozen = false;
 let scene, camera, renderer, networkGroup, nodesMesh, linesMesh;
 let positions = [], colors = [];
-const nodeCount = 180;
+let nodeCount = 180;
 let isDragging = false;
 let previousPointer = { x: 0, y: 0 };
 let lastPointerPos = { x: 0, y: 0 };
 let pointerSpeed = 0;
 let audioCtx = null, osc = null, gainNode = null;
 let isAutoRotating = true;
+
+/* ---------- MOBILE / ANDROID DETECTION ---------- */
+const IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth <= 900;
+const IS_ANDROID = /Android/i.test(navigator.userAgent);
+const IS_TOUCH = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 /* ---------- AUDIO BUTTON UI ---------- */
 function updateAudioButtonUI() {
@@ -79,7 +84,6 @@ function renderIndexList() {
 
 function updateSectionDataUI(idx) {
   const data = sections[idx];
-
   const kickerEl = document.getElementById('section-kicker');
   const titleEl = document.getElementById('section-title');
   const descEl = document.getElementById('section-desc');
@@ -122,14 +126,28 @@ function init3D() {
   const canvas = document.getElementById('webgl-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
 
+  // Riduci il carico su mobile / Android
+  if (IS_MOBILE) nodeCount = 110;
+  if (IS_ANDROID) nodeCount = 90;
+
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(0, 0, 7.5);
 
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  // Antialias off su mobile = enorme guadagno su Android
+  const useAntialias = !IS_MOBILE;
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: useAntialias,
+    alpha: true,
+    powerPreference: 'high-performance'
+  });
+
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // pixelRatio massimo 1.5 su mobile, 2 su desktop
+  const maxRatio = IS_MOBILE ? 1.5 : 2;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
 
   networkGroup = new THREE.Group();
   positions = [];
@@ -160,7 +178,7 @@ function init3D() {
   nodesGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
   const nodesMat = new THREE.PointsMaterial({
-    size: 0.06,
+    size: IS_MOBILE ? 0.08 : 0.06,
     vertexColors: true,
     transparent: true,
     opacity: 0.95,
@@ -172,7 +190,7 @@ function init3D() {
 
   const linePositions = [];
   const lineColors = [];
-  const maxDist = 0.85;
+  const maxDist = IS_MOBILE ? 0.75 : 0.85;
   const maxDistSq = maxDist * maxDist;
 
   for (let i = 0; i < nodeCount; i++) {
@@ -199,7 +217,7 @@ function init3D() {
   const linesMat = new THREE.LineBasicMaterial({
     vertexColors: true,
     transparent: true,
-    opacity: 0.35
+    opacity: IS_MOBILE ? 0.25 : 0.35
   });
 
   linesMesh = new THREE.LineSegments(linesGeo, linesMat);
@@ -216,20 +234,19 @@ function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const maxRatio = IS_MOBILE ? 1.5 : 2;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
 }
 
 /* ---------- INTERACTIONS ---------- */
 function initInteractions() {
   const cursor = document.getElementById('cursor');
-  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-  if (cursor && isTouch) cursor.style.display = 'none';
+  if (cursor && IS_TOUCH) cursor.style.display = 'none';
 
   const speedEl = document.getElementById('speed-val');
 
   function handlePointerMove(clientX, clientY) {
-    if (cursor && !isTouch) {
+    if (cursor && !IS_TOUCH) {
       cursor.style.left = `${clientX}px`;
       cursor.style.top = `${clientY}px`;
     }
@@ -248,7 +265,6 @@ function initInteractions() {
 
       networkGroup.rotation.y += deltaX * 0.008;
       networkGroup.rotation.x += deltaY * 0.008;
-
       networkGroup.rotation.x = Math.max(-Math.PI / 4, Math.min(Math.PI / 4, networkGroup.rotation.x));
 
       let normalizedAngle = (networkGroup.rotation.y % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
@@ -274,9 +290,9 @@ function initInteractions() {
   });
 
   /* ---------- TOUCH (mobile) ---------- */
-  // Sphere dragging is active only if the touch starts in the central zone
-  // and blocks all native iOS/Android gestures (edge-swipe, tab bar, etc.)
-  const orbitZone = document.querySelector('.col-center') || document.getElementById('webgl-canvas') || document.body;
+  // #touch-surface è un layer trasparente sopra il canvas che cattura i drag
+  const touchSurface = document.getElementById('touch-surface');
+  const orbitZone = touchSurface || document.body;
   let touchStartedOnOrbit = false;
 
   function isRotateOverlayActive() {
@@ -285,26 +301,17 @@ function initInteractions() {
     return getComputedStyle(overlay).display !== 'none';
   }
 
-  function isTouchOnOrbitZone(clientX, clientY) {
-    // On desktop this is not needed; on mobile drag is limited to the central zone
-    if (window.innerWidth > 900) return true;
-    const center = document.querySelector('.col-center');
-    if (!center) {
-      // fallback: whole central band of the viewport
-      return clientX > window.innerWidth * 0.2 && clientX < window.innerWidth * 0.8;
-    }
-    const r = center.getBoundingClientRect();
-    return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
-  }
-
   orbitZone.addEventListener('touchstart', (e) => {
     if (isRotateOverlayActive()) return;
 
     const touch = e.touches[0];
     if (!touch) return;
 
-    // On mobile, drag starts only within the central zone (sphere)
-    if (!isTouchOnOrbitZone(touch.clientX, touch.clientY)) return;
+    // Se il tocco è sopra un controllo interattivo, lascialo passare
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (el && el.closest && el.closest('button, a, .index-item, .menu-item, .card-link, .audio-toggle, .brand')) {
+      return;
+    }
 
     touchStartedOnOrbit = true;
     isDragging = true;
@@ -312,7 +319,6 @@ function initInteractions() {
     previousPointer = { x: touch.clientX, y: touch.clientY };
     lastPointerPos = { x: touch.clientX, y: touch.clientY };
 
-    // CRUCIAL: blocks native gestures
     if (e.cancelable) e.preventDefault();
   }, { passive: false });
 
@@ -322,8 +328,6 @@ function initInteractions() {
     if (!touch) return;
 
     handlePointerMove(touch.clientX, touch.clientY);
-
-    // CRUCIAL: prevents scroll/edge-swipe/system tab-bar during drag
     if (e.cancelable) e.preventDefault();
   }, { passive: false });
 
@@ -337,13 +341,12 @@ function initInteractions() {
   orbitZone.addEventListener('touchend', endOrbitTouch, { passive: false });
   orbitZone.addEventListener('touchcancel', endOrbitTouch, { passive: false });
 
-  // Blocks iOS edge-swipe (the side gestures that switch page/app)
-  // across the whole app, but ONLY for touches that start from the outer edges.
+  // Blocca edge-swipe iOS solo sui bordi estremi
   document.addEventListener('touchstart', (e) => {
     const t = e.touches[0];
     if (!t) return;
     const x = t.clientX;
-    const edge = 24; // px from the edge
+    const edge = 24;
     if (x < edge || x > window.innerWidth - edge) {
       if (e.cancelable) e.preventDefault();
     }
@@ -411,10 +414,7 @@ function triggerUselessPulse() {
 
   gsap.to(networkGroup.scale, {
     x: 1.3, y: 1.3, z: 1.3,
-    duration: 0.2,
-    yoyo: true,
-    repeat: 1,
-    ease: "power2.out"
+    duration: 0.2, yoyo: true, repeat: 1, ease: "power2.out"
   });
 
   if (osc && audioCtx && audioCtx.state === 'running') {
@@ -504,14 +504,21 @@ function updateClock() {
 
 /* ---------- ANIMATE ---------- */
 let lastTime = 0;
+let frameSkipCounter = 0;
 function animate(time) {
   requestAnimationFrame(animate);
 
   const delta = time - lastTime;
   lastTime = time;
 
+  // Su Android rendiamo a ~30fps per risparmiare GPU
+  if (IS_ANDROID) {
+    frameSkipCounter++;
+    if (frameSkipCounter % 2 !== 0) return;
+  }
+
   if (isAutoRotating && !isDragging && networkGroup && !isTimeFrozen) {
-    const speed = 0.00015; // slowed down (was 0.0004)
+    const speed = 0.00015;
     networkGroup.rotation.y += speed * Math.min(delta, 50);
 
     let normalizedAngle = (networkGroup.rotation.y % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);

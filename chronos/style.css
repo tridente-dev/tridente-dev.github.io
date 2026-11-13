@@ -37,7 +37,6 @@ html, body {
   line-height: 1.4;
   letter-spacing: 0.05em;
   overscroll-behavior: none;
-  /* Block native iOS/Android gestures: vertical scroll handled internally */
   touch-action: pan-y;
   -webkit-touch-callout: none;
 }
@@ -66,6 +65,7 @@ a, button, [role="button"] {
   outline-offset: 3px;
 }
 
+/* Canvas decorativo: non riceve eventi */
 #webgl-canvas {
   position: fixed;
   top: 0;
@@ -75,8 +75,34 @@ a, button, [role="button"] {
   height: 100dvh;
   z-index: 1;
   pointer-events: none;
-  /* No native gestures on the canvas */
   touch-action: none;
+  will-change: transform;
+}
+
+/* Superficie trasparente che cattura i drag della sfera */
+#touch-surface {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none; /* desktop: disabilitata */
+  touch-action: none;
+  background: transparent;
+}
+@media (max-width: 900px) {
+  #touch-surface {
+    pointer-events: auto;
+    /* lascia interattivo il pannello index a destra */
+    right: 0;
+  }
+}
+@media (max-width: 640px) {
+  /* su portrait stretto la superficie touch è solo la fascia centrale */
+  #touch-surface {
+    left: 0;
+    right: 0;
+    top: 140px;
+    bottom: 140px;
+  }
 }
 
 #grain {
@@ -118,6 +144,15 @@ a, button, [role="button"] {
   grid-template-columns: 320px 1fr 240px;
   grid-template-rows: 60px 1fr 32px minmax(70px, auto);
   padding: 0 var(--pad-x) var(--pad-y) var(--pad-x);
+  pointer-events: none; /* i figli riattivano pointer-events */
+}
+.app-layout > * {
+  pointer-events: auto;
+}
+
+/* La colonna centrale resta trasparente ai touch così passano a #touch-surface */
+.col-center {
+  pointer-events: none !important;
 }
 
 .header-nav {
@@ -320,6 +355,7 @@ a, button, [role="button"] {
   padding-right: 4px;
   scroll-behavior: smooth;
   touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 .index-list::-webkit-scrollbar { width: 3px; }
 .index-list::-webkit-scrollbar-thumb {
@@ -591,7 +627,6 @@ a, button, [role="button"] {
   60%, 100% { transform: rotate(90deg); }
 }
 
-/* Show overlay only on mobile in portrait */
 @media (max-width: 900px) and (orientation: portrait) {
   #rotate-overlay { display: flex; }
 }
@@ -612,18 +647,6 @@ a, button, [role="button"] {
 @media (max-width: 900px) {
   #cursor { display: none; }
   * { cursor: auto !important; }
-
-  /* On mobile the canvas must receive touches for sphere dragging */
-  #webgl-canvas {
-    pointer-events: auto;
-    touch-action: none;
-  }
-
-  /* The central zone becomes interactive for dragging */
-  .col-center {
-    pointer-events: auto;
-    touch-action: none;
-  }
 
   .app-layout {
     grid-template-columns: 1fr 1fr;
@@ -656,7 +679,10 @@ a, button, [role="button"] {
     grid-row: 2;
     padding: 0;
     gap: 20px;
+    pointer-events: none;
   }
+  .col-left > * { pointer-events: auto; }
+
   .col-right {
     grid-column: 2;
     grid-row: 2;
@@ -728,10 +754,7 @@ a, button, [role="button"] {
 
   .brand { gap: 10px; width: 100%; }
   .logo { font-size: 1.5rem; }
-  .sub-logo {
-    font-size: 0.65rem;
-    white-space: nowrap;
-  }
+  .sub-logo { font-size: 0.65rem; white-space: nowrap; }
 
   .top-menu {
     width: 100%;
@@ -743,11 +766,7 @@ a, button, [role="button"] {
   .menu-item { font-size: 9.5px; padding: 2px 0; }
   .status-dot { display: none; }
 
-  .col-left {
-    padding: 0;
-    gap: 24px;
-    flex: none;
-  }
+  .col-left { padding: 0; gap: 24px; flex: none; }
   .kicker { font-size: 0.7rem; margin-bottom: 10px; }
   .main-headline {
     font-size: clamp(1.7rem, 8vw, 2.2rem);
@@ -768,12 +787,8 @@ a, button, [role="button"] {
     max-height: 200px;
   }
   .index-header { margin-bottom: 10px; }
-  .index-list {
-    max-height: 150px;
-    gap: 2px;
-  }
+  .index-list { max-height: 150px; gap: 2px; }
   .index-item { padding: 4px 8px; }
-
   .index-footer-note { display: none; }
 
   .mid-bar {
@@ -820,10 +835,7 @@ a, button, [role="button"] {
     padding: 10px 14px;
     min-height: 100dvh;
   }
-  .header-nav {
-    padding-bottom: 6px;
-    gap: 6px;
-  }
+  .header-nav { padding-bottom: 6px; gap: 6px; }
   .main-headline { font-size: 1.5rem; }
   .col-right { max-height: 140px; }
   .index-list { max-height: 100px; }

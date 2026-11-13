@@ -6,7 +6,6 @@
   <meta name="theme-color" content="#080808">
   <meta name="description" content="Chronos — Experimental study on the perception of time. An interactive 3D experience.">
 
-  <!-- iOS / Android web-app meta -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="mobile-web-app-capable" content="yes">
@@ -30,6 +29,9 @@
   <div id="grain" aria-hidden="true"></div>
 
   <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+  <!-- Touch surface: riceve i drag della sfera su mobile -->
+  <div id="touch-surface" aria-hidden="true"></div>
 
   <div class="app-layout">
 
@@ -124,7 +126,6 @@
     </div>
   </div>
 
-  <!-- Device rotation overlay (mobile portrait) -->
   <div id="rotate-overlay" aria-hidden="true">
     <div class="rotate-content">
       <svg class="rotate-icon" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2">
