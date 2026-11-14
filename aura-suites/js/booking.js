@@ -361,62 +361,10 @@ export function updateSummary() {
 }
 
 export async function handleBooking(event) {
-    event.preventDefault();
-
-    if (calculatedNights <= 0) {
-        showToast('Select valid dates from the calendar before confirming.', 'error');
-        return;
-    }
-
-    const checkinVal = document.getElementById('checkin-date').value;
-    if (!checkinVal) { showToast('Enter the check-in date.', 'error'); return; }
-
-    const checkinDate = new Date(checkinVal);
-    const guestCount = parseInt(document.getElementById('guests-select').value || 0, 10);
-
-    for (let i = 1; i <= guestCount; i++) {
-        const dobInput = document.getElementById(`dob-${i}`);
-        if (!dobInput || !dobInput.value) {
-            showToast(`Enter the date of birth for guest ${i}.`, 'error');
-            return;
-        }
-        const age = calcolaEta(new Date(dobInput.value), checkinDate);
-        if (age < 16) {
-            showToast(`Guest ${i}: under 16 at check-in date.`, 'error');
-            return;
-        }
-    }
-
-    const form = document.getElementById('booking-form');
-    const submitBtn = document.querySelector('button[type="button"][onclick*="requestSubmit"]')
-                   || form.querySelector('button[type="submit"]');
-    const originalText = submitBtn?.textContent;
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
-
-    try {
-        const formData = new FormData(form);
-        formData.append('_subject', 'New Aura Suites booking');
-        formData.append('nights', calculatedNights);
-        formData.append('room', document.getElementById('room-select').value);
-
-        const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-            showToast('Request sent! You will receive a confirmation email.', 'success');
-            form.reset();
-        } else {
-            throw new Error('Server error');
-        }
-    } catch (err) {
-        console.error(err);
-        showToast('Sending error. Please try again or contact us by phone.', 'error');
-    } finally {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; }
-    }
+    if (event) event.preventDefault();
+    // Aura Suites è una demo di portfolio: non raccogliere né inviare prenotazioni reali.
+    showToast('Demo only: no booking has been sent. Please do not enter real personal data.', 'error');
+    return;
 }
 
 /* Global exports for inline onclick */

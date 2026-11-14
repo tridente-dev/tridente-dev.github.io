@@ -88,11 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.getAttribute('data-i18n');
             const value = dict[key] || fallback[key];
             if (value) {
-                if (el.children.length === 0) {
-                    el.textContent = value;
+                // Gestisce il contenuto HTML (es. link nella privacy note)
+                if (el.hasAttribute('data-i18n-html') || value.includes('<a ')) {
+                    el.innerHTML = value;
                 } else {
-                    const textNode = Array.from(el.childNodes).find(n => n.nodeType === 3);
-                    if (textNode) textNode.textContent = value;
+                    if (el.children.length === 0) {
+                        el.textContent = value;
+                    } else {
+                        const textNode = Array.from(el.childNodes).find(n => n.nodeType === 3);
+                        if (textNode) textNode.textContent = value;
+                    }
                 }
             }
         });
@@ -134,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filteredLanguages.length === 0) {
             const empty = document.createElement('div');
             empty.className = 'lang-empty';
-            empty.textContent = 'Nessun risultato / No results';
+            empty.textContent = 'No results';
             langList.appendChild(empty);
             updateLangCount();
             return;
@@ -212,7 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderLangList('');
 
-    // Inizializzazione automatica lingua (Browser o LocalStorage)
     let initialLang = 'en';
     try {
         const savedLang = localStorage.getItem('siteLang');
@@ -419,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================================================
-       8. CONTACT FORM (Web3Forms + Verifica Email Reale)
+       8. CONTACT FORM (Web3Forms + controllo locale formato email)
        ========================================================= */
     const contactForm    = document.getElementById('contact-form');
     const formStatus     = document.getElementById('form-status');
@@ -437,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'example.com', 'example.org', 'example.net', 'esempio.com', 'test.com',
         'fake.com', 'mailinator.com', 'tempmail.com', '10minutemail.com',
         'guerrillamail.com', 'throwawaymail.com', 'yopmail.com', 'trashmail.com',
-        'asd.com', 'qwerty.com', 'xyz.com', 'abc.com', 'cjves'
+        'asd.com', 'qwerty.com', 'xyz.com', 'abc.com'
     ]);
 
     const trustedProviders = [
@@ -450,44 +454,14 @@ document.addEventListener('DOMContentLoaded', () => {
     async function isRealEmailDomain(email) {
         const strictEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,24}$/;
         if (!strictEmailRegex.test(email)) return { ok: false, reason: 'format' };
-
-        const parts     = email.split('@');
+        const parts = email.split('@');
         const localPart = parts[0].toLowerCase();
-        const domain    = parts[1].toLowerCase();
-
+        const domain = parts[1].toLowerCase();
         if (localPart.startsWith('.') || localPart.endsWith('.') || localPart.includes('..')) {
             return { ok: false, reason: 'format' };
         }
-
         if (blockedDomains.has(domain)) return { ok: false, reason: 'blocked' };
-
-        try {
-            const controller = new AbortController();
-            const timeoutId  = setTimeout(() => controller.abort(), 5000);
-
-            const dnsResponse = await fetch(
-                `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,
-                { signal: controller.signal }
-            );
-            clearTimeout(timeoutId);
-
-            if (!dnsResponse.ok) {
-                if (trustedProviders.includes(domain)) return { ok: true };
-                return { ok: false, reason: 'unverifiable' };
-            }
-
-            const dnsData = await dnsResponse.json();
-
-            if (dnsData.Status !== 0) return { ok: false, reason: 'nodomain' };
-
-            const hasMx = Array.isArray(dnsData.Answer) && dnsData.Answer.some(a => a.type === 15);
-            if (!hasMx) return { ok: false, reason: 'nomx' };
-
-            return { ok: true };
-        } catch (err) {
-            if (trustedProviders.includes(domain)) return { ok: true };
-            return { ok: false, reason: 'unverifiable' };
-        }
+        return { ok: true };
     }
 
     if (contactForm) {
@@ -562,7 +536,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // === INVIO A WEB3FORMS ===
             try {
                 const formData = new FormData(contactForm);
 
@@ -586,7 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isSuccess = response.ok && (successFlag || data === null);
 
                 if (!isSuccess) {
-                    const msg = (data && (data.message || data.error)) || 'Invio non riuscito';
+                    const msg = (data && (data.message || data.error)) || 'Sending failed';
                     throw new Error(msg);
                 }
 

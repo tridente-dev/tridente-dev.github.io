@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="it" data-theme="light" style="background-color: #FAFAF9;">
+<html lang="en" data-theme="light" style="background-color: #FAFAF9;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giancarlo Tridente — Web Developer & Digital Designer</title>
-    <meta name="description" content="Portfolio di Giancarlo Tridente, Web Developer & Digital Designer. Progetto esperienze digitali ad alto impatto visivo.">
+    <meta name="description" content="Portfolio of Giancarlo Tridente, Web Developer & Digital Designer. I design high-impact digital experiences.">
     <meta name="theme-color" content="#FAFAF9">
 
     <script>
@@ -44,412 +44,80 @@
     <link rel="icon" type="image/png" sizes="192x192" href="logo-favicon.png?v=3">
     <link rel="apple-touch-icon" sizes="180x180" href="logo-favicon.png?v=3">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* =============================================
-           OVERLAY SELEZIONE LINGUA - EDITORIAL STYLE
-           ============================================= */
-        .lang-overlay {
-            position: fixed;
-            inset: 0;
-            background: var(--bg-main);
-            z-index: 99999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 1;
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(0px);
-        }
-        .lang-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        .lang-overlay::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 60%);
-            pointer-events: none;
-            opacity: 0.9;
-        }
-
-        .lang-modal {
-            position: relative;
-            width: 100%;
-            max-width: 480px;
-            max-height: 88vh;
-            display: flex;
-            flex-direction: column;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            box-shadow:
-                0 1px 2px rgba(0,0,0,0.02),
-                0 30px 80px -20px rgba(20,24,31,0.18),
-                0 0 0 1px rgba(255,255,255,0.03) inset;
-            overflow: hidden;
-            animation: langModalIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes langModalIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .lang-modal-head {
-            padding: 32px 32px 20px;
-            position: relative;
-        }
-
-        .lang-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
-            color: var(--text-muted);
-            font-weight: 500;
-            margin-bottom: 14px;
-        }
-        .lang-eyebrow::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 8px var(--accent);
-        }
-
-        .lang-title {
-            font-family: var(--font-heading);
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-            line-height: 1.15;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-        }
-
-        .lang-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.92rem;
-            line-height: 1.5;
-        }
-
-        /* --- SEARCH --- */
-        .lang-search-wrap {
-            padding: 0 32px 20px;
-            position: relative;
-        }
-
-        .lang-search {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .lang-search-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
-            color: var(--text-muted);
-            pointer-events: none;
-            transition: color 0.2s ease;
-        }
-
-        .lang-search input {
-            width: 100%;
-            font-family: inherit;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            background: var(--bg-main);
-            border: 1px solid var(--border-subtle);
-            border-radius: 10px;
-            padding: 12px 14px 12px 40px;
-            outline: none;
-            transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .lang-search input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .lang-search input:focus {
-            border-color: var(--accent);
-            background: var(--bg-surface);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-
-        .lang-search:has(input:focus) .lang-search-icon {
-            color: var(--accent);
-        }
-
-        /* --- LISTA SCROLLABILE --- */
-        .lang-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 12px 20px;
-            margin: 0 12px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--border-strong) transparent;
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-            max-height: 44vh;
-        }
-
-        .lang-list::-webkit-scrollbar {
-            width: 5px;
-        }
-        .lang-list::-webkit-scrollbar-thumb {
-            background: var(--border-strong);
-            border-radius: 3px;
-        }
-        .lang-list::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        /* --- ITEM LINGUA --- */
-        .lang-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            width: 100%;
-            padding: 12px 16px;
-            background: transparent;
-            border: 1px solid transparent;
-            border-radius: 10px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 0.98rem;
-            color: var(--text-primary);
-            text-align: left;
-            transition:
-                background 0.2s ease,
-                border-color 0.2s ease,
-                transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            animation: langItemIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-        }
-
-        @keyframes langItemIn {
-            from {
-                opacity: 0;
-                transform: translateX(-8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .lang-item:hover,
-        .lang-item.is-focused {
-            background: var(--bg-surface-hover);
-            border-color: var(--border-subtle);
-            transform: translateX(2px);
-        }
-
-        .lang-item:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-
-        .lang-item.is-current {
-            background: var(--accent-glow);
-            border-color: var(--accent-soft);
-        }
-
-        .lang-flag {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--bg-main);
-            border: 1px solid var(--border-subtle);
-            font-size: 1.15rem;
-            line-height: 1;
-            flex-shrink: 0;
-            transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.5, 1), border-color 0.2s ease;
-        }
-
-        .lang-flag.lang-acronym {
-            font-family: var(--font-heading);
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
-            background: var(--bg-main);
-            border: 1px solid var(--border-subtle);
-            transition: all 0.2s ease;
-        }
-
-        .lang-item:hover .lang-flag.lang-acronym,
-        .lang-item.is-focused .lang-flag.lang-acronym {
-            color: var(--accent);
-            border-color: var(--accent);
-            background: var(--accent-glow);
-            transform: scale(1.05);
-        }
-
-        .lang-item:hover .lang-flag,
-        .lang-item.is-focused .lang-flag {
-            transform: rotate(-6deg) scale(1.06);
-            border-color: var(--accent);
-        }
-
-        .lang-names {
-            display: flex;
-            flex-direction: column;
-            gap: 1px;
-            flex: 1;
-            min-width: 0;
-        }
-
-        .lang-native {
-            font-weight: 500;
-            font-size: 0.98rem;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .lang-code {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 500;
-        }
-
-        .lang-check {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-            opacity: 0;
-            color: var(--accent);
-            transition: opacity 0.2s ease;
-        }
-        .lang-item.is-current .lang-check {
-            opacity: 1;
-        }
-
-        /* --- FOOTER --- */
-        .lang-foot {
-            padding: 14px 32px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .lang-count {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            letter-spacing: 0.02em;
-        }
-
-        .lang-close {
-            font-family: inherit;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            background: transparent;
-            border: 1px solid var(--border-subtle);
-            padding: 7px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .lang-close:hover {
-            color: var(--text-primary);
-            border-color: var(--border-strong);
-            background: var(--bg-surface-hover);
-        }
-
-        .lang-empty {
-            padding: 40px 20px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* --- PULSANTE "A" NELL'HEADER --- */
-        .lang-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-primary);
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            flex-shrink: 0;
-            position: relative;
-        }
-        .lang-btn:hover {
-            background: var(--bg-surface-hover);
-            border-color: var(--accent);
-            transform: translateY(-1px) rotate(-4deg);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-        }
-        .lang-btn::after {
-            content: attr(data-current-lang);
-            position: absolute;
-            bottom: -5px;
-            right: -5px;
-            background: var(--accent);
-            color: var(--bg-main);
-            font-size: 0.55rem;
-            font-weight: bold;
-            padding: 2px 5px;
-            border-radius: 10px;
-            text-transform: uppercase;
-            border: 1.5px solid var(--bg-main);
-            line-height: 1;
-            letter-spacing: 0.02em;
-        }
-
-        /* --- RTL --- */
+        /* OVERLAY SELEZIONE LINGUA */
+        .lang-overlay { position: fixed; inset: 0; background: var(--bg-main); z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 1; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(0px); }
+        .lang-overlay.hidden { opacity: 0; pointer-events: none; }
+        .lang-overlay::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 60%); pointer-events: none; opacity: 0.9; }
+        .lang-modal { position: relative; width: 100%; max-width: 480px; max-height: 88vh; display: flex; flex-direction: column; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.02), 0 30px 80px -20px rgba(20,24,31,0.18), 0 0 0 1px rgba(255,255,255,0.03) inset; overflow: hidden; animation: langModalIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes langModalIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .lang-modal-head { padding: 32px 32px 20px; position: relative; }
+        .lang-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); font-weight: 500; margin-bottom: 14px; }
+        .lang-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+        .lang-title { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--text-primary); margin-bottom: 8px; }
+        .lang-subtitle { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5; }
+        .lang-search-wrap { padding: 0 32px 20px; position: relative; }
+        .lang-search { position: relative; display: flex; align-items: center; }
+        .lang-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--text-muted); pointer-events: none; transition: color 0.2s ease; }
+        .lang-search input { width: 100%; font-family: inherit; font-size: 0.95rem; color: var(--text-primary); background: var(--bg-main); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px 14px 12px 40px; outline: none; transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease; }
+        .lang-search input::placeholder { color: var(--text-muted); }
+        .lang-search input:focus { border-color: var(--accent); background: var(--bg-surface); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .lang-search:has(input:focus) .lang-search-icon { color: var(--accent); }
+        .lang-list { flex: 1; overflow-y: auto; padding: 12px 20px; margin: 0 12px; scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); max-height: 44vh; }
+        .lang-list::-webkit-scrollbar { width: 5px; }
+        .lang-list::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+        .lang-list::-webkit-scrollbar-track { background: transparent; }
+        .lang-item { display: flex; align-items: center; gap: 16px; width: 100%; padding: 12px 16px; background: transparent; border: 1px solid transparent; border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.98rem; color: var(--text-primary); text-align: left; transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); position: relative; animation: langItemIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+        @keyframes langItemIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+        .lang-item:hover, .lang-item.is-focused { background: var(--bg-surface-hover); border-color: var(--border-subtle); transform: translateX(2px); }
+        .lang-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .lang-item.is-current { background: var(--accent-glow); border-color: var(--accent-soft); }
+        .lang-flag { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-main); border: 1px solid var(--border-subtle); font-size: 1.15rem; line-height: 1; flex-shrink: 0; transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.5, 1), border-color 0.2s ease; }
+        .lang-flag.lang-acronym { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.05em; background: var(--bg-main); border: 1px solid var(--border-subtle); transition: all 0.2s ease; }
+        .lang-item:hover .lang-flag.lang-acronym, .lang-item.is-focused .lang-flag.lang-acronym { color: var(--accent); border-color: var(--accent); background: var(--accent-glow); transform: scale(1.05); }
+        .lang-item:hover .lang-flag, .lang-item.is-focused .lang-flag { transform: rotate(-6deg) scale(1.06); border-color: var(--accent); }
+        .lang-names { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+        .lang-native { font-weight: 500; font-size: 0.98rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lang-code { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+        .lang-check { width: 18px; height: 18px; flex-shrink: 0; opacity: 0; color: var(--accent); transition: opacity 0.2s ease; }
+        .lang-item.is-current .lang-check { opacity: 1; }
+        .lang-foot { padding: 14px 32px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+        .lang-count { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.02em; }
+        .lang-close { font-family: inherit; font-size: 0.8rem; font-weight: 500; color: var(--text-secondary); background: transparent; border: 1px solid var(--border-subtle); padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
+        .lang-close:hover { color: var(--text-primary); border-color: var(--border-strong); background: var(--bg-surface-hover); }
+        .lang-empty { padding: 40px 20px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+        .lang-btn { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-primary); font-family: var(--font-heading); font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); flex-shrink: 0; position: relative; }
+        .lang-btn:hover { background: var(--bg-surface-hover); border-color: var(--accent); transform: translateY(-1px) rotate(-4deg); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        .lang-btn::after { content: attr(data-current-lang); position: absolute; bottom: -5px; right: -5px; background: var(--accent); color: var(--bg-main); font-size: 0.55rem; font-weight: bold; padding: 2px 5px; border-radius: 10px; text-transform: uppercase; border: 1.5px solid var(--bg-main); line-height: 1; letter-spacing: 0.02em; }
         [dir="rtl"] .lang-item { text-align: right; }
         [dir="rtl"] .lang-search-icon { left: auto; right: 14px; }
         [dir="rtl"] .lang-search input { padding: 12px 40px 12px 14px; }
-        [dir="rtl"] .lang-item:hover,
-        [dir="rtl"] .lang-item.is-focused { transform: translateX(-2px); }
-
-        /* --- MOBILE --- */
-        @media (max-width: 520px) {
-            .lang-modal-head { padding: 24px 22px 16px; }
-            .lang-title { font-size: 1.45rem; }
-            .lang-search-wrap { padding: 0 22px 16px; }
-            .lang-list { margin: 0 6px; padding: 10px 12px; }
-            .lang-foot { padding: 12px 22px 16px; }
-            .lang-item { padding: 10px 12px; gap: 12px; }
-            .lang-flag { width: 32px; height: 32px; font-size: 1rem; }
+        [dir="rtl"] .lang-item:hover, [dir="rtl"] .lang-item.is-focused { transform: translateX(-2px); }
+        @media (max-width: 520px) { .lang-modal-head { padding: 24px 22px 16px; } .lang-title { font-size: 1.45rem; } .lang-search-wrap { padding: 0 22px 16px; } .lang-list { margin: 0 6px; padding: 10px 12px; } .lang-foot { padding: 12px 22px 16px; } .lang-item { padding: 10px 12px; gap: 12px; } .lang-flag { width: 32px; height: 32px; font-size: 1rem; } }
+        
+        /* --- STILE PRIVACY NOTE --- */
+        .privacy-note {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-top: 16px;
+            max-width: 540px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .privacy-note a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+            text-decoration-color: var(--border-strong);
+            text-underline-offset: 3px;
+            transition: color 0.2s ease;
+        }
+        .privacy-note a:hover {
+            color: var(--text-primary);
+            text-decoration-color: var(--text-primary);
         }
     </style>
 </head>
@@ -470,14 +138,7 @@
                         <circle cx="11" cy="11" r="7"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
-                    <input
-                        type="text"
-                        id="lang-search-input"
-                        placeholder="Search a language…"
-                        autocomplete="off"
-                        spellcheck="false"
-                        aria-label="Search language"
-                    >
+                    <input type="text" id="lang-search-input" placeholder="Search a language…" autocomplete="off" spellcheck="false" aria-label="Search language">
                 </div>
             </div>
 
@@ -486,8 +147,8 @@
             </div>
 
             <div class="lang-foot">
-                <span class="lang-count" id="lang-count">16 lingue disponibili</span>
-                <button type="button" class="lang-close" id="lang-close">Chiudi</button>
+                <span class="lang-count" id="lang-count">16 languages available</span>
+                <button type="button" class="lang-close" id="lang-close">Close</button>
             </div>
         </div>
     </div>
@@ -504,14 +165,14 @@
 
             <div class="nav-right">
                 <nav class="nav-menu">
-                    <a href="#projects" data-i18n="nav_works">Lavori</a>
-                    <a href="#about" data-i18n="nav_about">Chi Sono</a>
-                    <a href="#contact" data-i18n="nav_contact">Contatti</a>
+                    <a href="#projects" data-i18n="nav_works">Works</a>
+                    <a href="#about" data-i18n="nav_about">About</a>
+                    <a href="#contact" data-i18n="nav_contact">Contact</a>
                 </nav>
 
-                <button id="lang-toggle" class="lang-btn" aria-label="Change language" title="Change language" data-current-lang="it">A</button>
+                <button id="lang-toggle" class="lang-btn" aria-label="Change language" title="Change language" data-current-lang="en">A</button>
 
-                <button id="theme-toggle" class="theme-toggle" aria-label="Cambia tema">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
                     <span class="toggle-track">
                         <span class="toggle-thumb">
                             <svg class="icon-sun" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -540,17 +201,17 @@
             <div class="container">
                 <div class="hero-content">
                     <span class="hero-status">
-                        <span class="status-dot"></span> <span data-i18n="hero_status">Disponibile per nuovi progetti</span>
+                        <span class="status-dot"></span> <span data-i18n="hero_status">Available for new projects</span>
                     </span>
                     <h1 class="hero-name">Giancarlo Tridente</h1>
                     <p class="hero-role" data-i18n="hero_role">Web Developer & Digital Designer</p>
                     <p class="hero-pitch" data-i18n="hero_pitch">
-                        Progetto e sviluppo esperienze digitali ad alto impatto visivo e funzionale,
-                        trasformando la complessità tecnica in interfacce pulite, veloci e intuitive.
+                        I design and develop digital experiences with high visual and functional impact,
+                        turning technical complexity into clean, fast, and intuitive interfaces.
                     </p>
                     <div class="hero-actions">
-                        <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_projects">Esplora i Lavori</a>
-                        <a href="#contact" class="btn btn-secondary" data-i18n="hero_btn_contact">Avvia un progetto</a>
+                        <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_projects">Explore Works</a>
+                        <a href="#contact" class="btn btn-secondary" data-i18n="hero_btn_contact">Start a project</a>
                     </div>
                 </div>
             </div>
@@ -559,12 +220,12 @@
         <section id="projects" class="projects">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title" data-i18n="projects_title">Progetti Personali Selezionati</h2>
+                    <h2 class="section-title" data-i18n="projects_title">Selected Personal Projects</h2>
                 </div>
 
                 <div class="projects-list">
 
-                    <a href="aura-suites/index.html" class="project-item" target="_blank" rel="noopener noreferrer" aria-label="Apri il progetto Aura Suites &amp; Resort (si apre in una nuova scheda)">
+                    <a href="aura-suites/index.html" class="project-item" target="_blank" rel="noopener noreferrer" aria-label="Open Aura Suites &amp; Resort project (opens in a new tab)">
                         <div class="project-meta">
                             <span class="project-number">01</span>
                             <span class="project-category" data-i18n="project1_cat">Luxury Hospitality Platform (Concept)</span>
@@ -572,17 +233,17 @@
                         <div class="project-body">
                             <h3 class="project-title">Aura Suites &amp; Resort</h3>
                             <p class="project-description" data-i18n="project1_desc">
-                                Progetto concept per una piattaforma di prenotazione diretta orientata al segmento Luxury Adults Only. Design minimale e motore di calcolo preventivi in tempo reale.
+                                Concept project for a direct booking platform targeting the Luxury Adults Only segment. Minimal design and real-time quote calculation engine.
                             </p>
 
                             <div class="project-details">
                                 <div class="detail-block">
-                                    <span class="detail-label" data-i18n="detail_project_nature">Natura del Progetto:</span>
-                                    <span class="detail-value" data-i18n="project1_nature">Sito concept sviluppato per esplorare architetture di booking e UI luxury</span>
+                                    <span class="detail-label" data-i18n="detail_project_nature">Project Nature:</span>
+                                    <span class="detail-value" data-i18n="project1_nature">Concept site developed to explore booking architectures and luxury UI</span>
                                 </div>
                                 <div class="detail-block">
-                                    <span class="detail-label" data-i18n="detail_tech_focus">Focus Tecnico:</span>
-                                    <span class="detail-value" data-i18n="project1_focus">Calcolo dinamico prezzi, gestione disponibilità camere, verifica età ospiti</span>
+                                    <span class="detail-label" data-i18n="detail_tech_focus">Technical Focus:</span>
+                                    <span class="detail-value" data-i18n="project1_focus">Dynamic price calculation, room availability management, guest age verification</span>
                                 </div>
                             </div>
 
@@ -592,11 +253,11 @@
                                 <span>JavaScript ES6+</span>
                                 <span>Tailwind CSS</span>
                             </div>
-                            <span class="project-link"><span data-i18n="detail_view_demo">Vedi Demo Live</span> <span class="arrow">→</span></span>
+                            <span class="project-link"><span data-i18n="detail_view_demo">View Live Demo</span> <span class="arrow">→</span></span>
                         </div>
                     </a>
 
-                    <a href="aether/index.html" class="project-item" target="_blank" rel="noopener noreferrer" aria-label="Apri il progetto AETHER Objects (si apre in una nuova scheda)">
+                    <a href="aether/index.html" class="project-item" target="_blank" rel="noopener noreferrer" aria-label="Open AETHER Objects project (opens in a new tab)">
                         <div class="project-meta">
                             <span class="project-number">02</span>
                             <span class="project-category" data-i18n="project2_cat">E-commerce Concept (Design Objects)</span>
@@ -604,31 +265,31 @@
                         <div class="project-body">
                             <h3 class="project-title">AETHER — Objects for Mindful Workspaces</h3>
                             <p class="project-description" data-i18n="project2_desc">
-                                Concept e-commerce per un brand di oggetti scultorei da scrivania. Catalogo dinamico con filtri, carrello persistente in localStorage, checkout completo e modal dedicato per le edizioni limitate numerate.
+                                E-commerce concept for a brand of sculptural desk objects. Dynamic catalog with filters, persistent cart in localStorage, full checkout, and a dedicated modal for numbered limited editions.
                             </p>
 
                             <div class="project-details">
                                 <div class="detail-block">
-                                    <span class="detail-label" data-i18n="detail_project_nature">Natura del Progetto:</span>
-                                    <span class="detail-value" data-i18n="project2_nature">Piattaforma e-commerce concept con gestione carrello, checkout e schede prodotto dinamiche</span>
+                                    <span class="detail-label" data-i18n="detail_project_nature">Project Nature:</span>
+                                    <span class="detail-value" data-i18n="project2_nature">Concept e-commerce platform with cart management, checkout, and dynamic product pages</span>
                                 </div>
                                 <div class="detail-block">
-                                    <span class="detail-label" data-i18n="detail_tech_focus">Focus Tecnico:</span>
-                                    <span class="detail-value" data-i18n="project2_focus">Filtri multi-criterio, persistenza carrello, gestione quantità, UI minimal luxury, tema chiaro/scuro</span>
+                                    <span class="detail-label" data-i18n="detail_tech_focus">Technical Focus:</span>
+                                    <span class="detail-value" data-i18n="project2_focus">Multi-criteria filters, cart persistence, quantity management, minimal luxury UI, light/dark theme</span>
                                 </div>
                             </div>
 
                             <div class="project-tags">
                                 <span>E-commerce UI</span>
-                                <span>JavaScript Vanilla</span>
+                                <span>Vanilla JavaScript</span>
                                 <span>LocalStorage</span>
                                 <span>Modal &amp; Drawer</span>
                             </div>
-                            <span class="project-link"><span data-i18n="detail_view_demo">Vedi Demo Live</span> <span class="arrow">→</span></span>
+                            <span class="project-link"><span data-i18n="detail_view_demo">View Live Demo</span> <span class="arrow">→</span></span>
                         </div>
                     </a>
 
-                    <a href="chronos/index.html" class="project-item" target="_blank" rel="noopener noreferrer" aria-label="Apri il progetto Chronos Time Perception (si apre in una nuova scheda)">
+                    <a href="chronos/index.html" class="project-item" target="_blank" rel="noopener noreferrer" aria-label="Open Chronos Time Perception project (opens in a new tab)">
                         <div class="project-meta">
                             <span class="project-number">03</span>
                             <span class="project-category" data-i18n="project3_cat">3D Web Experience (Concept)</span>
@@ -636,17 +297,17 @@
                         <div class="project-body">
                             <h3 class="project-title">Chronos Time Perception</h3>
                             <p class="project-description" data-i18n="project3_desc">
-                                Studio digitale e sperimentale sulla percezione temporale. Un'esperienza immersiva WebGL con rendering 3D in tempo reale e orbita interattiva a 360°.
+                                Digital and experimental study on time perception. An immersive WebGL experience with real-time 3D rendering and interactive 360° orbit.
                             </p>
 
                             <div class="project-details">
                                 <div class="detail-block">
-                                    <span class="detail-label" data-i18n="detail_project_nature">Natura del Progetto:</span>
-                                    <span class="detail-value" data-i18n="project3_nature">Sperimentazione creativa per l'integrazione di grafica 3D e canvas nel browser</span>
+                                    <span class="detail-label" data-i18n="detail_project_nature">Project Nature:</span>
+                                    <span class="detail-value" data-i18n="project3_nature">Creative experimentation for integrating 3D graphics and canvas in the browser</span>
                                 </div>
                                 <div class="detail-block">
-                                    <span class="detail-label" data-i18n="detail_tech_focus">Focus Tecnico:</span>
-                                    <span class="detail-value" data-i18n="project3_focus">Shading personalizzato, gestione camera orbitale 3D, ottimizzazione framerate a 60fps</span>
+                                    <span class="detail-label" data-i18n="detail_tech_focus">Technical Focus:</span>
+                                    <span class="detail-value" data-i18n="project3_focus">Custom shading, 3D orbital camera management, 60fps framerate optimization</span>
                                 </div>
                             </div>
 
@@ -656,23 +317,19 @@
                                 <span>GSAP Animations</span>
                                 <span>Canvas API</span>
                             </div>
-                            <span class="project-link"><span data-i18n="detail_view_demo">Vedi Demo Live</span> <span class="arrow">→</span></span>
+                            <span class="project-link"><span data-i18n="detail_view_demo">View Live Demo</span> <span class="arrow">→</span></span>
                         </div>
                     </a>
 
                 </div><!-- /.projects-list -->
 
                 <div class="repo-cta">
-                    <a href="https://github.com/tridente-dev/tridente-dev.github.io"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="repo-link"
-                       aria-label="Apri la repository GitHub del portfolio (si apre in una nuova scheda)">
+                    <a href="https://github.com/tridente-dev/tridente-dev.github.io" target="_blank" rel="noopener noreferrer" class="repo-link" aria-label="Open the portfolio GitHub repository (opens in a new tab)">
                         <svg class="repo-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                         </svg>
                         <span class="repo-text">
-                            <span class="repo-label" data-i18n="repo_label">Codice sorgente disponibile su</span>
+                            <span class="repo-label" data-i18n="repo_label">Source code available on</span>
                             <span class="repo-name">GitHub <span class="repo-arrow">→</span></span>
                         </span>
                     </a>
@@ -684,21 +341,21 @@
             <div class="container">
                 <div class="about-grid">
                     <div class="about-header">
-                        <h2 class="section-title" data-i18n="about_title">Ingegneria e forma visiva.</h2>
+                        <h2 class="section-title" data-i18n="about_title">Engineering and visual form.</h2>
                     </div>
                     <div class="about-content">
                         <p class="about-bio" data-i18n="about_bio1">
-                            Sono uno studente di Informatica a Milano con un forte orientamento al design digitale. Credo che il codice sia lo strumento per dare forma a idee complesse, ma è l'attenzione al dettaglio visivo e all'interazione a renderle memorabili.
+                            I am an Italian Computer Science student based in Milan with a strong focus on digital design. I believe code is the fundamental tool for shaping and giving substance to complex ideas. However, it is the meticulous attention to visual detail and interaction that makes these ideas memorable for the end user.
                         </p>
                         <p class="about-bio" data-i18n="about_bio2">
-                            Il mio approccio unisce il rigore analitico dello sviluppo software ad una spiccata sensibilità estetica, creando prodotti digitali essenziali, performanti ed eleganti.
+                            My approach combines the analytical rigor of software development with a distinct aesthetic sensibility. I work to create digital products that not only function flawlessly, but are also essential, high-performing, and elegant, transforming technical complexity into a clean and engaging UX.
                         </p>
 
                         <div class="skills-block">
-                            <h3 class="skills-heading" data-i18n="skills_title">Competenze e Strumenti</h3>
+                            <h3 class="skills-heading" data-i18n="skills_title">Skills and Tools</h3>
                             <div class="skills-columns">
                                 <div class="skill-group">
-                                    <h4 data-i18n="skills_dev">Sviluppo</h4>
+                                    <h4 data-i18n="skills_dev">Development</h4>
                                     <ul>
                                         <li>HTML5 / CSS3 / SASS</li>
                                         <li>JavaScript (ES6+) / TypeScript</li>
@@ -725,70 +382,37 @@
         <section id="contact" class="contact">
             <div class="container">
                 <div class="contact-card">
-                    <h2 class="contact-title" data-i18n="contact_title">Hai un progetto in mente?</h2>
-                    <p class="contact-subtitle" data-i18n="contact_subtitle">Compila il modulo o scrivimi una mail. Rispondo solitamente entro 24 ore.</p>
+                    <h2 class="contact-title" data-i18n="contact_title">Have a project in mind?</h2>
+                    <p class="contact-subtitle" data-i18n="contact_subtitle">Fill out the form or write me an email. I usually reply within 24 hours.</p>
 
                     <a href="mailto:g.tridente.web@gmail.com" class="contact-email" id="contact-email">
                         g.tridente.web@gmail.com
                     </a>
 
-                    <!-- ============================================
-                         FORM DI CONTATTO — WEB3FORMS
-                         Access Key già inserita: 345919ac-2b43-4396-95cb-cc19aecb22e8
-                         ============================================ -->
-                    <form
-                        id="contact-form"
-                        class="contact-form"
-                        action="https://api.web3forms.com/submit"
-                        method="POST"
-                        novalidate
-                    >
+                    <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
                         <input type="hidden" name="access_key" value="345919ac-2b43-4396-95cb-cc19aecb22e8">
-                        <input type="hidden" name="subject" value="Nuovo messaggio dal portfolio — Giancarlo Tridente">
+                        <input type="hidden" name="subject" value="New message from portfolio — Giancarlo Tridente">
                         <input type="hidden" name="from_name" value="Portfolio Giancarlo Tridente">
                         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="form-name" data-i18n="form_name">Nome</label>
-                                <input
-                                    type="text"
-                                    id="form-name"
-                                    name="name"
-                                    placeholder="Il tuo nome"
-                                    data-i18n-placeholder="form_name_ph"
-                                    required
-                                    autocomplete="name"
-                                >
+                                <label for="form-name" data-i18n="form_name">Name</label>
+                                <input type="text" id="form-name" name="name" placeholder="Your name" data-i18n-placeholder="form_name_ph" required autocomplete="name">
                             </div>
                             <div class="form-group">
                                 <label for="form-email" data-i18n="form_email">Email</label>
-                                <input
-                                    type="email"
-                                    id="form-email"
-                                    name="email"
-                                    placeholder="tu@esempio.com"
-                                    data-i18n-placeholder="form_email_ph"
-                                    required
-                                    autocomplete="email"
-                                >
+                                <input type="email" id="form-email" name="email" placeholder="you@example.com" data-i18n-placeholder="form_email_ph" required autocomplete="email">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="form-message" data-i18n="form_message">Messaggio</label>
-                            <textarea
-                                id="form-message"
-                                name="message"
-                                rows="5"
-                                placeholder="Raccontami del tuo progetto…"
-                                data-i18n-placeholder="form_message_ph"
-                                required
-                            ></textarea>
+                            <label for="form-message" data-i18n="form_message">Message</label>
+                            <textarea id="form-message" name="message" rows="5" placeholder="Tell me about your project…" data-i18n-placeholder="form_message_ph" required></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary form-submit" id="form-submit">
-                            <span class="form-submit-text" data-i18n="form_send">Invia messaggio</span>
+                            <span class="form-submit-text" data-i18n="form_send">Send message</span>
                             <svg class="form-submit-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <line x1="22" y1="2" x2="11" y2="13"></line>
                                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -798,6 +422,11 @@
                         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
                     </form>
 
+                    <!-- Link aperti nella stessa scheda -->
+                    <p class="privacy-note" data-i18n="contact_privacy_note">
+                        The data you provide will be used exclusively to respond to your inquiry and evaluate a potential collaboration. Please consult the <a href="privacy.html" rel="noopener noreferrer">Privacy Policy</a> and <a href="legal.html" rel="noopener noreferrer">Legal Notes</a> for more information.
+                    </p>
+
                     <!-- MESSAGGIO DI RINGRAZIAMENTO -->
                     <div class="form-thanks" id="form-thanks" hidden>
                         <div class="form-thanks-icon">
@@ -805,8 +434,8 @@
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
-                        <h3 class="form-thanks-title" data-i18n="form_thanks_title">Messaggio inviato!</h3>
-                        <p class="form-thanks-text" data-i18n="form_thanks_text">Grazie per avermi contattato. Ti risponderò il prima possibile.</p>
+                        <h3 class="form-thanks-title" data-i18n="form_thanks_title">Message sent!</h3>
+                        <p class="form-thanks-text" data-i18n="form_thanks_text">Thanks for reaching out. I will get back to you as soon as possible.</p>
                     </div>
 
                     <div class="contact-footer">
@@ -814,7 +443,7 @@
                             <a href="https://www.instagram.com/tridente.dev/" target="_blank" rel="noopener noreferrer">Instagram</a>
                             <a href="https://wa.me/393314052066" target="_blank" rel="noopener noreferrer">WhatsApp</a>
                         </div>
-                        <p class="copyright" data-i18n="copyright">&copy; 2026 Giancarlo Tridente. Tutti i diritti riservati.</p>
+                        <p class="copyright" data-i18n="copyright">&copy; 2026 Giancarlo Tridente. All rights reserved.</p>
                     </div>
                 </div>
             </div>

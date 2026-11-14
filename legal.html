@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="legal_page_title">Legal Notes — Tridente Dev</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="stylesheet" href="style.css"><link rel="icon" type="image/png" href="logo-favicon.png">
+  
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
+        document.documentElement.style.colorScheme = (saved === 'dark') ? 'dark' : 'light';
+        
+        var savedLang = localStorage.getItem('siteLang');
+        if (savedLang) {
+          document.documentElement.setAttribute('lang', savedLang);
+          if (savedLang === 'ar') document.documentElement.setAttribute('dir', 'rtl');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  
+  <style>
+    .legal-wrap{max-width:780px;margin:0 auto;padding:140px 24px 80px}
+    .legal-wrap h1{font-size:clamp(2rem,4vw,2.8rem);margin-bottom:1rem;font-family:var(--font-heading);font-weight:700;letter-spacing:-0.025em}
+    .legal-wrap h2{margin:2rem 0 .6rem;font-family:var(--font-heading);font-size:1.3rem}
+    .legal-wrap p,.legal-wrap li{line-height:1.75;color:var(--text-secondary);margin-bottom:14px}
+    .legal-wrap a{color:var(--accent);text-decoration:underline}
+    .legal-back { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--accent); font-weight: 500; margin-bottom: 32px; }
+    .legal-back:hover { text-decoration: underline; }
+
+    /* OVERLAY SELEZIONE LINGUA (Copia esatta da index.html) */
+    .lang-overlay { position: fixed; inset: 0; background: var(--bg-main); z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 1; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(0px); }
+    .lang-overlay.hidden { opacity: 0; pointer-events: none; }
+    .lang-overlay::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 60%); pointer-events: none; opacity: 0.9; }
+    .lang-modal { position: relative; width: 100%; max-width: 480px; max-height: 88vh; display: flex; flex-direction: column; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.02), 0 30px 80px -20px rgba(20,24,31,0.18), 0 0 0 1px rgba(255,255,255,0.03) inset; overflow: hidden; animation: langModalIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes langModalIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .lang-modal-head { padding: 32px 32px 20px; position: relative; }
+    .lang-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); font-weight: 500; margin-bottom: 14px; }
+    .lang-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+    .lang-title { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--text-primary); margin-bottom: 8px; }
+    .lang-subtitle { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5; }
+    .lang-search-wrap { padding: 0 32px 20px; position: relative; }
+    .lang-search { position: relative; display: flex; align-items: center; }
+    .lang-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--text-muted); pointer-events: none; transition: color 0.2s ease; }
+    .lang-search input { width: 100%; font-family: inherit; font-size: 0.95rem; color: var(--text-primary); background: var(--bg-main); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px 14px 12px 40px; outline: none; transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease; }
+    .lang-search input::placeholder { color: var(--text-muted); }
+    .lang-search input:focus { border-color: var(--accent); background: var(--bg-surface); box-shadow: 0 0 0 3px var(--accent-glow); }
+    .lang-search:has(input:focus) .lang-search-icon { color: var(--accent); }
+    .lang-list { flex: 1; overflow-y: auto; padding: 12px 20px; margin: 0 12px; scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); max-height: 44vh; }
+    .lang-list::-webkit-scrollbar { width: 5px; }
+    .lang-list::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+    .lang-list::-webkit-scrollbar-track { background: transparent; }
+    .lang-item { display: flex; align-items: center; gap: 16px; width: 100%; padding: 12px 16px; background: transparent; border: 1px solid transparent; border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 0.98rem; color: var(--text-primary); text-align: left; transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); position: relative; animation: langItemIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+    @keyframes langItemIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+    .lang-item:hover, .lang-item.is-focused { background: var(--bg-surface-hover); border-color: var(--border-subtle); transform: translateX(2px); }
+    .lang-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .lang-item.is-current { background: var(--accent-glow); border-color: var(--accent-soft); }
+    .lang-flag { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-main); border: 1px solid var(--border-subtle); font-size: 1.15rem; line-height: 1; flex-shrink: 0; transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.5, 1), border-color 0.2s ease; }
+    .lang-flag.lang-acronym { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.05em; background: var(--bg-main); border: 1px solid var(--border-subtle); transition: all 0.2s ease; }
+    .lang-item:hover .lang-flag.lang-acronym, .lang-item.is-focused .lang-flag.lang-acronym { color: var(--accent); border-color: var(--accent); background: var(--accent-glow); transform: scale(1.05); }
+    .lang-item:hover .lang-flag, .lang-item.is-focused .lang-flag { transform: rotate(-6deg) scale(1.06); border-color: var(--accent); }
+    .lang-names { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+    .lang-native { font-weight: 500; font-size: 0.98rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lang-code { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
+    .lang-check { width: 18px; height: 18px; flex-shrink: 0; opacity: 0; color: var(--accent); transition: opacity 0.2s ease; }
+    .lang-item.is-current .lang-check { opacity: 1; }
+    .lang-foot { padding: 14px 32px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .lang-count { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.02em; }
+    .lang-close { font-family: inherit; font-size: 0.8rem; font-weight: 500; color: var(--text-secondary); background: transparent; border: 1px solid var(--border-subtle); padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
+    .lang-close:hover { color: var(--text-primary); border-color: var(--border-strong); background: var(--bg-surface-hover); }
+    .lang-empty { padding: 40px 20px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+    .lang-btn { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-primary); font-family: var(--font-heading); font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); flex-shrink: 0; position: relative; }
+    .lang-btn:hover { background: var(--bg-surface-hover); border-color: var(--accent); transform: translateY(-1px) rotate(-4deg); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .lang-btn::after { content: attr(data-current-lang); position: absolute; bottom: -5px; right: -5px; background: var(--accent); color: var(--bg-main); font-size: 0.55rem; font-weight: bold; padding: 2px 5px; border-radius: 10px; text-transform: uppercase; border: 1.5px solid var(--bg-main); line-height: 1; letter-spacing: 0.02em; }
+    [dir="rtl"] .lang-item { text-align: right; }
+    [dir="rtl"] .lang-search-icon { left: auto; right: 14px; }
+    [dir="rtl"] .lang-search input { padding: 12px 40px 12px 14px; }
+    [dir="rtl"] .lang-item:hover, [dir="rtl"] .lang-item.is-focused { transform: translateX(-2px); }
+    @media (max-width: 520px) { .lang-modal-head { padding: 24px 22px 16px; } .lang-title { font-size: 1.45rem; } .lang-search-wrap { padding: 0 22px 16px; } .lang-list { margin: 0 6px; padding: 10px 12px; } .lang-foot { padding: 12px 22px 16px; } .lang-item { padding: 10px 12px; gap: 12px; } .lang-flag { width: 32px; height: 32px; font-size: 1rem; } }
+  </style>
+</head>
+<body>
+
+    <!-- OVERLAY SELEZIONE LINGUA -->
+    <div id="lang-overlay" class="lang-overlay">
+        <div class="lang-modal" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title">
+            <div class="lang-modal-head">
+                <span class="lang-eyebrow" id="lang-eyebrow">Language</span>
+                <h2 class="lang-title" id="lang-modal-title">Choose your language</h2>
+                <p class="lang-subtitle" id="lang-modal-subtitle">Select the language you prefer to browse the site.</p>
+            </div>
+
+            <div class="lang-search-wrap">
+                <div class="lang-search">
+                    <svg class="lang-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="lang-search-input" placeholder="Search a language…" autocomplete="off" spellcheck="false" aria-label="Search language">
+                </div>
+            </div>
+
+            <div class="lang-list" id="lang-list" role="listbox" aria-label="Languages">
+                <!-- Generato da JS -->
+            </div>
+
+            <div class="lang-foot">
+                <span class="lang-count" id="lang-count">16 languages available</span>
+                <button type="button" class="lang-close" id="lang-close">Close</button>
+            </div>
+        </div>
+    </div>
+
+<header class="header">
+  <div class="container nav-container">
+    <a href="index.html" class="brand-logo">
+      <div class="logo-wrapper">
+        <img src="logo.png" alt="Tridente Dev Logo" class="brand-mark" width="42" height="42">
+      </div>
+      <span class="brand-name">Giancarlo Tridente<span class="accent-dot">.</span></span>
+    </a>
+    <div class="nav-right">
+      <button id="lang-toggle" class="lang-btn" aria-label="Change language" title="Change language" data-current-lang="en">A</button>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <span class="toggle-track">
+          <span class="toggle-thumb">
+            <svg class="icon-sun" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="legal-wrap">
+<a href="index.html" class="legal-back" data-i18n="legal_back">← Back to portfolio</a>
+<h1 data-i18n="legal_title">Legal Notes</h1>
+<p><strong data-i18n="legal_updated">Last updated: November 14, 2026</strong></p>
+<h2 data-i18n="legal_owner_title">Site Owner</h2>
+<p data-i18n="legal_owner_desc">This personal portfolio is curated by Giancarlo Tridente. Contact: g.tridente.web@gmail.com.</p>
+<!-- Rimosso il div.legal-warning come richiesto -->
+<h2 data-i18n="legal_purpose_title">Purpose of the Site</h2>
+<p data-i18n="legal_purpose_desc">The site presents skills, works, and demonstration projects. Descriptions and prices possibly shown in the demos do not constitute a binding offer, a quote, or a commitment to sell. Any professional assignments will be defined separately with a specific quote and agreement, in compliance with applicable tax and consumer protection obligations.</p>
+<h2 data-i18n="legal_demos_title">Demonstration Projects</h2>
+<p data-i18n="legal_demos_desc">AETHER and Aura Suites are concepts created for demonstration purposes. Brands, products, facilities, prices, availability, orders, and bookings shown are project elements and do not necessarily represent real activities or operators. Do not make payments or bookings and do not enter real personal data in the demos.</p>
+<h2 data-i18n="legal_ip_title">Intellectual Property</h2>
+<p data-i18n="legal_ip_desc">Unless otherwise indicated, texts, code, graphic elements, and original materials of the portfolio are presented for portfolio purposes. Third-party trademarks, images, or resources remain the property of their respective owners. For reports: g.tridente.web@gmail.com.</p>
+<h2 data-i18n="legal_privacy_title">Privacy</h2>
+<p><span data-i18n="legal_privacy_desc">For information on the processing of personal data, please consult the</span> <a href="privacy.html" data-i18n="legal_privacy_link">Privacy Policy</a>.</p>
+</main>
+
+<script src="translations.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const htmlElement = document.documentElement;
+        const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        htmlElement.setAttribute('data-theme', newTheme);
+        htmlElement.style.colorScheme = (newTheme === 'dark') ? 'dark' : 'light';
+        try { localStorage.setItem('theme', newTheme); } catch (_) {}
+      });
+    }
+
+    // --- LANGUAGE LOGIC (same as script.js) ---
+    const langOverlay = document.getElementById('lang-overlay');
+    const langList = document.getElementById('lang-list');
+    const langSearchInput = document.getElementById('lang-search-input');
+    const langToggle = document.getElementById('lang-toggle');
+    const langCount = document.getElementById('lang-count');
+    const langClose = document.getElementById('lang-close');
+    const langEyebrow = document.getElementById('lang-eyebrow');
+    const langModalTitle = document.getElementById('lang-modal-title');
+    const langModalSubtitle = document.getElementById('lang-modal-subtitle');
+    const htmlElement = document.documentElement;
+
+    const supportedLanguages = [
+        { code: 'en', flag: '🇬🇧', name: 'English',            english: 'English' },
+        { code: 'it', flag: '🇮🇹', name: 'Italiano',           english: 'Italian' },
+        { code: 'es', flag: '🇪🇸', name: 'Español',            english: 'Spanish' },
+        { code: 'fr', flag: '🇫🇷', name: 'Français',           english: 'French' },
+        { code: 'de', flag: '🇩🇪', name: 'Deutsch',            english: 'German' },
+        { code: 'pt', flag: '🇵🇹', name: 'Português',          english: 'Portuguese' },
+        { code: 'zh', flag: '🇨🇳', name: '中文',                english: 'Chinese' },
+        { code: 'ja', flag: '🇯🇵', name: '日本語',              english: 'Japanese' },
+        { code: 'id', flag: '🇮🇩', name: 'Bahasa Indonesia',   english: 'Indonesian' },
+        { code: 'ar', flag: '🇸🇦', name: 'العربية',            english: 'Arabic' },
+        { code: 'hi', flag: '🇮🇳', name: 'हिन्दी',             english: 'Hindi' },
+        { code: 'ru', flag: '🇷🇺', name: 'Русский',            english: 'Russian' },
+        { code: 'ko', flag: '🇰🇷', name: '한국어',              english: 'Korean' },
+        { code: 'tr', flag: '🇹🇷', name: 'Türkçe',             english: 'Turkish' },
+        { code: 'nl', flag: '🇳🇱', name: 'Nederlands',         english: 'Dutch' },
+        { code: 'pl', flag: '🇵🇱', name: 'Polski',             english: 'Polish' }
+    ];
+
+    const overlayTexts = {
+        eyebrow:  { en: "Language", it: "Lingua", fr: "Langue", de: "Sprache", es: "Idioma", pt: "Idioma", zh: "语言", ja: "言語", id: "Bahasa", ar: "اللغة", hi: "भाषा", ru: "Язык", ko: "언어", tr: "Dil", nl: "Taal", pl: "Język" },
+        title:    { en: "Choose your language", it: "Scegli la tua lingua", fr: "Choisissez votre langue", de: "Wählen Sie Ihre Sprache", es: "Elige tu idioma", pt: "Escolha o seu idioma", zh: "选择您的语言", ja: "言語を選択してください", id: "Pilih bahasa Anda", ar: "اختر لغتك", hi: "अपनी भाषा चुनें", ru: "Выберите язык", ko: "언어를 선택하세요", tr: "Dilinizi seçin", nl: "Kies uw taal", pl: "Wybierz swój język" },
+        subtitle: { en: "Select the language you prefer to browse the site.", it: "Seleziona la lingua con cui preferisci navigare il sito.", fr: "Sélectionnez la langue dans laquelle vous préférez naviguer sur le site.", de: "Wählen Sie die Sprache, in der Sie die Website durchsuchen möchten.", es: "Selecciona el idioma con el que prefieres navegar por el sitio.", pt: "Selecione o idioma com o qual prefere navegar no site.", zh: "选择您希望浏览网站时使用的语言。", ja: "サイトを閲覧する際に希望する言語を選択してください。", id: "Pilih bahasa yang Anda sukai untuk menjelajahi situs.", ar: "حدد اللغة التي تفضل تصفح الموقع بها.", hi: "वह भाषा चुनें जिसमें आप साइट ब्राउज़ करना पसंद करते हैं।", ru: "Выберите язык, на котором вы предпочитаете просматривать сайт.", ko: "사이트를 탐색할 때 선호하는 언어를 선택하세요.", tr: "Siteyi gezinmek için tercih ettiğiniz dili seçin.", nl: "Selecteer de taal waarin u de site wilt verkennen.", pl: "Wybierz język, w którym chcesz przeglądać stronę." },
+        search:   { en: "Search a language…", it: "Cerca una lingua…", fr: "Rechercher une langue…", de: "Sprache suchen…", es: "Buscar un idioma…", pt: "Pesquisar um idioma…", zh: "搜索语言…", ja: "言語を検索…", id: "Cari bahasa…", ar: "ابحث عن لغة…", hi: "भाषा खोजें…", ru: "Поиск языка…", ko: "언어 검색…", tr: "Dil ara…", nl: "Zoek een taal…", pl: "Szukaj języka…" },
+        close:    { en: "Close", it: "Chiudi", fr: "Fermer", de: "Schließen", es: "Cerrar", pt: "Fechar", zh: "关闭", ja: "閉じる", id: "Tutup", ar: "إغلاق", hi: "बंद करें", ru: "Закрыть", ko: "닫기", tr: "Kapat", nl: "Sluiten", pl: "Zamknij" },
+        count:    { en: "languages available", it: "lingue disponibili", fr: "langues disponibles", de: "Sprachen verfügbar", es: "idiomas disponibles", pt: "idiomas disponíveis", zh: "种语言可用", ja: "言語が利用可能", id: "bahasa tersedia", ar: "لغات متاحة", hi: "भाषाएँ उपलब्ध", ru: "языков доступно", ko: "개 언어 사용 가능", tr: "dil mevcut", nl: "talen beschikbaar", pl: "języków dostępnych" }
+    };
+
+    let currentLang = 'en';
+    let filteredLanguages = [...supportedLanguages];
+    let focusedIndex = -1;
+
+    function getOverlayText(key, lang) {
+        return (overlayTexts[key] && (overlayTexts[key][lang] || overlayTexts[key]['en'])) || '';
+    }
+
+    function applyTranslation(langCode) {
+        currentLang = langCode;
+        const dict = (window.translations && window.translations[langCode]) || {};
+        const fallback = (window.translations && window.translations['en']) || {};
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const value = dict[key] || fallback[key];
+            if (value) {
+                if (el.tagName === 'TITLE') {
+                    document.title = value;
+                } else {
+                    el.innerHTML = value; // innerHTML per gestire i link nella privacy policy
+                }
+            }
+        });
+
+        htmlElement.setAttribute('lang', langCode);
+        if (langToggle) langToggle.setAttribute('data-current-lang', langCode);
+
+        if (langCode === 'ar') {
+            htmlElement.setAttribute('dir', 'rtl');
+            document.body.style.direction = 'rtl';
+        } else {
+            htmlElement.setAttribute('dir', 'ltr');
+            document.body.style.direction = 'ltr';
+        }
+
+        if (langSearchInput) langSearchInput.placeholder = getOverlayText('search', langCode);
+        if (langClose)       langClose.textContent = getOverlayText('close', langCode);
+        updateLangCount();
+    }
+
+    function renderLangList(filter = '') {
+        if (!langList) return;
+        const q = filter.trim().toLowerCase();
+        filteredLanguages = supportedLanguages.filter(l =>
+            l.name.toLowerCase().includes(q) || l.english.toLowerCase().includes(q) || l.code.toLowerCase().includes(q)
+        );
+        langList.innerHTML = '';
+        if (filteredLanguages.length === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'lang-empty';
+            empty.textContent = 'No results';
+            langList.appendChild(empty);
+            updateLangCount();
+            return;
+        }
+        filteredLanguages.forEach((lang, i) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'lang-item' + (lang.code === currentLang ? ' is-current' : '');
+            btn.dataset.code = lang.code;
+            btn.setAttribute('role', 'option');
+            btn.setAttribute('aria-selected', lang.code === currentLang ? 'true' : 'false');
+            btn.style.animationDelay = (i * 0.025) + 's';
+            btn.innerHTML = `
+                <span class="lang-flag lang-acronym">${lang.code.toUpperCase()}</span>
+                <span class="lang-names">
+                    <span class="lang-native">${lang.name}</span>
+                </span>
+                <svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            `;
+            btn.addEventListener('click', () => selectLanguage(lang.code));
+            langList.appendChild(btn);
+        });
+        focusedIndex = -1;
+        updateLangCount();
+    }
+
+    function updateLangCount() {
+        if (!langCount) return;
+        const n = filteredLanguages.length;
+        const label = getOverlayText('count', currentLang);
+        langCount.textContent = `${n} ${label}`;
+    }
+
+    function selectLanguage(code) {
+        try { localStorage.setItem('siteLang', code); } catch (e) {}
+        applyTranslation(code);
+        document.querySelectorAll('.lang-item').forEach(el => {
+            const isCurrent = el.dataset.code === code;
+            el.classList.toggle('is-current', isCurrent);
+            el.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        });
+        closeOverlay();
+    }
+
+    function openOverlay() {
+        if (!langOverlay) return;
+        langOverlay.style.display = 'flex';
+        void langOverlay.offsetWidth;
+        langOverlay.classList.remove('hidden');
+        if (langEyebrow)       langEyebrow.textContent = getOverlayText('eyebrow', currentLang);
+        if (langModalTitle)    langModalTitle.textContent = getOverlayText('title', currentLang);
+        if (langModalSubtitle) langModalSubtitle.textContent = getOverlayText('subtitle', currentLang);
+        if (langSearchInput) {
+            langSearchInput.value = '';
+            langSearchInput.placeholder = getOverlayText('search', currentLang);
+        }
+        if (langClose) langClose.textContent = getOverlayText('close', currentLang);
+        renderLangList('');
+        setTimeout(() => { if (langSearchInput) langSearchInput.focus(); }, 100);
+    }
+
+    function closeOverlay() {
+        if (!langOverlay) return;
+        langOverlay.classList.add('hidden');
+        setTimeout(() => { langOverlay.style.display = 'none'; }, 400);
+    }
+
+    renderLangList('');
+    let initialLang = 'en';
+    try {
+        const savedLang = localStorage.getItem('siteLang');
+        if (savedLang && window.translations && window.translations[savedLang]) {
+            initialLang = savedLang;
+        } else {
+            const browserLang = (navigator.language || navigator.userLanguage || 'en').slice(0, 2).toLowerCase();
+            if (window.translations && window.translations[browserLang]) {
+                initialLang = browserLang;
+            }
+        }
+    } catch (e) {}
+    if (langOverlay) {
+        langOverlay.style.display = 'none';
+        langOverlay.classList.add('hidden');
+    }
+    applyTranslation(initialLang);
+
+    if (langSearchInput) {
+        langSearchInput.addEventListener('input', (e) => renderLangList(e.target.value));
+        langSearchInput.addEventListener('keydown', (e) => {
+            if (!langList) return;
+            const items = langList.querySelectorAll('.lang-item');
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                focusedIndex = Math.min(focusedIndex + 1, items.length - 1);
+                updateKeyboardFocus(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                focusedIndex = Math.max(focusedIndex - 1, 0);
+                updateKeyboardFocus(items);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (focusedIndex >= 0 && items[focusedIndex]) items[focusedIndex].click();
+                else if (items.length > 0) items[0].click();
+            } else if (e.key === 'Escape') {
+                closeOverlay();
+            }
+        });
+    }
+
+    function updateKeyboardFocus(items) {
+        if (!items || !items.length) return;
+        items.forEach((el, i) => {
+            el.classList.toggle('is-focused', i === focusedIndex);
+            if (i === focusedIndex && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+        });
+    }
+
+    if (langToggle) langToggle.addEventListener('click', openOverlay);
+    if (langClose)  langClose.addEventListener('click', closeOverlay);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && langOverlay && !langOverlay.classList.contains('hidden')) {
+            closeOverlay();
+        }
+    });
+
+    if (langOverlay) {
+        langOverlay.addEventListener('click', (e) => {
+            if (e.target === langOverlay) closeOverlay();
+        });
+    }
+  });
+</script>
+</body></html>

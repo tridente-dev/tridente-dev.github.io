@@ -659,7 +659,7 @@ function placeOrder(e) {
   container.innerHTML = `
     <div class="confirm-screen">
       <div class="order-number-box">
-        <span class="label">Order ref.</span>
+        <span class="label">Demo reference (not a real order)</span>
         <span class="value">${orderNum}</span>
       </div>
 
@@ -669,8 +669,8 @@ function placeOrder(e) {
         </svg>
       </div>
 
-      <h1>Order confirmed</h1>
-      <p>Thank you ${esc(nome) || 'for your order'}! We have received your request and will contact you shortly${email ? ` at <strong style="color:var(--text-main)">${esc(email)}</strong>` : ''}.</p>
+      <h1>Demo order preview</h1>
+      <p>This is a local demonstration only. <strong>No order has been placed, no payment has been taken and no details have been sent.</strong></p>
 
       <div class="order-details-card">
         <h3>Order details</h3>
@@ -741,7 +741,7 @@ function submitContact(e) {
   container.innerHTML = `
     <div class="confirm-screen">
       <div class="order-number-box">
-        <span class="label">Message ref.</span>
+        <span class="label">Demo reference (not sent)</span>
         <span class="value">${rifMsg}</span>
       </div>
 
@@ -751,16 +751,16 @@ function submitContact(e) {
         </svg>
       </div>
 
-      <h1>Message sent</h1>
-      <p>Thank you ${esc(nome) || ''}! We have received your message and will reply within 48 hours${email ? ` at <strong style="color:var(--text-main)">${esc(email)}</strong>` : ''}.</p>
+      <h1>Message preview</h1>
+      <p>This is a local portfolio simulation only. <strong>No message has been sent and no personal data has been transmitted.</strong></p>
 
       <div class="order-details-card">
         <h3>Message details</h3>
-        <div class="detail-row"><span class="k">Sent on</span><span class="v">${dataMsg} · ${oraMsg}</span></div>
+        <div class="detail-row"><span class="k">Preview created</span><span class="v">${dataMsg} · ${oraMsg}</span></div>
         <div class="detail-row"><span class="k">Sender</span><span class="v">${esc((nome + ' ' + cognome).trim()) || '—'}</span></div>
         <div class="detail-row"><span class="k">Email</span><span class="v">${esc(email) || '—'}</span></div>
         <div class="detail-row"><span class="k">Subject</span><span class="v">${esc(oggetto) || '—'}</span></div>
-        <div class="detail-row"><span class="k">Response time</span><span class="v">Within 48 hours</span></div>
+        <div class="detail-row"><span class="k">Status</span><span class="v">Not sent — demo only</span></div>
         ${messaggio ? `<div class="detail-row"><span class="k">Message</span><span class="v" style="max-width: 60%; white-space: pre-wrap;">${esc(messaggio)}</span></div>` : ''}
       </div>
 
