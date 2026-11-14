@@ -1,7 +1,40 @@
 /* ============================================================
    CHRONOS — style.css
    Cross-browser & Mobile Touch Optimized (iOS / Android / PC)
+   Configurazione font locali per conformità GDPR / UE
    ============================================================ */
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/playfair-display-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/playfair-display-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('../fonts/space-mono-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('../fonts/space-mono-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --bg-black: #080808;

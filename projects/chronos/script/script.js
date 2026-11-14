@@ -291,7 +291,6 @@ function initInteractions() {
     previousPointer = { x: e.clientX, y: e.clientY };
     lastPointerPos = { x: e.clientX, y: e.clientY };
 
-    // Cattura il puntatore per iOS/Safari: permette di continuare il drag anche se il dito esce dal canvas
     if (e.target && e.target.setPointerCapture) {
       try { e.target.setPointerCapture(e.pointerId); } catch (err) {}
     }
@@ -318,7 +317,6 @@ function initInteractions() {
   window.addEventListener('pointerup', endPointerDrag, { passive: true });
   window.addEventListener('pointercancel', endPointerDrag, { passive: true });
 
-  // Fallback per iOS Safari: previene lo scroll di pagina durante il trascinamento della sfera
   document.addEventListener('touchmove', (e) => {
     if (isDragging && e.cancelable) {
       e.preventDefault();
@@ -475,7 +473,30 @@ function toggleAudio() {
 function updateClock() {
   const el = document.getElementById('clock-val');
   if (!el) return;
-  el.textContent = new Date().toTimeString().split(' ')[0];
+  
+  const now = new Date();
+  // Mostra l'ora locale del dispositivo (HH:MM:SS)
+  el.textContent = now.toTimeString().split(' ')[0];
+  
+  // Aggiorna dinamicamente l'etichetta del fuso orario nel DOM
+  const tzLabel = document.getElementById('timezone-label');
+  if (tzLabel) {
+    // Ottiene il fuso orario locale (es. "Europe/Rome", "America/New_York")
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    // Calcola l'offset UTC (es. UTC+02:00, UTC-05:00)
+    const offset = -now.getTimezoneOffset();
+    const sign = offset >= 0 ? '+' : '-';
+    const hours = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0');
+    const minutes = String(Math.abs(offset) % 60).padStart(2, '0');
+    const utcOffset = `UTC${sign}${hours}:${minutes}`;
+    
+    // Estrae la città dal fuso orario (es. "Rome" da "Europe/Rome")
+    const city = timeZone.split('/').pop().replace(/_/g, ' ');
+    
+    // Aggiorna il testo nell'interfaccia
+    tzLabel.textContent = `LOCAL TIME / ${city} — ${utcOffset}`;
+  }
 }
 
 /* ---------- ANIMATE ---------- */
