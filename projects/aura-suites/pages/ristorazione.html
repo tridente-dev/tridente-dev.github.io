@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wellness & Spa - Aura Suites</title>
-    <meta name="description" content="Aura Spa & Wellness Oasis: Finnish sauna, Turkish bath, holistic massages, panoramic Jacuzzi and Technogym gym.">
+    <title>Restaurants, Bar & Nightlife - Aura Suites</title>
+    <meta name="description" content="Restaurants, bars and nightlife at Aura Suites: Gourmet Buffet, Pizzeria, Steakhouse, fish restaurant, lounge bar and Aura Club disco.">
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23232120'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='60' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
 
@@ -31,8 +31,8 @@
             <nav class="hidden lg:flex items-center space-x-6 text-sm tracking-wide font-medium text-neutral-600">
                 <a href="../index.html#about" class="hover:text-neutral-900 transition">About Us</a>
                 <a href="camere.html" class="hover:text-neutral-900 transition">Rooms</a>
-                <a href="wellness.html" class="text-neutral-900 font-semibold transition">Wellness & Spa</a>
-                <a href="ristorazione.html" class="hover:text-neutral-900 transition">Restaurants, Bar & Nightlife</a>
+                <a href="wellness.html" class="hover:text-neutral-900 transition">Wellness & Spa</a>
+                <a href="ristorazione.html" class="text-neutral-900 font-semibold transition">Restaurants, Bar & Nightlife</a>
                 <a href="escursioni.html" class="hover:text-neutral-900 transition">Excursions</a>
             </nav>
 
@@ -63,72 +63,113 @@
 
     <main class="flex-grow max-w-7xl mx-auto px-6 py-8 w-full space-y-12">
         <div class="border-b border-neutral-soft pb-4">
-            <h1 class="font-serif-title text-4xl font-light text-neutral-900">Aura Spa & Wellness Oasis</h1>
-            <p class="text-neutral-500 text-sm mt-1">Click on the cards to see opening hours, available treatments and access conditions.</p>
+            <h1 class="font-serif-title text-4xl font-light text-neutral-900">Restaurants, Bar & Nightlife</h1>
+            <p class="text-neutral-500 text-sm mt-1">Click on the image to view hours, full menu and service details.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Buffet -->
             <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover">
-                <div class="relative h-60 overflow-hidden group cursor-pointer" onclick="openModal('sauna')">
-                    <img src="../img/Sauna-e-Bagno-Turco.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Sauna and Turkish Bath">
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition"></div>
-                    <span class="absolute bottom-4 left-4 bg-white/90 text-neutral-900 font-semibold text-xs px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition duration-300">🔍 Click for Sauna Info</span>
+                <div class="relative h-60 overflow-hidden cursor-pointer" onclick="openModal('buffet')">
+                    <img src="../img/Buffet.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover" alt="Buffet">
                 </div>
                 <div class="p-6 space-y-2">
                     <div class="flex justify-between items-center">
-                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-semibold">Free with All Inclusive</span>
-                        <span class="text-[11px] text-neutral-500 font-medium">Hours: 08:00 - 21:00</span>
+                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-semibold">Central Buffet & 2 Snacks</span>
+                        <span class="text-[11px] text-neutral-500 font-medium">Various Hours</span>
                     </div>
-                    <h3 class="font-serif-title text-2xl font-medium">Finnish Sauna & Turkish Bath</h3>
-                    <p class="text-xs text-neutral-500">Wellness journey in Nordic pine with aromatherapy and emotional showers (€35 per 2-hour slot for non All Inclusive).</p>
+                    <h3 class="font-serif-title text-2xl font-medium">Buffet Gourmet "Aura"</h3>
+                    <p class="text-xs text-neutral-500">Breakfast, Lunch and Dinner. Dynamic menu that changes at every meal.</p>
                 </div>
             </div>
 
+            <!-- Pizzeria -->
             <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover">
-                <div class="relative h-60 overflow-hidden group cursor-pointer" onclick="openModal('massaggi')">
-                    <img src="../img/Trattamenti-Olistici.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Holistic Treatments">
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition"></div>
-                    <span class="absolute bottom-4 left-4 bg-white/90 text-neutral-900 font-semibold text-xs px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition duration-300">🔍 Click for Massage List</span>
+                <div class="relative h-60 overflow-hidden cursor-pointer" onclick="openModal('pizzeria')">
+                    <img src="../img/Pizzeria.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover" alt="Pizzeria">
                 </div>
                 <div class="p-6 space-y-2">
                     <div class="flex justify-between items-center">
-                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-semibold">1 massage/day in All Inclusive</span>
-                        <span class="text-[11px] text-neutral-500 font-medium">Hours: 09:00 - 20:00</span>
+                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-semibold">Free only with All Inclusive</span>
+                        <span class="text-[11px] text-amber-900 font-bold bg-amber-100 px-2 py-0.5 rounded">Dinner only (19:30 - 23:00)</span>
                     </div>
-                    <h3 class="font-serif-title text-2xl font-medium">Massage Room & Holistic Treatments</h3>
-                    <p class="text-xs text-neutral-500">Decontracting massages, holistic treatments and facial treatments by reservation (€60 per session for non All Inclusive).</p>
+                    <h3 class="font-serif-title text-2xl font-medium">Artisanal Pizzeria</h3>
+                    <p class="text-xs text-neutral-500">Wood-fired pizzas (€25 for non All Inclusive).</p>
                 </div>
             </div>
 
+            <!-- Steakhouse -->
             <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover">
-                <div class="relative h-60 overflow-hidden group cursor-pointer" onclick="openModal('jacuzzi')">
-                    <img src="../img/Jacuzzi-Panoramica.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Panoramic Jacuzzi">
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition"></div>
-                    <span class="absolute bottom-4 left-4 bg-white/90 text-neutral-900 font-semibold text-xs px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition duration-300">🔍 Click for Jacuzzi Details</span>
+                <div class="relative h-60 overflow-hidden cursor-pointer" onclick="openModal('carne')">
+                    <img src="../img/Carne.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover" alt="Steakhouse">
                 </div>
                 <div class="p-6 space-y-2">
                     <div class="flex justify-between items-center">
-                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-semibold">Free with All Inclusive</span>
-                        <span class="text-[11px] text-neutral-500 font-medium">Hours: 09:00 - 22:00</span>
+                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-semibold">Free only with All Inclusive</span>
+                        <span class="text-[11px] text-amber-900 font-bold bg-amber-100 px-2 py-0.5 rounded">Dinner only (19:30 - 23:00)</span>
                     </div>
-                    <h3 class="font-serif-title text-2xl font-medium">Heated Panoramic Jacuzzi</h3>
-                    <p class="text-xs text-neutral-500">Outdoor heated hydromassage pool at 37°C in the solarium with sunset view (€30/day for non All Inclusive).</p>
+                    <h3 class="font-serif-title text-2xl font-medium">Steakhouse "Prime Grill"</h3>
+                    <p class="text-xs text-neutral-500">Precious and dry-aged grilled meats (€45 for non All Inclusive).</p>
                 </div>
             </div>
 
+            <!-- Fish -->
             <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover">
-                <div class="relative h-60 overflow-hidden group cursor-pointer" onclick="openModal('palestra')">
-                    <img src="../img/Palestra-Technogym.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover group-hover:scale-105 transition duration-500" alt="Technogym Gym">
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition"></div>
-                    <span class="absolute bottom-4 left-4 bg-white/90 text-neutral-900 font-semibold text-xs px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition duration-300">🔍 Click for Gym Hours & Info</span>
+                <div class="relative h-60 overflow-hidden cursor-pointer" onclick="openModal('pesce')">
+                    <img src="../img/tagliere-di-mare.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover" alt="Fish">
                 </div>
                 <div class="p-6 space-y-2">
                     <div class="flex justify-between items-center">
-                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-semibold">Free with All Inclusive</span>
-                        <span class="text-[11px] text-neutral-500 font-medium">Hours: 07:00 - 22:00</span>
+                        <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Excluded from All Inclusive (€80 / pers)</span>
+                        <span class="text-[11px] text-amber-900 font-bold bg-amber-100 px-2 py-0.5 rounded">Dinner only (19:30 - 23:00)</span>
                     </div>
-                    <h3 class="font-serif-title text-2xl font-medium">Technogym Equipped Gym</h3>
-                    <p class="text-xs text-neutral-500">Cardio equipment, weights and dedicated area for yoga and pilates (€25/day for non All Inclusive).</p>
+                    <h3 class="font-serif-title text-2xl font-medium">Gourmet Fish Restaurant "Oceano"</h3>
+                    <p class="text-xs text-neutral-500">Grilled fish and fried and baked seafood specialties (€80 per person).</p>
+                </div>
+            </div>
+
+            <!-- Bar Marea -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover">
+                <div class="relative h-60 overflow-hidden cursor-pointer" onclick="openModal('bar-marea')">
+                    <img src="../img/Marea-Lounge-Bar.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover" alt="Marea Lounge Bar">
+                </div>
+                <div class="p-6 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-semibold">Included in All Inclusive</span>
+                        <span class="text-[11px] text-neutral-500 font-medium">Hours: 10:00 - 01:00</span>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-medium">Marea Cocktail Lounge Bar</h3>
+                    <p class="text-xs text-neutral-500">Sea-front bar with signature cocktails and aperitifs. Free for All Inclusive, charged for others.</p>
+                </div>
+            </div>
+
+            <!-- Bar Tramonto -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover">
+                <div class="relative h-60 overflow-hidden cursor-pointer" onclick="openModal('bar-tramonto')">
+                    <img src="../img/Tramonto-Pool-Bar.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover" alt="Sunset Pool Bar">
+                </div>
+                <div class="p-6 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs uppercase tracking-wider text-emerald-700 font-semibold">Included in All Inclusive</span>
+                        <span class="text-[11px] text-neutral-500 font-medium">Hours: 09:00 - 19:00</span>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-medium">Tramonto Sunset Pool Bar</h3>
+                    <p class="text-xs text-neutral-500">Poolside bar with smoothies, detox extracts and summer drinks. Free for All Inclusive, charged for others.</p>
+                </div>
+            </div>
+
+            <!-- Discoteca -->
+            <div class="bg-white rounded-2xl overflow-hidden border border-neutral-soft shadow-sm card-hover md:col-span-2">
+                <div class="relative h-72 overflow-hidden cursor-pointer" onclick="openModal('discoteca')">
+                    <img src="../img/Discoteca-Aura-Club.jpg" loading="lazy" decoding="async" class="h-full w-full object-cover" alt="Aura Club Disco">
+                </div>
+                <div class="p-6 space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs uppercase tracking-wider text-purple-700 font-semibold">Free Entry for All Guests</span>
+                        <span class="text-[11px] text-purple-900 font-bold bg-purple-100 px-2 py-0.5 rounded">Hours: 23:00 - 04:00</span>
+                    </div>
+                    <h3 class="font-serif-title text-2xl font-medium">Aura Club & Nightlife</h3>
+                    <p class="text-xs text-neutral-500">The resort's soundproofed underground disco with international DJ sets, audiophile sound system and private area. Free entry for all guests; drinks included for All Inclusive, charged for other packages.</p>
                 </div>
             </div>
         </div>
