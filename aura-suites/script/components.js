@@ -2,10 +2,10 @@
 
 const NAV_ITEMS = [
     { href: 'index.html#about', label: 'About Us', match: '' },
-    { href: 'camere.html', label: 'Rooms', match: 'camere' },
-    { href: 'wellness.html', label: 'Wellness & Spa', match: 'wellness' },
-    { href: 'ristorazione.html', label: 'Restaurants, Bar & Nightlife', match: 'ristorazione' },
-    { href: 'escursioni.html', label: 'Excursions', match: 'escursioni' }
+    { href: 'pages/camere.html', label: 'Rooms', match: 'camere' },
+    { href: 'pages/wellness.html', label: 'Wellness & Spa', match: 'wellness' },
+    { href: 'pages/ristorazione.html', label: 'Restaurants, Bar & Nightlife', match: 'ristorazione' },
+    { href: 'pages/escursioni.html', label: 'Excursions', match: 'escursioni' }
 ];
 
 export function renderHeader(currentPage = '') {
@@ -32,7 +32,7 @@ export function renderHeader(currentPage = '') {
 
             <div class="hidden lg:flex items-center space-x-4">
                 <span class="text-[10px] uppercase tracking-wider bg-sand px-3 py-1 rounded-full border border-neutral-soft font-semibold text-neutral-600">Adults Only 16+</span>
-                <a href="prenotazione.html" class="bg-stone-dark text-white px-5 py-2.5 rounded-full text-xs uppercase tracking-widest font-medium hover:bg-neutral-800 transition">Book Now</a>
+                <a href="pages/prenotazione.html" class="bg-stone-dark text-white px-5 py-2.5 rounded-full text-xs uppercase tracking-widest font-medium hover:bg-neutral-800 transition">Book Now</a>
             </div>
 
             <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden text-neutral-900 p-2 focus:outline-none" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -46,7 +46,7 @@ export function renderHeader(currentPage = '') {
             ${mobileLinks}
             <div class="pt-2 flex flex-col space-y-2">
                 <span class="text-[10px] uppercase tracking-wider bg-sand px-3 py-1 rounded-full border border-neutral-soft font-semibold text-neutral-600 text-center">Adults Only 16+</span>
-                <a href="prenotazione.html" class="bg-stone-dark text-white text-center py-3 rounded-xl text-xs uppercase tracking-widest font-semibold">Book Now</a>
+                <a href="pages/prenotazione.html" class="bg-stone-dark text-white text-center py-3 rounded-xl text-xs uppercase tracking-widest font-semibold">Book Now</a>
             </div>
         </div>
     </header>`;

@@ -6,9 +6,9 @@ export const roomsDatabase = {
         description: 'The Classic Queen Room is designed to offer an elegant and private retreat. Furnished with natural materials, light oak parquet and Carrara marble, it features a comfortable Queen Size bed with a high-density orthopedic mattress.',
         features: ['Max 2 Guests', '28 m²', 'Queen Size Bed', 'Marble Bathroom', 'Wi-Fi 1Gbps', 'Garden View', 'Smart A/C'],
         images: {
-            hero:    'img/Classic-Queen-Room.jpg',
-            interni: 'img/Jacuzzi-Panoramica.jpg',
-            bagno:   'img/Aura-Suites-1.jpg'
+            hero:    '../img/Classic-Queen-Room.jpg',
+            interni: '../img/Classic-Queen-Room.jpg',
+            bagno:   '../img/Classic-Queen-Room.jpg'
         }
     },
     'superior-twin': {
@@ -16,9 +16,9 @@ export const roomsDatabase = {
         description: 'Bright and versatile, the Superior Twin Room offers a private balcony equipped with outdoor armchairs to relax in the open air. Configurable with two single beds or a double bed.',
         features: ['Max 2 Guests', '32 m²', 'Twin/Double Beds', 'Private Balcony', '55" Smart TV', 'Organic Amenity Kit'],
         images: {
-            hero:    'img/Superior-Twin-Room.jpg',
-            interni: 'img/argentato.jpg',
-            bagno:   'img/vasca.jpg'
+            hero:    '../img/Superior-Twin-Room.jpg',
+            interni: '../img/Superior-Twin-Room.jpg',
+            bagno:   '../img/Superior-Twin-Room.jpg'
         }
     },
     'executive-sea': {
@@ -26,9 +26,9 @@ export const roomsDatabase = {
         description: 'Located on the upper floors, this room boasts large soundproofed floor-to-ceiling windows with a panoramic sea view and an espresso coffee machine with artisanal pods.',
         features: ['Max 2 Guests', '38 m²', 'Frontal Sea View', 'Espresso Coffee Included', 'King Bed', 'Luxury Amenity Kit'],
         images: {
-            hero:    'img/Aura-Suites-1.jpg',
-            interni: 'img/Grand-Family-Residence.jpg',
-            bagno:   'img/lampada.jpg'
+            hero:    '../img/Executive-Sea-View.jpg',
+            interni: '../img/Executive-Sea-View.jpg',
+            bagno:   '../img/Executive-Sea-View.jpg'
         }
     },
     'deluxe-panorama': {
@@ -36,9 +36,9 @@ export const roomsDatabase = {
         description: 'An iconic suite featuring a freestanding bathtub placed near the large floor-to-ceiling sea-view windows. It offers a large private terrace furnished with sun loungers.',
         features: ['Max 2 Guests', '55 m²', 'Freestanding Bathtub', 'Panoramic Terrace', 'King Size Bed', 'Lounge Area'],
         images: {
-            hero:    'img/Deluxe-Panorama-Suite.jpg',
-            interni: 'img/Sauna-e-Bagno-Turco.jpg',
-            bagno:   'img/cubo.jpg'
+            hero:    '../img/Deluxe-Panorama-Suite.jpg',
+            interni: '../img/Deluxe-Panorama-Suite.jpg',
+            bagno:   '../img/Deluxe-Panorama-Suite.jpg'
         }
     },
     'comfort-quad': {
@@ -46,9 +46,9 @@ export const roomsDatabase = {
         description: 'Designed to accommodate up to 4 adult guests in total comfort, it features two distinct sleeping areas with a King Size bed and two single beds, and a master bathroom with double sink.',
         features: ['Max 4 Guests', '48 m²', '1 King + 2 Singles', 'Double TV', 'Spacious Bathroom', 'Minibar Included'],
         images: {
-            hero:    'img/Comfort-Quad-Room.jpg',
-            interni: 'img/bianco.jpg',
-            bagno:   'img/salotto.jpg'
+            hero:    '../img/Comfort-Quad-Room.jpg',
+            interni: '../img/Comfort-Quad-Room.jpg',
+            bagno:   '../img/Comfort-Quad-Room.jpg'
         }
     },
     'grand-residence': {
@@ -56,9 +56,9 @@ export const roomsDatabase = {
         description: 'A true luxury apartment consisting of two independent double bedrooms, two private bathrooms and a large central living room with a terrace overlooking the resort.',
         features: ['Max 4 Guests', '65 m²', '2 Bedrooms', '2 Private Bathrooms', 'Separate Living Room', 'Double Balcony'],
         images: {
-            hero:    'img/Grand-Family-Residence.jpg',
-            interni: 'img/albero.jpg',
-            bagno:   'img/piante.jpg'
+            hero:    '../img/Grand-Family-Residence.jpg',
+            interni: '../img/Grand-Family-Residence.jpg',
+            bagno:   '../img/Grand-Family-Residence.jpg'
         }
     },
     'signature-terrace': {
@@ -66,9 +66,9 @@ export const roomsDatabase = {
         description: 'Panoramic penthouse for 4 guests with an impressive 360° terrace featuring a private heated Jacuzzi for exclusive use and dedicated butler service.',
         features: ['Max 4 Guests', '80 m²', 'Terrace Jacuzzi', 'Butler Service', '2 King Size Beds', '360° Panoramic View'],
         images: {
-            hero:    'img/acquario.jpg',
-            interni: 'img/Jacuzzi-Panoramica.jpg',
-            bagno:   'img/Aura-Suites-3.jpg'
+            hero:    '../img/Signature-Terrace-Suite.jpg',
+            interni: '../img/Signature-Terrace-Suite.jpg',
+            bagno:   '../img/Signature-Terrace-Suite.jpg'
         }
     }
 };

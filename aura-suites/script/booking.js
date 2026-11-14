@@ -362,7 +362,7 @@ export function updateSummary() {
 
 export async function handleBooking(event) {
     if (event) event.preventDefault();
-    // Aura Suites è una demo di portfolio: non raccogliere né inviare prenotazioni reali.
+    // Aura Suites is a portfolio demo: do not collect or send real bookings.
     showToast('Demo only: no booking has been sent. Please do not enter real personal data.', 'error');
     return;
 }
