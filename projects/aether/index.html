@@ -11,38 +11,33 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="AETHER — Objects for Mindful Workspaces">
   <meta property="og:description" content="Sculptural objects for mindful workspaces. Designed in Milan, made in Italy.">
-  <meta property="og:image" content="og-image.jpg">
+  <meta property="og:image" content="img/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="canonical" href="https://aether.example.com/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230b0b0d'/%3E%3Ctext x='50' y='68' font-family='serif' font-size='60' fill='%23c8a05a' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  
+  <!-- CSS LOCALE (percorso corretto perché index.html è nella root di aether) -->
+  <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+  <!-- BANNER DEMO -->
   <div role="note" style="padding:12px 18px;text-align:center;background:#f4e8d3;color:#352b1e;font:500 13px/1.5 Inter,Arial,sans-serif;">
-    PORTFOLIO DEMO — AETHER è un concept fittizio. Non effettuare ordini o pagamenti e non inserire dati personali reali. <a href="../legal.html" style="text-decoration:underline">Dettagli</a> · <a href="../privacy.html" style="text-decoration:underline">Privacy</a>
+    PORTFOLIO DEMO — AETHER is a fictional concept. Do not place orders or make payments and do not enter real personal data. <a href="../../legal.html" style="text-decoration:underline">Details</a> · <a href="../../privacy.html" style="text-decoration:underline">Privacy</a>
   </div>
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- ============================================================
-       HEADER / NAVBAR
-       ============================================================ -->
   <header class="navbar" role="banner">
     <div class="nav-left">
       <a href="index.html" class="logo" aria-label="AETHER - Home">AETHER<span>.</span></a>
       <nav class="nav-links" aria-label="Main navigation">
         <a href="index.html" class="active">Catalog</a>
-        <a href="limited.html">Limited</a>
-        <a href="services.html">Services</a>
-        <a href="journal.html">Journal</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="pages/limited.html">Limited</a>
+        <a href="pages/services.html">Services</a>
+        <a href="pages/journal.html">Journal</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/contact.html">Contact</a>
       </nav>
     </div>
     <div class="nav-right">
@@ -61,34 +56,24 @@
     </div>
   </header>
 
-  <!-- MOBILE NAV -->
   <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
     <a href="index.html" class="active">Catalog</a>
-    <a href="limited.html">Limited</a>
-    <a href="services.html">Services</a>
-    <a href="journal.html">Journal</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="pages/limited.html">Limited</a>
+    <a href="pages/services.html">Services</a>
+    <a href="pages/journal.html">Journal</a>
+    <a href="pages/about.html">About</a>
+    <a href="pages/contact.html">Contact</a>
   </nav>
 
-  <!-- ============================================================
-       MAIN
-       ============================================================ -->
   <main id="main-content">
-
-    <!-- HERO -->
     <section class="hero-section">
       <div class="hero-tag">EDITION 2026 / PERMANENT COLLECTION</div>
       <h1 class="hero-title">Architecture <em>for your mind</em>.</h1>
       <p class="hero-sub">Sculptural desk objects in brushed aluminum, matte ceramic and mineral glass. Built to last, designed to inspire.</p>
     </section>
 
-    <!-- CATALOG LAYOUT -->
     <div class="main-layout">
-
-      <!-- SIDEBAR FILTERS -->
       <aside class="sidebar" aria-label="Filters">
-        <!-- Collection filter -->
         <div class="filter-block">
           <span class="filter-header">Collection</span>
           <button class="filter-btn active" onclick="setCategory('all', this)">All objects</button>
@@ -97,7 +82,6 @@
           <button class="filter-btn" onclick="setCategory('audio', this)">Acoustics</button>
         </div>
 
-        <!-- Material filter -->
         <div class="filter-block">
           <span class="filter-header">Finish</span>
           <button class="filter-btn active" onclick="setMaterial('all', this)">All materials</button>
@@ -109,7 +93,6 @@
         </div>
       </aside>
 
-      <!-- CONTENT AREA / CATALOG -->
       <section class="content-area" aria-label="Catalog">
         <div class="catalog-header">
           <div class="catalog-search">
@@ -120,7 +103,6 @@
             <span class="search-count" id="search-count">20 objects</span>
           </div>
 
-          <!-- SORT MENU -->
           <div class="sort-wrap">
             <button class="sort-trigger" onclick="toggleSortMenu()" aria-haspopup="true" aria-expanded="false">
               <span class="sort-label">Sort</span>
@@ -138,15 +120,11 @@
           </div>
         </div>
 
-        <!-- PRODUCT GRID (populated by JS) -->
         <div class="product-grid" id="product-grid"></div>
       </section>
     </div>
   </main>
 
-  <!-- ============================================================
-       CART DRAWER
-       ============================================================ -->
   <div class="drawer-overlay" id="overlay" onclick="toggleCart()"></div>
   <aside class="cart-drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Cart" aria-hidden="true">
     <div class="cart-header">
@@ -157,13 +135,10 @@
     <div class="cart-footer">
       <div class="summary-line"><span>Shipping</span><span>Free in EU</span></div>
       <div class="summary-line total"><span>Total</span><span id="cart-total">€0</span></div>
-      <a href="checkout.html" class="checkout-btn">Proceed to checkout</a>
+      <a href="pages/checkout.html" class="checkout-btn">Proceed to checkout</a>
     </div>
   </aside>
 
-  <!-- ============================================================
-       FOOTER
-       ============================================================ -->
   <footer class="footer" role="contentinfo">
     <div>
       <a href="index.html" class="logo" style="margin-bottom: 14px; display: inline-block;">AETHER<span>.</span></a>
@@ -172,24 +147,25 @@
     <div>
       <h4>Shop</h4>
       <a href="index.html">Catalog</a>
-      <a href="limited.html">Limited Edition</a>
-      <a href="services.html">Services</a>
+      <a href="pages/limited.html">Limited Edition</a>
+      <a href="pages/services.html">Services</a>
     </div>
     <div>
       <h4>Company</h4>
-      <a href="about.html">About us</a>
-      <a href="journal.html">Journal</a>
-      <a href="contact.html">Contact</a>
+      <a href="pages/about.html">About us</a>
+      <a href="pages/journal.html">Journal</a>
+      <a href="pages/contact.html">Contact</a>
     </div>
     <div>
       <h4>Legal</h4>
-      <a href="../privacy.html">Privacy</a>
-      <a href="../legal.html">Note legali / Demo</a>
-      <a href="../legal.html">Informazioni demo</a>
+      <a href="../../privacy.html">Privacy Policy</a>
+      <a href="../../legal.html">Legal Notes</a>
+      <a href="../../legal.html">Demo Info</a>
     </div>
     <div class="copy">© 2026 AETHER — OBJECTS FOR MINDFUL WORKSPACES</div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- SCRIPT LOCALE (percorso corretto per la root di aether) -->
+  <script src="script/script.js"></script>
 </body>
 </html>

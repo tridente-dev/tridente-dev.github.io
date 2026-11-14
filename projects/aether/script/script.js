@@ -1,46 +1,53 @@
 /* ============================================================
    AETHER — script.js
-   Catalog + cart, checkout, contact — fully in English
    ============================================================ */
 
+// FUNZIONE MAGICA: calcola il percorso corretto dell'immagine
+function getImgPath(filename) {
+  // Se l'URL contiene '/pages/', usa '../img/'
+  if (window.location.pathname.includes('/pages/')) {
+    return `../img/${filename}`;
+  }
+  // Altrimenti usa 'img/'
+  return `img/${filename}`;
+}
+
 /* ------------------------------------------------------------
-   PRODUCTS — Permanent collection (20 objects)
+   PRODUCTS — Nomi esatti presi dalla tua cartella
    ------------------------------------------------------------ */
 const products = [
-  { id: 1,  name: "Monolite Lumina Lamp",   category: "illuminazione",  material: "alluminio", price: 240, stock: 12, img: "img/lampada-monolite-lumina.jpg", desc: "Sculptural table lamp in brushed aluminum with opal glass diffuser. Adjustable warm light." },
-  { id: 2,  name: "Halo Arc Lamp",      category: "illuminazione",  material: "alluminio", price: 310, stock: 7,  img: "img/lampada-ad-arco-halo.png", desc: "Integrated LED light arc, adjustable in intensity and color temperature." },
-  { id: 3,  name: "Ember Ceramic Wall Light",   category: "illuminazione",  material: "ceramica",  price: 190, stock: 15, img: "img/Applique-Ceramica-Ember.png", desc: "Matte ceramic wall light with amber finish and diffused warm light." },
-  { id: 4,  name: "Smoked Glass Pendant",    category: "illuminazione",  material: "vetro",     price: 285, stock: 9,  img: "img/Sospensione-Vetro-Fume.png", desc: "Mouth-blown smoked glass pendant with braided fabric cable." },
+  { id: 1,  name: "Monolite Lumina Lamp",   category: "illuminazione",  material: "alluminio", price: 240, stock: 12, img: getImgPath("lampada-monolite-lumina.png"), desc: "Sculptural table lamp in brushed aluminum with opal glass diffuser. Adjustable warm light." },
+  { id: 2,  name: "Halo Arc Lamp",      category: "illuminazione",  material: "alluminio", price: 310, stock: 7,  img: getImgPath("lampada-ad-arco-halo.png"), desc: "Integrated LED light arc, adjustable in intensity and color temperature." },
+  { id: 3,  name: "Ember Ceramic Wall Light",   category: "illuminazione",  material: "ceramica",  price: 190, stock: 15, img: getImgPath("Applique-Ceramica-Ember.png"), desc: "Matte ceramic wall light with amber finish and diffused warm light." },
+  { id: 4,  name: "Smoked Glass Pendant",    category: "illuminazione",  material: "vetro",     price: 285, stock: 9,  img: getImgPath("Sospensione-Vetro-Fume.png"), desc: "Mouth-blown smoked glass pendant with braided fabric cable." },
 
-  { id: 5,  name: "Ceramic Pen Holder",  category: "organizzazione", material: "ceramica",  price: 85,  stock: 24, img: "img/Vaso-Portapenne-Ceramica.png", desc: "Hand-thrown pen holder in matte ceramic, ivory glaze." },
-  { id: 6,  name: "Anodized Laptop Stand",category: "organizzazione", material: "alluminio", price: 110, stock: 18, img: "img/Supporto-Laptop-Anodizzato.png", desc: "Anodized aluminum laptop stand, adjustable tilt, non-slip pads." },
-  { id: 7,  name: "Grid Desk Tray",    category: "organizzazione", material: "alluminio", price: 95,  stock: 14, img: "img/Vassoio-Scrivania-Grid.png", desc: "Modular tray for small objects, with grey felt inserts." },
-  { id: 8,  name: "Mineral Glass Pen Holder", category: "organizzazione", material: "vetro",     price: 60,  stock: 30, img: "img/Portapenne-Vetro-Minerale.png", desc: "Smoked mineral glass pen holder." },
-  { id: 9,  name: "Floating Suspended Folder", category: "organizzazione", material: "alluminio", price: 120, stock: 11, img: "img/Cartelletta-Sospesa-Flottante.png", desc: "Suspended document folder, minimalist design, 200-sheet capacity." },
-  { id: 10, name: "Ceramic Paperweight",       category: "organizzazione", material: "ceramica",  price: 45,  stock: 40, img: "img/Fermacarte-Ceramica.png", desc: "Glazed ceramic paperweight, calibrated weight 380g." },
-  { id: 11, name: "Leather Desk Mat", category: "organizzazione", material: "pelle",     price: 130, stock: 8,  img: "img/Tappetino-Scrivania-Pelle.png", desc: "Full-grain brown leather desk mat, hand-stitched." },
-  { id: 12, name: "Metal Card Holder",  category: "organizzazione", material: "alluminio", price: 45,  stock: 22, img: "img/Portabiglietti.png", desc: "Brushed metal card holder with black insert, matte finish." },
+  { id: 5,  name: "Ceramic Pen Holder",  category: "organizzazione", material: "ceramica",  price: 85,  stock: 24, img: getImgPath("Vaso-Portapenne-Ceramica.png"), desc: "Hand-thrown pen holder in matte ceramic, ivory glaze." },
+  { id: 6,  name: "Anodized Laptop Stand",category: "organizzazione", material: "alluminio", price: 110, stock: 18, img: getImgPath("Supporto-Laptop-Anodizzato.png"), desc: "Anodized aluminum laptop stand, adjustable tilt, non-slip pads." },
+  { id: 7,  name: "Grid Desk Tray",    category: "organizzazione", material: "alluminio", price: 95,  stock: 14, img: getImgPath("Vassoio-Scrivania-Grid.png"), desc: "Modular tray for small objects, with grey felt inserts." },
+  { id: 8,  name: "Mineral Glass Pen Holder", category: "organizzazione", material: "vetro",     price: 60,  stock: 30, img: getImgPath("Portapenne-Vetro-Minerale.png"), desc: "Smoked mineral glass pen holder." },
+  { id: 9,  name: "Floating Suspended Folder", category: "organizzazione", material: "alluminio", price: 120, stock: 11, img: getImgPath("Cartelletta-Sospesa-Flottante.png"), desc: "Suspended document folder, minimalist design, 200-sheet capacity." },
+  { id: 10, name: "Ceramic Paperweight",       category: "organizzazione", material: "ceramica",  price: 45,  stock: 40, img: getImgPath("Fermacarte-Ceramica.png"), desc: "Glazed ceramic paperweight, calibrated weight 380g." },
+  { id: 11, name: "Leather Desk Mat", category: "organizzazione", material: "pelle",     price: 130, stock: 8,  img: getImgPath("Tappetino-Scrivania-Pelle.png"), desc: "Full-grain brown leather desk mat, hand-stitched." },
+  { id: 12, name: "Metal Card Holder",  category: "organizzazione", material: "alluminio", price: 45,  stock: 22, img: getImgPath("Portabiglietti.png"), desc: "Brushed metal card holder with black insert, matte finish." },
 
-  { id: 13, name: "Resonance 5 Stabilizer", category: "audio",         material: "alluminio", price: 220, stock: 6,  img: "img/Blocco-Sonoro-Resonance.png", desc: "Black anodized aluminum stabilizer weight with graphite core, ideal for turntables." },
-  { id: 14, name: "Echo Sound-Absorbing Panel", category: "audio",       material: "alluminio", price: 130, stock: 16, img: "img/Pannello-Fonoassorbente-Echo.png", desc: "Rigid sound-absorbing panel with technical coating, 40×40 cm, reduces echo by 30%." },
-  { id: 15, name: "Silent Acoustic Cubes",  category: "audio",          material: "lana",      price: 65,  stock: 13, img: "img/Cubo-Acustico-Silenzioso.png", desc: "High-density foam acoustic cubes, dampen primary reflections." },
-  { id: 16, name: "Red Glass Diffuser",     category: "audio",          material: "vetro",     price: 175, stock: 5,  img: "img/Diffusore-Vetro-Fume.png", desc: "Ruby red glass room diffuser with black rattan sticks." },
-  { id: 17, name: "White Ceramic Isolators", category: "audio",          material: "ceramica",  price: 55,  stock: 20, img: "img/Piastrella-Acustica-Lana.png", desc: "Pair of white glazed ceramic isolators for cables and audio supports." },
-  { id: 18, name: "Aluminum Headphone Stand", category: "audio",          material: "alluminio", price: 165, stock: 10, img: "img/Supporto-Cuffie-Titanio.png", desc: "Matte black aluminum headphone stand with heavy metal base." },
-  { id: 19, name: "Under-Desk Cable Organizer", category: "audio",      material: "alluminio", price: 45,  stock: 28, img: "img/Dock-Cavi.png", desc: "White painted steel under-desk rack with cable hooks." },
-  { id: 20, name: "Marbleized Vase",         category: "organizzazione", material: "ceramica",  price: 75,  stock: 17, img: "img/Vaso-Marmorizzato.png", desc: "Cylindrical white marbleized ceramic vase, ideal as a pen holder or organizer." },
+  { id: 13, name: "Resonance 5 Stabilizer", category: "audio",         material: "alluminio", price: 220, stock: 6,  img: getImgPath("Blocco-Sonoro-Resonance.png"), desc: "Black anodized aluminum stabilizer weight with graphite core, ideal for turntables." },
+  { id: 14, name: "Echo Sound-Absorbing Panel", category: "audio",       material: "alluminio", price: 130, stock: 16, img: getImgPath("Pannello-Fonoassorbente-Echo.png"), desc: "Rigid sound-absorbing panel with technical coating, 40×40 cm, reduces echo by 30%." },
+  { id: 15, name: "Silent Acoustic Cubes",  category: "audio",          material: "lana",      price: 65,  stock: 13, img: getImgPath("Cubo-Acustico-Silenzioso.png"), desc: "High-density foam acoustic cubes, dampen primary reflections." },
+  { id: 16, name: "Red Glass Diffuser",     category: "audio",          material: "vetro",     price: 175, stock: 5,  img: getImgPath("Diffusore-Vetro-Fume.png"), desc: "Ruby red glass room diffuser with black rattan sticks." },
+  { id: 17, name: "White Ceramic Isolators", category: "audio",          material: "ceramica",  price: 55,  stock: 20, img: getImgPath("Piastrella-Acustica-Lana.png"), desc: "Pair of white glazed ceramic isolators for cables and audio supports." },
+  { id: 18, name: "Aluminum Headphone Stand", category: "audio",          material: "alluminio", price: 165, stock: 10, img: getImgPath("Supporto-Cuffie-Titanio.png"), desc: "Matte black aluminum headphone stand with heavy metal base." },
+  { id: 19, name: "Under-Desk Cable Organizer", category: "audio",      material: "alluminio", price: 45,  stock: 28, img: getImgPath("Dock-Cavi.png"), desc: "White painted steel under-desk rack with cable hooks." },
+  { id: 20, name: "Marbleized Vase",         category: "organizzazione", material: "ceramica",  price: 75,  stock: 17, img: getImgPath("Vaso-Marmorizzato.png"), desc: "Cylindrical white marbleized ceramic vase, ideal as a pen holder or organizer." },
 ];
 
-/* ------------------------------------------------------------
-   LIMITED EDITION (3 numbered objects)
-   ------------------------------------------------------------ */
 const limitedProducts = [
-  { id: 101, name: "Aether N. 01 — Monolith",  category: "illuminazione", material: "ceramica",  price: 890,  stock: 3, img: "img/Aether-01-Monolite.png", desc: "Monolithic raku ceramic sculpture with natural veining, numbered edition of 50.", edition: "ED. 01 / 50" },
-  { id: 102, name: "Aether N. 02 — Vase",      category: "organizzazione", material: "vetro",     price: 640,  stock: 2, img: "img/Aether-02-Vaso.png", desc: "Sculptural mouth-blown glass vase with white net decoration, numbered edition of 30.", edition: "ED. 02 / 30" },
-  { id: 103, name: "Aether N. 03 — Amplifier", category: "audio",      material: "alluminio", price: 1180, stock: 1, img: "img/Aether-03-Risonanza.png", desc: "Integrated amplifier in brushed aluminum, silver/orange two-tone finish, numbered edition of 20.", edition: "ED. 03 / 20" },
+  { id: 101, name: "Aether N. 01 — Monolith",  category: "illuminazione", material: "ceramica",  price: 890,  stock: 3, img: getImgPath("Aether-01-Monolite.png"), desc: "Monolithic raku ceramic sculpture with natural veining, numbered edition of 50.", edition: "ED. 01 / 50" },
+  { id: 102, name: "Aether N. 02 — Vase",      category: "organizzazione", material: "vetro",     price: 640,  stock: 2, img: getImgPath("Aether-02-Vaso.png"), desc: "Sculptural mouth-blown glass vase with white net decoration, numbered edition of 30.", edition: "ED. 02 / 30" },
+  { id: 103, name: "Aether N. 03 — Amplifier", category: "audio",      material: "alluminio", price: 1180, stock: 1, img: getImgPath("Aether-03-Risonanza.png"), desc: "Integrated amplifier in brushed aluminum, silver/orange two-tone finish, numbered edition of 20.", edition: "ED. 03 / 20" },
 ];
 
-const FALLBACK_IMG = "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&q=80";
+// Fallback (se un'immagine non esiste, usa questa, ma non dovrebbe servire)
+const FALLBACK_IMG = getImgPath("placeholder.png");
 
 /* ------------------------------------------------------------
    GLOBAL STATE
@@ -176,7 +183,7 @@ function renderProducts() {
 
   grid.innerHTML = filtered.map(p => `
     <div class="product-card">
-      <a href="product.html?id=${p.id}">
+      <a href="pages/product.html?id=${p.id}">
         <div class="image-container">
           <img src="${esc(p.img)}" alt="${esc(p.name)}" class="product-image" loading="lazy" decoding="async"
                onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
@@ -202,7 +209,7 @@ function renderProducts() {
 }
 
 /* ------------------------------------------------------------
-   RENDER LIMITED EDITION (clickable cards → detail modal)
+   RENDER LIMITED EDITION
    ------------------------------------------------------------ */
 function renderLimited() {
   const grid = document.getElementById('limited-grid');
@@ -359,7 +366,7 @@ function renderProductDetail() {
     container.innerHTML = `
       <div style="grid-column: 1/-1; padding: 40px 0;">
         <p style="color: var(--text-sub);">Product not found.
-          <a href="index.html" style="color:var(--accent); text-decoration: underline;">Back to catalog</a>
+          <a href="../index.html" style="color:var(--accent); text-decoration: underline;">Back to catalog</a>
         </p>
       </div>`;
     return;
@@ -587,7 +594,7 @@ function renderCheckoutSummary() {
     summary.innerHTML = `
       <h3>ORDER SUMMARY</h3>
       <p style="color: var(--text-sub); font-size: 13px; margin-bottom: 20px;">Your cart is empty.</p>
-      <a href="index.html" class="checkout-btn" style="display:block; text-align:center;">Back to catalog</a>
+      <a href="../index.html" class="checkout-btn" style="display:block; text-align:center;">Back to catalog</a>
     `;
     return;
   }
@@ -698,7 +705,7 @@ function placeOrder(e) {
       </div>
 
       <div class="confirm-actions">
-        <a href="index.html" class="checkout-btn">Back to catalog</a>
+        <a href="../index.html" class="checkout-btn">Back to catalog</a>
       </div>
     </div>
   `;
@@ -765,7 +772,7 @@ function submitContact(e) {
       </div>
 
       <div class="confirm-actions">
-        <a href="index.html" class="checkout-btn">Back to catalog</a>
+        <a href="../index.html" class="checkout-btn">Back to catalog</a>
       </div>
     </div>
   `;
