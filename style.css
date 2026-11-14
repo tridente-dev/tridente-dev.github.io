@@ -21,7 +21,7 @@
 
     --text-primary: #14181F;
     --text-secondary: #4B5563;
-    --text-muted: #9099A8;
+    --text-muted: #A0A8B6; /* Modificato da #9099A8 per migliorare il contrasto */
 
     --border-subtle: #E6E4DF;
     --border-strong: #CFCCC5;
@@ -54,7 +54,7 @@
 
     --text-primary: #EDEEF1;
     --text-secondary: #A5ACB8;
-    --text-muted: #6B7280;
+    --text-muted: #8A94A6; /* Modificato da #6B7280 per migliorare il contrasto */
 
     --border-subtle: rgba(237, 238, 241, 0.08);
     --border-strong: rgba(237, 238, 241, 0.18);
