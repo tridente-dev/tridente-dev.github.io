@@ -32,6 +32,7 @@
         .privacy-title { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px; }
         .privacy-updated { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 40px; }
         .privacy-content h2 { font-family: var(--font-heading); font-size: 1.3rem; margin-top: 36px; margin-bottom: 12px; color: var(--text-primary); }
+        .privacy-content h3 { font-family: var(--font-heading); font-size: 1.08rem; margin-top: 22px; margin-bottom: 10px; color: var(--text-primary); }
         .privacy-content p, .privacy-content li { color: var(--text-secondary); font-size: 0.98rem; line-height: 1.75; margin-bottom: 14px; }
         .privacy-content ul { padding-left: 20px; margin-bottom: 16px; }
         .privacy-content a { color: var(--accent); text-decoration: underline; }
@@ -149,7 +150,7 @@
         <article class="privacy-section">
             <a href="index.html" class="privacy-back" data-i18n="privacy_back">← Back to portfolio</a>
             <h1 class="privacy-title" data-i18n="privacy_title">Privacy Policy</h1>
-            <p class="privacy-updated" data-i18n="privacy_updated">Last updated: November 2026 — Pursuant to Art. 13 of Regulation (EU) 2016/679 (GDPR)</p>
+            <p class="privacy-updated" data-i18n="privacy_updated">Last updated: November 15, 2026 — Pursuant to Art. 13 of Regulation (EU) 2016/679 (GDPR)</p>
 
             <div class="privacy-content">
                 <h2 data-i18n="privacy_h2_1">1. Data Controller</h2>
@@ -157,36 +158,69 @@
 
                 <h2 data-i18n="privacy_h2_2">2. Data Processed and Purposes</h2>
                 <ul>
-                    <li data-i18n="privacy_li1">Contact Form: name, email, and message content, provided voluntarily. They are used to respond to the request and, if requested by the data subject, to carry out pre-contractual activities. Legal basis: Art. 6(1)(b) GDPR for pre-contractual requests; where not applicable, the different legal basis will be identified and indicated before processing.</li>
+                    <li data-i18n="privacy_li1">Contact Form: name, email, and message content, provided voluntarily. They are used to respond to the request and, if requested by the data subject, to carry out pre-contractual activities.</li>
                     <li data-i18n="privacy_li2">Technical Data: the hosting service may process IP addresses, logs, and device data to deliver the pages and protect the infrastructure. The hosting provider's privacy policies also apply to such processing.</li>
                     <li data-i18n="privacy_li3">Local Preferences: the site uses the browser's LocalStorage to remember the selected theme and language. These preferences remain in the browser and are not sent via the form. Users can delete these preferences at any time by clearing site data in their browser.</li>
                 </ul>
 
                 <h2 data-i18n="privacy_h2_3">3. Cookies and Similar Technologies</h2>
-                <p data-i18n="privacy_p3">The main portfolio code uses LocalStorage for theme and language preferences. No analytics, advertising, or profiling tools are implemented in the main code. Demonstration pages embedded in the portfolio may load external resources (e.g., JavaScript libraries from CDNs): such requests may communicate technical data such as IP address and browser information to the respective provider. Before introducing additional tracking tools or non-technical cookies, the need for prior consent and any consent management platform will be evaluated.</p>
+                <div data-i18n="privacy_p3_full">
+                    <p>The site uses the browser's LocalStorage exclusively to store certain user preferences, such as the graphic theme and the selected language. This information remains stored on the user's device and is not used for advertising, profiling, or tracking purposes.</p>
+                    <p>The main portfolio code does not implement analytics, advertising, or profiling tools. All fonts used by the site are self-hosted; therefore, no external font services (such as Google Fonts) are loaded.</p>
+                    <p>Some demonstration pages included in the portfolio may load JavaScript libraries or other resources from third-party CDN services, including Tailwind CSS. When such resources are requested, the respective providers may receive technical data necessary for the connection, such as the IP address and information relating to the user's browser and device.</p>
+                    <p>Loading resources from CDNs does not automatically entail the use of profiling cookies or the obligation to request consent. The need for any additional notices or prior consent is assessed based on the tools actually used, their purposes, and the applicable legislation.</p>
+                    <p>Should cookies or other tracking tools not strictly necessary be introduced in the future, their use will be subject to the user's prior consent, where required by applicable law, through any consent management tools.</p>
+                    <p>For further information on the processing of personal data, please consult this privacy policy.</p>
+                </div>
 
-                <h2 data-i18n="privacy_h2_4">4. Recipients and Providers</h2>
+                <h2 data-i18n="privacy_h2_4">4. Legal Basis for Processing and Transfers Outside the EEA</h2>
+
+                <h3 data-i18n="privacy_h3_4a">4.1 Legal Basis</h3>
+                <ul>
+                    <li data-i18n="privacy_li_basis_precontractual"><strong>Pre-contractual requests (quote or collaboration):</strong> processing is necessary to take steps at the request of the data subject prior to entering into a contract — Art. 6(1)(b) GDPR.</li>
+                    <li data-i18n="privacy_li_basis_legitimate"><strong>Generic information requests:</strong> processing is based on the legitimate interest of the controller in replying to and managing communications, where the conditions of Art. 6(1)(f) GDPR are met.</li>
+                    <li data-i18n="privacy_li_basis_security"><strong>Site security and operation:</strong> processing is based on the legitimate interest in ensuring the security of the site and preventing abuse, where applicable (Art. 6(1)(f) GDPR).</li>
+                </ul>
+
+                <h3 data-i18n="privacy_h3_4b">4.2 Transfers Outside the EEA</h3>
+                <p data-i18n="privacy_p_transfer_intro">The contact form is managed through Web3Forms (Web3Creative). According to the information published by the provider, Web3Forms uses infrastructure (e.g., AWS and Cloudflare) that may involve the transfer of data outside the European Economic Area. Web3Forms declares that such transfers are governed by the Standard Contractual Clauses (SCC) approved by the European Commission.</p>
+                <ul>
+                    <li data-i18n="privacy_li_transfer_doc"><a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer">Web3Forms Privacy Policy</a> — official documentation of the provider.</li>
+                    <li data-i18n="privacy_li_transfer_scc">The safeguards applied are the Standard Contractual Clauses (SCC) adopted by the European Commission (Decision 2021/914/EU), as declared by the provider.</li>
+                    <li data-i18n="privacy_li_transfer_copy">To obtain a copy of the applicable safeguards, you can write to <a href="mailto:g.tridente.web@gmail.com">g.tridente.web@gmail.com</a>.</li>
+                </ul>
+
+                <h2 data-i18n="privacy_h2_5">5. Recipients and Providers</h2>
                 <ul>
                     <li data-i18n="privacy_li4">GitHub Pages: site hosting and possible processing of technical logs. Consult the GitHub General Privacy Statement.</li>
-                    <li data-i18n="privacy_li5">Web3Forms: The contact form uses the Web3Forms service (Web3Creative) to forward data. Web3Forms acts as a Data Processor under Art. 28 GDPR. The service is based in India and uses infrastructure (AWS, Cloudflare) that may involve the transfer of data outside the EEA. This transfer is governed by Standard Contractual Clauses (SCC) approved by the European Commission. Data sent via the form is retained for a maximum of 3 years. Consult the Web3Forms Privacy Policy and the provider's updated contractual documentation.</li>
+                    <li data-i18n="privacy_li5">Web3Forms: The contact form uses the Web3Forms service (Web3Creative) to forward data. Web3Forms acts as a Data Processor under Art. 28 GDPR. The service is based in India and uses infrastructure (AWS, Cloudflare) that may involve the transfer of data outside the EEA, governed as described in section 4.2. Data sent via the form is retained for a maximum of 3 years. Consult the Web3Forms Privacy Policy and the provider's updated contractual documentation.</li>
                     <li data-i18n="privacy_li6">Demo External Resources: some demonstration pages may load JavaScript libraries from third-party CDNs. Such requests may communicate technical data such as IP address and browser information to the respective provider. Please consult the respective service policies. No external font services (e.g., Google Fonts) are used, as all fonts are self-hosted.</li>
                 </ul>
                 <p data-i18n="privacy_p4">The main form code performs the email address format check locally in the browser; no DNS query is performed to Quad9 or Google Public DNS. Data is not sold for advertising purposes.</p>
 
-                <h2 data-i18n="privacy_h2_5">5. Retention</h2>
-                <p data-i18n="privacy_p5">Requests received are retained for the time necessary to manage them and keep track of the communication. For data sent via Web3Forms, the retention period is a maximum of 3 years, after which the data will be deleted. Local preferences (theme and language) remain in the user's browser until the user clears the site data.</p>
+                <h2 data-i18n="privacy_h2_6">6. Retention Periods</h2>
+                <p data-i18n="privacy_p6_intro">Data are retained for the time strictly necessary for the purposes described above, according to the following criteria:</p>
+                <ul>
+                    <li data-i18n="privacy_li_retention_inbox"><strong>Data in the email inbox:</strong> up to 24 months from the last exchange of communications, unless further retention is required for the defence of legal claims or for legal obligations.</li>
+                    <li data-i18n="privacy_li_retention_quotes"><strong>Quote requests:</strong> up to 24 months from the request, in line with the statute of limitations applicable to pre-contractual relationships.</li>
+                    <li data-i18n="privacy_li_retention_web3forms"><strong>Data retained by Web3Forms:</strong> according to the retention times declared by the service (currently up to 3 years), after which the data are deleted.</li>
+                    <li data-i18n="privacy_li_retention_localstorage"><strong>LocalStorage preferences (theme and language):</strong> until deletion by the user through the browser settings.</li>
+                </ul>
 
-                <h2 data-i18n="privacy_h2_6">6. Provision of Data</h2>
-                <p data-i18n="privacy_p6">The provision of form data is optional, but without the data marked as necessary, it may not be possible to respond to the request. Do not enter special categories of personal data or confidential information in the message.</p>
+                <h2 data-i18n="privacy_h2_7">7. Provision of Data</h2>
+                <p data-i18n="privacy_p7">The provision of form data is optional, but without the data marked as necessary, it may not be possible to respond to the request. Do not enter special categories of personal data or confidential information in the message.</p>
 
-                <h2 data-i18n="privacy_h2_7">7. Rights of the Data Subject</h2>
-                <p data-i18n="privacy_p7">In the cases provided for by Articles 15–22 GDPR, the data subject may request access, rectification, erasure, restriction, portability, or objection by writing to g.tridente.web@gmail.com. It is also possible to lodge a complaint with the Italian Data Protection Authority.</p>
+                <h2 data-i18n="privacy_h2_8">8. Rights of the Data Subject</h2>
+                <p data-i18n="privacy_p8">In the cases provided for by Articles 15–22 GDPR, the data subject may request access, rectification, erasure, restriction, portability, or objection by writing to g.tridente.web@gmail.com. It is also possible to lodge a complaint with the <strong>Garante per la protezione dei dati personali</strong>, whose official website is available at <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer">www.garanteprivacy.it</a>.</p>
 
-                <h2 data-i18n="privacy_h2_8">8. Demos and Demonstration Sites</h2>
-                <p data-i18n="privacy_p8">The AETHER and Aura Suites sections are demonstration projects of the portfolio, not real commercial activities. Do not make real payments, orders, or bookings and do not enter real personal data in their forms. Interactions are simulated and do not constitute a commercial offer.</p>
+                <h2 data-i18n="privacy_h2_9">9. Automated Decision-Making</h2>
+                <p data-i18n="privacy_p9">The website does not use automated decision-making or profiling producing legal effects or similarly significant effects on users, within the meaning of Article 22 GDPR.</p>
 
-                <h2 data-i18n="privacy_h2_9">9. Updates and Contacts</h2>
-                <p data-i18n="privacy_p9">This policy may be updated in the event of changes to the site, providers, or processing activities. Last updated: November 14, 2026. For questions on data processing: g.tridente.web@gmail.com.</p>
+                <h2 data-i18n="privacy_h2_10">10. Demos and Demonstration Sites</h2>
+                <p data-i18n="privacy_p10">The AETHER and Aura Suites sections are demonstration projects of the portfolio, not real commercial activities. Do not make real payments, orders, or bookings and do not enter real personal data in their forms. Interactions are simulated and do not constitute a commercial offer.</p>
+
+                <h2 data-i18n="privacy_h2_11">11. Updates and Contacts</h2>
+                <p data-i18n="privacy_p11">This policy may be updated in the event of changes to the site, providers, or processing activities. Last updated: November 15, 2026. For questions on data processing: g.tridente.web@gmail.com.</p>
             </div>
         </article>
     </main>
@@ -267,7 +301,7 @@
                         if (el.tagName === 'TITLE') {
                             document.title = value;
                         } else {
-                            el.innerHTML = value; // innerHTML per gestire i link nella privacy policy
+                            el.innerHTML = value;
                         }
                     }
                 });
