@@ -73,6 +73,8 @@ html {
   text-size-adjust: 100%;
 }
 
+body.menu-open { overflow: hidden; } /* Blocca lo scroll della pagina quando il menu mobile è aperto */
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -223,44 +225,60 @@ input, textarea, select { font-family: inherit; font-size: 16px; }
   border-radius: 10px; cursor: pointer;
   align-items: center; justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 60; /* Sopra il menu mobile */
 }
 .menu-toggle:active { transform: scale(0.95); }
 
-/* Menu mobile a tendina */
+/* ------------------------------------------------------------
+   MENU MOBILE (SCHERMO INTERO SOTTO LA NAVBAR)
+   ------------------------------------------------------------ */
 .mobile-nav {
   display: none;
   position: fixed;
-  top: var(--nav-height); left: 0; right: 0;
+  top: var(--nav-height); 
+  left: 0; 
+  right: 0;
+  bottom: 0; /* Si estende fino in fondo allo schermo */
   background: var(--bg-soft);
-  border-bottom: 1px solid var(--border);
-  padding: 16px var(--pad-x);
-  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  padding: 24px var(--pad-x);
   z-index: 49;
   flex-direction: column;
-  gap: 4px;
-  box-shadow: var(--shadow);
-  max-height: calc(100dvh - var(--nav-height));
-  overflow-y: auto;
-  animation: slide-down .25s ease-out;
+  justify-content: center; /* Centra i link verticalmente */
+  align-items: center;
+  gap: 8px;
+  animation: fade-in-menu 0.3s ease-out;
+  overflow-y: auto; /* Permette lo scroll solo se i link sono troppi per lo schermo */
 }
-@keyframes slide-down {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
+
+@keyframes fade-in-menu {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
-.mobile-nav.open { display: flex; }
+
+.mobile-nav.open { 
+  display: flex; 
+}
+
 .mobile-nav a {
-  padding: 14px 8px;
-  font-size: 15px;
+  padding: 16px;
+  font-size: 20px; /* Testo più grande per toccarlo facilmente */
+  font-family: var(--font-serif); /* Stile elegante */
   color: var(--text-sub);
-  border-bottom: 1px solid var(--border);
-  transition: color .2s, padding-left .2s;
-  min-height: 48px;
+  transition: color .2s, transform .2s;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
-.mobile-nav a:last-child { border-bottom: none; }
-.mobile-nav a:active { color: var(--text-main); background: var(--accent-soft); }
-.mobile-nav a.active { color: var(--text-main); font-weight: 600; }
+.mobile-nav a:active { 
+  color: var(--text-main); 
+  transform: scale(0.98);
+}
+.mobile-nav a.active { 
+  color: var(--accent); 
+  font-weight: 600; 
+}
 
 /* ------------------------------------------------------------
    5. HERO

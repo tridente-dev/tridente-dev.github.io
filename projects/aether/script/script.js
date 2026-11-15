@@ -156,11 +156,14 @@ function setSort(value) {
 document.addEventListener('click', (e) => {
   const wrap = document.querySelector('.sort-wrap');
   if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
+  
   const mobileNav = document.getElementById('mobile-nav');
   const menuToggle = document.querySelector('.menu-toggle');
+  
   if (mobileNav && mobileNav.classList.contains('open') &&
       !mobileNav.contains(e.target) && menuToggle && !menuToggle.contains(e.target)) {
     mobileNav.classList.remove('open');
+    document.body.classList.remove('menu-open'); // <-- Ripristina lo scroll della pagina
     menuToggle.setAttribute('aria-expanded', 'false');
   }
 });
@@ -534,9 +537,14 @@ document.addEventListener('keydown', (e) => {
 function toggleMobileNav() {
   const nav = document.getElementById('mobile-nav');
   const btn = document.querySelector('.menu-toggle');
+  const body = document.body;
+  
   if (!nav) return;
+  
   const isOpen = nav.classList.contains('open');
+  
   nav.classList.toggle('open');
+  body.classList.toggle('menu-open'); // <-- Aggiunge/rimuove la classe che blocca lo scroll
   btn?.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
 }
 
