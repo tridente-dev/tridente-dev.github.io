@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 form_error_email_nodomain: 'This email domain does not exist or cannot receive messages.',
                 form_error_send: 'Sending failed. Please try again.',
                 form_sending: 'Sending…',
+                form_error_consent: 'Please accept the Privacy Policy to continue.',
                 form_thanks_title: 'Message sent!',
                 form_thanks_text: 'Thanks for reaching out. I will get back to you as soon as possible.'
             },
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 form_error_email_nodomain: 'Il dominio di questa email non esiste o non può ricevere messaggi.',
                 form_error_send: 'Invio non riuscito. Riprova.',
                 form_sending: 'Invio in corso…',
+                form_error_consent: 'Devi accettare la Privacy Policy per continuare.',
                 form_thanks_title: 'Messaggio inviato!',
                 form_thanks_text: 'Grazie per avermi contattato. Ti risponderò il prima possibile.'
             }
@@ -429,6 +431,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const formSubmitBtn  = document.getElementById('form-submit');
     const formThanks     = document.getElementById('form-thanks');
     const formSubmitText = formSubmitBtn ? formSubmitBtn.querySelector('.form-submit-text') : null;
+    const formPrivacy    = document.getElementById('form-privacy');
+    const consentLabel   = formPrivacy ? formPrivacy.closest('.consent-label') : null;
 
     function t(key) {
         const dict     = (translations && translations[currentLang]) || {};
@@ -463,6 +467,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return { ok: true };
     }
 
+    // Rimuove lo stato di errore della checkbox appena l'utente la spunta
+    if (formPrivacy) {
+        formPrivacy.addEventListener('change', () => {
+            if (formPrivacy.checked && consentLabel) {
+                consentLabel.classList.remove('is-invalid');
+            }
+            if (formStatus) {
+                formStatus.textContent = '';
+                formStatus.classList.remove('is-error');
+            }
+        });
+    }
+
     if (contactForm) {
         contactForm.querySelectorAll('input, textarea').forEach(el => {
             el.addEventListener('input', () => {
@@ -486,11 +503,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const message = messageEl.value.trim();
 
             [nameEl, emailFEl, messageEl].forEach(el => el.classList.remove('is-invalid'));
+            if (consentLabel) consentLabel.classList.remove('is-invalid');
             if (formStatus) {
                 formStatus.textContent = '';
                 formStatus.classList.remove('is-error');
             }
 
+            // --- 1. VALIDAZIONE CONSENSO PRIVACY ---
+            if (!formPrivacy || !formPrivacy.checked) {
+                if (consentLabel) consentLabel.classList.add('is-invalid');
+                if (formPrivacy) formPrivacy.focus();
+                if (formStatus) {
+                    formStatus.textContent = t('form_error_consent');
+                    formStatus.classList.add('is-error');
+                }
+                return;
+            }
+
+            // --- 2. VALIDAZIONE CAMPI OBBLIGATORI ---
             let hasError = false;
             if (!name)    { nameEl.classList.add('is-invalid');    hasError = true; }
             if (!email)   { emailFEl.classList.add('is-invalid');  hasError = true; }
@@ -511,6 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formSubmitBtn.classList.add('is-sending');
             }
 
+            // --- 3. VALIDAZIONE EMAIL ---
             const emailCheck = await isRealEmailDomain(email);
             if (!emailCheck.ok) {
                 emailFEl.classList.add('is-invalid');
@@ -535,6 +566,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // --- 4. INVIO A WEB3FORMS ---
             try {
                 const formData = new FormData(contactForm);
 
@@ -605,19 +637,16 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenu.classList.remove('is-open');
             hamburgerBtn.classList.remove('is-active');
             hamburgerBtn.setAttribute('aria-label', 'Open menu');
-            // body.style.overflow = ''; // Non blocchiamo lo scroll per un dropdown
         } else {
             mobileMenu.classList.add('is-open');
             hamburgerBtn.classList.add('is-active');
             hamburgerBtn.setAttribute('aria-label', 'Close menu');
-            // body.style.overflow = 'hidden'; // Non blocchiamo lo scroll
         }
     }
 
     if (hamburgerBtn && mobileMenu) {
         hamburgerBtn.addEventListener('click', toggleMenu);
 
-        // Chiudi il menu quando si clicca su un link
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('is-open');
@@ -626,7 +655,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Chiudi il menu se si clicca fuori
         document.addEventListener('click', (e) => {
             if (mobileMenu.classList.contains('is-open') && 
                 !mobileMenu.contains(e.target) && 
