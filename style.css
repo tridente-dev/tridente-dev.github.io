@@ -1366,7 +1366,7 @@ button {
 }
 
 /* Da 426px in su, il menu hamburger scompare e torna quello desktop */
-@media (min-width: 426px) {
+@media (min-width: 1322) {
     .mobile-menu {
         display: none !important;
     }
