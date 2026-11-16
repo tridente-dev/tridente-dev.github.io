@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 form_error_consent: 'Please accept the Privacy Policy to continue.',
                 form_thanks_title: 'Message sent!',
                 form_thanks_text: 'Thanks for reaching out. I will get back to you as soon as possible.',
-                contact_privacy_note: "The data you provide will be used exclusively to respond to your inquiry and evaluate a potential collaboration. Please consult the <a href='privacy.html'>Privacy Policy</a> and <a href='legal.html'>Legal Notes</a> for more information."
+                contact_privacy_note: "The data you provide will be used exclusively to respond to your inquiry and evaluate a potential collaboration."
             },
             it: {
                 form_error_required: 'Compila tutti i campi obbligatori.',
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 form_error_consent: 'Devi accettare la Privacy Policy per continuare.',
                 form_thanks_title: 'Messaggio inviato!',
                 form_thanks_text: 'Grazie per avermi contattato. Ti risponderò il prima possibile.',
-                contact_privacy_note: "I dati forniti saranno utilizzati esclusivamente per rispondere alla tua richiesta e valutare una potenziale collaborazione. Consulta la <a href='privacy.html'>Privacy Policy</a> e le <a href='legal.html'>Note Legali</a> per maggiori informazioni."
+                contact_privacy_note: "I dati forniti saranno utilizzati esclusivamente per rispondere alla tua richiesta e valutare una potenziale collaborazione."
             }
         };
     }
@@ -428,13 +428,18 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================================
        8. CONTACT FORM (Web3Forms + controllo locale formato email)
        ========================================================= */
-    const contactForm    = document.getElementById('contact-form');
-    const formStatus     = document.getElementById('form-status');
-    const formSubmitBtn  = document.getElementById('form-submit');
-    const formThanks     = document.getElementById('form-thanks');
-    const formSubmitText = formSubmitBtn ? formSubmitBtn.querySelector('.form-submit-text') : null;
-    const formPrivacy    = document.getElementById('form-privacy');
-    const consentLabel   = formPrivacy ? formPrivacy.closest('.consent-label') : null;
+    const contactForm          = document.getElementById('contact-form');
+    const formStatus           = document.getElementById('form-status');
+    const formSubmitBtn        = document.getElementById('form-submit');
+    const formThanks           = document.getElementById('form-thanks');
+    const formPrivacy          = document.getElementById('form-privacy');
+    const consentLabel         = formPrivacy ? formPrivacy.closest('.consent-label') : null;
+    const privacyAcceptedInput = document.getElementById('privacy-accepted-at');
+
+    function formatLocalDateTime(date) {
+        const pad = (n) => String(n).padStart(2, '0');
+        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    }
 
     function t(key) {
         const dict     = (translations && translations[currentLang]) || {};
@@ -536,8 +541,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const originalText = formSubmitText ? formSubmitText.textContent : '';
-            if (formSubmitText) formSubmitText.textContent = t('form_sending');
             if (formSubmitBtn) {
                 formSubmitBtn.disabled = true;
                 formSubmitBtn.classList.add('is-sending');
@@ -560,7 +563,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     formStatus.textContent = errorMsg;
                     formStatus.classList.add('is-error');
                 }
-                if (formSubmitText) formSubmitText.textContent = originalText;
                 if (formSubmitBtn) {
                     formSubmitBtn.disabled = false;
                     formSubmitBtn.classList.remove('is-sending');
@@ -570,7 +572,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // --- 4. INVIO A WEB3FORMS ---
             try {
+                if (privacyAcceptedInput) {
+                    privacyAcceptedInput.value = formatLocalDateTime(new Date());
+                }
                 const formData = new FormData(contactForm);
+                const acceptedAt = formData.get('Privacy accepted at');
+                const policyVer  = formData.get('Privacy policy version');
+                formData.delete('Privacy accepted at');
+                formData.delete('Privacy policy version');
+                formData.append('Privacy accepted at', acceptedAt);
+                formData.append('Privacy policy version', policyVer);
 
                 const response = await fetchWithTimeout(contactForm.action, {
                     method: 'POST',
@@ -613,7 +624,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     formStatus.textContent = t('form_error_send');
                     formStatus.classList.add('is-error');
                 }
-                if (formSubmitText) formSubmitText.textContent = originalText;
                 if (formSubmitBtn) {
                     formSubmitBtn.disabled = false;
                     formSubmitBtn.classList.remove('is-sending');

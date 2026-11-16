@@ -66,7 +66,7 @@ window.translations = {
     form_error_email_nodomain: "This email domain does not exist or cannot receive messages.",
     form_error_send: "Sending failed. Please try again.",
 
-    contact_privacy_note: "By submitting this form, you confirm that you have read the <a href=\"privacy.html\">Privacy Policy</a> and the <a href=\"legal.html\">Legal Notes</a>. The data you provide will be used exclusively to respond to your inquiry and evaluate a potential collaboration.",
+    contact_privacy_note: "The data you provide will be used exclusively to respond to your inquiry and evaluate a potential collaboration.",
     form_privacy_consent: "I have read and accept the <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> and <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Legal Notes</a>.",
     form_error_consent: "Please accept the Privacy Policy to continue.",
 
@@ -203,7 +203,7 @@ window.translations = {
     form_error_email_nodomain: "Il dominio di questa email non esiste o non può ricevere messaggi.",
     form_error_send: "Invio non riuscito. Riprova.",
 
-    contact_privacy_note: "Inviando questo modulo, confermi di aver letto la <a href=\"privacy.html\">Privacy Policy</a> e le <a href=\"legal.html\">Note Legali</a>. I dati forniti saranno utilizzati esclusivamente per rispondere alla tua richiesta e valutare una potenziale collaborazione.",
+    contact_privacy_note: "I dati forniti saranno utilizzati esclusivamente per rispondere alla tua richiesta e valutare una potenziale collaborazione.",
     form_privacy_consent: "Ho letto e accetto la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> e le <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Note Legali</a>.",
     form_error_consent: "Devi accettare la Privacy Policy per continuare.",
 
@@ -340,7 +340,7 @@ window.translations = {
     form_error_email_nodomain: "Este dominio de email no existe o no puede recibir mensajes.",
     form_error_send: "Error al enviar. Inténtalo de nuevo.",
 
-    contact_privacy_note: "Al enviar este formulario, confirmas que has leído la <a href=\"privacy.html\">Política de Privacidad</a> y las <a href=\"legal.html\">Notas Legales</a>. Los datos que proporciones se utilizarán exclusivamente para responder a tu consulta y evaluar una posible colaboración.",
+    contact_privacy_note: "Los datos que proporciones se utilizarán exclusivamente para responder a tu consulta y evaluar una posible colaboración.",
     form_privacy_consent: "He leído y acepto la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Política de Privacidad</a> y las <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Notas Legales</a>.",
     form_error_consent: "Debes aceptar la Política de Privacidad para continuar.",
 
@@ -477,7 +477,7 @@ window.translations = {
     form_error_email_nodomain: "Ce domaine email n'existe pas ou ne peut pas recevoir de messages.",
     form_error_send: "Échec de l'envoi. Veuillez réessayer.",
 
-    contact_privacy_note: "En soumettant ce formulaire, vous confirmez avoir lu la <a href=\"privacy.html\">Politique de Confidentialité</a> et les <a href=\"legal.html\">Mentions Légales</a>. Les données fournies seront utilisées exclusivement pour répondre à votre demande et évaluer une éventuelle collaboration.",
+    contact_privacy_note: "Les données fournies seront utilisées exclusivement pour répondre à votre demande et évaluer une éventuelle collaboration.",
     form_privacy_consent: "J'ai lu et j'accepte la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Politique de Confidentialité</a> et les <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Mentions Légales</a>.",
     form_error_consent: "Veuillez accepter la Politique de Confidentialité pour continuer.",
 
@@ -614,7 +614,7 @@ window.translations = {
     form_error_email_nodomain: "Diese E-Mail-Domain existiert nicht oder kann keine Nachrichten empfangen.",
     form_error_send: "Senden fehlgeschlagen. Bitte versuchen Sie es erneut.",
 
-    contact_privacy_note: "Mit dem Absenden dieses Formulars bestätigen Sie, dass Sie die <a href=\"privacy.html\">Datenschutzerklärung</a> und die <a href=\"legal.html\">Rechtlichen Hinweise</a> gelesen haben. Die von Ihnen bereitgestellten Daten werden ausschließlich zur Beantwortung Ihrer Anfrage und zur Bewertung einer möglichen Zusammenarbeit verwendet.",
+    contact_privacy_note: "Die von Ihnen bereitgestellten Daten werden ausschließlich zur Beantwortung Ihrer Anfrage und zur Bewertung einer möglichen Zusammenarbeit verwendet.",
     form_privacy_consent: "Ich habe die <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> und die <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Rechtlichen Hinweise</a> gelesen und akzeptiere sie.",
     form_error_consent: "Bitte akzeptieren Sie die Datenschutzerklärung, um fortzufahren.",
 
@@ -751,7 +751,7 @@ window.translations = {
     form_error_email_nodomain: "Este domínio de e-mail não existe ou não pode receber mensagens.",
     form_error_send: "Falha no envio. Tente novamente.",
 
-    contact_privacy_note: "Ao enviar este formulário, você confirma que leu a <a href=\"privacy.html\">Política de Privacidade</a> e as <a href=\"legal.html\">Notas Legais</a>. Os dados fornecidos serão utilizados exclusivamente para responder à sua consulta e avaliar uma possível colaboração.",
+    contact_privacy_note: "Os dados fornecidos serão utilizados exclusivamente para responder à sua consulta e avaliar uma possível colaboração.",
     form_privacy_consent: "Li e aceito a <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Política de Privacidade</a> e as <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Notas Legais</a>.",
     form_error_consent: "Aceite a Política de Privacidade para continuar.",
 
@@ -888,7 +888,7 @@ window.translations = {
     form_error_email_nodomain: "此邮箱域名不存在或无法接收邮件。",
     form_error_send: "发送失败。请重试。",
 
-    contact_privacy_note: "提交此表单即表示您确认已阅读<a href=\"privacy.html\">隐私政策</a>和<a href=\"legal.html\">法律声明</a>。您提供的数据将仅用于回复您的询问并评估潜在的合作。",
+    contact_privacy_note: "您提供的数据将仅用于回复您的询问并评估潜在的合作。",
     form_privacy_consent: "我已阅读并接受<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">隐私政策</a>和<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">法律声明</a>。",
     form_error_consent: "请接受隐私政策以继续。",
 
@@ -1025,7 +1025,7 @@ window.translations = {
     form_error_email_nodomain: "このメールドメインは存在しないか、メッセージを受信できません。",
     form_error_send: "送信に失敗しました。もう一度お試しください。",
 
-    contact_privacy_note: "このフォームを送信することで、<a href=\"privacy.html\">プライバシーポリシー</a>および<a href=\"legal.html\">法的通知</a>を読み、同意したものとみなされます。ご提供いただいたデータは、お問い合わせへの回答および潜在的なコラボレーションの評価のみに使用されます。",
+    contact_privacy_note: "ご提供いただいたデータは、お問い合わせへの回答および潜在的なコラボレーションの評価のみに使用されます。",
     form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">プライバシーポリシー</a>および<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">法的通知</a>を読み、同意します。",
     form_error_consent: "続行するにはプライバシーポリシーに同意してください。",
 
@@ -1162,7 +1162,7 @@ window.translations = {
     form_error_email_nodomain: "Domain email ini tidak ada atau tidak dapat menerima pesan.",
     form_error_send: "Pengiriman gagal. Silakan coba lagi.",
 
-    contact_privacy_note: "Dengan mengirimkan formulir ini, Anda mengonfirmasi bahwa Anda telah membaca <a href=\"privacy.html\">Kebijakan Privasi</a> dan <a href=\"legal.html\">Catatan Hukum</a>. Data yang Anda berikan akan digunakan secara eksklusif untuk menanggapi pertanyaan Anda dan mengevaluasi potensi kolaborasi.",
+    contact_privacy_note: "Data yang Anda berikan akan digunakan secara eksklusif untuk menanggapi pertanyaan Anda dan mengevaluasi potensi kolaborasi.",
     form_privacy_consent: "Saya telah membaca dan menyetujui <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Kebijakan Privasi</a> dan <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Catatan Hukum</a>.",
     form_error_consent: "Harap setujui Kebijakan Privasi untuk melanjutkan.",
 
@@ -1299,7 +1299,7 @@ window.translations = {
     form_error_email_nodomain: "نطاق البريد الإلكتروني هذا غير موجود أو لا يمكنه استقبال الرسائل.",
     form_error_send: "فشل الإرسال. يرجى المحاولة مرة أخرى.",
 
-    contact_privacy_note: "بإرسال هذا النموذج، فإنك تؤكد أنك قرأت <a href=\"privacy.html\">سياسة الخصوصية</a> و<a href=\"legal.html\">الملاحظات القانونية</a>. ستُستخدم البيانات التي تقدمها حصرياً للرد على استفسارك وتقييم تعاون محتمل.",
+    contact_privacy_note: "ستُستخدم البيانات التي تقدمها حصرياً للرد على استفسارك وتقييم تعاون محتمل.",
     form_privacy_consent: "لقد قرأت وأوافق على <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">سياسة الخصوصية</a> و<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">الملاحظات القانونية</a>.",
     form_error_consent: "يرجى قبول سياسة الخصوصية للمتابعة.",
 
@@ -1436,7 +1436,7 @@ window.translations = {
     form_error_email_nodomain: "यह ईमेल डोमेन मौजूद नहीं है या संदेश प्राप्त नहीं कर सकता।",
     form_error_send: "भेजना विफल रहा। कृपया पुनः प्रयास करें।",
 
-    contact_privacy_note: "इस फ़ॉर्म को सबमिट करके, आप पुष्टि करते हैं कि आपने <a href=\"privacy.html\">गोपनीयता नीति</a> और <a href=\"legal.html\">कानूनी नोटिस</a> पढ़ लिए हैं। आपके द्वारा प्रदान किया गया डेटा केवल आपकी पूछताछ का जवाब देने और संभावित सहयोग का मूल्यांकन करने के लिए उपयोग किया जाएगा।",
+    contact_privacy_note: "आपके द्वारा प्रदान किया गया डेटा केवल आपकी पूछताछ का जवाब देने और संभावित सहयोग का मूल्यांकन करने के लिए उपयोग किया जाएगा।",
     form_privacy_consent: "मैंने <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">गोपनीयता नीति</a> और <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">कानूनी नोटिस</a> पढ़ लिए हैं और उन्हें स्वीकार करता हूं।",
     form_error_consent: "जारी रखने के लिए कृपया गोपनीयता नीति स्वीकार करें।",
 
@@ -1573,7 +1573,7 @@ window.translations = {
     form_error_email_nodomain: "Домен этого email не существует или не может принимать сообщения.",
     form_error_send: "Отправка не удалась. Попробуйте снова.",
 
-    contact_privacy_note: "Отправляя эту форму, вы подтверждаете, что прочитали <a href=\"privacy.html\">Политику конфиденциальности</a> и <a href=\"legal.html\">Правовые примечания</a>. Предоставленные данные будут использоваться исключительно для ответа на ваш запрос и оценки потенциального сотрудничества.",
+    contact_privacy_note: "Предоставленные данные будут использоваться исключительно для ответа на ваш запрос и оценки потенциального сотрудничества.",
     form_privacy_consent: "Я прочитал(а) и принимаю <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Политику конфиденциальности</a> и <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Правовые примечания</a>.",
     form_error_consent: "Примите Политику конфиденциальности, чтобы продолжить.",
 
@@ -1710,7 +1710,7 @@ window.translations = {
     form_error_email_nodomain: "이 이메일 도메인이 존재하지 않거나 메시지를 받을 수 없습니다.",
     form_error_send: "전송에 실패했습니다. 다시 시도해 주세요.",
 
-    contact_privacy_note: "이 양식을 제출함으로써 귀하는 <a href=\"privacy.html\">개인정보 처리방침</a> 및 <a href=\"legal.html\">법적 고지</a>를 읽었음을 확인합니다. 제공된 데이터는 문의에 답변하고 잠재적 협업을 평가하기 위해서만 사용됩니다.",
+    contact_privacy_note: "제공된 데이터는 문의에 답변하고 잠재적 협업을 평가하기 위해서만 사용됩니다.",
     form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">개인정보 처리방침</a> 및 <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">법적 고지</a>를 읽고 동의합니다.",
     form_error_consent: "계속하려면 개인정보 처리방침에 동의해 주세요.",
 
@@ -1847,7 +1847,7 @@ window.translations = {
     form_error_email_nodomain: "Bu e-posta alan adı mevcut değil veya mesaj alamıyor.",
     form_error_send: "Gönderme başarısız oldu. Lütfen tekrar deneyin.",
 
-    contact_privacy_note: "Bu formu göndererek <a href=\"privacy.html\">Gizlilik Politikası</a> ve <a href=\"legal.html\">Yasal Notlar</a>'ı okuduğunuzu onaylarsınız. Sağladığınız veriler yalnızca talebinizi yanıtlamak ve olası bir işbirliğini değerlendirmek için kullanılacaktır.",
+    contact_privacy_note: "Sağladığınız veriler yalnızca talebinizi yanıtlamak ve olası bir işbirliğini değerlendirmek için kullanılacaktır.",
     form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Gizlilik Politikası</a> ve <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Yasal Notlar</a>'ı okudum ve kabul ediyorum.",
     form_error_consent: "Devam etmek için lütfen Gizlilik Politikası'nı kabul edin.",
 
@@ -1984,7 +1984,7 @@ window.translations = {
     form_error_email_nodomain: "Dit e-maildomein bestaat niet of kan geen berichten ontvangen.",
     form_error_send: "Verzenden mislukt. Probeer het opnieuw.",
 
-    contact_privacy_note: "Door dit formulier te verzenden, bevestig je dat je het <a href=\"privacy.html\">Privacybeleid</a> en de <a href=\"legal.html\">Juridische kennisgeving</a> hebt gelezen. De door jou verstrekte gegevens worden uitsluitend gebruikt om je vraag te beantwoorden en een mogelijke samenwerking te beoordelen.",
+    contact_privacy_note: "De door jou verstrekte gegevens worden uitsluitend gebruikt om je vraag te beantwoorden en een mogelijke samenwerking te beoordelen.",
     form_privacy_consent: "Ik heb het <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacybeleid</a> en de <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Juridische kennisgeving</a> gelezen en accepteer deze.",
     form_error_consent: "Accepteer het Privacybeleid om door te gaan.",
 
@@ -2121,7 +2121,7 @@ window.translations = {
     form_error_email_nodomain: "Ta domena e-mail nie istnieje lub nie może odbierać wiadomości.",
     form_error_send: "Wysyłanie nie powiodło się. Spróbuj ponownie.",
 
-    contact_privacy_note: "Wysyłając ten formularz, potwierdzasz, że przeczytałeś <a href=\"privacy.html\">Politykę prywatności</a> i <a href=\"legal.html\">Noty prawne</a>. Podane dane będą wykorzystywane wyłącznie do odpowiedzi na Twoje zapytanie i oceny potencjalnej współpracy.",
+    contact_privacy_note: "Podane dane będą wykorzystywane wyłącznie do odpowiedzi na Twoje zapytanie i oceny potencjalnej współpracy.",
     form_privacy_consent: "Przeczytałem i akceptuję <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Politykę prywatności</a> i <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Noty prawne</a>.",
     form_error_consent: "Zaakceptuj Politykę prywatności, aby kontynuować.",
 
