@@ -1230,3 +1230,144 @@ button {
         transform: translateX(22px);
     }
 }
+
+/* =========================================================
+   MOBILE MENU HAMBURGER (Solo fino a 425px)
+   ========================================================= */
+
+/* Nasconde il pulsante hamburger di default su desktop */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10001; /* Sopra tutto */
+    position: relative;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    transform-origin: center;
+}
+
+/* Stato attivo (X) */
+.hamburger-btn.is-active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger-btn.is-active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-btn.is-active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Menu Overlay Mobile (Dropdown compatto) */
+.mobile-menu {
+    position: fixed;
+    top: 80px; /* Sotto l'header */
+    right: 16px; /* Allineato a destra */
+    width: calc(100% - 32px); /* Larghezza quasi totale ma con margini */
+    max-width: 300px; /* Larghezza massima per non sembrare un blocco enorme */
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.02);
+    z-index: 9999;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px) scale(0.98);
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: top right;
+}
+
+.mobile-menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Allineamento a sinistra */
+    gap: 16px;
+}
+
+.mobile-link {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    width: 100%;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.mobile-link:last-child {
+    border-bottom: none;
+}
+
+.mobile-link:hover {
+    color: var(--accent);
+    padding-left: 4px;
+}
+
+/* Stagger animation per i link */
+.mobile-menu.is-open .mobile-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-menu.is-open .mobile-link:nth-child(1) { transition-delay: 0.05s; }
+.mobile-menu.is-open .mobile-link:nth-child(2) { transition-delay: 0.1s; }
+.mobile-menu.is-open .mobile-link:nth-child(3) { transition-delay: 0.15s; }
+
+
+/* Media Query: Attiva Hamburger e nasconde menu desktop SOLO fino a 425px */
+@media (max-width: 426px) {
+    .desktop-only {
+        display: none !important;
+    }
+    
+    .hamburger-btn {
+        display: flex;
+    }
+
+    /* Assicura che il contenitore nav-right sia allineato */
+    .nav-right {
+        gap: 12px; /* Spazio leggermente ridotto per far stare tutto */
+    }
+    
+    /* Nasconde la X di default e mostra l'hamburger */
+    .hamburger-btn.is-active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-btn.is-active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger-btn.is-active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+/* Da 426px in su, il menu hamburger scompare e torna quello desktop */
+@media (min-width: 426px) {
+    .mobile-menu {
+        display: none !important;
+    }
+}

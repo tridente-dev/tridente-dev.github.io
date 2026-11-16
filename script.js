@@ -88,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.getAttribute('data-i18n');
             const value = dict[key] || fallback[key];
             if (value) {
-                // Gestisce il contenuto HTML (es. link nella privacy note)
                 if (el.hasAttribute('data-i18n-html') || value.includes('<a ')) {
                     el.innerHTML = value;
                 } else {
@@ -585,6 +584,56 @@ document.addEventListener('DOMContentLoaded', () => {
                     formSubmitBtn.disabled = false;
                     formSubmitBtn.classList.remove('is-sending');
                 }
+            }
+        });
+    }
+
+    /* =========================================================
+       9. MENU MOBILE HAMBURGER (NUOVO)
+       ========================================================= */
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    const body = document.body;
+
+    function toggleMenu() {
+        if (!hamburgerBtn || !mobileMenu) return;
+        
+        const isOpen = mobileMenu.classList.contains('is-open');
+        
+        if (isOpen) {
+            mobileMenu.classList.remove('is-open');
+            hamburgerBtn.classList.remove('is-active');
+            hamburgerBtn.setAttribute('aria-label', 'Open menu');
+            // body.style.overflow = ''; // Non blocchiamo lo scroll per un dropdown
+        } else {
+            mobileMenu.classList.add('is-open');
+            hamburgerBtn.classList.add('is-active');
+            hamburgerBtn.setAttribute('aria-label', 'Close menu');
+            // body.style.overflow = 'hidden'; // Non blocchiamo lo scroll
+        }
+    }
+
+    if (hamburgerBtn && mobileMenu) {
+        hamburgerBtn.addEventListener('click', toggleMenu);
+
+        // Chiudi il menu quando si clicca su un link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('is-open');
+                hamburgerBtn.classList.remove('is-active');
+                hamburgerBtn.setAttribute('aria-label', 'Open menu');
+            });
+        });
+
+        // Chiudi il menu se si clicca fuori
+        document.addEventListener('click', (e) => {
+            if (mobileMenu.classList.contains('is-open') && 
+                !mobileMenu.contains(e.target) && 
+                !hamburgerBtn.contains(e.target)) {
+                mobileMenu.classList.remove('is-open');
+                hamburgerBtn.classList.remove('is-active');
+                hamburgerBtn.setAttribute('aria-label', 'Open menu');
             }
         });
     }
