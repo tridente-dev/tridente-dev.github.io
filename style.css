@@ -1339,7 +1339,7 @@ button {
 
 
 /* Media Query: Attiva Hamburger e nasconde menu desktop SOLO fino a 425px */
-@media (max-width: 426px) {
+@media (max-width: 450px) {
     .desktop-only {
         display: none !important;
     }
