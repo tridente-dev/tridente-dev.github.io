@@ -1,5 +1,5 @@
 /* =========================================================
-   FONT SELF-HOSTED (Sostituisce Google Fonts)
+   FONT SELF-HOSTED 
    ========================================================= */
 
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 300; font-display: swap; src: url('fonts/inter-v13-latin-300.woff2') format('woff2'); }
@@ -1232,7 +1232,7 @@ button {
 }
 
 /* =========================================================
-   MOBILE MENU HAMBURGER (Solo fino a 425px)
+   MOBILE MENU HAMBURGER (Solo fino a 480px)
    ========================================================= */
 
 /* Nasconde il pulsante hamburger di default su desktop */
@@ -1338,8 +1338,8 @@ button {
 .mobile-menu.is-open .mobile-link:nth-child(3) { transition-delay: 0.15s; }
 
 
-/* Media Query: Attiva Hamburger e nasconde menu desktop SOLO fino a 425px */
-@media (max-width: 1321px) {
+/* Media Query: Attiva Hamburger e nasconde menu desktop SOLO fino a 480px */
+@media (max-width: 480px) {
     .desktop-only {
         display: none !important;
     }
@@ -1352,21 +1352,10 @@ button {
     .nav-right {
         gap: 12px; /* Spazio leggermente ridotto per far stare tutto */
     }
-    
-    /* Nasconde la X di default e mostra l'hamburger */
-    .hamburger-btn.is-active span:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    .hamburger-btn.is-active span:nth-child(2) {
-        opacity: 0;
-    }
-    .hamburger-btn.is-active span:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
 }
 
-/* Da 426px in su, il menu hamburger scompare e torna quello desktop */
-@media (min-width: 1322) {
+/* Da 481px in su, il menu hamburger scompare e torna quello desktop */
+@media (min-width: 481px) {
     .mobile-menu {
         display: none !important;
     }
