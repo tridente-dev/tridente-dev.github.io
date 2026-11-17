@@ -67,7 +67,7 @@ window.translations = {
     form_error_send: "Sending failed. Please try again.",
 
     contact_privacy_note: "The data you provide will be used exclusively to respond to your inquiry and evaluate a potential collaboration.",
-    form_privacy_consent: "I declare that I have read the <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> and the <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Legal Notes</a>.",
+    form_privacy_consent: "I declare that I have read the <a href=\"privacy.html\">Privacy Policy</a> and the <a href=\"legal.html\">Legal Notes</a>.",
     form_error_consent: "Please accept the Privacy Policy to continue.",
 
     copyright: "© 2026 Giancarlo Tridente. All rights reserved.",
@@ -205,7 +205,7 @@ window.translations = {
     form_error_send: "Invio non riuscito. Riprova.",
 
     contact_privacy_note: "I dati forniti saranno utilizzati esclusivamente per rispondere alla tua richiesta e valutare una potenziale collaborazione.",
-    form_privacy_consent: "Dichiaro di aver preso visione della <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> e delle <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Note Legali</a>.",
+    form_privacy_consent: "Dichiaro di aver preso visione della <a href=\"privacy.html\">Privacy Policy</a> e delle <a href=\"legal.html\">Note Legali</a>.",
     form_error_consent: "Devi accettare la Privacy Policy per continuare.",
 
     copyright: "© 2026 Giancarlo Tridente. Tutti i diritti riservati.",
@@ -343,7 +343,7 @@ window.translations = {
     form_error_send: "Error al enviar. Inténtalo de nuevo.",
 
     contact_privacy_note: "Los datos que proporciones se utilizarán exclusivamente para responder a tu consulta y evaluar una posible colaboración.",
-    form_privacy_consent: "Declaro haber leído la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Política de Privacidad</a> y las <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Notas Legales</a>.",
+    form_privacy_consent: "Declaro haber leído la <a href=\"privacy.html\">Política de Privacidad</a> y las <a href=\"legal.html\">Notas Legales</a>.",
     form_error_consent: "Debes aceptar la Política de Privacidad para continuar.",
 
     copyright: "© 2026 Giancarlo Tridente. Todos los derechos reservados.",
@@ -481,7 +481,7 @@ window.translations = {
     form_error_send: "Échec de l'envoi. Veuillez réessayer.",
 
     contact_privacy_note: "Les données fournies seront utilisées exclusivement pour répondre à votre demande et évaluer une éventuelle collaboration.",
-    form_privacy_consent: "Je déclare avoir pris connaissance de la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Politique de confidentialité</a> et des <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Mentions légales</a>.",
+    form_privacy_consent: "Je déclare avoir pris connaissance de la <a href=\"privacy.html\">Politique de confidentialité</a> et des <a href=\"legal.html\">Mentions légales</a>.",
     form_error_consent: "Veuillez accepter la Politique de Confidentialité pour continuer.",
 
     copyright: "© 2026 Giancarlo Tridente. Tous droits réservés.",
@@ -619,7 +619,7 @@ window.translations = {
     form_error_send: "Senden fehlgeschlagen. Bitte versuchen Sie es erneut.",
 
     contact_privacy_note: "Die von Ihnen bereitgestellten Daten werden ausschließlich zur Beantwortung Ihrer Anfrage und zur Bewertung einer möglichen Zusammenarbeit verwendet.",
-    form_privacy_consent: "Ich erkläre, dass ich die <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> und die <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Rechtlichen Hinweise</a> zur Kenntnis genommen habe.",
+    form_privacy_consent: "Ich erkläre, dass ich die <a href=\"privacy.html\">Datenschutzerklärung</a> und die <a href=\"legal.html\">Rechtlichen Hinweise</a> zur Kenntnis genommen habe.",
     form_error_consent: "Bitte akzeptieren Sie die Datenschutzerklärung, um fortzufahren.",
 
     copyright: "© 2026 Giancarlo Tridente. Alle Rechte vorbehalten.",
@@ -757,7 +757,7 @@ window.translations = {
     form_error_send: "Falha no envio. Tente novamente.",
 
     contact_privacy_note: "Os dados fornecidos serão utilizados exclusivamente para responder à sua consulta e avaliar uma possível colaboração.",
-    form_privacy_consent: "Declaro que tomei conhecimento da <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Política de Privacidade</a> e das <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Notas Legais</a>.",
+    form_privacy_consent: "Declaro que tomei conhecimento da <a href=\"privacy.html\">Política de Privacidade</a> e das <a href=\"legal.html\">Notas Legais</a>.",
     form_error_consent: "Aceite a Política de Privacidade para continuar.",
 
     copyright: "© 2026 Giancarlo Tridente. Todos os direitos reservados.",
@@ -895,7 +895,7 @@ window.translations = {
     form_error_send: "发送失败。请重试。",
 
     contact_privacy_note: "您提供的数据将仅用于回复您的询问并评估潜在的合作。",
-    form_privacy_consent: "我声明已阅读<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">隐私政策</a>和<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">法律声明</a>。",
+    form_privacy_consent: "我声明已阅读<a href=\"privacy.html\">隐私政策</a>和<a href=\"legal.html\">法律声明</a>。",
     form_error_consent: "请接受隐私政策以继续。",
 
     copyright: "© 2026 Giancarlo Tridente。保留所有权利。",
@@ -1033,7 +1033,7 @@ window.translations = {
     form_error_send: "送信に失敗しました。もう一度お試しください。",
 
     contact_privacy_note: "ご提供いただいたデータは、お問い合わせへの回答および潜在的なコラボレーションの評価のみに使用されます。",
-    form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">プライバシーポリシー</a>および<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">法的事項</a>を確認したことを宣言します。",
+    form_privacy_consent: "<a href=\"privacy.html\">プライバシーポリシー</a>および<a href=\"legal.html\">法的事項</a>を確認したことを宣言します。",
     form_error_consent: "続行するにはプライバシーポリシーに同意してください。",
 
     copyright: "© 2026 Giancarlo Tridente. All rights reserved.",
@@ -1171,7 +1171,7 @@ window.translations = {
     form_error_send: "Pengiriman gagal. Silakan coba lagi.",
 
     contact_privacy_note: "Data yang Anda berikan akan digunakan secara eksklusif untuk menanggapi pertanyaan Anda dan mengevaluasi potensi kolaborasi.",
-    form_privacy_consent: "Saya menyatakan telah membaca <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Kebijakan Privasi</a> dan <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Catatan Hukum</a>.",
+    form_privacy_consent: "Saya menyatakan telah membaca <a href=\"privacy.html\">Kebijakan Privasi</a> dan <a href=\"legal.html\">Catatan Hukum</a>.",
     form_error_consent: "Harap setujui Kebijakan Privasi untuk melanjutkan.",
 
     copyright: "© 2026 Giancarlo Tridente. Semua hak dilindungi.",
@@ -1309,7 +1309,7 @@ window.translations = {
     form_error_send: "فشل الإرسال. يرجى المحاولة مرة أخرى.",
 
     contact_privacy_note: "ستُستخدم البيانات التي تقدمها حصرياً للرد على استفسارك وتقييم تعاون محتمل.",
-    form_privacy_consent: "أقر بأنني اطلعت على <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">سياسة الخصوصية</a> و<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">الملاحظات القانونية</a>.",
+    form_privacy_consent: "أقر بأنني اطلعت على <a href=\"privacy.html\">سياسة الخصوصية</a> و<a href=\"legal.html\">الملاحظات القانونية</a>.",
     form_error_consent: "يرجى قبول سياسة الخصوصية للمتابعة.",
 
     copyright: "© 2026 Giancarlo Tridente. جميع الحقوق محفوظة.",
@@ -1447,7 +1447,7 @@ window.translations = {
     form_error_send: "भेजना विफल रहा। कृपया पुनः प्रयास करें।",
 
     contact_privacy_note: "आपके द्वारा प्रदान किया गया डेटा केवल आपकी पूछताछ का जवाब देने और संभावित सहयोग का मूल्यांकन करने के लिए उपयोग किया जाएगा।",
-    form_privacy_consent: "मैं घोषणा करता/करती हूँ कि मैंने <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">गोपनीयता नीति</a> और <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">कानूनी सूचनाएँ</a> पढ़ ली हैं।",
+    form_privacy_consent: "मैं घोषणा करता/करती हूँ कि मैंने <a href=\"privacy.html\">गोपनीयता नीति</a> और <a href=\"legal.html\">कानूनी सूचनाएँ</a> पढ़ ली हैं।",
     form_error_consent: "जारी रखने के लिए कृपया गोपनीयता नीति स्वीकार करें।",
 
     copyright: "© 2026 Giancarlo Tridente. सर्वाधिकार सुरक्षित।",
@@ -1585,7 +1585,7 @@ window.translations = {
     form_error_send: "Отправка не удалась. Попробуйте снова.",
 
     contact_privacy_note: "Предоставленные данные будут использоваться исключительно для ответа на ваш запрос и оценки потенциального сотрудничества.",
-    form_privacy_consent: "Подтверждаю, что ознакомился(-ась) с <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Политикой конфиденциальности</a> и <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Правовыми положениями</a>.",
+    form_privacy_consent: "Подтверждаю, что ознакомился(-ась) с <a href=\"privacy.html\">Политикой конфиденциальности</a> и <a href=\"legal.html\">Правовыми положениями</a>.",
     form_error_consent: "Примите Политику конфиденциальности, чтобы продолжить.",
 
     copyright: "© 2026 Giancarlo Tridente. Все права защищены.",
@@ -1723,7 +1723,7 @@ window.translations = {
     form_error_send: "전송에 실패했습니다. 다시 시도해 주세요.",
 
     contact_privacy_note: "제공된 데이터는 문의에 답변하고 잠재적 협업을 평가하기 위해서만 사용됩니다.",
-    form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">개인정보 처리방침</a>과 <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">법적 고지</a>를 확인했음을 선언합니다.",
+    form_privacy_consent: "<a href=\"privacy.html\">개인정보 처리방침</a>과 <a href=\"legal.html\">법적 고지</a>를 확인했음을 선언합니다.",
     form_error_consent: "계속하려면 개인정보 처리방침에 동의해 주세요.",
 
     copyright: "© 2026 Giancarlo Tridente. 모든 권리 보유.",
@@ -1861,7 +1861,7 @@ window.translations = {
     form_error_send: "Gönderme başarısız oldu. Lütfen tekrar deneyin.",
 
     contact_privacy_note: "Sağladığınız veriler yalnızca talebinizi yanıtlamak ve olası bir işbirliğini değerlendirmek için kullanılacaktır.",
-    form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Gizlilik Politikası</a>nı ve <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Yasal Bilgilendirmeleri</a> okuduğumu beyan ederim.",
+    form_privacy_consent: "<a href=\"privacy.html\">Gizlilik Politikası</a>nı ve <a href=\"legal.html\">Yasal Bilgilendirmeleri</a> okuduğumu beyan ederim.",
     form_error_consent: "Devam etmek için lütfen Gizlilik Politikası'nı kabul edin.",
 
     copyright: "© 2026 Giancarlo Tridente. Tüm hakları saklıdır.",
@@ -1999,7 +1999,7 @@ window.translations = {
     form_error_send: "Verzenden mislukt. Probeer het opnieuw.",
 
     contact_privacy_note: "De door jou verstrekte gegevens worden uitsluitend gebruikt om je vraag te beantwoorden en een mogelijke samenwerking te beoordelen.",
-    form_privacy_consent: "Ik verklaar dat ik het <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacybeleid</a> en de <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Juridische informatie</a> heb gelezen.",
+    form_privacy_consent: "Ik verklaar dat ik het <a href=\"privacy.html\">Privacybeleid</a> en de <a href=\"legal.html\">Juridische informatie</a> heb gelezen.",
     form_error_consent: "Accepteer het Privacybeleid om door te gaan.",
 
     copyright: "© 2026 Giancarlo Tridente. Alle rechten voorbehouden.",
@@ -2137,7 +2137,7 @@ window.translations = {
     form_error_send: "Wysyłanie nie powiodło się. Spróbuj ponownie.",
 
     contact_privacy_note: "Podane dane będą wykorzystywane wyłącznie do odpowiedzi na Twoje zapytanie i oceny potencjalnej współpracy.",
-    form_privacy_consent: "Oświadczam, że zapoznałem(-am) się z <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Polityką prywatności</a> oraz <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Informacjami prawnymi</a>.",
+    form_privacy_consent: "Oświadczam, że zapoznałem(-am) się z <a href=\"privacy.html\">Polityką prywatności</a> oraz <a href=\"legal.html\">Informacjami prawnymi</a>.",
     form_error_consent: "Zaakceptuj Politykę prywatności, aby kontynuować.",
 
     copyright: "© 2026 Giancarlo Tridente. Wszelkie prawa zastrzeżone.",
