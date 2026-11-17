@@ -2,7 +2,7 @@
    translations.js
    Traduzioni complete per il sito portfolio
    Lingue supportate: en, it, es, fr, de, pt, zh, ja, id, ar, hi, ru, ko, tr, nl, pl
-   Ultimo aggiornamento: 15 novembre 2026
+   Ultimo aggiornamento: 17 novembre 2026
    ========================================================= */
 
 window.translations = {
@@ -67,7 +67,7 @@ window.translations = {
     form_error_send: "Sending failed. Please try again.",
 
     contact_privacy_note: "The data you provide will be used exclusively to respond to your inquiry and evaluate a potential collaboration.",
-    form_privacy_consent: "I have read and accept the <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> and <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Legal Notes</a>.",
+    form_privacy_consent: "I declare that I have read the <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> and the <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Legal Notes</a>.",
     form_error_consent: "Please accept the Privacy Policy to continue.",
 
     copyright: "© 2026 Giancarlo Tridente. All rights reserved.",
@@ -75,7 +75,7 @@ window.translations = {
     legal_page_title: "Legal Notes — Tridente Dev",
     legal_back: "← Back to portfolio",
     legal_title: "Legal Notes",
-    legal_updated: "Last updated: November 15, 2026",
+    legal_updated: "Last updated: November 17, 2026",
     legal_owner_title: "Site Owner",
     legal_owner_desc: "This personal portfolio is curated by Giancarlo Tridente, based in Milan (MI), Italy. Contact: g.tridente.web@gmail.com.",
     legal_purpose_title: "Purpose of the Site",
@@ -102,13 +102,14 @@ window.translations = {
     privacy_page_title: "Privacy Policy — Giancarlo Tridente",
     privacy_back: "← Back to portfolio",
     privacy_title: "Privacy Policy",
-    privacy_updated: "Last updated: November 15, 2026 — Pursuant to Art. 13 of Regulation (EU) 2016/679 (GDPR)",
+    privacy_updated: "Last updated: November 17, 2026 — Pursuant to Art. 13 of Regulation (EU) 2016/679 (GDPR)",
     privacy_h2_1: "1. Data Controller",
     privacy_p1: "The data controller is Giancarlo Tridente, based in Milan (MI), Italy. Contactable at g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Data Processed and Purposes",
     privacy_li1: "Contact Form: name, email, and message content, provided voluntarily. They are used to respond to the request and, if requested by the data subject, to carry out pre-contractual activities.",
     privacy_li2: "Technical Data: the hosting service may process IP addresses, logs, and device data to deliver the pages and protect the infrastructure. The hosting provider's privacy policies also apply to such processing.",
     privacy_li3: "Local Preferences: the site uses the browser's LocalStorage to remember the selected theme and language. These preferences remain in the browser and are not sent via the form. Users can delete these preferences at any time by clearing site data in their browser.",
+    privacy_li_ack: "Data relating to acknowledgement of the privacy notice: when the form is submitted, the date and time of submission are automatically recorded, together with the version of the Privacy Policy made available to the user. This information is associated with the request and used exclusively to document that the privacy notice was viewed and which version applied at the time of submission. These data are transmitted through the Web3Forms service together with the other form data.",
     privacy_h2_3: "3. Cookies and Similar Technologies",
     privacy_p3_full: "<p>The site uses the browser's LocalStorage exclusively to store certain user preferences, such as the graphic theme and the selected language. This information remains stored on the user's device and is not used for advertising, profiling, or tracking purposes.</p><p>The main portfolio code does not implement analytics, advertising, or profiling tools. All fonts used by the site are self-hosted; therefore, no external font services (such as Google Fonts) are loaded.</p><p>Some demonstration pages included in the portfolio may load JavaScript libraries or other resources from third-party CDN services, including Tailwind CSS. When such resources are requested, the respective providers may receive technical data necessary for the connection, such as the IP address and information relating to the user's browser and device.</p><p>Loading resources from CDNs does not automatically entail the use of profiling cookies or the obligation to request consent. The need for any additional notices or prior consent is assessed based on the tools actually used, their purposes, and the applicable legislation.</p><p>Should cookies or other tracking tools not strictly necessary be introduced in the future, their use will be subject to the user's prior consent, where required by applicable law, through any consent management tools.</p><p>For further information on the processing of personal data, please consult this privacy policy.</p>",
     privacy_h2_4: "4. Legal Basis for Processing and Transfers Outside the EEA",
@@ -141,7 +142,7 @@ window.translations = {
     privacy_h2_10: "10. Demos and Demonstration Sites",
     privacy_p10: "The AETHER and Aura Suites sections are demonstration projects of the portfolio, not real commercial activities. Do not make real payments, orders, or bookings and do not enter real personal data in their forms. Interactions are simulated and do not constitute a commercial offer.",
     privacy_h2_11: "11. Updates and Contacts",
-    privacy_p11: "This policy may be updated in the event of changes to the site, providers, or processing activities. Last updated: November 15, 2026. For questions on data processing: g.tridente.web@gmail.com."
+    privacy_p11: "This policy may be updated in the event of changes to the site, providers, or processing activities. Last updated: November 17, 2026. For questions on data processing: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -204,7 +205,7 @@ window.translations = {
     form_error_send: "Invio non riuscito. Riprova.",
 
     contact_privacy_note: "I dati forniti saranno utilizzati esclusivamente per rispondere alla tua richiesta e valutare una potenziale collaborazione.",
-    form_privacy_consent: "Ho letto e accetto la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> e le <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Note Legali</a>.",
+    form_privacy_consent: "Dichiaro di aver preso visione della <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> e delle <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Note Legali</a>.",
     form_error_consent: "Devi accettare la Privacy Policy per continuare.",
 
     copyright: "© 2026 Giancarlo Tridente. Tutti i diritti riservati.",
@@ -212,7 +213,7 @@ window.translations = {
     legal_page_title: "Note Legali — Tridente Dev",
     legal_back: "← Torna al portfolio",
     legal_title: "Note Legali",
-    legal_updated: "Ultimo aggiornamento: 15 novembre 2026",
+    legal_updated: "Ultimo aggiornamento: 17 novembre 2026",
     legal_owner_title: "Titolare del sito",
     legal_owner_desc: "Questo portfolio personale è curato da Giancarlo Tridente, con sede a Milano (MI), Italia. Contatto: g.tridente.web@gmail.com.",
     legal_purpose_title: "Finalità del sito",
@@ -239,13 +240,14 @@ window.translations = {
     privacy_page_title: "Privacy Policy — Giancarlo Tridente",
     privacy_back: "← Torna al portfolio",
     privacy_title: "Privacy Policy",
-    privacy_updated: "Ultimo aggiornamento: 15 novembre 2026 — Ai sensi dell'art. 13 del Regolamento (UE) 2016/679 (GDPR)",
+    privacy_updated: "Ultimo aggiornamento: 17 novembre 2026 — Ai sensi dell'art. 13 del Regolamento (UE) 2016/679 (GDPR)",
     privacy_h2_1: "1. Titolare del trattamento",
     privacy_p1: "Il titolare del trattamento è Giancarlo Tridente, con sede a Milano (MI), Italia. Contattabile all'indirizzo g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Dati trattati e finalità",
     privacy_li1: "Modulo di contatto: nome, email e contenuto del messaggio, forniti volontariamente. Sono utilizzati per rispondere alla richiesta e, se richiesto dall'interessato, per svolgere attività precontrattuali.",
     privacy_li2: "Dati tecnici: il servizio di hosting può trattare indirizzi IP, log e dati del dispositivo per erogare le pagine e proteggere l'infrastruttura. A tali trattamenti si applicano anche le informative privacy del fornitore di hosting.",
     privacy_li3: "Preferenze locali: il sito utilizza il LocalStorage del browser per ricordare il tema e la lingua selezionati. Tali preferenze restano nel browser e non vengono inviate tramite il modulo. L'utente può cancellarle in qualsiasi momento eliminando i dati del sito dal browser.",
+    privacy_li_ack: "Dati relativi alla presa visione dell'informativa: al momento dell'invio del modulo vengono registrati automaticamente la data e l'ora dell'invio, insieme alla versione della Privacy Policy resa disponibile all'utente. Queste informazioni sono associate alla richiesta e utilizzate esclusivamente per documentare la presa visione dell'informativa e la versione applicabile al momento dell'invio. Tali dati vengono trasmessi tramite il servizio Web3Forms insieme agli altri dati del modulo.",
     privacy_h2_3: "3. Cookie e tecnologie analoghe",
     privacy_p3_full: "<p>Il sito utilizza il LocalStorage del browser esclusivamente per memorizzare alcune preferenze dell'utente, come il tema grafico e la lingua selezionata. Queste informazioni rimangono memorizzate nel dispositivo dell'utente e non vengono utilizzate per finalità pubblicitarie, di profilazione o di tracciamento.</p><p>Il codice principale del portfolio non implementa strumenti di analytics, advertising o profilazione. Tutti i font utilizzati dal sito sono self-hosted, pertanto non vengono caricati servizi esterni di font, come Google Fonts.</p><p>Alcune pagine dimostrative incluse nel portfolio possono caricare librerie JavaScript o altre risorse da servizi CDN di terze parti, tra cui Tailwind CSS. Quando tali risorse vengono richieste, i rispettivi fornitori possono ricevere dati tecnici necessari alla connessione, quali l'indirizzo IP e informazioni relative al browser e al dispositivo dell'utente.</p><p>Il caricamento di risorse da CDN non comporta automaticamente l'utilizzo di cookie di profilazione o l'obbligo di richiedere il consenso. La necessità di eventuali informative aggiuntive o del consenso preventivo viene valutata in base agli strumenti effettivamente utilizzati, alle loro finalità e alla normativa applicabile.</p><p>Qualora in futuro venissero introdotti cookie o altri strumenti di tracciamento non strettamente necessari, il loro utilizzo sarà subordinato al consenso preventivo dell'utente, quando richiesto dalla normativa vigente, attraverso gli eventuali strumenti di gestione del consenso.</p><p>Per ulteriori informazioni sul trattamento dei dati personali, è possibile consultare la presente informativa.</p>",
     privacy_h2_4: "4. Base giuridica del trattamento e trasferimenti fuori SEE",
@@ -278,7 +280,7 @@ window.translations = {
     privacy_h2_10: "10. Demo e siti dimostrativi",
     privacy_p10: "Le sezioni AETHER e Aura Suites sono progetti dimostrativi del portfolio, non attività commerciali reali. Non effettuare pagamenti, ordini o prenotazioni reali e non inserire dati personali reali nei loro moduli. Le interazioni sono simulate e non costituiscono offerta commerciale.",
     privacy_h2_11: "11. Aggiornamenti e contatti",
-    privacy_p11: "La presente informativa può essere aggiornata in caso di modifiche al sito, ai fornitori o alle attività di trattamento. Ultimo aggiornamento: 15 novembre 2026. Per domande sul trattamento dei dati: g.tridente.web@gmail.com."
+    privacy_p11: "La presente informativa può essere aggiornata in caso di modifiche al sito, ai fornitori o alle attività di trattamento. Ultimo aggiornamento: 17 novembre 2026. Per domande sul trattamento dei dati: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -341,7 +343,7 @@ window.translations = {
     form_error_send: "Error al enviar. Inténtalo de nuevo.",
 
     contact_privacy_note: "Los datos que proporciones se utilizarán exclusivamente para responder a tu consulta y evaluar una posible colaboración.",
-    form_privacy_consent: "He leído y acepto la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Política de Privacidad</a> y las <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Notas Legales</a>.",
+    form_privacy_consent: "Declaro haber leído la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Política de Privacidad</a> y las <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Notas Legales</a>.",
     form_error_consent: "Debes aceptar la Política de Privacidad para continuar.",
 
     copyright: "© 2026 Giancarlo Tridente. Todos los derechos reservados.",
@@ -349,7 +351,7 @@ window.translations = {
     legal_page_title: "Notas Legales — Tridente Dev",
     legal_back: "← Volver al portfolio",
     legal_title: "Notas Legales",
-    legal_updated: "Última actualización: 15 de noviembre de 2026",
+    legal_updated: "Última actualización: 17 de noviembre de 2026",
     legal_owner_title: "Titular del sitio",
     legal_owner_desc: "Este portfolio personal está gestionado por Giancarlo Tridente, con sede en Milán (MI), Italia. Contacto: g.tridente.web@gmail.com.",
     legal_purpose_title: "Finalidad del sitio",
@@ -376,13 +378,14 @@ window.translations = {
     privacy_page_title: "Política de Privacidad — Giancarlo Tridente",
     privacy_back: "← Volver al portfolio",
     privacy_title: "Política de Privacidad",
-    privacy_updated: "Última actualización: 15 de noviembre de 2026 — De conformidad con el art. 13 del Reglamento (UE) 2016/679 (GDPR)",
+    privacy_updated: "Última actualización: 17 de noviembre de 2026 — De conformidad con el art. 13 del Reglamento (UE) 2016/679 (GDPR)",
     privacy_h2_1: "1. Responsable del tratamiento",
     privacy_p1: "El responsable del tratamiento es Giancarlo Tridente, con sede en Milán (MI), Italia. Contacto: g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Datos tratados y finalidades",
     privacy_li1: "Formulario de contacto: nombre, email y contenido del mensaje, proporcionados voluntariamente. Se utilizan para responder a la solicitud y, si lo solicita el interesado, para llevar a cabo actividades precontractuales.",
     privacy_li2: "Datos técnicos: el servicio de hosting puede tratar direcciones IP, logs y datos del dispositivo para entregar las páginas y proteger la infraestructura. También se aplican las políticas de privacidad del proveedor de hosting.",
     privacy_li3: "Preferencias locales: el sitio utiliza LocalStorage del navegador para recordar el tema y el idioma seleccionados. Estas preferencias permanecen en el navegador y no se envían a través del formulario. El usuario puede eliminarlas en cualquier momento borrando los datos del sitio en el navegador.",
+    privacy_li_ack: "Datos relativos a la consulta del aviso de privacidad: al enviar el formulario, se registran automáticamente la fecha y la hora del envío, junto con la versión de la Política de Privacidad puesta a disposición del usuario. Esta información se asocia a la solicitud y se utiliza exclusivamente para documentar que se consultó el aviso de privacidad y qué versión era aplicable en el momento del envío. Estos datos se transmiten a través del servicio Web3Forms junto con los demás datos del formulario.",
     privacy_h2_3: "3. Cookies y tecnologías similares",
     privacy_p3_full: "<p>El sitio utiliza el LocalStorage del navegador exclusivamente para almacenar algunas preferencias del usuario, como el tema gráfico y el idioma seleccionado. Esta información permanece almacenada en el dispositivo del usuario y no se utiliza con fines publicitarios, de perfilado o de seguimiento.</p><p>El código principal del portfolio no implementa herramientas de analytics, publicidad o perfilado. Todas las fuentes utilizadas por el sitio son auto-hospedadas; por lo tanto, no se cargan servicios externos de fuentes, como Google Fonts.</p><p>Algunas páginas de demostración incluidas en el portfolio pueden cargar bibliotecas JavaScript u otros recursos desde servicios CDN de terceros, incluido Tailwind CSS. Cuando se solicitan dichos recursos, los respectivos proveedores pueden recibir datos técnicos necesarios para la conexión, como la dirección IP e información relativa al navegador y al dispositivo del usuario.</p><p>La carga de recursos desde CDN no implica automáticamente el uso de cookies de perfilado ni la obligación de solicitar consentimiento. La necesidad de posibles avisos adicionales o del consentimiento previo se evalúa en función de las herramientas efectivamente utilizadas, sus finalidades y la normativa aplicable.</p><p>Si en el futuro se introdujeran cookies u otras herramientas de seguimiento no estrictamente necesarias, su uso quedará subordinado al consentimiento previo del usuario, cuando lo exija la normativa vigente, a través de las eventuales herramientas de gestión del consentimiento.</p><p>Para más información sobre el tratamiento de datos personales, puede consultar la presente política de privacidad.</p>",
     privacy_h2_4: "4. Base jurídica del tratamiento y transferencias fuera del EEE",
@@ -415,7 +418,7 @@ window.translations = {
     privacy_h2_10: "10. Demos y sitios de demostración",
     privacy_p10: "Las secciones AETHER y Aura Suites son proyectos de demostración del portfolio, no actividades comerciales reales. No realices pagos, pedidos ni reservas reales y no introduzcas datos personales reales en sus formularios. Las interacciones son simuladas y no constituyen una oferta comercial.",
     privacy_h2_11: "11. Actualizaciones y contactos",
-    privacy_p11: "Esta política puede actualizarse en caso de cambios en el sitio, en los proveedores o en las actividades de tratamiento. Última actualización: 15 de noviembre de 2026. Para preguntas sobre el tratamiento de datos: g.tridente.web@gmail.com."
+    privacy_p11: "Esta política puede actualizarse en caso de cambios en el sitio, en los proveedores o en las actividades de tratamiento. Última actualización: 17 de noviembre de 2026. Para preguntas sobre el tratamiento de datos: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -478,7 +481,7 @@ window.translations = {
     form_error_send: "Échec de l'envoi. Veuillez réessayer.",
 
     contact_privacy_note: "Les données fournies seront utilisées exclusivement pour répondre à votre demande et évaluer une éventuelle collaboration.",
-    form_privacy_consent: "J'ai lu et j'accepte la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Politique de Confidentialité</a> et les <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Mentions Légales</a>.",
+    form_privacy_consent: "Je déclare avoir pris connaissance de la <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Politique de confidentialité</a> et des <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Mentions légales</a>.",
     form_error_consent: "Veuillez accepter la Politique de Confidentialité pour continuer.",
 
     copyright: "© 2026 Giancarlo Tridente. Tous droits réservés.",
@@ -486,7 +489,7 @@ window.translations = {
     legal_page_title: "Mentions Légales — Tridente Dev",
     legal_back: "← Retour au portfolio",
     legal_title: "Mentions Légales",
-    legal_updated: "Dernière mise à jour : 15 novembre 2026",
+    legal_updated: "Dernière mise à jour : 17 novembre 2026",
     legal_owner_title: "Propriétaire du site",
     legal_owner_desc: "Ce portfolio personnel est géré par Giancarlo Tridente, basé à Milan (MI), Italie. Contact : g.tridente.web@gmail.com.",
     legal_purpose_title: "Objet du site",
@@ -513,13 +516,14 @@ window.translations = {
     privacy_page_title: "Politique de Confidentialité — Giancarlo Tridente",
     privacy_back: "← Retour au portfolio",
     privacy_title: "Politique de Confidentialité",
-    privacy_updated: "Dernière mise à jour : 15 novembre 2026 — Conformément à l'art. 13 du Règlement (UE) 2016/679 (RGPD)",
+    privacy_updated: "Dernière mise à jour : 17 novembre 2026 — Conformément à l'art. 13 du Règlement (UE) 2016/679 (RGPD)",
     privacy_h2_1: "1. Responsable du traitement",
     privacy_p1: "Le responsable du traitement est Giancarlo Tridente, basé à Milan (MI), Italie. Contact : g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Données traitées et finalités",
     privacy_li1: "Formulaire de contact : nom, email et contenu du message, fournis volontairement. Ils sont utilisés pour répondre à la demande et, si l'intéressé le demande, pour mener des activités précontractuelles.",
     privacy_li2: "Données techniques : le service d'hébergement peut traiter des adresses IP, des logs et des données d'appareil pour fournir les pages et protéger l'infrastructure. Les politiques de confidentialité du fournisseur d'hébergement s'appliquent également à ces traitements.",
     privacy_li3: "Préférences locales : le site utilise le LocalStorage du navigateur pour mémoriser le thème et la langue sélectionnés. Ces préférences restent dans le navigateur et ne sont pas envoyées via le formulaire. L'utilisateur peut les supprimer à tout moment en effaçant les données du site dans son navigateur.",
+    privacy_li_ack: "Données relatives à la prise de connaissance de la notice de confidentialité : lors de l'envoi du formulaire, la date et l'heure d'envoi sont automatiquement enregistrées, ainsi que la version de la Politique de confidentialité mise à la disposition de l'utilisateur. Ces informations sont associées à la demande et utilisées exclusivement pour documenter la consultation de la notice et la version applicable au moment de l'envoi. Ces données sont transmises via le service Web3Forms avec les autres données du formulaire.",
     privacy_h2_3: "3. Cookies et technologies similaires",
     privacy_p3_full: "<p>Le site utilise le LocalStorage du navigateur exclusivement pour mémoriser certaines préférences de l'utilisateur, telles que le thème graphique et la langue sélectionnée. Ces informations restent stockées sur l'appareil de l'utilisateur et ne sont pas utilisées à des fins publicitaires, de profilage ou de suivi.</p><p>Le code principal du portfolio n'implémente pas d'outils d'analytics, de publicité ou de profilage. Toutes les polices utilisées par le site sont auto-hébergées ; par conséquent, aucun service de polices externe (tel que Google Fonts) n'est chargé.</p><p>Certaines pages de démonstration intégrées au portfolio peuvent charger des bibliothèques JavaScript ou d'autres ressources depuis des services CDN tiers, y compris Tailwind CSS. Lorsque ces ressources sont demandées, les fournisseurs concernés peuvent recevoir les données techniques nécessaires à la connexion, telles que l'adresse IP et des informations relatives au navigateur et à l'appareil de l'utilisateur.</p><p>Le chargement de ressources depuis des CDN n'implique pas automatiquement l'utilisation de cookies de profilage ni l'obligation de demander le consentement. La nécessité d'éventuelles informations supplémentaires ou d'un consentement préalable est évaluée en fonction des outils effectivement utilisés, de leurs finalités et de la législation applicable.</p><p>Si des cookies ou d'autres outils de suivi non strictement nécessaires étaient introduits à l'avenir, leur utilisation serait subordonnée au consentement préalable de l'utilisateur, lorsque la loi applicable l'exige, via les éventuels outils de gestion du consentement.</p><p>Pour plus d'informations sur le traitement des données personnelles, veuillez consulter la présente politique de confidentialité.</p>",
     privacy_h2_4: "4. Base juridique du traitement et transferts hors EEE",
@@ -552,7 +556,7 @@ window.translations = {
     privacy_h2_10: "10. Démos et sites de démonstration",
     privacy_p10: "Les sections AETHER et Aura Suites sont des projets de démonstration du portfolio, et non de réelles activités commerciales. N'effectuez pas de paiements, commandes ou réservations réels et ne saisissez pas de données personnelles réelles dans leurs formulaires. Les interactions sont simulées et ne constituent pas une offre commerciale.",
     privacy_h2_11: "11. Mises à jour et contacts",
-    privacy_p11: "Cette politique peut être mise à jour en cas de modifications du site, des fournisseurs ou des activités de traitement. Dernière mise à jour : 15 novembre 2026. Pour toute question sur le traitement des données : g.tridente.web@gmail.com."
+    privacy_p11: "Cette politique peut être mise à jour en cas de modifications du site, des fournisseurs ou des activités de traitement. Dernière mise à jour : 17 novembre 2026. Pour toute question sur le traitement des données : g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -615,7 +619,7 @@ window.translations = {
     form_error_send: "Senden fehlgeschlagen. Bitte versuchen Sie es erneut.",
 
     contact_privacy_note: "Die von Ihnen bereitgestellten Daten werden ausschließlich zur Beantwortung Ihrer Anfrage und zur Bewertung einer möglichen Zusammenarbeit verwendet.",
-    form_privacy_consent: "Ich habe die <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> und die <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Rechtlichen Hinweise</a> gelesen und akzeptiere sie.",
+    form_privacy_consent: "Ich erkläre, dass ich die <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> und die <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Rechtlichen Hinweise</a> zur Kenntnis genommen habe.",
     form_error_consent: "Bitte akzeptieren Sie die Datenschutzerklärung, um fortzufahren.",
 
     copyright: "© 2026 Giancarlo Tridente. Alle Rechte vorbehalten.",
@@ -623,7 +627,7 @@ window.translations = {
     legal_page_title: "Rechtliche Hinweise — Tridente Dev",
     legal_back: "← Zurück zum Portfolio",
     legal_title: "Rechtliche Hinweise",
-    legal_updated: "Letzte Aktualisierung: 15. November 2026",
+    legal_updated: "Letzte Aktualisierung: 17. November 2026",
     legal_owner_title: "Website-Inhaber",
     legal_owner_desc: "Dieses persönliche Portfolio wird von Giancarlo Tridente mit Sitz in Mailand (MI), Italien, verwaltet. Kontakt: g.tridente.web@gmail.com.",
     legal_purpose_title: "Zweck der Website",
@@ -650,13 +654,14 @@ window.translations = {
     privacy_page_title: "Datenschutzerklärung — Giancarlo Tridente",
     privacy_back: "← Zurück zum Portfolio",
     privacy_title: "Datenschutzerklärung",
-    privacy_updated: "Letzte Aktualisierung: 15. November 2026 — Gemäß Art. 13 der Verordnung (EU) 2016/679 (DSGVO)",
+    privacy_updated: "Letzte Aktualisierung: 17. November 2026 — Gemäß Art. 13 der Verordnung (EU) 2016/679 (DSGVO)",
     privacy_h2_1: "1. Verantwortlicher",
     privacy_p1: "Verantwortlicher ist Giancarlo Tridente mit Sitz in Mailand (MI), Italien. Kontakt: g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Verarbeitete Daten und Zwecke",
     privacy_li1: "Kontaktformular: Name, E-Mail und Nachrichteninhalt, freiwillig bereitgestellt. Sie werden verwendet, um die Anfrage zu beantworten und, falls vom Betroffenen gewünscht, vorvertragliche Maßnahmen durchzuführen.",
     privacy_li2: "Technische Daten: Der Hosting-Dienst kann IP-Adressen, Logs und Gerätedaten verarbeiten, um die Seiten bereitzustellen und die Infrastruktur zu schützen. Für diese Verarbeitungen gelten auch die Datenschutzrichtlinien des Hosting-Anbieters.",
     privacy_li3: "Lokale Präferenzen: Die Website verwendet das LocalStorage des Browsers, um das ausgewählte Theme und die Sprache zu speichern. Diese Präferenzen verbleiben im Browser und werden nicht über das Formular übermittelt. Nutzer können diese Präferenzen jederzeit löschen, indem sie die Websitedaten in ihrem Browser löschen.",
+    privacy_li_ack: "Daten zur Kenntnisnahme der Datenschutzhinweise: Beim Absenden des Formulars werden das Datum und die Uhrzeit der Übermittlung sowie die dem Nutzer bereitgestellte Version der Datenschutzerklärung automatisch erfasst. Diese Informationen werden der Anfrage zugeordnet und ausschließlich dazu verwendet, die Kenntnisnahme der Datenschutzhinweise und die zum Zeitpunkt der Übermittlung geltende Version zu dokumentieren. Diese Daten werden zusammen mit den übrigen Formulardaten über den Dienst Web3Forms übermittelt.",
     privacy_h2_3: "3. Cookies und ähnliche Technologien",
     privacy_p3_full: "<p>Die Website verwendet das LocalStorage des Browsers ausschließlich, um bestimmte Nutzereinstellungen zu speichern, wie das grafische Theme und die ausgewählte Sprache. Diese Informationen verbleiben auf dem Gerät des Nutzers und werden nicht zu Werbe-, Profiling- oder Tracking-Zwecken verwendet.</p><p>Der Hauptcode des Portfolios implementiert keine Analyse-, Werbe- oder Profiling-Tools. Alle auf der Website verwendeten Schriftarten werden selbst gehostet; daher werden keine externen Schriftdienste (wie Google Fonts) geladen.</p><p>Einige im Portfolio eingebettete Demonstrationsseiten können JavaScript-Bibliotheken oder andere Ressourcen von CDN-Drittanbietern laden, einschließlich Tailwind CSS. Wenn solche Ressourcen angefordert werden, können die jeweiligen Anbieter technische Daten erhalten, die für die Verbindung erforderlich sind, wie die IP-Adresse und Informationen zum Browser und Gerät des Nutzers.</p><p>Das Laden von Ressourcen von CDNs führt nicht automatisch zur Verwendung von Profiling-Cookies oder zur Pflicht, eine Einwilligung einzuholen. Die Notwendigkeit zusätzlicher Hinweise oder einer vorherigen Einwilligung wird anhand der tatsächlich verwendeten Tools, ihrer Zwecke und der geltenden Gesetzgebung bewertet.</p><p>Sollten in Zukunft Cookies oder andere nicht unbedingt erforderliche Tracking-Tools eingeführt werden, unterliegt deren Verwendung der vorherigen Einwilligung des Nutzers, sofern dies nach geltendem Recht erforderlich ist, über etwaige Einwilligungsverwaltungstools.</p><p>Weitere Informationen zur Verarbeitung personenbezogener Daten finden Sie in dieser Datenschutzerklärung.</p>",
     privacy_h2_4: "4. Rechtsgrundlage der Verarbeitung und Übermittlungen außerhalb des EWR",
@@ -689,7 +694,7 @@ window.translations = {
     privacy_h2_10: "10. Demos und Demonstrationsseiten",
     privacy_p10: "Die Bereiche AETHER und Aura Suites sind Demonstrationsprojekte des Portfolios, keine realen kommerziellen Aktivitäten. Führen Sie keine echten Zahlungen, Bestellungen oder Buchungen durch und geben Sie in ihren Formularen keine echten personenbezogenen Daten ein. Interaktionen sind simuliert und stellen kein kommerzielles Angebot dar.",
     privacy_h2_11: "11. Aktualisierungen und Kontakte",
-    privacy_p11: "Diese Richtlinie kann bei Änderungen der Website, der Anbieter oder der Verarbeitungstätigkeiten aktualisiert werden. Letzte Aktualisierung: 15. November 2026. Bei Fragen zur Datenverarbeitung: g.tridente.web@gmail.com."
+    privacy_p11: "Diese Richtlinie kann bei Änderungen der Website, der Anbieter oder der Verarbeitungstätigkeiten aktualisiert werden. Letzte Aktualisierung: 17. November 2026. Bei Fragen zur Datenverarbeitung: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -752,7 +757,7 @@ window.translations = {
     form_error_send: "Falha no envio. Tente novamente.",
 
     contact_privacy_note: "Os dados fornecidos serão utilizados exclusivamente para responder à sua consulta e avaliar uma possível colaboração.",
-    form_privacy_consent: "Li e aceito a <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Política de Privacidade</a> e as <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Notas Legais</a>.",
+    form_privacy_consent: "Declaro que tomei conhecimento da <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Política de Privacidade</a> e das <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Notas Legais</a>.",
     form_error_consent: "Aceite a Política de Privacidade para continuar.",
 
     copyright: "© 2026 Giancarlo Tridente. Todos os direitos reservados.",
@@ -760,7 +765,7 @@ window.translations = {
     legal_page_title: "Notas Legais — Tridente Dev",
     legal_back: "← Voltar ao portfólio",
     legal_title: "Notas Legais",
-    legal_updated: "Última atualização: 15 de novembro de 2026",
+    legal_updated: "Última atualização: 17 de novembro de 2026",
     legal_owner_title: "Proprietário do site",
     legal_owner_desc: "Este portfólio pessoal é curado por Giancarlo Tridente, com sede em Milão (MI), Itália. Contato: g.tridente.web@gmail.com.",
     legal_purpose_title: "Finalidade do site",
@@ -787,13 +792,14 @@ window.translations = {
     privacy_page_title: "Política de Privacidade — Giancarlo Tridente",
     privacy_back: "← Voltar ao portfólio",
     privacy_title: "Política de Privacidade",
-    privacy_updated: "Última atualização: 15 de novembro de 2026 — Nos termos do art. 13 do Regulamento (UE) 2016/679 (GDPR)",
+    privacy_updated: "Última atualização: 17 de novembro de 2026 — Nos termos do art. 13 do Regulamento (UE) 2016/679 (GDPR)",
     privacy_h2_1: "1. Controlador de dados",
     privacy_p1: "O controlador de dados é Giancarlo Tridente, com sede em Milão (MI), Itália. Contato: g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Dados tratados e finalidades",
     privacy_li1: "Formulário de contato: nome, e-mail e conteúdo da mensagem, fornecidos voluntariamente. São usados para responder à solicitação e, se solicitado pelo titular, para realizar atividades pré-contratuais.",
     privacy_li2: "Dados técnicos: o serviço de hospedagem pode tratar endereços IP, logs e dados do dispositivo para entregar as páginas e proteger a infraestrutura. As políticas de privacidade do provedor de hospedagem também se aplicam a esses tratamentos.",
     privacy_li3: "Preferências locais: o site usa o LocalStorage do navegador para lembrar o tema e o idioma selecionados. Essas preferências permanecem no navegador e não são enviadas pelo formulário. Os usuários podem excluí-las a qualquer momento limpando os dados do site no navegador.",
+    privacy_li_ack: "Dados relativos à tomada de conhecimento da informação de privacidade: no momento do envio do formulário, são registadas automaticamente a data e a hora do envio, juntamente com a versão da Política de Privacidade disponibilizada ao utilizador. Estas informações são associadas ao pedido e utilizadas exclusivamente para documentar a consulta da informação e a versão aplicável no momento do envio. Estes dados são transmitidos através do serviço Web3Forms juntamente com os restantes dados do formulário.",
     privacy_h2_3: "3. Cookies e tecnologias semelhantes",
     privacy_p3_full: "<p>O site usa o LocalStorage do navegador exclusivamente para armazenar algumas preferências do usuário, como o tema gráfico e o idioma selecionado. Essas informações permanecem armazenadas no dispositivo do usuário e não são utilizadas para fins publicitários, de perfilamento ou de rastreamento.</p><p>O código principal do portfólio não implementa ferramentas de analytics, publicidade ou perfilamento. Todas as fontes usadas pelo site são auto-hospedadas; portanto, nenhum serviço externo de fontes (como o Google Fonts) é carregado.</p><p>Algumas páginas de demonstração incluídas no portfólio podem carregar bibliotecas JavaScript ou outros recursos de serviços CDN de terceiros, incluindo Tailwind CSS. Quando tais recursos são solicitados, os respectivos provedores podem receber dados técnicos necessários para a conexão, como o endereço IP e informações relativas ao navegador e ao dispositivo do usuário.</p><p>O carregamento de recursos de CDNs não implica automaticamente o uso de cookies de perfilamento nem a obrigação de solicitar consentimento. A necessidade de eventuais avisos adicionais ou de consentimento prévio é avaliada com base nas ferramentas efetivamente utilizadas, nas suas finalidades e na legislação aplicável.</p><p>Caso no futuro sejam introduzidos cookies ou outras ferramentas de rastreamento não estritamente necessárias, seu uso ficará subordinado ao consentimento prévio do usuário, quando exigido pela legislação aplicável, por meio de eventuais ferramentas de gestão de consentimento.</p><p>Para mais informações sobre o tratamento de dados pessoais, consulte a presente política de privacidade.</p>",
     privacy_h2_4: "4. Base jurídica do tratamento e transferências fora do EEE",
@@ -826,7 +832,7 @@ window.translations = {
     privacy_h2_10: "10. Demos e sites de demonstração",
     privacy_p10: "As seções AETHER e Aura Suites são projetos de demonstração do portfólio, não atividades comerciais reais. Não faça pagamentos, pedidos ou reservas reais e não insira dados pessoais reais em seus formulários. As interações são simuladas e não constituem oferta comercial.",
     privacy_h2_11: "11. Atualizações e contatos",
-    privacy_p11: "Esta política pode ser atualizada em caso de alterações no site, nos provedores ou nas atividades de tratamento. Última atualização: 15 de novembro de 2026. Para dúvidas sobre o tratamento de dados: g.tridente.web@gmail.com."
+    privacy_p11: "Esta política pode ser atualizada em caso de alterações no site, nos provedores ou nas atividades de tratamento. Última atualização: 17 de novembro de 2026. Para dúvidas sobre o tratamento de dados: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -889,7 +895,7 @@ window.translations = {
     form_error_send: "发送失败。请重试。",
 
     contact_privacy_note: "您提供的数据将仅用于回复您的询问并评估潜在的合作。",
-    form_privacy_consent: "我已阅读并接受<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">隐私政策</a>和<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">法律声明</a>。",
+    form_privacy_consent: "我声明已阅读<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">隐私政策</a>和<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">法律声明</a>。",
     form_error_consent: "请接受隐私政策以继续。",
 
     copyright: "© 2026 Giancarlo Tridente。保留所有权利。",
@@ -897,7 +903,7 @@ window.translations = {
     legal_page_title: "法律声明 — Tridente Dev",
     legal_back: "← 返回作品集",
     legal_title: "法律声明",
-    legal_updated: "最后更新：2026 年 11 月 15 日",
+    legal_updated: "最后更新：2026 年 11 月 17 日",
     legal_owner_title: "网站所有者",
     legal_owner_desc: "本个人作品集由 Giancarlo Tridente 维护，位于意大利米兰（MI）。联系方式：g.tridente.web@gmail.com。",
     legal_purpose_title: "网站目的",
@@ -924,13 +930,14 @@ window.translations = {
     privacy_page_title: "隐私政策 — Giancarlo Tridente",
     privacy_back: "← 返回作品集",
     privacy_title: "隐私政策",
-    privacy_updated: "最后更新：2026 年 11 月 15 日 — 依据欧盟 2016/679 号条例（GDPR）第 13 条",
+    privacy_updated: "最后更新：2026 年 11 月 17 日 — 依据欧盟 2016/679 号条例（GDPR）第 13 条",
     privacy_h2_1: "1. 数据控制者",
     privacy_p1: "数据控制者为 Giancarlo Tridente，位于意大利米兰（MI）。可通过 g.tridente.web@gmail.com 联系。",
     privacy_h2_2: "2. 处理的数据和目的",
     privacy_li1: "联系表单：姓名、电子邮件和留言内容，均为自愿提供。用于回复请求，并在数据主体要求时开展合同前活动。",
     privacy_li2: "技术数据：托管服务可能处理 IP 地址、日志和设备数据，以提供页面并保护基础设施。托管提供商的隐私政策也适用于此类处理。",
     privacy_li3: "本地偏好：网站使用浏览器的 LocalStorage 记住所选的主题和语言。这些偏好保留在浏览器中，不会通过表单发送。用户可随时通过清除浏览器中的网站数据来删除这些偏好。",
+    privacy_li_ack: "与查阅隐私告知相关的数据：提交表单时，系统会自动记录提交日期和时间，以及向用户提供的隐私政策版本。这些信息与请求相关联，仅用于证明用户已查阅隐私告知，并记录提交时适用的版本。这些数据将通过 Web3Forms 服务与表单中的其他数据一并传输。",
     privacy_h2_3: "3. Cookie 和类似技术",
     privacy_p3_full: "<p>本网站仅使用浏览器的 LocalStorage 来存储某些用户偏好，例如图形主题和所选语言。这些信息保留在用户设备上，不用于广告、画像或跟踪目的。</p><p>作品集主代码未实现任何分析、广告或画像工具。网站使用的所有字体均为自托管；因此不加载外部字体服务（如 Google Fonts）。</p><p>作品中包含的部分演示页面可能从第三方 CDN 服务（包括 Tailwind CSS）加载 JavaScript 库或其他资源。当请求此类资源时，相应提供商可能会收到连接所需的技术数据，例如 IP 地址以及有关用户浏览器和设备的信息。</p><p>从 CDN 加载资源并不自动意味着使用画像 Cookie 或必须请求同意。是否需要任何附加通知或事先同意，将根据实际使用的工具、其目的和适用法律进行评估。</p><p>如果将来引入 Cookie 或其他非严格必要的跟踪工具，其使用将根据适用法律的要求，通过任何同意管理工具获得用户的事先同意。</p><p>有关个人数据处理的更多信息，请参阅本隐私政策。</p>",
     privacy_h2_4: "4. 处理的法律依据和欧洲经济区以外的传输",
@@ -963,7 +970,7 @@ window.translations = {
     privacy_h2_10: "10. 演示和演示站点",
     privacy_p10: "AETHER 和 Aura Suites 部分是作品集的演示项目，并非真实的商业活动。请勿在其表单中进行真实支付、下单或预订，也不要输入真实的个人数据。交互为模拟，不构成商业要约。",
     privacy_h2_11: "11. 更新和联系方式",
-    privacy_p11: "本政策可能因网站、提供商或处理活动的变更而更新。最后更新：2026 年 11 月 15 日。有关数据处理的疑问：g.tridente.web@gmail.com。"
+    privacy_p11: "本政策可能因网站、提供商或处理活动的变更而更新。最后更新：2026 年 11 月 17 日。有关数据处理的疑问：g.tridente.web@gmail.com。"
   },
 
   /* =======================================================
@@ -1026,7 +1033,7 @@ window.translations = {
     form_error_send: "送信に失敗しました。もう一度お試しください。",
 
     contact_privacy_note: "ご提供いただいたデータは、お問い合わせへの回答および潜在的なコラボレーションの評価のみに使用されます。",
-    form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">プライバシーポリシー</a>および<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">法的通知</a>を読み、同意します。",
+    form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">プライバシーポリシー</a>および<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">法的事項</a>を確認したことを宣言します。",
     form_error_consent: "続行するにはプライバシーポリシーに同意してください。",
 
     copyright: "© 2026 Giancarlo Tridente. All rights reserved.",
@@ -1034,7 +1041,7 @@ window.translations = {
     legal_page_title: "法的通知 — Tridente Dev",
     legal_back: "← ポートフォリオに戻る",
     legal_title: "法的通知",
-    legal_updated: "最終更新：2026年11月15日",
+    legal_updated: "最終更新：2026年11月17日",
     legal_owner_title: "サイト所有者",
     legal_owner_desc: "この個人ポートフォリオは、イタリア・ミラノ（MI）を拠点とする Giancarlo Tridente によって管理されています。連絡先：g.tridente.web@gmail.com。",
     legal_purpose_title: "サイトの目的",
@@ -1061,13 +1068,14 @@ window.translations = {
     privacy_page_title: "プライバシーポリシー — Giancarlo Tridente",
     privacy_back: "← ポートフォリオに戻る",
     privacy_title: "プライバシーポリシー",
-    privacy_updated: "最終更新：2026年11月15日 — EU 規則 2016/679（GDPR）第 13 条に基づく",
+    privacy_updated: "最終更新：2026年11月17日 — EU 規則 2016/679（GDPR）第 13 条に基づく",
     privacy_h2_1: "1. データ管理者",
     privacy_p1: "データ管理者は、イタリア・ミラノ（MI）を拠点とする Giancarlo Tridente です。g.tridente.web@gmail.com までご連絡ください。",
     privacy_h2_2: "2. 処理されるデータと目的",
     privacy_li1: "お問い合わせフォーム：氏名、メールアドレス、メッセージ内容（自発的に提供されたもの）。これらはリクエストへの回答、およびデータ主体の求めに応じた契約前活動の遂行に使用されます。",
     privacy_li2: "技術データ：ホスティングサービスは、ページの配信とインフラの保護のために IP アドレス、ログ、デバイスデータを処理する場合があります。これらの処理には、ホスティングプロバイダーのプライバシーポリシーも適用されます。",
     privacy_li3: "ローカル設定：本サイトは、選択されたテーマと言語を記憶するためにブラウザの LocalStorage を使用します。これらの設定はブラウザ内に保持され、フォーム経由で送信されることはありません。ユーザーはブラウザでサイトデータを消去することで、いつでも削除できます。",
+    privacy_li_ack: "プライバシー通知の確認に関するデータ：フォームの送信時に、送信日時とユーザーに提示されたプライバシーポリシーのバージョンが自動的に記録されます。これらの情報は問い合わせに関連付けられ、プライバシー通知が確認されたこと、および送信時に適用されていたバージョンを記録する目的に限って使用されます。これらのデータは、フォームの他のデータとともにWeb3Formsサービスを通じて送信されます。",
     privacy_h2_3: "3. Cookie および類似技術",
     privacy_p3_full: "<p>本サイトは、グラフィックテーマや選択された言語など、一部のユーザー設定を保存するためにのみ、ブラウザの LocalStorage を使用します。この情報はユーザーのデバイスに保存され、広告、プロファイリング、トラッキングの目的では使用されません。</p><p>ポートフォリオのメインコードは、分析、広告、プロファイリングのツールを実装していません。本サイトで使用されるすべてのフォントはセルフホストされているため、外部フォントサービス（Google Fonts など）は読み込まれません。</p><p>ポートフォリオに含まれる一部のデモページは、Tailwind CSS を含む第三者 CDN サービスから JavaScript ライブラリやその他のリソースを読み込む場合があります。そのようなリソースが要求されると、各プロバイダーは、IP アドレスやユーザーのブラウザおよびデバイスに関する情報など、接続に必要な技術データを受け取る場合があります。</p><p>CDN からのリソースの読み込みは、プロファイリング Cookie の使用や同意取得の義務を自動的に伴うものではありません。追加の通知や事前同意の必要性は、実際に使用されるツール、その目的、および適用法に基づいて評価されます。</p><p>将来、厳密に必要でない Cookie やその他のトラッキングツールが導入された場合、その使用は、適用法で要求される場合、同意管理ツールを通じてユーザーの事前同意を得たうえで行われます。</p><p>個人データの処理に関する詳細については、本プライバシーポリシーをご覧ください。</p>",
     privacy_h2_4: "4. 処理の法的根拠と EEA 域外への移転",
@@ -1100,7 +1108,7 @@ window.translations = {
     privacy_h2_10: "10. デモとデモサイト",
     privacy_p10: "AETHER および Aura Suites セクションは、ポートフォリオのデモプロジェクトであり、実際の商業活動ではありません。実際の支払い、注文、予約を行わず、フォームに実際の個人データを入力しないでください。インタラクションはシミュレートされており、商業的オファーを構成するものではありません。",
     privacy_h2_11: "11. 更新と連絡先",
-    privacy_p11: "本ポリシーは、サイト、プロバイダー、または処理活動の変更に応じて更新される場合があります。最終更新：2026年11月15日。データ処理に関するご質問：g.tridente.web@gmail.com。"
+    privacy_p11: "本ポリシーは、サイト、プロバイダー、または処理活動の変更に応じて更新される場合があります。最終更新：2026年11月17日。データ処理に関するご質問：g.tridente.web@gmail.com。"
   },
 
   /* =======================================================
@@ -1163,7 +1171,7 @@ window.translations = {
     form_error_send: "Pengiriman gagal. Silakan coba lagi.",
 
     contact_privacy_note: "Data yang Anda berikan akan digunakan secara eksklusif untuk menanggapi pertanyaan Anda dan mengevaluasi potensi kolaborasi.",
-    form_privacy_consent: "Saya telah membaca dan menyetujui <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Kebijakan Privasi</a> dan <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Catatan Hukum</a>.",
+    form_privacy_consent: "Saya menyatakan telah membaca <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Kebijakan Privasi</a> dan <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Catatan Hukum</a>.",
     form_error_consent: "Harap setujui Kebijakan Privasi untuk melanjutkan.",
 
     copyright: "© 2026 Giancarlo Tridente. Semua hak dilindungi.",
@@ -1171,7 +1179,7 @@ window.translations = {
     legal_page_title: "Catatan Hukum — Tridente Dev",
     legal_back: "← Kembali ke portofolio",
     legal_title: "Catatan Hukum",
-    legal_updated: "Terakhir diperbarui: 15 November 2026",
+    legal_updated: "Terakhir diperbarui: 17 November 2026",
     legal_owner_title: "Pemilik Situs",
     legal_owner_desc: "Portofolio pribadi ini dikurasi oleh Giancarlo Tridente, berbasis di Milan (MI), Italia. Kontak: g.tridente.web@gmail.com.",
     legal_purpose_title: "Tujuan Situs",
@@ -1198,13 +1206,14 @@ window.translations = {
     privacy_page_title: "Kebijakan Privasi — Giancarlo Tridente",
     privacy_back: "← Kembali ke portofolio",
     privacy_title: "Kebijakan Privasi",
-    privacy_updated: "Terakhir diperbarui: 15 November 2026 — Berdasarkan Art. 13 Peraturan (UE) 2016/679 (GDPR)",
+    privacy_updated: "Terakhir diperbarui: 17 November 2026 — Berdasarkan Art. 13 Peraturan (UE) 2016/679 (GDPR)",
     privacy_h2_1: "1. Pengendali Data",
     privacy_p1: "Pengendali data adalah Giancarlo Tridente, berbasis di Milan (MI), Italia. Dapat dihubungi di g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Data yang Diproses dan Tujuan",
     privacy_li1: "Formulir Kontak: nama, email, dan isi pesan, diberikan secara sukarela. Digunakan untuk menanggapi permintaan dan, jika diminta oleh subjek data, untuk melakukan kegiatan pra-kontrak.",
     privacy_li2: "Data Teknis: layanan hosting dapat memproses alamat IP, log, dan data perangkat untuk mengirimkan halaman dan melindungi infrastruktur. Kebijakan privasi penyedia hosting juga berlaku untuk pemrosesan tersebut.",
     privacy_li3: "Preferensi Lokal: situs menggunakan LocalStorage browser untuk mengingat tema dan bahasa yang dipilih. Preferensi ini tetap di browser dan tidak dikirim melalui formulir. Pengguna dapat menghapusnya kapan saja dengan menghapus data situs di browser.",
+    privacy_li_ack: "Data terkait bukti telah membaca pemberitahuan privasi: saat formulir dikirim, tanggal dan waktu pengiriman dicatat secara otomatis, bersama dengan versi Kebijakan Privasi yang tersedia bagi pengguna. Informasi ini dikaitkan dengan permintaan dan digunakan secara eksklusif untuk mendokumentasikan bahwa pemberitahuan privasi telah dibaca serta versi yang berlaku pada saat pengiriman. Data ini dikirim melalui layanan Web3Forms bersama data formulir lainnya.",
     privacy_h2_3: "3. Cookie dan Teknologi Serupa",
     privacy_p3_full: "<p>Situs ini menggunakan LocalStorage browser secara eksklusif untuk menyimpan preferensi pengguna tertentu, seperti tema grafis dan bahasa yang dipilih. Informasi ini tetap tersimpan di perangkat pengguna dan tidak digunakan untuk tujuan periklanan, pembuatan profil, atau pelacakan.</p><p>Kode utama portofolio tidak menerapkan alat analitik, periklanan, atau pembuatan profil. Semua font yang digunakan situs ini dihosting sendiri; oleh karena itu, tidak ada layanan font eksternal (seperti Google Fonts) yang dimuat.</p><p>Beberapa halaman demonstrasi yang disertakan dalam portofolio dapat memuat pustaka JavaScript atau sumber daya lain dari layanan CDN pihak ketiga, termasuk Tailwind CSS. Saat sumber daya tersebut diminta, penyedia terkait dapat menerima data teknis yang diperlukan untuk koneksi, seperti alamat IP dan informasi tentang browser dan perangkat pengguna.</p><p>Memuat sumber daya dari CDN tidak secara otomatis memerlukan penggunaan cookie pembuatan profil atau kewajiban untuk meminta persetujuan. Kebutuhan akan pemberitahuan tambahan atau persetujuan sebelumnya dinilai berdasarkan alat yang benar-benar digunakan, tujuannya, dan undang-undang yang berlaku.</p><p>Jika cookie atau alat pelacakan lain yang tidak sepenuhnya diperlukan diperkenalkan di masa mendatang, penggunaannya akan bergantung pada persetujuan pengguna sebelumnya, jika diwajibkan oleh hukum yang berlaku, melalui alat manajemen persetujuan apa pun.</p><p>Untuk informasi lebih lanjut tentang pemrosesan data pribadi, silakan lihat kebijakan privasi ini.</p>",
     privacy_h2_4: "4. Dasar Hukum Pemrosesan dan Transfer di Luar EEA",
@@ -1237,7 +1246,7 @@ window.translations = {
     privacy_h2_10: "10. Demo dan Situs Demonstrasi",
     privacy_p10: "Bagian AETHER dan Aura Suites adalah proyek demonstrasi portofolio, bukan aktivitas komersial nyata. Jangan melakukan pembayaran, pesanan, atau pemesanan nyata dan jangan memasukkan data pribadi nyata dalam formulir mereka. Interaksi disimulasikan dan tidak merupakan penawaran komersial.",
     privacy_h2_11: "11. Pembaruan dan Kontak",
-    privacy_p11: "Kebijakan ini dapat diperbarui jika ada perubahan pada situs, penyedia, atau aktivitas pemrosesan. Terakhir diperbarui: 15 November 2026. Untuk pertanyaan tentang pemrosesan data: g.tridente.web@gmail.com."
+    privacy_p11: "Kebijakan ini dapat diperbarui jika ada perubahan pada situs, penyedia, atau aktivitas pemrosesan. Terakhir diperbarui: 17 November 2026. Untuk pertanyaan tentang pemrosesan data: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -1300,7 +1309,7 @@ window.translations = {
     form_error_send: "فشل الإرسال. يرجى المحاولة مرة أخرى.",
 
     contact_privacy_note: "ستُستخدم البيانات التي تقدمها حصرياً للرد على استفسارك وتقييم تعاون محتمل.",
-    form_privacy_consent: "لقد قرأت وأوافق على <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">سياسة الخصوصية</a> و<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">الملاحظات القانونية</a>.",
+    form_privacy_consent: "أقر بأنني اطلعت على <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">سياسة الخصوصية</a> و<a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">الملاحظات القانونية</a>.",
     form_error_consent: "يرجى قبول سياسة الخصوصية للمتابعة.",
 
     copyright: "© 2026 Giancarlo Tridente. جميع الحقوق محفوظة.",
@@ -1308,7 +1317,7 @@ window.translations = {
     legal_page_title: "الملاحظات القانونية — Tridente Dev",
     legal_back: "← العودة إلى المحفظة",
     legal_title: "الملاحظات القانونية",
-    legal_updated: "آخر تحديث: 15 نوفمبر 2026",
+    legal_updated: "آخر تحديث: 17 نوفمبر 2026",
     legal_owner_title: "مالك الموقع",
     legal_owner_desc: "هذه المحفظة الشخصية يديرها Giancarlo Tridente، ومقرها في ميلانو (MI)، إيطاليا. الاتصال: g.tridente.web@gmail.com.",
     legal_purpose_title: "الغرض من الموقع",
@@ -1335,13 +1344,14 @@ window.translations = {
     privacy_page_title: "سياسة الخصوصية — Giancarlo Tridente",
     privacy_back: "← العودة إلى المحفظة",
     privacy_title: "سياسة الخصوصية",
-    privacy_updated: "آخر تحديث: 15 نوفمبر 2026 — وفقاً للمادة 13 من اللائحة (الاتحاد الأوروبي) 2016/679 (GDPR)",
+    privacy_updated: "آخر تحديث: 17 نوفمبر 2026 — وفقاً للمادة 13 من اللائحة (الاتحاد الأوروبي) 2016/679 (GDPR)",
     privacy_h2_1: "1. المسؤول عن معالجة البيانات",
     privacy_p1: "المسؤول عن معالجة البيانات هو Giancarlo Tridente، ومقره في ميلانو (MI)، إيطاليا. يمكن الاتصال به على g.tridente.web@gmail.com.",
     privacy_h2_2: "2. البيانات المعالجة والأغراض",
     privacy_li1: "نموذج الاتصال: الاسم والبريد الإلكتروني ومحتوى الرسالة، المقدمة طواعية. تُستخدم للرد على الطلب، وإذا طلب صاحب البيانات، للقيام بأنشطة ما قبل التعاقد.",
     privacy_li2: "البيانات التقنية: قد تعالج خدمة الاستضافة عناوين IP والسجلات وبيانات الجهاز لتقديم الصفحات وحماية البنية التحتية. تنطبق سياسات الخصوصية لمزود الاستضافة أيضاً على هذه المعالجة.",
     privacy_li3: "التفضيلات المحلية: يستخدم الموقع LocalStorage في المتصفح لتذكر السمة واللغة المختارة. تظل هذه التفضيلات في المتصفح ولا تُرسل عبر النموذج. يمكن للمستخدمين حذفها في أي وقت عن طريق مسح بيانات الموقع في المتصفح.",
+    privacy_li_ack: "البيانات المتعلقة بالاطلاع على إشعار الخصوصية: عند إرسال النموذج، يتم تسجيل تاريخ ووقت الإرسال تلقائيًا، إلى جانب إصدار سياسة الخصوصية المتاح للمستخدم. ترتبط هذه المعلومات بالطلب وتُستخدم حصريًا لتوثيق الاطلاع على إشعار الخصوصية والإصدار الساري وقت الإرسال. وتُنقل هذه البيانات عبر خدمة Web3Forms مع بيانات النموذج الأخرى.",
     privacy_h2_3: "3. ملفات تعريف الارتباط والتقنيات المماثلة",
     privacy_p3_full: "<p>يستخدم الموقع LocalStorage في المتصفح حصرياً لتخزين بعض تفضيلات المستخدم، مثل السمة الرسومية واللغة المختارة. تظل هذه المعلومات مخزنة على جهاز المستخدم ولا تُستخدم لأغراض الإعلان أو التنميط أو التتبع.</p><p>لا ينفذ الكود الرئيسي للمحفظة أدوات تحليلات أو إعلانات أو تنميط. جميع الخطوط المستخدمة في الموقع مستضافة ذاتياً؛ لذلك لا يتم تحميل أي خدمات خطوط خارجية (مثل Google Fonts).</p><p>قد تقوم بعض صفحات العرض التوضيحي المضمنة في المحفظة بتحميل مكتبات JavaScript أو موارد أخرى من خدمات CDN تابعة لأطراف ثالثة، بما في ذلك Tailwind CSS. عندما يتم طلب مثل هذه الموارد، قد يتلقى المزودون المعنيون بيانات تقنية ضرورية للاتصال، مثل عنوان IP ومعلومات متعلقة بمتصفح المستخدم وجهازه.</p><p>لا يستلزم تحميل الموارد من شبكات CDN تلقائياً استخدام ملفات تعريف الارتباط للتنميط أو الالتزام بطلب الموافقة. يتم تقييم الحاجة إلى أي إشعارات إضافية أو موافقة مسبقة بناءً على الأدوات المستخدمة فعلياً وأغراضها والتشريعات المعمول بها.</p><p>إذا تم إدخال ملفات تعريف الارتباط أو أدوات التتبع الأخرى غير الضرورية تماماً في المستقبل، فسيخضع استخدامها لموافقة المستخدم المسبقة، حيثما يقتضي القانون المعمول به، من خلال أي أدوات لإدارة الموافقة.</p><p>لمزيد من المعلومات حول معالجة البيانات الشخصية، يرجى الرجوع إلى سياسة الخصوصية هذه.</p>",
     privacy_h2_4: "4. الأساس القانوني للمعالجة وعمليات النقل خارج المنطقة الاقتصادية الأوروبية",
@@ -1374,7 +1384,7 @@ window.translations = {
     privacy_h2_10: "10. العروض التوضيحية والمواقع التجريبية",
     privacy_p10: "أقسام AETHER وAura Suites هي مشاريع عرض توضيحي للمحفظة، وليست أنشطة تجارية حقيقية. لا تقم بإجراء مدفوعات أو طلبات أو حجوزات حقيقية ولا تُدخل بيانات شخصية حقيقية في نماذجها. التفاعلات محاكاة ولا تشكل عرضاً تجارياً.",
     privacy_h2_11: "11. التحديثات وجهات الاتصال",
-    privacy_p11: "قد يتم تحديث هذه السياسة في حالة حدوث تغييرات على الموقع أو المزودين أو أنشطة المعالجة. آخر تحديث: 15 نوفمبر 2026. للأسئلة حول معالجة البيانات: g.tridente.web@gmail.com."
+    privacy_p11: "قد يتم تحديث هذه السياسة في حالة حدوث تغييرات على الموقع أو المزودين أو أنشطة المعالجة. آخر تحديث: 17 نوفمبر 2026. للأسئلة حول معالجة البيانات: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -1437,7 +1447,7 @@ window.translations = {
     form_error_send: "भेजना विफल रहा। कृपया पुनः प्रयास करें।",
 
     contact_privacy_note: "आपके द्वारा प्रदान किया गया डेटा केवल आपकी पूछताछ का जवाब देने और संभावित सहयोग का मूल्यांकन करने के लिए उपयोग किया जाएगा।",
-    form_privacy_consent: "मैंने <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">गोपनीयता नीति</a> और <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">कानूनी नोटिस</a> पढ़ लिए हैं और उन्हें स्वीकार करता हूं।",
+    form_privacy_consent: "मैं घोषणा करता/करती हूँ कि मैंने <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">गोपनीयता नीति</a> और <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">कानूनी सूचनाएँ</a> पढ़ ली हैं।",
     form_error_consent: "जारी रखने के लिए कृपया गोपनीयता नीति स्वीकार करें।",
 
     copyright: "© 2026 Giancarlo Tridente. सर्वाधिकार सुरक्षित।",
@@ -1445,7 +1455,7 @@ window.translations = {
     legal_page_title: "कानूनी नोटिस — Tridente Dev",
     legal_back: "← पोर्टफ़ोलियो पर वापस जाएं",
     legal_title: "कानूनी नोटिस",
-    legal_updated: "अंतिम अपडेट: 15 नवंबर 2026",
+    legal_updated: "अंतिम अपडेट: 17 नवंबर 2026",
     legal_owner_title: "साइट मालिक",
     legal_owner_desc: "यह व्यक्तिगत पोर्टफ़ोलियो Giancarlo Tridente द्वारा क्यूरेट किया गया है, जिसका आधार मिलान (MI), इटली में है। संपर्क: g.tridente.web@gmail.com।",
     legal_purpose_title: "साइट का उद्देश्य",
@@ -1472,13 +1482,14 @@ window.translations = {
     privacy_page_title: "गोपनीयता नीति — Giancarlo Tridente",
     privacy_back: "← पोर्टफ़ोलियो पर वापस जाएं",
     privacy_title: "गोपनीयता नीति",
-    privacy_updated: "अंतिम अपडेट: 15 नवंबर 2026 — विनियमन (EU) 2016/679 (GDPR) के अनुच्छेद 13 के अनुसार",
+    privacy_updated: "अंतिम अपडेट: 17 नवंबर 2026 — विनियमन (EU) 2016/679 (GDPR) के अनुच्छेद 13 के अनुसार",
     privacy_h2_1: "1. डेटा नियंत्रक",
     privacy_p1: "डेटा नियंत्रक Giancarlo Tridente है, जिसका आधार मिलान (MI), इटली में है। g.tridente.web@gmail.com पर संपर्क योग्य।",
     privacy_h2_2: "2. संसाधित डेटा और उद्देश्य",
     privacy_li1: "संपर्क फ़ॉर्म: नाम, ईमेल और संदेश सामग्री, स्वेच्छा से प्रदान किए गए। इनका उपयोग अनुरोध का जवाब देने और, यदि डेटा विषय द्वारा अनुरोध किया जाए, तो पूर्व-संविदात्मक गतिविधियां करने के लिए किया जाता है।",
     privacy_li2: "तकनीकी डेटा: होस्टिंग सेवा पृष्ठों को वितरित करने और बुनियादी ढांचे की रक्षा के लिए IP पते, लॉग और डिवाइस डेटा संसाधित कर सकती है। होस्टिंग प्रदाता की गोपनीयता नीतियां भी ऐसे प्रसंस्करण पर लागू होती हैं।",
     privacy_li3: "स्थानीय प्राथमिकताएं: साइट चयनित थीम और भाषा को याद रखने के लिए ब्राउज़र के LocalStorage का उपयोग करती है। ये प्राथमिकताएं ब्राउज़र में रहती हैं और फ़ॉर्म के माध्यम से नहीं भेजी जाती हैं। उपयोगकर्ता अपने ब्राउज़र में साइट डेटा साफ़ करके किसी भी समय इन्हें हटा सकते हैं।",
+    privacy_li_ack: "गोपनीयता सूचना को देखने से संबंधित डेटा: फ़ॉर्म सबमिट करते समय, सबमिशन की तारीख और समय तथा उपयोगकर्ता को उपलब्ध कराए गए गोपनीयता नीति के संस्करण को स्वचालित रूप से दर्ज किया जाता है। यह जानकारी अनुरोध से जुड़ी होती है और इसका उपयोग केवल यह दर्ज करने के लिए किया जाता है कि गोपनीयता सूचना देखी गई थी और सबमिशन के समय कौन-सा संस्करण लागू था। यह डेटा फ़ॉर्म के अन्य डेटा के साथ Web3Forms सेवा के माध्यम से भेजा जाता है।",
     privacy_h2_3: "3. कुकीज़ और समान तकनीकें",
     privacy_p3_full: "<p>साइट विशेष रूप से कुछ उपयोगकर्ता प्राथमिकताओं, जैसे ग्राफ़िक थीम और चयनित भाषा को संग्रहीत करने के लिए ब्राउज़र के LocalStorage का उपयोग करती है। यह जानकारी उपयोगकर्ता के डिवाइस पर संग्रहीत रहती है और विज्ञापन, प्रोफाइलिंग या ट्रैकिंग उद्देश्यों के लिए उपयोग नहीं की जाती है।</p><p>पोर्टफ़ोलियो का मुख्य कोड एनालिटिक्स, विज्ञापन या प्रोफाइलिंग टूल लागू नहीं करता है। साइट द्वारा उपयोग किए जाने वाले सभी फ़ॉन्ट स्व-होस्टेड हैं; इसलिए, कोई बाहरी फ़ॉन्ट सेवाएं (जैसे Google Fonts) लोड नहीं की जाती हैं।</p><p>पोर्टफ़ोलियो में शामिल कुछ प्रदर्शन पृष्ठ तृतीय-पक्ष CDN सेवाओं से JavaScript लाइब्रेरी या अन्य संसाधन लोड कर सकते हैं, जिनमें Tailwind CSS शामिल है। जब ऐसे संसाधनों का अनुरोध किया जाता है, तो संबंधित प्रदाता कनेक्शन के लिए आवश्यक तकनीकी डेटा प्राप्त कर सकते हैं, जैसे IP पता और उपयोगकर्ता के ब्राउज़र और डिवाइस से संबंधित जानकारी।</p><p>CDN से संसाधन लोड करना स्वचालित रूप से प्रोफाइलिंग कुकीज़ के उपयोग या सहमति का अनुरोध करने के दायित्व को शामिल नहीं करता है। किसी भी अतिरिक्त सूचना या पूर्व सहमति की आवश्यकता का मूल्यांकन वास्तव में उपयोग किए गए टूल, उनके उद्देश्यों और लागू कानून के आधार पर किया जाता है।</p><p>यदि भविष्य में कुकीज़ या अन्य सख्ती से आवश्यक ट्रैकिंग टूल पेश किए जाते हैं, तो उनका उपयोग उपयोगकर्ता की पूर्व सहमति के अधीन होगा, जहां लागू कानून द्वारा आवश्यक हो, किसी भी सहमति प्रबंधन टूल के माध्यम से।</p><p>व्यक्तिगत डेटा के प्रसंस्करण पर अधिक जानकारी के लिए, कृपया यह गोपनीयता नीति देखें।</p>",
     privacy_h2_4: "4. प्रसंस्करण का कानूनी आधार और EEA के बाहर स्थानांतरण",
@@ -1511,7 +1522,7 @@ window.translations = {
     privacy_h2_10: "10. डेमो और प्रदर्शन साइटें",
     privacy_p10: "AETHER और Aura Suites अनुभाग पोर्टफ़ोलियो के प्रदर्शन प्रोजेक्ट हैं, वास्तविक व्यावसायिक गतिविधियां नहीं। वास्तविक भुगतान, ऑर्डर या बुकिंग न करें और उनके फ़ॉर्म में वास्तविक व्यक्तिगत डेटा दर्ज न करें। इंटरैक्शन सिम्युलेटेड हैं और वाणिज्यिक प्रस्ताव नहीं हैं।",
     privacy_h2_11: "11. अपडेट और संपर्क",
-    privacy_p11: "यह नीति साइट, प्रदाताओं या प्रसंस्करण गतिविधियों में परिवर्तन की स्थिति में अपडेट की जा सकती है। अंतिम अपडेट: 15 नवंबर 2026। डेटा प्रसंस्करण पर प्रश्नों के लिए: g.tridente.web@gmail.com।"
+    privacy_p11: "यह नीति साइट, प्रदाताओं या प्रसंस्करण गतिविधियों में परिवर्तन की स्थिति में अपडेट की जा सकती है। अंतिम अपडेट: 17 नवंबर 2026। डेटा प्रसंस्करण पर प्रश्नों के लिए: g.tridente.web@gmail.com।"
   },
 
   /* =======================================================
@@ -1574,7 +1585,7 @@ window.translations = {
     form_error_send: "Отправка не удалась. Попробуйте снова.",
 
     contact_privacy_note: "Предоставленные данные будут использоваться исключительно для ответа на ваш запрос и оценки потенциального сотрудничества.",
-    form_privacy_consent: "Я прочитал(а) и принимаю <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Политику конфиденциальности</a> и <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Правовые примечания</a>.",
+    form_privacy_consent: "Подтверждаю, что ознакомился(-ась) с <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Политикой конфиденциальности</a> и <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Правовыми положениями</a>.",
     form_error_consent: "Примите Политику конфиденциальности, чтобы продолжить.",
 
     copyright: "© 2026 Giancarlo Tridente. Все права защищены.",
@@ -1582,7 +1593,7 @@ window.translations = {
     legal_page_title: "Правовые примечания — Tridente Dev",
     legal_back: "← Вернуться к портфолио",
     legal_title: "Правовые примечания",
-    legal_updated: "Последнее обновление: 15 ноября 2026",
+    legal_updated: "Последнее обновление: 17 ноября 2026",
     legal_owner_title: "Владелец сайта",
     legal_owner_desc: "Это личное портфолио курируется Giancarlo Tridente, Милан (MI), Италия. Контакт: g.tridente.web@gmail.com.",
     legal_purpose_title: "Назначение сайта",
@@ -1609,13 +1620,14 @@ window.translations = {
     privacy_page_title: "Политика конфиденциальности — Giancarlo Tridente",
     privacy_back: "← Вернуться к портфолио",
     privacy_title: "Политика конфиденциальности",
-    privacy_updated: "Последнее обновление: 15 ноября 2026 — В соответствии со ст. 13 Регламента (ЕС) 2016/679 (GDPR)",
+    privacy_updated: "Последнее обновление: 17 ноября 2026 — В соответствии со ст. 13 Регламента (ЕС) 2016/679 (GDPR)",
     privacy_h2_1: "1. Контролёр данных",
     privacy_p1: "Контролёром данных является Giancarlo Tridente, Милан (MI), Италия. Контакт: g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Обрабатываемые данные и цели",
     privacy_li1: "Контактная форма: имя, email и содержание сообщения, предоставленные добровольно. Используются для ответа на запрос и, если субъект данных запросит, для осуществления преддоговорной деятельности.",
     privacy_li2: "Технические данные: хостинг-сервис может обрабатывать IP-адреса, логи и данные устройств для доставки страниц и защиты инфраструктуры. Политики конфиденциальности хостинг-провайдера также применяются к такой обработке.",
     privacy_li3: "Локальные предпочтения: сайт использует LocalStorage браузера для запоминания выбранной темы и языка. Эти предпочтения остаются в браузере и не отправляются через форму. Пользователи могут удалить их в любое время, очистив данные сайта в браузере.",
+    privacy_li_ack: "Данные, связанные с ознакомлением с уведомлением о конфиденциальности: при отправке формы автоматически фиксируются дата и время отправки, а также версия Политики конфиденциальности, предоставленная пользователю. Эта информация связывается с запросом и используется исключительно для документального подтверждения ознакомления с уведомлением и версии, действовавшей на момент отправки. Эти данные передаются через сервис Web3Forms вместе с остальными данными формы.",
     privacy_h2_3: "3. Cookies и аналогичные технологии",
     privacy_p3_full: "<p>Сайт использует LocalStorage браузера исключительно для хранения некоторых пользовательских предпочтений, таких как графическая тема и выбранный язык. Эта информация остаётся на устройстве пользователя и не используется в рекламных целях, для профилирования или отслеживания.</p><p>Основной код портфолио не реализует аналитические, рекламные или профилирующие инструменты. Все шрифты, используемые сайтом, размещены на собственном сервере; поэтому внешние шрифтовые сервисы (например, Google Fonts) не загружаются.</p><p>Некоторые демонстрационные страницы, включённые в портфолио, могут загружать библиотеки JavaScript или другие ресурсы из сторонних CDN-сервисов, включая Tailwind CSS. Когда такие ресурсы запрашиваются, соответствующие провайдеры могут получать технические данные, необходимые для соединения, такие как IP-адрес и информация о браузере и устройстве пользователя.</p><p>Загрузка ресурсов из CDN не влечёт автоматически использование профилирующих cookies или обязательство запрашивать согласие. Необходимость каких-либо дополнительных уведомлений или предварительного согласия оценивается на основе фактически используемых инструментов, их целей и применимого законодательства.</p><p>Если в будущем будут введены cookies или другие инструменты отслеживания, не являющиеся строго необходимыми, их использование будет зависеть от предварительного согласия пользователя, когда это требуется применимым законодательством, через любые инструменты управления согласием.</p><p>Для получения дополнительной информации об обработке персональных данных, пожалуйста, ознакомьтесь с настоящей политикой конфиденциальности.</p>",
     privacy_h2_4: "4. Правовое основание обработки и передачи за пределы ЕЭЗ",
@@ -1648,7 +1660,7 @@ window.translations = {
     privacy_h2_10: "10. Демо и демонстрационные сайты",
     privacy_p10: "Разделы AETHER и Aura Suites являются демонстрационными проектами портфолио, а не реальной коммерческой деятельностью. Не совершайте реальных платежей, заказов или бронирований и не вводите реальные персональные данные в их формы. Взаимодействия смоделированы и не являются коммерческим предложением.",
     privacy_h2_11: "11. Обновления и контакты",
-    privacy_p11: "Эта политика может быть обновлена в случае изменений на сайте, у провайдеров или в деятельности по обработке. Последнее обновление: 15 ноября 2026. По вопросам обработки данных: g.tridente.web@gmail.com."
+    privacy_p11: "Эта политика может быть обновлена в случае изменений на сайте, у провайдеров или в деятельности по обработке. Последнее обновление: 17 ноября 2026. По вопросам обработки данных: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -1711,7 +1723,7 @@ window.translations = {
     form_error_send: "전송에 실패했습니다. 다시 시도해 주세요.",
 
     contact_privacy_note: "제공된 데이터는 문의에 답변하고 잠재적 협업을 평가하기 위해서만 사용됩니다.",
-    form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">개인정보 처리방침</a> 및 <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">법적 고지</a>를 읽고 동의합니다.",
+    form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">개인정보 처리방침</a>과 <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">법적 고지</a>를 확인했음을 선언합니다.",
     form_error_consent: "계속하려면 개인정보 처리방침에 동의해 주세요.",
 
     copyright: "© 2026 Giancarlo Tridente. 모든 권리 보유.",
@@ -1719,7 +1731,7 @@ window.translations = {
     legal_page_title: "법적 고지 — Tridente Dev",
     legal_back: "← 포트폴리오로 돌아가기",
     legal_title: "법적 고지",
-    legal_updated: "최종 업데이트: 2026년 11월 15일",
+    legal_updated: "최종 업데이트: 2026년 11월 17일",
     legal_owner_title: "사이트 소유자",
     legal_owner_desc: "이 개인 포트폴리오는 이탈리아 밀라노(MI)에 기반을 둔 Giancarlo Tridente가 관리합니다. 연락처: g.tridente.web@gmail.com.",
     legal_purpose_title: "사이트 목적",
@@ -1746,13 +1758,14 @@ window.translations = {
     privacy_page_title: "개인정보 처리방침 — Giancarlo Tridente",
     privacy_back: "← 포트폴리오로 돌아가기",
     privacy_title: "개인정보 처리방침",
-    privacy_updated: "최종 업데이트: 2026년 11월 15일 — 규정 (EU) 2016/679(GDPR) 제13조에 따름",
+    privacy_updated: "최종 업데이트: 2026년 11월 17일 — 규정 (EU) 2016/679(GDPR) 제13조에 따름",
     privacy_h2_1: "1. 데이터 컨트롤러",
     privacy_p1: "데이터 컨트롤러는 이탈리아 밀라노(MI)에 기반을 둔 Giancarlo Tridente입니다. g.tridente.web@gmail.com으로 연락할 수 있습니다.",
     privacy_h2_2: "2. 처리되는 데이터 및 목적",
     privacy_li1: "연락처 양식: 이름, 이메일 및 메시지 내용(자발적 제공). 요청에 응답하고 데이터 주체가 요청하는 경우 계약 전 활동을 수행하는 데 사용됩니다.",
     privacy_li2: "기술 데이터: 호스팅 서비스는 페이지를 제공하고 인프라를 보호하기 위해 IP 주소, 로그 및 기기 데이터를 처리할 수 있습니다. 호스팅 제공업체의 개인정보 처리방침도 이러한 처리에 적용됩니다.",
     privacy_li3: "로컬 기본 설정: 사이트는 선택한 테마와 언어를 기억하기 위해 브라우저의 LocalStorage를 사용합니다. 이러한 기본 설정은 브라우저에 남아 있으며 양식을 통해 전송되지 않습니다. 사용자는 언제든지 브라우저에서 사이트 데이터를 지워 삭제할 수 있습니다.",
+    privacy_li_ack: "개인정보 안내 확인 관련 데이터: 양식을 제출할 때 제출 날짜와 시간이 사용자에게 제공된 개인정보 처리방침 버전과 함께 자동으로 기록됩니다. 이 정보는 문의와 연결되며 개인정보 안내를 확인했다는 사실과 제출 당시 적용된 버전을 기록하는 목적으로만 사용됩니다. 해당 데이터는 양식의 다른 데이터와 함께 Web3Forms 서비스를 통해 전송됩니다.",
     privacy_h2_3: "3. 쿠키 및 유사 기술",
     privacy_p3_full: "<p>사이트는 그래픽 테마 및 선택한 언어와 같은 특정 사용자 기본 설정을 저장하기 위해서만 브라우저의 LocalStorage를 사용합니다. 이 정보는 사용자 기기에 저장되며 광고, 프로파일링 또는 추적 목적으로 사용되지 않습니다.</p><p>포트폴리오의 메인 코드는 분석, 광고 또는 프로파일링 도구를 구현하지 않습니다. 사이트에서 사용하는 모든 글꼴은 자체 호스팅되므로 외부 글꼴 서비스(예: Google Fonts)가 로드되지 않습니다.</p><p>포트폴리오에 포함된 일부 데모 페이지는 Tailwind CSS를 포함한 타사 CDN 서비스에서 JavaScript 라이브러리 또는 기타 리소스를 로드할 수 있습니다. 이러한 리소스가 요청되면 해당 제공업체는 IP 주소 및 사용자의 브라우저 및 기기와 관련된 정보와 같이 연결에 필요한 기술 데이터를 수신할 수 있습니다.</p><p>CDN에서 리소스를 로드한다고 해서 자동으로 프로파일링 쿠키를 사용하거나 동의를 요청할 의무가 발생하는 것은 아닙니다. 추가 고지 또는 사전 동의의 필요성은 실제로 사용되는 도구, 목적 및 적용 가능한 법률에 따라 평가됩니다.</p><p>향후 엄격히 필요하지 않은 쿠키 또는 기타 추적 도구가 도입되는 경우, 해당 사용은 적용 가능한 법률에서 요구하는 경우 동의 관리 도구를 통해 사용자의 사전 동의를 조건으로 합니다.</p><p>개인 데이터 처리에 대한 자세한 내용은 이 개인정보 처리방침을 참조하세요.</p>",
     privacy_h2_4: "4. 처리의 법적 근거 및 EEA 외부 이전",
@@ -1785,7 +1798,7 @@ window.translations = {
     privacy_h2_10: "10. 데모 및 데모 사이트",
     privacy_p10: "AETHER 및 Aura Suites 섹션은 포트폴리오의 데모 프로젝트이며 실제 상업 활동이 아닙니다. 실제 결제, 주문 또는 예약을 하지 말고 양식에 실제 개인 데이터를 입력하지 마세요. 상호작용은 시뮬레이션되며 상업적 제안을 구성하지 않습니다.",
     privacy_h2_11: "11. 업데이트 및 연락처",
-    privacy_p11: "이 정책은 사이트, 제공업체 또는 처리 활동의 변경 시 업데이트될 수 있습니다. 최종 업데이트: 2026년 11월 15일. 데이터 처리 관련 질문: g.tridente.web@gmail.com."
+    privacy_p11: "이 정책은 사이트, 제공업체 또는 처리 활동의 변경 시 업데이트될 수 있습니다. 최종 업데이트: 2026년 11월 17일. 데이터 처리 관련 질문: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -1848,7 +1861,7 @@ window.translations = {
     form_error_send: "Gönderme başarısız oldu. Lütfen tekrar deneyin.",
 
     contact_privacy_note: "Sağladığınız veriler yalnızca talebinizi yanıtlamak ve olası bir işbirliğini değerlendirmek için kullanılacaktır.",
-    form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Gizlilik Politikası</a> ve <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Yasal Notlar</a>'ı okudum ve kabul ediyorum.",
+    form_privacy_consent: "<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Gizlilik Politikası</a>nı ve <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Yasal Bilgilendirmeleri</a> okuduğumu beyan ederim.",
     form_error_consent: "Devam etmek için lütfen Gizlilik Politikası'nı kabul edin.",
 
     copyright: "© 2026 Giancarlo Tridente. Tüm hakları saklıdır.",
@@ -1856,7 +1869,7 @@ window.translations = {
     legal_page_title: "Yasal Notlar — Tridente Dev",
     legal_back: "← Portföye dön",
     legal_title: "Yasal Notlar",
-    legal_updated: "Son güncelleme: 15 Kasım 2026",
+    legal_updated: "Son güncelleme: 17 Kasım 2026",
     legal_owner_title: "Site Sahibi",
     legal_owner_desc: "Bu kişisel portföy, Milano (MI), İtalya merkezli Giancarlo Tridente tarafından yönetilmektedir. İletişim: g.tridente.web@gmail.com.",
     legal_purpose_title: "Sitenin Amacı",
@@ -1883,13 +1896,14 @@ window.translations = {
     privacy_page_title: "Gizlilik Politikası — Giancarlo Tridente",
     privacy_back: "← Portföye dön",
     privacy_title: "Gizlilik Politikası",
-    privacy_updated: "Son güncelleme: 15 Kasım 2026 — (AB) 2016/679 Sayılı Tüzüğün (GDPR) 13. Maddesi uyarınca",
+    privacy_updated: "Son güncelleme: 17 Kasım 2026 — (AB) 2016/679 Sayılı Tüzüğün (GDPR) 13. Maddesi uyarınca",
     privacy_h2_1: "1. Veri Sorumlusu",
     privacy_p1: "Veri sorumlusu, Milano (MI), İtalya merkezli Giancarlo Tridente'dir. g.tridente.web@gmail.com adresinden iletişime geçilebilir.",
     privacy_h2_2: "2. İşlenen Veriler ve Amaçlar",
     privacy_li1: "İletişim Formu: ad, e-posta ve mesaj içeriği, gönüllü olarak sağlanır. Talebi yanıtlamak ve veri sahibinin talebi üzerine sözleşme öncesi faaliyetlerde bulunmak için kullanılır.",
     privacy_li2: "Teknik Veriler: barındırma hizmeti, sayfaları sunmak ve altyapıyı korumak için IP adreslerini, günlükleri ve cihaz verilerini işleyebilir. Barındırma sağlayıcısının gizlilik politikaları da bu tür işlemelere uygulanır.",
     privacy_li3: "Yerel Tercihler: site, seçilen temayı ve dili hatırlamak için tarayıcının LocalStorage'ını kullanır. Bu tercihler tarayıcıda kalır ve form aracılığıyla gönderilmez. Kullanıcılar tarayıcılarında site verilerini temizleyerek bu tercihleri istedikleri zaman silebilirler.",
+    privacy_li_ack: "Gizlilik bildiriminin incelenmesine ilişkin veriler: form gönderildiğinde, gönderim tarihi ve saati ile kullanıcıya sunulan Gizlilik Politikası sürümü otomatik olarak kaydedilir. Bu bilgiler taleple ilişkilendirilir ve yalnızca gizlilik bildiriminin incelendiğini ve gönderim sırasında hangi sürümün geçerli olduğunu belgelemek amacıyla kullanılır. Bu veriler, formun diğer verileriyle birlikte Web3Forms hizmeti aracılığıyla iletilir.",
     privacy_h2_3: "3. Çerezler ve Benzer Teknolojiler",
     privacy_p3_full: "<p>Site, yalnızca grafik tema ve seçilen dil gibi belirli kullanıcı tercihlerini depolamak için tarayıcının LocalStorage'ını kullanır. Bu bilgiler kullanıcının cihazında saklı kalır ve reklam, profilleme veya izleme amacıyla kullanılmaz.</p><p>Portföyün ana kodu analitik, reklam veya profilleme araçları içermez. Sitenin kullandığı tüm yazı tipleri kendi sunucumuzda barındırılır; bu nedenle harici yazı tipi hizmetleri (Google Fonts gibi) yüklenmez.</p><p>Portföyde bulunan bazı demo sayfaları, Tailwind CSS dahil olmak üzere üçüncü taraf CDN hizmetlerinden JavaScript kütüphaneleri veya diğer kaynakları yükleyebilir. Bu tür kaynaklar talep edildiğinde, ilgili sağlayıcılar IP adresi ve kullanıcının tarayıcısı ve cihazıyla ilgili bilgiler gibi bağlantı için gerekli teknik verileri alabilir.</p><p>CDN'lerden kaynak yüklemek otomatik olarak profilleme çerezlerinin kullanımını veya onay isteme yükümlülüğünü gerektirmez. Ek bildirim veya önceden onay gerekliliği, gerçekte kullanılan araçlara, amaçlarına ve geçerli mevzuata göre değerlendirilir.</p><p>Gelecekte kesinlikle gerekli olmayan çerezler veya diğer izleme araçları eklenirse, kullanımları geçerli yasaların gerektirdiği durumlarda onay yönetim araçları aracılığıyla kullanıcının önceden onayına bağlı olacaktır.</p><p>Kişisel verilerin işlenmesi hakkında daha fazla bilgi için lütfen bu gizlilik politikasına bakın.</p>",
     privacy_h2_4: "4. İşlemenin Yasal Dayanağı ve AEA Dışına Transferler",
@@ -1922,7 +1936,7 @@ window.translations = {
     privacy_h2_10: "10. Demolar ve Demo Siteleri",
     privacy_p10: "AETHER ve Aura Suites bölümleri portföyün demo projeleridir, gerçek ticari faaliyetler değildir. Gerçek ödeme, sipariş veya rezervasyon yapmayın ve formlarına gerçek kişisel veriler girmeyin. Etkileşimler simüle edilmiştir ve ticari teklif oluşturmaz.",
     privacy_h2_11: "11. Güncellemeler ve İletişim",
-    privacy_p11: "Bu politika; site, sağlayıcılar veya işleme faaliyetlerindeki değişiklikler durumunda güncellenebilir. Son güncelleme: 15 Kasım 2026. Veri işlemeyle ilgili sorular için: g.tridente.web@gmail.com."
+    privacy_p11: "Bu politika; site, sağlayıcılar veya işleme faaliyetlerindeki değişiklikler durumunda güncellenebilir. Son güncelleme: 17 Kasım 2026. Veri işlemeyle ilgili sorular için: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -1985,7 +1999,7 @@ window.translations = {
     form_error_send: "Verzenden mislukt. Probeer het opnieuw.",
 
     contact_privacy_note: "De door jou verstrekte gegevens worden uitsluitend gebruikt om je vraag te beantwoorden en een mogelijke samenwerking te beoordelen.",
-    form_privacy_consent: "Ik heb het <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacybeleid</a> en de <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Juridische kennisgeving</a> gelezen en accepteer deze.",
+    form_privacy_consent: "Ik verklaar dat ik het <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Privacybeleid</a> en de <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Juridische informatie</a> heb gelezen.",
     form_error_consent: "Accepteer het Privacybeleid om door te gaan.",
 
     copyright: "© 2026 Giancarlo Tridente. Alle rechten voorbehouden.",
@@ -1993,7 +2007,7 @@ window.translations = {
     legal_page_title: "Juridische kennisgeving — Tridente Dev",
     legal_back: "← Terug naar portfolio",
     legal_title: "Juridische kennisgeving",
-    legal_updated: "Laatst bijgewerkt: 15 november 2026",
+    legal_updated: "Laatst bijgewerkt: 17 november 2026",
     legal_owner_title: "Eigenaar van de site",
     legal_owner_desc: "Dit persoonlijke portfolio wordt beheerd door Giancarlo Tridente, gevestigd in Milaan (MI), Italië. Contact: g.tridente.web@gmail.com.",
     legal_purpose_title: "Doel van de site",
@@ -2020,13 +2034,14 @@ window.translations = {
     privacy_page_title: "Privacybeleid — Giancarlo Tridente",
     privacy_back: "← Terug naar portfolio",
     privacy_title: "Privacybeleid",
-    privacy_updated: "Laatst bijgewerkt: 15 november 2026 — Overeenkomstig art. 13 van Verordening (EU) 2016/679 (AVG)",
+    privacy_updated: "Laatst bijgewerkt: 17 november 2026 — Overeenkomstig art. 13 van Verordening (EU) 2016/679 (AVG)",
     privacy_h2_1: "1. Verwerkingsverantwoordelijke",
     privacy_p1: "De verwerkingsverantwoordelijke is Giancarlo Tridente, gevestigd in Milaan (MI), Italië. Contact: g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Verwerkte gegevens en doeleinden",
     privacy_li1: "Contactformulier: naam, e-mail en berichtinhoud, vrijwillig verstrekt. Ze worden gebruikt om het verzoek te beantwoorden en, indien gevraagd door de betrokkene, om precontractuele activiteiten uit te voeren.",
     privacy_li2: "Technische gegevens: de hostingdienst kan IP-adressen, logs en apparaatgegevens verwerken om de pagina's te leveren en de infrastructuur te beschermen. Het privacybeleid van de hostingprovider is ook van toepassing op dergelijke verwerking.",
     privacy_li3: "Lokale voorkeuren: de site gebruikt de LocalStorage van de browser om het geselecteerde thema en de taal te onthouden. Deze voorkeuren blijven in de browser en worden niet via het formulier verzonden. Gebruikers kunnen deze op elk moment verwijderen door sitegegevens in hun browser te wissen.",
+    privacy_li_ack: "Gegevens over het kennisnemen van de privacyverklaring: bij het verzenden van het formulier worden de datum en het tijdstip van verzending automatisch geregistreerd, samen met de versie van het Privacybeleid die aan de gebruiker beschikbaar is gesteld. Deze informatie wordt aan het verzoek gekoppeld en uitsluitend gebruikt om vast te leggen dat de privacyverklaring is geraadpleegd en welke versie gold op het moment van verzending. Deze gegevens worden samen met de overige formuliergegevens via de dienst Web3Forms verzonden.",
     privacy_h2_3: "3. Cookies en vergelijkbare technologieën",
     privacy_p3_full: "<p>De site gebruikt de LocalStorage van de browser uitsluitend om bepaalde gebruikersvoorkeuren op te slaan, zoals het grafische thema en de geselecteerde taal. Deze informatie blijft opgeslagen op het apparaat van de gebruiker en wordt niet gebruikt voor advertentie-, profilerings- of trackingdoeleinden.</p><p>De hoofdcode van het portfolio implementeert geen analytics-, advertentie- of profileringstools. Alle lettertypen die door de site worden gebruikt, worden zelf gehost; daarom worden er geen externe lettertypediensten (zoals Google Fonts) geladen.</p><p>Sommige demopagina's in het portfolio kunnen JavaScript-bibliotheken of andere bronnen laden van CDN-diensten van derden, waaronder Tailwind CSS. Wanneer dergelijke bronnen worden opgevraagd, kunnen de betreffende providers technische gegevens ontvangen die nodig zijn voor de verbinding, zoals het IP-adres en informatie over de browser en het apparaat van de gebruiker.</p><p>Het laden van bronnen van CDN's leidt niet automatisch tot het gebruik van profileringscookies of de verplichting om toestemming te vragen. De noodzaak van eventuele aanvullende kennisgevingen of voorafgaande toestemming wordt beoordeeld op basis van de daadwerkelijk gebruikte tools, hun doeleinden en de toepasselijke wetgeving.</p><p>Als in de toekomst cookies of andere trackingtools die niet strikt noodzakelijk zijn, worden geïntroduceerd, is het gebruik ervan onderworpen aan de voorafgaande toestemming van de gebruiker, waar vereist door de toepasselijke wetgeving, via eventuele toestemmingsbeheertools.</p><p>Voor meer informatie over de verwerking van persoonsgegevens, raadpleeg dit privacybeleid.</p>",
     privacy_h2_4: "4. Rechtsgrond voor verwerking en doorgiften buiten de EER",
@@ -2059,7 +2074,7 @@ window.translations = {
     privacy_h2_10: "10. Demo's en demosites",
     privacy_p10: "De secties AETHER en Aura Suites zijn demoprojecten van het portfolio, geen echte commerciële activiteiten. Voer geen echte betalingen, bestellingen of boekingen uit en voer geen echte persoonsgegevens in hun formulieren in. Interacties zijn gesimuleerd en vormen geen commercieel aanbod.",
     privacy_h2_11: "11. Updates en contacten",
-    privacy_p11: "Dit beleid kan worden bijgewerkt in geval van wijzigingen in de site, providers of verwerkingsactiviteiten. Laatst bijgewerkt: 15 november 2026. Voor vragen over gegevensverwerking: g.tridente.web@gmail.com."
+    privacy_p11: "Dit beleid kan worden bijgewerkt in geval van wijzigingen in de site, providers of verwerkingsactiviteiten. Laatst bijgewerkt: 17 november 2026. Voor vragen over gegevensverwerking: g.tridente.web@gmail.com."
   },
 
   /* =======================================================
@@ -2122,7 +2137,7 @@ window.translations = {
     form_error_send: "Wysyłanie nie powiodło się. Spróbuj ponownie.",
 
     contact_privacy_note: "Podane dane będą wykorzystywane wyłącznie do odpowiedzi na Twoje zapytanie i oceny potencjalnej współpracy.",
-    form_privacy_consent: "Przeczytałem i akceptuję <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Politykę prywatności</a> i <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Noty prawne</a>.",
+    form_privacy_consent: "Oświadczam, że zapoznałem(-am) się z <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener\">Polityką prywatności</a> oraz <a href=\"legal.html\" target=\"_blank\" rel=\"noopener\">Informacjami prawnymi</a>.",
     form_error_consent: "Zaakceptuj Politykę prywatności, aby kontynuować.",
 
     copyright: "© 2026 Giancarlo Tridente. Wszelkie prawa zastrzeżone.",
@@ -2130,7 +2145,7 @@ window.translations = {
     legal_page_title: "Noty prawne — Tridente Dev",
     legal_back: "← Powrót do portfolio",
     legal_title: "Noty prawne",
-    legal_updated: "Ostatnia aktualizacja: 15 listopada 2026",
+    legal_updated: "Ostatnia aktualizacja: 17 listopada 2026",
     legal_owner_title: "Właściciel strony",
     legal_owner_desc: "To osobiste portfolio jest prowadzone przez Giancarlo Tridente, z siedzibą w Mediolanie (MI), Włochy. Kontakt: g.tridente.web@gmail.com.",
     legal_purpose_title: "Cel strony",
@@ -2157,13 +2172,14 @@ window.translations = {
     privacy_page_title: "Polityka prywatności — Giancarlo Tridente",
     privacy_back: "← Powrót do portfolio",
     privacy_title: "Polityka prywatności",
-    privacy_updated: "Ostatnia aktualizacja: 15 listopada 2026 — Zgodnie z art. 13 Rozporządzenia (UE) 2016/679 (RODO)",
+    privacy_updated: "Ostatnia aktualizacja: 17 listopada 2026 — Zgodnie z art. 13 Rozporządzenia (UE) 2016/679 (RODO)",
     privacy_h2_1: "1. Administrator danych",
     privacy_p1: "Administratorem danych jest Giancarlo Tridente, z siedzibą w Mediolanie (MI), Włochy. Kontakt: g.tridente.web@gmail.com.",
     privacy_h2_2: "2. Przetwarzane dane i cele",
     privacy_li1: "Formularz kontaktowy: imię, e-mail i treść wiadomości, podane dobrowolnie. Służą do odpowiedzi na zapytanie i, jeśli zażąda tego osoba, której dane dotyczą, do prowadzenia działań przedkontraktowych.",
     privacy_li2: "Dane techniczne: usługa hostingowa może przetwarzać adresy IP, logi i dane urządzeń w celu dostarczania stron i ochrony infrastruktury. Polityki prywatności dostawcy hostingu mają również zastosowanie do takiego przetwarzania.",
     privacy_li3: "Preferencje lokalne: witryna wykorzystuje LocalStorage przeglądarki do zapamiętywania wybranego motywu i języka. Te preferencje pozostają w przeglądarce i nie są wysyłane przez formularz. Użytkownicy mogą je usunąć w dowolnym momencie, czyszcząc dane witryny w przeglądarce.",
+    privacy_li_ack: "Dane dotyczące zapoznania się z informacją o prywatności: w chwili wysłania formularza automatycznie rejestrowana jest data i godzina wysłania oraz wersja Polityki prywatności udostępniona użytkownikowi. Informacje te są przypisywane do zapytania i wykorzystywane wyłącznie w celu udokumentowania zapoznania się z informacją oraz wersji obowiązującej w chwili wysłania. Dane te są przekazywane za pośrednictwem usługi Web3Forms wraz z pozostałymi danymi formularza.",
     privacy_h2_3: "3. Pliki cookie i podobne technologie",
     privacy_p3_full: "<p>Witryna wykorzystuje LocalStorage przeglądarki wyłącznie do przechowywania niektórych preferencji użytkownika, takich jak motyw graficzny i wybrany język. Informacje te pozostają zapisane na urządzeniu użytkownika i nie są wykorzystywane do celów reklamowych, profilowania ani śledzenia.</p><p>Główny kod portfolio nie implementuje narzędzi analitycznych, reklamowych ani profilujących. Wszystkie czcionki używane przez witrynę są hostowane samodzielnie; w związku z tym nie są ładowane żadne zewnętrzne usługi czcionek (takie jak Google Fonts).</p><p>Niektóre strony demonstracyjne zawarte w portfolio mogą ładować biblioteki JavaScript lub inne zasoby z usług CDN stron trzecich, w tym Tailwind CSS. Gdy takie zasoby są żądane, odpowiedni dostawcy mogą otrzymać dane techniczne niezbędne do połączenia, takie jak adres IP i informacje dotyczące przeglądarki i urządzenia użytkownika.</p><p>Ładowanie zasobów z CDN nie powoduje automatycznie korzystania z plików cookie do profilowania ani obowiązku żądania zgody. Konieczność ewentualnych dodatkowych powiadomień lub uprzedniej zgody jest oceniana na podstawie faktycznie używanych narzędzi, ich celów i obowiązującego prawa.</p><p>Gdyby w przyszłości wprowadzono pliki cookie lub inne narzędzia śledzące niebędące ściśle niezbędnymi, ich użycie będzie podlegać uprzedniej zgodzie użytkownika, gdy wymaga tego obowiązujące prawo, za pośrednictwem ewentualnych narzędzi do zarządzania zgodami.</p><p>Aby uzyskać więcej informacji na temat przetwarzania danych osobowych, zapoznaj się z niniejszą polityką prywatności.</p>",
     privacy_h2_4: "4. Podstawa prawna przetwarzania i transfery poza EOG",
@@ -2196,7 +2212,7 @@ window.translations = {
     privacy_h2_10: "10. Wersje demonstracyjne i witryny demonstracyjne",
     privacy_p10: "Sekcje AETHER i Aura Suites to projekty demonstracyjne portfolio, a nie rzeczywiste działania komercyjne. Nie dokonuj rzeczywistych płatności, zamówień ani rezerwacji i nie wprowadzaj prawdziwych danych osobowych w ich formularzach. Interakcje są symulowane i nie stanowią oferty handlowej.",
     privacy_h2_11: "11. Aktualizacje i kontakty",
-    privacy_p11: "Niniejsza polityka może być aktualizowana w przypadku zmian w witrynie, dostawcach lub działaniach przetwarzania. Ostatnia aktualizacja: 15 listopada 2026. Pytania dotyczące przetwarzania danych: g.tridente.web@gmail.com."
+    privacy_p11: "Niniejsza polityka może być aktualizowana w przypadku zmian w witrynie, dostawcach lub działaniach przetwarzania. Ostatnia aktualizacja: 17 listopada 2026. Pytania dotyczące przetwarzania danych: g.tridente.web@gmail.com."
   }
 
 };

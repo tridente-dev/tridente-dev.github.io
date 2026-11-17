@@ -437,8 +437,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const privacyAcceptedInput = document.getElementById('privacy-accepted-at');
 
     function formatLocalDateTime(date) {
-        const pad = (n) => String(n).padStart(2, '0');
-        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+        // Formato leggibile e stabile, indipendente dal fuso orario del server.
+        const formatted = new Intl.DateTimeFormat('it-IT', {
+            timeZone: 'Europe/Rome',
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hourCycle: 'h23'
+        }).format(date);
+        return `${formatted} (Europe/Rome)`;
     }
 
     function t(key) {
